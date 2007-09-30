@@ -240,7 +240,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Provider.DropDownNavigation
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://cswslocal.gelco.com/sharpcontentportal/", "http://cswslocal.gelco.com/sharpcontentportal", "{85B9B124-8177-401A-B6F6-FD8C1EA71DB0}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://localhost/sharpcontentportal/", "http://localhost/sharpcontentportal", "{85B9B124-8177-401A-B6F6-FD8C1EA71DB0}"
 	ProjectSection(WebsiteProperties) = preProject
 		ProjectReferences = "{BD54C946-FE71-4E5F-B4B0-61BE98FCBF35}|SharpContent.dll;{F336D16D-E512-42CC-876A-9E0118F87514}|SharpContent.HttpModules.UrlRewrite.dll;{CEC8C2BF-5A34-475C-9768-0FD8504B316E}|SharpContent.FckHtmlEditorProvider.dll;{0D7E8101-E36A-4904-AD9F-567D5F396A02}|SharpContent.Ftb3HtmlEditorProvider.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/sharpcontentportal"
