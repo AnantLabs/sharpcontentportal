@@ -1,0 +1,2 @@
+<%@ Control Language="C#" AutoEventWireup="true"  Inherits="SharpContent.UI.Skins.Controls.Login" CodeFile="Login.ascx.cs" %>
+<asp:hyperlink id="hypLogin" runat="server" cssclass="SkinObject" enableviewstate="False"></asp:hyperlink>
