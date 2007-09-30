@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>scp.xml</title>
+	<link href="scpunittest.css" rel="stylesheet" type="text/css">
+
+	<script src="../scp.js"></script>
+	<script src="../scp.xml.js"></script>
+	<script src="../scp.diagnostics.js"></script>
+	<script language=javascript>
+	<!--
+		scp_xml.prototype.UnitTests = function()
+		{
+			var oXML = scp.xml.createDocument();
+			scp.diagnostics.assertNotNull('createDocument()', oXML);
+			oXML.loadXml('<root><test nm="t1"/><test nm="t2"/></root>');
+			scp.diagnostics.assertNotNull('childNodes()', oXML.childNodes(0));
+			scp.diagnostics.assertStringLength('xml property', oXML.childNodes(0).xml);
+			var sStyle = '<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><p><xsl:for-each select="//test"><xsl:apply-templates select="." /></xsl:for-each></p></xsl:template><xsl:template match="test"><b>test: </b><xsl:value-of select="@nm"/></xsl:template></xsl:stylesheet>';
+			//var sHTML = oXML.applyStyle(sStyle);
+			//scp.diagnostics.assertStringLength('XSL Transform results', sHTML);
+			//oXML.loadXML(sHTML);
+			//scp.diagnostics.assertNotNull('transformed xml childNodes()', oXML.childNodes(0));
+			//scp.diagnostics.assertStringLength('transformed xml property', oXML.childNodes(0).xml);
+			
+			//scp.diagnostics.displayDebug('browser.toString(): ' + scp.dom.browser.toString());			
+		}
+
+	//-->
+	</script>
+	
+</head>
+<body>
+	<form ID="Form1">
+	<img src="poweredbyscp537x36.gif">	
+	<h1>SharpContent Client API - scp.xml Namespace</h1>	
+	<p class="summary">Still under construction.  This object will provide a uniform way to interact with each browser's XML DOM.</p>
+	<div class="funccontent">
+		<table ID="Table1">
+			<tr>
+				<td class="funcname">createDocument</td>
+				<td class="funcdesc">creates XML Document</td>
+			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr>
+				<td class="funcname">loadXML</td>
+				<td class="funcdesc">loads XML string into Document</td>
+			</tr>
+			<tr>
+				<td class="paramname">sXML</td>
+				<td class="paramdesc">XML string</td>
+			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr>
+				<td class="funcname">applyStyle</td>
+				<td class="funcdesc">Applies XSL style to Document</td>
+			</tr>
+			<tr>
+				<td class="paramname">sXSL</td>
+				<td class="paramdesc">XSL string to apply</td>
+			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+		</table>
+	</div>
+	<textarea id="__SCPDebugOutput" rows="10" cols="100" class="unittestcontent" NAME="__SCPDebugOutput"></textarea>
+	<br>
+	<input type="button" onclick="scp_diagnosticTests(scp);" value="Unit Tests" ID="Button1" NAME="Button1">
+	</form>
+</body>
+</html>
+
