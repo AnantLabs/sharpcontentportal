@@ -1,0 +1,1658 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProjectGuid>{BD54C946-FE71-4E5F-B4B0-61BE98FCBF35}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <AssemblyName>SharpContent</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SharpContent</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="SharpZipLib">
+      <Name>SharpZipLib</Name>
+      <HintPath>..\3rdPartyLibs\SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration">
+      <Name>System.Configuration</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.SqlXml">
+      <Name>System.Data.SqlXml</Name>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Name>System.Deployment</Name>
+    </Reference>
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Name>System.EnterpriseServices</Name>
+    </Reference>
+    <Reference Include="System.Management">
+      <Name>System.Management</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting">
+      <Name>System.Runtime.Remoting</Name>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <Name>System.Transactions</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SharpContent\Common\Controls\Form.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\FileItem.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Globals.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Lists\ListController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Lists\ListEntryInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Lists\ListEntryInfoCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Lists\ListInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Lists\ListInfoCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\Calendar.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\CBO.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\Config.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\CoreCacheType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\DataCache.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\FileSystemUtils.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\HtmlUtils.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\Null.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\UrlController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\UrlInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\UrlLogInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\UrlTrackingInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\UrlUtils.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\Utilities\XmlUtils.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Common\XmlValidatorBase.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Container.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Data\DataProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Data\NonCommandParameterAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Data\SqlCommandGenerator.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Data\SqlParameterAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Host\HostSettings.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Host\HostSettingsController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Actions\ActionEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Actions\ActionEventHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Actions\ModuleAction.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Actions\ModuleActionCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Actions\ModuleActionEventListener.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Actions\ModuleActionType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\ModuleCommunicate.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\ModuleCommunicationEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\ModuleCommunicationEventHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\ModuleCommunicators.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\ModuleListeners.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\RoleChangeEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Definitions\ModuleDefinitionController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Definitions\ModuleDefinitionInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Definitions\ModuleDefinitionValidator.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Definitions\ModuleDefinitionVersion.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\DesktopModuleController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\DesktopModuleInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\DesktopModuleSupportedFeature.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\DisplayMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\EventMessageProcessor.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\ModuleControlController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\ModuleControlInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\ModuleController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\ModuleInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\ModuleSettingsBase.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\PaFileInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\PaWriter.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\PortalDesktopModuleInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\PortalModuleBase.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\UserModuleBase.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\UsersControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\VisibilityState.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalAliasCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalAliasController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalAliasInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalSettings.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalTemplateModuleAction.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Portals\PortalTemplateValidator.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Profile\ProfileController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Profile\ProfilePropertyDefinition.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Profile\ProfilePropertyDefinitionCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Profile\ProfilePropertyDefinitionComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Tabs\TabController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Tabs\TabInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Tabs\TabType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\AnonymousUserInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\BaseUserInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\OnlineUserInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\PurgeUsersOnline.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserMembership.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserOnlineController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserProfile.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserRoleInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserTime.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Users\UserVisibilityMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\CachePageStatePersister.cs" />
+    <Compile Include="SharpContent\Framework\CDefault.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\DiskPageStatePersister.cs" />
+    <Compile Include="SharpContent\Framework\PageBase.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\Providers\Provider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\Providers\ProviderConfiguration.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\Providers\ProviderConfigurationHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\Reflection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Framework\UserControlBase.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\InstallResources.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaDataProviderComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpAdapterBase.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpAdapter_V2.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpAdapter_V2Provider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpAdapter_V2Skin.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpAdapter_V3.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpInstallerBase.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpInstaller_V2Provider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpInstaller_V2Skin.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpInstaller_V3.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaScpLoaderFactory.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaFile.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaFileType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaFolder.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaFolderCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaInstaller.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaInstallInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaLogEntry.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaLogger.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaLogType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\PaTextEncoding.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\ResourceInstaller.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\Admin\ResourceInstaller\ResourceInstallerBase.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\HTMLEditorProvider\HtmlEditorProvider.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Modules\NavigationProvider\NavigationEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\NavigationProvider\NavigationProvider.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Modules\SearchInput\SearchInputController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Modules\SearchInput\SearchResultsModuleInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\NavDataSource.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\AuthenticationController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\AuthenticationMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\AuthenticationProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\AuthenticationStatus.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\Configuration.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\GroupController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\GroupInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\ObjectClass.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\UserController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\UserInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\MembershipController.cs" />
+    <Compile Include="SharpContent\Security\Membership\MembershipProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\MembershipProviderConfig.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\PasswordConfig.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\PasswordFormat.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\PasswordQuestionInfo.cs" />
+    <Compile Include="SharpContent\Security\Membership\PasswordUpdateStatus.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\UserCreateStatus.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\UserLoginStatus.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Membership\UserRegistrationStatus.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\CompareFolderPermissions.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\CompareModulePermissions.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\CompareTabPermissions.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\Controls\FolderPermissionsGrid.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\Controls\ModulePermissionsGrid.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\Controls\PermissionsGrid.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\Controls\TabPermissionsGrid.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\FolderPermissionCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\FolderPermissionController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\FolderPermissionInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\ModulePermissionCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\ModulePermissionController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\ModulePermissionInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\PermissionController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\PermissionInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\TabPermissionCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\TabPermissionController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Permissions\TabPermissionInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\PortalSecurity.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Profile\ProfileProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Profile\ProfileProviderConfig.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Roles\RoleComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Roles\RoleController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Roles\RoleGroupInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Roles\RoleInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Roles\RoleProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\SecurityAccessLevel.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Cache\CachingProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Cache\PurgeCache.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\Config\EventQueueConfiguration.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\Config\EventQueueSubscribers.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\Config\PublishedEvent.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\Config\PublishedEvents.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\Config\SubscriberInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\EventMessage.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\EventMessageCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\EventMessageProcessorBase.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\EventQueueController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\EventQueue\MessagePriority.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\BasePortalException.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\ErrorContainer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\ExceptionInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\Exceptions.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\ModuleLoadException.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\PageLoadException.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\SchedulerException.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Exceptions\SecurityException.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\FileController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\FileInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\FileManagerFunctions.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\FileServerHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\FolderController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\FolderInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\SynchronizeFileSystem.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\FileSystem\UploadType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\CultureDropDownTypes.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\CultureInfoComparer.cs" />
+    <Compile Include="SharpContent\Services\Localization\LanguagePackType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\Locale.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleCollectionWrapper.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleFileCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleFileInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleFilePack.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleFilePackReader.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleFilePackWriter.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleFileUtil.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\LocaleType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Localization\Localization.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\EventLogController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\ExceptionLogController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogDetailInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LoggingProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogInfoArray.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogProperties.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogTypeConfigInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogTypeInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\LogTypeSortFriendlyName.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\PortalSortTitle.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\PurgeLogBuffer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\EventLog\SendLogNotifications.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\SiteLog\BufferedSiteLog.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\SiteLog\PurgeSiteLog.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\SiteLog\SiteLogController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Log\SiteLog\SiteLogInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Mail\Mail.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Mail\MailFormat.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Mail\MailPriority.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Mail\MessageType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Mail\SendBulkEmail.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Personalization\Personalization.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Personalization\PersonalizationController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Personalization\PersonalizationInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\ResourceLoader.cs" />
+    <Compile Include="SharpContent\Services\Scheduling\EventName.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\PurgeScheduleHistory.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\ScheduleHistoryItem.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\ScheduleHistorySortStartDate.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\ScheduleItem.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\SchedulerClient.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\SchedulerMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\ScheduleSource.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\ScheduleStatus.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\ScheduleStatusSortRemainingTimeDescending.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\SchedulingProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\WorkCompleted.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\WorkErrored.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\WorkProgressing.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Scheduling\WorkStarted.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\IndexingProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchDataStoreProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchEngine.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchEngineScheduler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchItemInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchItemInfoCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchResultsInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Search\SearchResultsInfoCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Upgrade\Upgrade.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Url\FriendlyUrl\FriendlyUrlProvider.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\AffiliateController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\AffiliateInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\BannerController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\BannerInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\BannerType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\BannerTypeController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\BannerTypeInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\ClassificationController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\ClassificationInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\VendorController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Vendors\VendorInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\Wizard.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardCancelEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardCancelEventHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardCommand.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardEventHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardPage.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardPageCollection.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardPageType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Services\Wizards\WizardSuccess.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Skin.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Containers\ActionBase.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Containers\Container.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\ControlPanels\ControlPanelBase.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Navigation.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\Controls\ModuleMessage.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\NavObjectBase.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\Skin.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinControl.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinController.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinFileProcessor.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinObjectBase.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinParser.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinThumbNailControl.ascx.cs">
+      <Name>Compile</Name>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Skins\SkinType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\Address.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\DualListControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\Help.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\HelpButtonControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\LabelControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\ListItemComparer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\ModuleAuditControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\SectionHeadControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\TextEditor.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\UrlControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\URLTrackingControl.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\UserControls\User.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SharpContent\UI\Utilities\SCPClientAPI.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CaptchaControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CaptchaHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CheckBoxColumn.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CheckBoxColumnTemplate.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CheckEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CollectionEditorControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CollectionEditorInfoAdapter.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\CommandButton.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ControlStyleAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\TextFieldTemplate.cs" />
+    <Compile Include="SharpContent\UI\WebControls\TextField.cs" />
+    <Compile Include="SharpContent\UI\WebControls\ImageCommandFieldTemplate.cs" />
+    <Compile Include="SharpContent\UI\WebControls\ImageCommandField.cs" />
+    <Compile Include="SharpContent\UI\WebControls\Design\DefaultDesignerInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\Design\DesignerTest.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\Design\PropertyEditorControlDesigner.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPCountryEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPDataGrid.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPDataGridCheckChangedEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPDataGridCheckedColumnEventHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPListEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPLocaleEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPPageEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPRegionEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPRichTextEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SCPTimeZoneEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\EditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\EditControlFactory.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\EditorDisplayMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\EditorInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\EnumEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\FieldEditorControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\GroupByMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ImageCommandColumn.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ImageCommandColumnEditMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ImageCommandColumnTemplate.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\IntegerEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\IsReadOnlyAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\LabelMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\LabelModeAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ListAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ListBoundField.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\MaxLengthAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\MultiLineTextEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PagingControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\ProfileEditorControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyCategoryComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyChangedEventHandler.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyEditorControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyEditorEventArgs.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyEditorMode.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyLabelControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertyNameComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertySortOrderComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\PropertySortType.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\RegularExpressionValidatorAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\RequiredAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SettingInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SettingNameComparer.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SettingsEditorControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SettingsEditorInfoAdapter.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\SortOrderAttribute.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\StandardEditorInfoAdapter.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\TextColumn.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\TextColumnTemplate.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\TextEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\TrueFalseEditControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\VisibilityControl.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="NavDataPageHierarchicalEnumerable.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="NavDataPageHierarchyData.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="NavDataSourceView.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\IModuleCommunicator.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\Communications\IModuleListener.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\IActionable.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\IPortable.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\ISearchable.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Entities\Modules\IUpgradeable.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\Security\Authentication\IAuthenticationObjectBase.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+    <Compile Include="SharpContent\UI\WebControls\IEditorInfoAdapter.cs">
+      <SubType>Code</SubType>
+      <Name>Compile</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Controls\CSharpNuke.WebControls\SharpContent.WebControls.csproj">
+      <Project>{92275BB2-2780-4279-8BC8-C79935B2B114}</Project>
+      <Name>SharpContent.WebControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="Controls\CSharpNuke.CountryListBox\SharpContent.CountryListBox.csproj">
+      <Project>{89093FD0-076F-48CD-9232-B665226CDBF0}</Project>
+      <Name>SharpContent.CountryListBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="Controls\CSharpNuke.WebUtility\SharpContent.WebUtility.csproj">
+      <Project>{54F96926-802C-408E-A04B-F56859C0308C}</Project>
+      <Name>SharpContent.WebUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
