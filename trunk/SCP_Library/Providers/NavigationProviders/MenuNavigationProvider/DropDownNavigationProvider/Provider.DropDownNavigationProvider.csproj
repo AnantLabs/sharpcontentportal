@@ -89,7 +89,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DropDownNavigationProvider.cs">
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +102,10 @@
     <ProjectReference Include="..\..\..\..\Controls\CSharpNuke.WebUtility\SharpContent.WebUtility.csproj">
       <Project>{54F96926-802C-408E-A04B-F56859C0308C}</Project>
       <Name>SharpContent.WebUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\SharpContent.Library.csproj">
+      <Project>{BD54C946-FE71-4E5F-B4B0-61BE98FCBF35}</Project>
+      <Name>SharpContent.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
