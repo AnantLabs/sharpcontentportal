@@ -90,7 +90,7 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PACKAGE {databaseOwner}SCPUKE_PKG AUTHID CURRENT_USER AS
+CREATE OR REPLACE PACKAGE {databaseOwner}SCP_PKG AUTHID CURRENT_USER AS
 procedure scp_GetDatabaseVersion (
   o_rc1 out {databaseOwner}global_pkg.rct1
 );
@@ -109,7 +109,7 @@ procedure scp_UpdateDatabaseVersion (
 END SCPUKE_PKG;
 /
 
-CREATE OR REPLACE PACKAGE BODY {databaseOwner}SCPUKE_PKG AS
+CREATE OR REPLACE PACKAGE BODY {databaseOwner}SCP_PKG AS
 
 procedure scp_GetDatabaseVersion (
   o_rc1 out {databaseOwner}global_pkg.rct1
