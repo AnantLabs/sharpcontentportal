@@ -28,13 +28,13 @@ using SharpContent.Services.Localization;
 
 namespace SharpContent.HttpModules
 {
-    public class SCPMembershipModule : IHttpModule
+    public class MembershipModule : IHttpModule
     {
         public string ModuleName
         {
             get
             {
-                return "SCPMembershipModule";
+                return "MembershipModule";
             }
         }
 
