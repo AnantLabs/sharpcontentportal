@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ASP2MenuNavigationProvider.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
