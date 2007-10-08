@@ -206,7 +206,7 @@ namespace SharpContent.Data
                     {
                         // initialize the database
                         StreamReader objStreamReader;
-                        objStreamReader = File.OpenText( returnValue + "00.00.00." + _providerConfiguration.DefaultProvider );
+                        objStreamReader = File.OpenText(returnValue + "00.00.00." + _providerConfiguration.DefaultProvider + ".sql");
                         string strScript = objStreamReader.ReadToEnd();
                         objStreamReader.Close();
 

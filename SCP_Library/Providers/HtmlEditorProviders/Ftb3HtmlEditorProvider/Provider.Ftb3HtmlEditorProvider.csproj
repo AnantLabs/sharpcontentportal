@@ -96,6 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Ftb3HtmlEditorProvider.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FTBCreateLink.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
