@@ -89,12 +89,6 @@
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\SharpContent.Library.csproj">
-      <Project>{BD54C946-FE71-4E5F-B4B0-61BE98FCBF35}</Project>
-      <Name>SharpContent.Library</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
