@@ -7,8 +7,8 @@
     <ProjectGuid>{A04BF948-09FA-49B1-BA9F-12D3A4B9BF61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharpContent.Provider.SCPProvider</RootNamespace>
-    <AssemblyName>SharpContent.Provider.SCPProvider</AssemblyName>
+    <RootNamespace>SharpContent.Provider.PortalProvider</RootNamespace>
+    <AssemblyName>SharpContent.Provider.PortalProvider</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,11 +37,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SCPMembershipProvider.cs" />
-    <Compile Include="SCPOracleMembershipProvider.cs" />
-    <Compile Include="SCPProfileProvider.cs" />
-    <Compile Include="SCPRoleProvider.cs" />
-    <Compile Include="SCPSqlMembershipProvider.cs" />
+    <Compile Include="PortalMembershipProvider.cs" />
+    <Compile Include="PortalOracleMembershipProvider.cs" />
+    <Compile Include="PortalProfileProvider.cs" />
+    <Compile Include="PortalRoleProvider.cs" />
+    <Compile Include="PortalSqlMembershipProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
