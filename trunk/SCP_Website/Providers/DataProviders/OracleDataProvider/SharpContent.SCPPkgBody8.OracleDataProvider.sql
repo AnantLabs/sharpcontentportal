@@ -899,7 +899,7 @@ BEGIN
     END IF;
 
     INSERT
-    INTO {databaseOwner}scp_lists(listname,   VALUE,   text,   level_,   sortorder,   definitionid,   parentid,   description)
+    INTO {databaseOwner}scp_lists(listname,   VALUE,   text,   "level",   sortorder,   definitionid,   parentid,   description)
     VALUES(i_listname,   i_value,   i_text,   v_level,   v_sortorder,   i_definitionid,   v_parentid,   i_description) returning entryid
     INTO o_entryid;
 
@@ -3707,7 +3707,7 @@ end scp_getbanner;
         OPEN o_rc1 FOR
 
         SELECT DISTINCT e.listname,
-          e.level_,
+          e."level",
           e.definitionid,
           e.parentid,
             (SELECT MAX(sortorder)
@@ -3752,7 +3752,7 @@ end scp_getbanner;
         FROM {databaseOwner}scp_lists e
         WHERE(listname = i_listname OR i_listname IS NULL)
          AND(definitionid = i_definitionid OR i_definitionid = -1)
-        ORDER BY e.level_,
+        ORDER BY e."level",
           displayname;
       END;
     ELSE
@@ -3763,7 +3763,7 @@ end scp_getbanner;
         OPEN o_rc1 FOR
 
         SELECT DISTINCT e.listname,
-          e.level_,
+          e."level",
           e.definitionid,
           e.parentid,
             (SELECT MAX(sortorder)
@@ -3812,7 +3812,7 @@ end scp_getbanner;
            FROM {databaseOwner}scp_lists
            WHERE listname = v_parentlistname
            AND VALUE = v_parentvalue)
-        ORDER BY e.level_,
+        ORDER BY e."level",
           displayname;
       END;
     END IF;
@@ -4487,7 +4487,7 @@ end scp_getbanner;
           e.listname,
           e.value,
           e.text,
-          e.level_,
+          e."level",
           e.sortorder,
           e.definitionid,
           e.parentid,
@@ -4521,7 +4521,7 @@ end scp_getbanner;
          AND(e.definitionid = i_definitionid OR i_definitionid = -1)
          AND(e.entryid = i_entryid OR i_entryid = -1)
          AND(e.VALUE = i_value OR i_value IS NULL)
-        ORDER BY e.level_,
+        ORDER BY e."level",
           e.listname,
           e.sortorder,
           e.text;
@@ -4537,7 +4537,7 @@ end scp_getbanner;
           e.listname,
           e.VALUE,
           e.text,
-          e.level_,
+          e."level",
           e.sortorder,
           e.definitionid,
           e.parentid,
@@ -4576,7 +4576,7 @@ end scp_getbanner;
            FROM {databaseOwner}scp_lists
            WHERE listname = v_parentlistname
            AND VALUE = v_parentvalue)
-        ORDER BY e.level_,
+        ORDER BY e."level",
           e.listname,
           e.sortorder,
           e.text;
@@ -6313,7 +6313,7 @@ BEGIN
 
   UPDATE {databaseOwner}scp_tabs
   SET taborder = i_taborder,
-    level_ = i_level,
+    "level" = i_level,
     parentid = i_parentid
   WHERE tabid = i_tabid;
 

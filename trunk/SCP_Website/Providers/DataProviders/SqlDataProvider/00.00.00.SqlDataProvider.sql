@@ -8,7 +8,7 @@
 /*****                                                  *****/
 /************************************************************/
 
-if exists (select * from dbo.sysobjects where id = object_id(N'Version') and OBJECTPROPERTY(id, N'IsTable') = 1)
+if exists (select * from {databaseOwner}sysobjects where id = object_id(N'Version') and OBJECTPROPERTY(id, N'IsTable') = 1)
 begin
   if '{objectQualifier}' <> ''
   begin
@@ -27,7 +27,7 @@ begin
 end
 else
 begin
-  if not exists (select * from dbo.sysobjects where id = object_id(N'{objectQualifier}Version') and OBJECTPROPERTY(id, N'IsTable') = 1)
+  if not exists (select * from {databaseOwner}sysobjects where id = object_id(N'{objectQualifier}Version') and OBJECTPROPERTY(id, N'IsTable') = 1)
   begin
     CREATE TABLE {databaseOwner}{objectQualifier}Version (
 	  [VersionId] [int] IDENTITY (1, 1) NOT NULL ,
@@ -55,7 +55,7 @@ begin
 end
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{objectQualifier}GetDatabaseVersion') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+if exists (select * from {databaseOwner}sysobjects where id = object_id(N'{objectQualifier}GetDatabaseVersion') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 drop procedure {databaseOwner}{objectQualifier}GetDatabaseVersion
 GO
 
@@ -71,7 +71,7 @@ where  VersionId = ( select max(VersionId) from {objectQualifier}Version )
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{objectQualifier}FindDatabaseVersion') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+if exists (select * from {databaseOwner}sysobjects where id = object_id(N'{objectQualifier}FindDatabaseVersion') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 drop procedure {databaseOwner}{objectQualifier}FindDatabaseVersion
 GO
 
@@ -91,7 +91,7 @@ and    Build = @Build
 
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{objectQualifier}UpdateDatabaseVersion') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+if exists (select * from {databaseOwner}sysobjects where id = object_id(N'{objectQualifier}UpdateDatabaseVersion') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 drop procedure {databaseOwner}{objectQualifier}UpdateDatabaseVersion
 GO
 

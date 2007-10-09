@@ -1,9 +1,9 @@
-/****** Object:  UserDefinedFunction [dbo].[dnn_GetElement]    Script Date: 10/05/2007 21:33:22 ******/
+/****** Object:  UserDefinedFunction {databaseOwner}[{objectQualifier}GetElement]    Script Date: 10/05/2007 21:33:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE FUNCTION [dbo].[dnn_GetElement]
+CREATE FUNCTION {databaseOwner}[{objectQualifier}GetElement]
 (
 	@ord AS INT,
 	@str AS VARCHAR(8000),
@@ -33,12 +33,12 @@ BEGIN
 	RETURN    CAST(SUBSTRING(@str, @pos, CHARINDEX(@delim, @str + @delim, @pos) - @pos) AS INT)
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[dnn_fn_GetVersion]    Script Date: 10/05/2007 21:33:22 ******/
+/****** Object:  UserDefinedFunction {databaseOwner}[{objectQualifier}fn_GetVersion]    Script Date: 10/05/2007 21:33:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE FUNCTION [dbo].[dnn_fn_GetVersion]
+CREATE FUNCTION {databaseOwner}[{objectQualifier}fn_GetVersion]
 (
 	@maj AS int,
 	@min AS int,
@@ -48,7 +48,7 @@ RETURNS bit
 
 AS
 BEGIN
-	IF Exists (SELECT * FROM dnn_Version
+	IF Exists (SELECT * FROM {objectQualifier}Version
 					WHERE Major = @maj
 						AND Minor = @min
 						AND Build = @bld
@@ -59,12 +59,12 @@ BEGIN
 	RETURN 0
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[dnn_GetProfilePropertyDefinitionID]    Script Date: 10/05/2007 21:33:22 ******/
+/****** Object:  UserDefinedFunction {databaseOwner}[{objectQualifier}GetProfilePropertyDefinitionID]    Script Date: 10/05/2007 21:33:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE FUNCTION [dbo].[dnn_GetProfilePropertyDefinitionID]
+CREATE FUNCTION {databaseOwner}[{objectQualifier}GetProfilePropertyDefinitionID]
 (
 	@PortalID				int,
 	@PropertyName			nvarchar(50)
@@ -84,7 +84,7 @@ BEGIN
 		SET @POrtalID = -1
 
 	SET @DefinitionID = (SELECT PropertyDefinitionID 
-							FROM dnn_ProfilePropertyDefinition
+							FROM {objectQualifier}ProfilePropertyDefinition
 							WHERE PortalID = @PortalID
 								AND PropertyName = @PropertyName
 						)
@@ -92,12 +92,12 @@ BEGIN
 	RETURN @DefinitionID
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[dnn_GetProfileElement]    Script Date: 10/05/2007 21:33:22 ******/
+/****** Object:  UserDefinedFunction {databaseOwner}[{objectQualifier}GetProfileElement]    Script Date: 10/05/2007 21:33:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE FUNCTION [dbo].[dnn_GetProfileElement]
+CREATE FUNCTION {databaseOwner}[{objectQualifier}GetProfileElement]
 (
 	@fieldName AS NVARCHAR(100),
 	@fields AS NVARCHAR(4000),
@@ -135,8 +135,8 @@ BEGIN
 	SUBSTRING(@Fields,@fieldNameStart,LEN(@Fields)-@fieldNameStart)
 
 	-- Get the values for the offset and length
-	SET @valueStart = dbo.dnn_getelement(1,@fieldNameToken,':')
-	SET @valueLength = dbo.dnn_getelement(2,@fieldNameToken,':')
+	SET @valueStart = {databaseOwner}{objectQualifier}getelement(1,@fieldNameToken,':')
+	SET @valueLength = {databaseOwner}{objectQualifier}getelement(2,@fieldNameToken,':')
 
 	-- Check for sane values, 0 length means the profile item was stored, just no data
 	IF @valueLength = 0 RETURN ''

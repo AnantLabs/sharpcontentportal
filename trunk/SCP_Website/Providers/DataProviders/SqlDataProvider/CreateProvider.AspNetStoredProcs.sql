@@ -1,9 +1,9 @@
-/****** Object:  StoredProcedure [dbo].[aspnet_Setup_RestorePermissions]    Script Date: 10/05/2007 21:28:14 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Setup_RestorePermissions]    Script Date: 10/05/2007 21:28:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Setup_RestorePermissions]
+CREATE PROCEDURE dbo.[aspnet_Setup_RestorePermissions]
     @name   sysname
 AS
 BEGIN
@@ -29,12 +29,12 @@ BEGIN
     DEALLOCATE c1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Setup_RemoveAllRoleMembers]    Script Date: 10/05/2007 21:28:14 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Setup_RemoveAllRoleMembers]    Script Date: 10/05/2007 21:28:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Setup_RemoveAllRoleMembers]
+CREATE PROCEDURE dbo.[aspnet_Setup_RemoveAllRoleMembers]
     @name   sysname
 AS
 BEGIN
@@ -68,12 +68,12 @@ BEGIN
     DEALLOCATE c1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UsersInRoles_IsUserInRole]    Script Date: 10/05/2007 21:28:17 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UsersInRoles_IsUserInRole]    Script Date: 10/05/2007 21:28:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UsersInRoles_IsUserInRole]
+CREATE PROCEDURE dbo.[aspnet_UsersInRoles_IsUserInRole]
     @ApplicationName  nvarchar(256),
     @UserName         nvarchar(256),
     @RoleName         nvarchar(256)
@@ -109,12 +109,12 @@ BEGIN
         RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Profile_DeleteInactiveProfiles]    Script Date: 10/05/2007 21:28:10 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Profile_DeleteInactiveProfiles]    Script Date: 10/05/2007 21:28:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Profile_DeleteInactiveProfiles]
+CREATE PROCEDURE dbo.[aspnet_Profile_DeleteInactiveProfiles]
     @ApplicationName        nvarchar(256),
     @ProfileAuthOptions     int,
     @InactiveSinceDate      datetime
@@ -146,12 +146,12 @@ BEGIN
     SELECT  @@ROWCOUNT
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Profile_GetNumberOfInactiveProfiles]    Script Date: 10/05/2007 21:28:10 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Profile_GetNumberOfInactiveProfiles]    Script Date: 10/05/2007 21:28:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Profile_GetNumberOfInactiveProfiles]
+CREATE PROCEDURE dbo.[aspnet_Profile_GetNumberOfInactiveProfiles]
     @ApplicationName        nvarchar(256),
     @ProfileAuthOptions     int,
     @InactiveSinceDate      datetime
@@ -178,12 +178,12 @@ BEGIN
             )
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UsersInRoles_GetRolesForUser]    Script Date: 10/05/2007 21:28:16 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UsersInRoles_GetRolesForUser]    Script Date: 10/05/2007 21:28:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UsersInRoles_GetRolesForUser]
+CREATE PROCEDURE dbo.[aspnet_UsersInRoles_GetRolesForUser]
     @ApplicationName  nvarchar(256),
     @UserName         nvarchar(256)
 AS
@@ -210,12 +210,12 @@ BEGIN
     RETURN (0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Roles_DeleteRole]    Script Date: 10/05/2007 21:28:13 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Roles_DeleteRole]    Script Date: 10/05/2007 21:28:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Roles_DeleteRole]
+CREATE PROCEDURE dbo.[aspnet_Roles_DeleteRole]
     @ApplicationName            nvarchar(256),
     @RoleName                   nvarchar(256),
     @DeleteOnlyIfRoleIsEmpty    bit
@@ -295,12 +295,12 @@ Cleanup:
     RETURN @ErrorCode
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Roles_RoleExists]    Script Date: 10/05/2007 21:28:14 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Roles_RoleExists]    Script Date: 10/05/2007 21:28:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Roles_RoleExists]
+CREATE PROCEDURE dbo.[aspnet_Roles_RoleExists]
     @ApplicationName  nvarchar(256),
     @RoleName         nvarchar(256)
 AS
@@ -316,12 +316,12 @@ BEGIN
         RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UsersInRoles_AddUsersToRoles]    Script Date: 10/05/2007 21:28:16 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UsersInRoles_AddUsersToRoles]    Script Date: 10/05/2007 21:28:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UsersInRoles_AddUsersToRoles]
+CREATE PROCEDURE dbo.[aspnet_UsersInRoles_AddUsersToRoles]
 	@ApplicationName  nvarchar(256),
 	@UserNames		  nvarchar(4000),
 	@RoleNames		  nvarchar(4000),
@@ -435,12 +435,12 @@ BEGIN
 	RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UsersInRoles_RemoveUsersFromRoles]    Script Date: 10/05/2007 21:28:17 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UsersInRoles_RemoveUsersFromRoles]    Script Date: 10/05/2007 21:28:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UsersInRoles_RemoveUsersFromRoles]
+CREATE PROCEDURE dbo.[aspnet_UsersInRoles_RemoveUsersFromRoles]
 	@ApplicationName  nvarchar(256),
 	@UserNames		  nvarchar(4000),
 	@RoleNames		  nvarchar(4000)
@@ -563,12 +563,12 @@ BEGIN
 	RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Profile_GetProfiles]    Script Date: 10/05/2007 21:28:11 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Profile_GetProfiles]    Script Date: 10/05/2007 21:28:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Profile_GetProfiles]
+CREATE PROCEDURE dbo.[aspnet_Profile_GetProfiles]
     @ApplicationName        nvarchar(256),
     @ProfileAuthOptions     int,
     @PageIndex              int,
@@ -622,12 +622,12 @@ BEGIN
     DROP TABLE #PageIndexForUsers
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Profile_GetProperties]    Script Date: 10/05/2007 21:28:11 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Profile_GetProperties]    Script Date: 10/05/2007 21:28:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Profile_GetProperties]
+CREATE PROCEDURE dbo.[aspnet_Profile_GetProperties]
     @ApplicationName      nvarchar(256),
     @UserName             nvarchar(256),
     @CurrentTimeUtc       datetime
@@ -660,12 +660,12 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetAllUsers]    Script Date: 10/05/2007 21:28:04 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetAllUsers]    Script Date: 10/05/2007 21:28:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetAllUsers]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetAllUsers]
     @ApplicationName       nvarchar(256),
     @PageIndex             int,
     @PageSize              int
@@ -715,12 +715,12 @@ BEGIN
     RETURN @TotalRecords
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetNumberOfUsersOnline]    Script Date: 10/05/2007 21:28:04 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetNumberOfUsersOnline]    Script Date: 10/05/2007 21:28:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetNumberOfUsersOnline]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetNumberOfUsersOnline]
     @ApplicationName            nvarchar(256),
     @MinutesSinceLastInActive   int,
     @CurrentTimeUtc             datetime
@@ -741,12 +741,12 @@ BEGIN
     RETURN(@NumOnline)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_FindUsersByName]    Script Date: 10/05/2007 21:28:03 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_FindUsersByName]    Script Date: 10/05/2007 21:28:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_FindUsersByName]
+CREATE PROCEDURE dbo.[aspnet_Membership_FindUsersByName]
     @ApplicationName       nvarchar(256),
     @UserNameToMatch       nvarchar(256),
     @PageIndex             int,
@@ -798,12 +798,12 @@ BEGIN
     RETURN @TotalRecords
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_FindUsersByEmail]    Script Date: 10/05/2007 21:28:03 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_FindUsersByEmail]    Script Date: 10/05/2007 21:28:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_FindUsersByEmail]
+CREATE PROCEDURE dbo.[aspnet_Membership_FindUsersByEmail]
     @ApplicationName       nvarchar(256),
     @EmailToMatch          nvarchar(256),
     @PageIndex             int,
@@ -861,12 +861,12 @@ BEGIN
     RETURN @TotalRecords
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetPasswordWithFormat]    Script Date: 10/05/2007 21:28:05 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetPasswordWithFormat]    Script Date: 10/05/2007 21:28:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetPasswordWithFormat]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetPasswordWithFormat]
     @ApplicationName                nvarchar(256),
     @UserName                       nvarchar(256),
     @UpdateLastLoginActivityDate    bit,
@@ -920,12 +920,12 @@ BEGIN
     RETURN 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_UpdateUserInfo]    Script Date: 10/05/2007 21:28:09 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_UpdateUserInfo]    Script Date: 10/05/2007 21:28:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_UpdateUserInfo]
+CREATE PROCEDURE dbo.[aspnet_Membership_UpdateUserInfo]
     @ApplicationName                nvarchar(256),
     @UserName                       nvarchar(256),
     @IsPasswordCorrect              bit,
@@ -1076,12 +1076,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetPassword]    Script Date: 10/05/2007 21:28:05 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetPassword]    Script Date: 10/05/2007 21:28:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetPassword]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetPassword]
     @ApplicationName                nvarchar(256),
     @UserName                       nvarchar(256),
     @MaxInvalidPasswordAttempts     int,
@@ -1215,12 +1215,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_SetPassword]    Script Date: 10/05/2007 21:28:07 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_SetPassword]    Script Date: 10/05/2007 21:28:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_SetPassword]
+CREATE PROCEDURE dbo.[aspnet_Membership_SetPassword]
     @ApplicationName  nvarchar(256),
     @UserName         nvarchar(256),
     @NewPassword      nvarchar(128),
@@ -1248,12 +1248,12 @@ BEGIN
     RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_ResetPassword]    Script Date: 10/05/2007 21:28:07 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_ResetPassword]    Script Date: 10/05/2007 21:28:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_ResetPassword]
+CREATE PROCEDURE dbo.[aspnet_Membership_ResetPassword]
     @ApplicationName             nvarchar(256),
     @UserName                    nvarchar(256),
     @NewPassword                 nvarchar(128),
@@ -1394,12 +1394,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_UnlockUser]    Script Date: 10/05/2007 21:28:08 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_UnlockUser]    Script Date: 10/05/2007 21:28:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_UnlockUser]
+CREATE PROCEDURE dbo.[aspnet_Membership_UnlockUser]
     @ApplicationName                         nvarchar(256),
     @UserName                                nvarchar(256)
 AS
@@ -1428,12 +1428,12 @@ BEGIN
     RETURN 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_UpdateUser]    Script Date: 10/05/2007 21:28:09 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_UpdateUser]    Script Date: 10/05/2007 21:28:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_UpdateUser]
+CREATE PROCEDURE dbo.[aspnet_Membership_UpdateUser]
     @ApplicationName      nvarchar(256),
     @UserName             nvarchar(256),
     @Email                nvarchar(256),
@@ -1520,12 +1520,12 @@ Cleanup:
     RETURN -1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_ChangePasswordQuestionAndAnswer]    Script Date: 10/05/2007 21:28:01 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_ChangePasswordQuestionAndAnswer]    Script Date: 10/05/2007 21:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_ChangePasswordQuestionAndAnswer]
+CREATE PROCEDURE dbo.[aspnet_Membership_ChangePasswordQuestionAndAnswer]
     @ApplicationName       nvarchar(256),
     @UserName              nvarchar(256),
     @NewPasswordQuestion   nvarchar(256),
@@ -1551,12 +1551,12 @@ BEGIN
     RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Applications_CreateApplication]    Script Date: 10/05/2007 21:28:01 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Applications_CreateApplication]    Script Date: 10/05/2007 21:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Applications_CreateApplication]
+CREATE PROCEDURE dbo.[aspnet_Applications_CreateApplication]
     @ApplicationName      nvarchar(256),
     @ApplicationId        uniqueidentifier OUTPUT
 AS
@@ -1604,12 +1604,12 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Users_DeleteUser]    Script Date: 10/05/2007 21:28:15 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Users_DeleteUser]    Script Date: 10/05/2007 21:28:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Users_DeleteUser]
+CREATE PROCEDURE dbo.[aspnet_Users_DeleteUser]
     @ApplicationName  nvarchar(256),
     @UserName         nvarchar(256),
     @TablesToDeleteFrom int,
@@ -1752,12 +1752,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_AnyDataInTables]    Script Date: 10/05/2007 21:28:00 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_AnyDataInTables]    Script Date: 10/05/2007 21:28:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_AnyDataInTables]
+CREATE PROCEDURE dbo.[aspnet_AnyDataInTables]
     @TablesToCheck int
 AS
 BEGIN
@@ -1840,12 +1840,12 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetUserByName]    Script Date: 10/05/2007 21:28:06 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetUserByName]    Script Date: 10/05/2007 21:28:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetUserByName]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetUserByName]
     @ApplicationName      nvarchar(256),
     @UserName             nvarchar(256),
     @CurrentTimeUtc       datetime,
@@ -1888,12 +1888,12 @@ BEGIN
     RETURN 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetUserByEmail]    Script Date: 10/05/2007 21:28:05 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetUserByEmail]    Script Date: 10/05/2007 21:28:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetUserByEmail]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetUserByEmail]
     @ApplicationName  nvarchar(256),
     @Email            nvarchar(256)
 AS
@@ -1918,12 +1918,12 @@ BEGIN
     RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Roles_GetAllRoles]    Script Date: 10/05/2007 21:28:13 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Roles_GetAllRoles]    Script Date: 10/05/2007 21:28:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Roles_GetAllRoles] (
+CREATE PROCEDURE dbo.[aspnet_Roles_GetAllRoles] (
     @ApplicationName           nvarchar(256))
 AS
 BEGIN
@@ -1937,12 +1937,12 @@ BEGIN
     ORDER BY RoleName
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UsersInRoles_GetUsersInRoles]    Script Date: 10/05/2007 21:28:17 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UsersInRoles_GetUsersInRoles]    Script Date: 10/05/2007 21:28:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UsersInRoles_GetUsersInRoles]
+CREATE PROCEDURE dbo.[aspnet_UsersInRoles_GetUsersInRoles]
     @ApplicationName  nvarchar(256),
     @RoleName         nvarchar(256)
 AS
@@ -1969,12 +1969,12 @@ BEGIN
     RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UsersInRoles_FindUsersInRole]    Script Date: 10/05/2007 21:28:16 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UsersInRoles_FindUsersInRole]    Script Date: 10/05/2007 21:28:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UsersInRoles_FindUsersInRole]
+CREATE PROCEDURE dbo.[aspnet_UsersInRoles_FindUsersInRole]
     @ApplicationName  nvarchar(256),
     @RoleName         nvarchar(256),
     @UserNameToMatch  nvarchar(256)
@@ -2002,12 +2002,12 @@ BEGIN
     RETURN(0)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_GetUserByUserId]    Script Date: 10/05/2007 21:28:06 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_GetUserByUserId]    Script Date: 10/05/2007 21:28:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_GetUserByUserId]
+CREATE PROCEDURE dbo.[aspnet_Membership_GetUserByUserId]
     @UserId               uniqueidentifier,
     @CurrentTimeUtc       datetime,
     @UpdateLastActivity   bit = 0
@@ -2037,12 +2037,12 @@ BEGIN
     RETURN 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Users_CreateUser]    Script Date: 10/05/2007 21:28:15 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Users_CreateUser]    Script Date: 10/05/2007 21:28:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Users_CreateUser]
+CREATE PROCEDURE dbo.[aspnet_Users_CreateUser]
     @ApplicationId    uniqueidentifier,
     @UserName         nvarchar(256),
     @IsUserAnonymous  bit,
@@ -2065,12 +2065,12 @@ BEGIN
     RETURN 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_UnRegisterSchemaVersion]    Script Date: 10/05/2007 21:28:14 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_UnRegisterSchemaVersion]    Script Date: 10/05/2007 21:28:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_UnRegisterSchemaVersion]
+CREATE PROCEDURE dbo.[aspnet_UnRegisterSchemaVersion]
     @Feature                   nvarchar(128),
     @CompatibleSchemaVersion   nvarchar(128)
 AS
@@ -2079,12 +2079,12 @@ BEGIN
         WHERE   Feature = LOWER(@Feature) AND @CompatibleSchemaVersion = CompatibleSchemaVersion
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_RegisterSchemaVersion]    Script Date: 10/05/2007 21:28:12 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_RegisterSchemaVersion]    Script Date: 10/05/2007 21:28:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_RegisterSchemaVersion]
+CREATE PROCEDURE dbo.[aspnet_RegisterSchemaVersion]
     @Feature                   nvarchar(128),
     @CompatibleSchemaVersion   nvarchar(128),
     @IsCurrentVersion          bit,
@@ -2109,12 +2109,12 @@ BEGIN
     VALUES( LOWER( @Feature ), @CompatibleSchemaVersion, @IsCurrentVersion )
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_CheckSchemaVersion]    Script Date: 10/05/2007 21:28:01 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_CheckSchemaVersion]    Script Date: 10/05/2007 21:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_CheckSchemaVersion]
+CREATE PROCEDURE dbo.[aspnet_CheckSchemaVersion]
     @Feature                   nvarchar(128),
     @CompatibleSchemaVersion   nvarchar(128)
 AS
@@ -2128,12 +2128,12 @@ BEGIN
     RETURN 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Membership_CreateUser]    Script Date: 10/05/2007 21:28:02 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Membership_CreateUser]    Script Date: 10/05/2007 21:28:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Membership_CreateUser]
+CREATE PROCEDURE dbo.[aspnet_Membership_CreateUser]
     @ApplicationName                        nvarchar(256),
     @UserName                               nvarchar(256),
     @Password                               nvarchar(128),
@@ -2329,12 +2329,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Profile_SetProperties]    Script Date: 10/05/2007 21:28:12 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Profile_SetProperties]    Script Date: 10/05/2007 21:28:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Profile_SetProperties]
+CREATE PROCEDURE dbo.[aspnet_Profile_SetProperties]
     @ApplicationName        nvarchar(256),
     @PropertyNames          ntext,
     @PropertyValuesString   ntext,
@@ -2433,12 +2433,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Roles_CreateRole]    Script Date: 10/05/2007 21:28:13 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Roles_CreateRole]    Script Date: 10/05/2007 21:28:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Roles_CreateRole]
+CREATE PROCEDURE dbo.[aspnet_Roles_CreateRole]
     @ApplicationName  nvarchar(256),
     @RoleName         nvarchar(256)
 AS
@@ -2504,12 +2504,12 @@ Cleanup:
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[aspnet_Profile_DeleteProfiles]    Script Date: 10/05/2007 21:28:10 ******/
+/****** Object:  StoredProcedure dbo.[aspnet_Profile_DeleteProfiles]    Script Date: 10/05/2007 21:28:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[aspnet_Profile_DeleteProfiles]
+CREATE PROCEDURE dbo.[aspnet_Profile_DeleteProfiles]
     @ApplicationName        nvarchar(256),
     @UserNames              nvarchar(4000)
 AS
