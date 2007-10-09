@@ -1014,6 +1014,7 @@ CREATE TABLE {databaseOwner}[{objectQualifier}ProfilePropertyDefinition](
 	[ValidationExpression] [nvarchar](2000) NULL,
 	[ViewOrder] [int] NOT NULL,
 	[Visible] [bit] NOT NULL,
+	[Searchable] [bit] NOT NULL
  CONSTRAINT [PK_{objectQualifier}ProfilePropertyDefinition] PRIMARY KEY CLUSTERED 
 (
 	[PropertyDefinitionID] ASC
