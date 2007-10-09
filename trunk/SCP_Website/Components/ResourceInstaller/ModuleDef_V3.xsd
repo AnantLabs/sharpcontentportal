@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema id="ModuleDefinition" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
-  <xs:element name="sharpcontentportal">
+  <xs:element name="sharpcontent">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="folders">
