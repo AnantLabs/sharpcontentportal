@@ -3832,7 +3832,8 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddPropertyDefinition]
 	@ValidationExpression nvarchar(100),
 	@ViewOrder int,
 	@Visible bit,
-    @Length int
+    @Length int,
+    @Searchable bit
 
 AS
 DECLARE @PropertyDefinitionId int
@@ -3856,7 +3857,8 @@ IF @PropertyDefinitionId is null
 				ValidationExpression,
 				ViewOrder,
 				Visible,
-				Length
+				Length,
+				Searchable
 			)
 			VALUES	(
 				@PortalId,
@@ -3870,7 +3872,8 @@ IF @PropertyDefinitionId is null
 				@ValidationExpression,
 				@ViewOrder,
 				@Visible,
-				@Length
+				@Length,
+				@Searchable
 			)
 
 		SELECT @PropertyDefinitionId = SCOPE_IDENTITY()
@@ -3887,7 +3890,8 @@ ELSE
 				ViewOrder = @ViewOrder,
 				Deleted = 0,
 				Visible = @Visible,
-				Length = @Length
+				Length = @Length,
+				Searchable = @Searchable
 			WHERE PropertyDefinitionId = @PropertyDefinitionId
 	END
 	
