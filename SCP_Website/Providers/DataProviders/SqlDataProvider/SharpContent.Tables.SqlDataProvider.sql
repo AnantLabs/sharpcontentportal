@@ -1,24 +1,24 @@
-/****** Object:  Table [dbo].[dnn_Questions]    Script Date: 10/07/2007 07:50:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Questions]    Script Date: 10/07/2007 07:50:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Questions](
+CREATE TABLE {databaseOwner}[{objectQualifier}Questions](
 	[QuestionId] [int] NOT NULL,
 	[Question] [nvarchar](1000) NULL,
 	[Locale] [nvarchar](50) NULL,
- CONSTRAINT [PK_dnn_Questions] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Questions] PRIMARY KEY CLUSTERED 
 (
 	[QuestionId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Schedule]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Schedule]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Schedule](
+CREATE TABLE {databaseOwner}[{objectQualifier}Schedule](
 	[ScheduleID] [int] IDENTITY(1,1) NOT NULL,
 	[TypeFullName] [varchar](200) NOT NULL,
 	[TimeLapse] [int] NOT NULL,
@@ -31,28 +31,28 @@ CREATE TABLE [dbo].[dnn_Schedule](
 	[Enabled] [bit] NOT NULL,
 	[ObjectDependencies] [varchar](300) NOT NULL,
 	[Servers] [nvarchar](150) NULL,
- CONSTRAINT [PK_dnn_Schedule] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Schedule] PRIMARY KEY CLUSTERED 
 (
 	[ScheduleID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Version]    Script Date: 10/05/2007 21:16:55 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Version]    Script Date: 10/05/2007 21:16:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Version](
+CREATE TABLE {databaseOwner}[{objectQualifier}Version](
 	[VersionId] [int] IDENTITY(1,1) NOT NULL,
 	[Major] [int] NOT NULL,
 	[Minor] [int] NOT NULL,
 	[Build] [int] NOT NULL,
 	[CreatedDate] [datetime] NOT NULL,
- CONSTRAINT [PK_dnn_Version] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Version] PRIMARY KEY CLUSTERED 
 (
 	[VersionId] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_Version] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}Version] UNIQUE NONCLUSTERED 
 (
 	[Major] ASC,
 	[Minor] ASC,
@@ -60,41 +60,41 @@ CREATE TABLE [dbo].[dnn_Version](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Classification]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Classification]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Classification](
+CREATE TABLE {databaseOwner}[{objectQualifier}Classification](
 	[ClassificationId] [int] IDENTITY(1,1) NOT NULL,
 	[ClassificationName] [nvarchar](200) NOT NULL,
 	[ParentId] [int] NULL,
- CONSTRAINT [PK_dnn_VendorCategory] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}VendorCategory] PRIMARY KEY CLUSTERED 
 (
 	[ClassificationId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SearchIndexer]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SearchIndexer]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SearchIndexer](
+CREATE TABLE {databaseOwner}[{objectQualifier}SearchIndexer](
 	[SearchIndexerID] [int] IDENTITY(1,1) NOT NULL,
 	[SearchIndexerAssemblyQualifiedName] [char](200) NOT NULL,
- CONSTRAINT [PK_dnn_SearchIndexer] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SearchIndexer] PRIMARY KEY CLUSTERED 
 (
 	[SearchIndexerID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_EventLogTypes]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}EventLogTypes]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_EventLogTypes](
+CREATE TABLE {databaseOwner}[{objectQualifier}EventLogTypes](
 	[LogTypeKey] [nvarchar](35) NOT NULL,
 	[LogTypeFriendlyName] [nvarchar](50) NOT NULL,
 	[LogTypeDescription] [nvarchar](128) NOT NULL,
@@ -106,37 +106,37 @@ CREATE TABLE [dbo].[dnn_EventLogTypes](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SearchCommonWords]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SearchCommonWords]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SearchCommonWords](
+CREATE TABLE {databaseOwner}[{objectQualifier}SearchCommonWords](
 	[CommonWordID] [int] IDENTITY(1,1) NOT NULL,
 	[CommonWord] [nvarchar](255) NOT NULL,
 	[Locale] [nvarchar](10) NULL,
- CONSTRAINT [PK_dnn_SearchCommonWords] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SearchCommonWords] PRIMARY KEY CLUSTERED 
 (
 	[CommonWordID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Lists]    Script Date: 10/05/2007 21:16:50 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Lists]    Script Date: 10/05/2007 21:16:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Lists](
+CREATE TABLE {databaseOwner}[{objectQualifier}Lists](
 	[EntryID] [int] IDENTITY(1,1) NOT NULL,
 	[ListName] [nvarchar](50) NOT NULL,
 	[Value] [nvarchar](100) NOT NULL,
 	[Text] [nvarchar](150) NOT NULL,
-	[ParentID] [int] NOT NULL CONSTRAINT [DF_dnn_Lists_ParentID]  DEFAULT ((0)),
-	[Level] [int] NOT NULL CONSTRAINT [DF_dnn_Lists_Level]  DEFAULT ((0)),
-	[SortOrder] [int] NOT NULL CONSTRAINT [DF_dnn_Lists_SortOrder]  DEFAULT ((0)),
-	[DefinitionID] [int] NOT NULL CONSTRAINT [DF_dnn_Lists_DefinitionID]  DEFAULT ((0)),
+	[ParentID] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Lists_ParentID]  DEFAULT ((0)),
+	[Level] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Lists_Level]  DEFAULT ((0)),
+	[SortOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Lists_SortOrder]  DEFAULT ((0)),
+	[DefinitionID] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Lists_DefinitionID]  DEFAULT ((0)),
 	[Description] [nvarchar](500) NULL,
- CONSTRAINT [PK_dnn_Lists] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Lists] PRIMARY KEY CLUSTERED 
 (
 	[ListName] ASC,
 	[Value] ASC,
@@ -145,64 +145,64 @@ CREATE TABLE [dbo].[dnn_Lists](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SearchWord]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SearchWord]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SearchWord](
+CREATE TABLE {databaseOwner}[{objectQualifier}SearchWord](
 	[SearchWordsID] [int] IDENTITY(1,1) NOT NULL,
 	[Word] [nvarchar](100) NOT NULL,
 	[IsCommon] [bit] NULL,
 	[HitCount] [int] NOT NULL,
- CONSTRAINT [PK_dnn_SearchWord] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SearchWord] PRIMARY KEY CLUSTERED 
 (
 	[SearchWordsID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_SearchWord] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}SearchWord] UNIQUE NONCLUSTERED 
 (
 	[Word] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_HostSettings]    Script Date: 10/05/2007 21:16:45 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}HostSettings]    Script Date: 10/05/2007 21:16:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_HostSettings](
+CREATE TABLE {databaseOwner}[{objectQualifier}HostSettings](
 	[SettingName] [nvarchar](50) NOT NULL,
 	[SettingValue] [nvarchar](256) NOT NULL,
-	[SettingIsSecure] [bit] NOT NULL CONSTRAINT [DF_dnn_HostSettings_Secure]  DEFAULT ((0)),
- CONSTRAINT [PK_dnn_HostSettings] PRIMARY KEY CLUSTERED 
+	[SettingIsSecure] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}HostSettings_Secure]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}HostSettings] PRIMARY KEY CLUSTERED 
 (
 	[SettingName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Portals]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Portals](
+CREATE TABLE {databaseOwner}[{objectQualifier}Portals](
 	[PortalID] [int] IDENTITY(0,1) NOT NULL,
 	[PortalName] [nvarchar](128) NOT NULL,
 	[LogoFile] [nvarchar](50) NULL,
 	[FooterText] [nvarchar](100) NULL,
 	[ExpiryDate] [datetime] NULL,
-	[UserRegistration] [int] NOT NULL CONSTRAINT [DF_dnn_Portals_UserRegistration]  DEFAULT ((0)),
-	[BannerAdvertising] [int] NOT NULL CONSTRAINT [DF_dnn_Portals_BannerAdvertising]  DEFAULT ((0)),
+	[UserRegistration] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_UserRegistration]  DEFAULT ((0)),
+	[BannerAdvertising] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_BannerAdvertising]  DEFAULT ((0)),
 	[AdministratorId] [int] NULL,
 	[Currency] [char](3) NULL,
-	[HostFee] [money] NOT NULL CONSTRAINT [DF_dnn_Portals_HostFee]  DEFAULT ((0)),
-	[HostSpace] [int] NOT NULL CONSTRAINT [DF_dnn_Portals_HostSpace]  DEFAULT ((0)),
+	[HostFee] [money] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_HostFee]  DEFAULT ((0)),
+	[HostSpace] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_HostSpace]  DEFAULT ((0)),
 	[AdministratorRoleId] [int] NULL,
 	[RegisteredRoleId] [int] NULL,
 	[Description] [nvarchar](500) NULL,
 	[KeyWords] [nvarchar](500) NULL,
 	[BackgroundFile] [nvarchar](50) NULL,
-	[GUID] [uniqueidentifier] NOT NULL CONSTRAINT [DF_dnn_Portals_GUID]  DEFAULT (newid()),
+	[GUID] [uniqueidentifier] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_GUID]  DEFAULT (newid()),
 	[PaymentProcessor] [nvarchar](50) NULL,
 	[ProcessorUserId] [nvarchar](50) NULL,
 	[ProcessorPassword] [nvarchar](50) NULL,
@@ -210,42 +210,42 @@ CREATE TABLE [dbo].[dnn_Portals](
 	[HomeTabId] [int] NULL,
 	[LoginTabId] [int] NULL,
 	[UserTabId] [int] NULL,
-	[DefaultLanguage] [nvarchar](10) NOT NULL CONSTRAINT [DF_dnn_Portals_DefaultLanguage]  DEFAULT ('en-US'),
-	[TimezoneOffset] [int] NOT NULL CONSTRAINT [DF_dnn_Portals_TimezoneOffset]  DEFAULT ((-8)),
+	[DefaultLanguage] [nvarchar](10) NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_DefaultLanguage]  DEFAULT ('en-US'),
+	[TimezoneOffset] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_TimezoneOffset]  DEFAULT ((-8)),
 	[AdminTabId] [int] NULL,
-	[HomeDirectory] [varchar](100) NOT NULL CONSTRAINT [DF_dnn_Portals_HomeDirectory]  DEFAULT (''),
+	[HomeDirectory] [varchar](100) NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_HomeDirectory]  DEFAULT (''),
 	[SplashTabId] [int] NULL,
-	[PageQuota] [int] NOT NULL CONSTRAINT [DF_dnn_Portals_PageQuota]  DEFAULT ((0)),
-	[UserQuota] [int] NOT NULL CONSTRAINT [DF_dnn_Portals_UserQuota]  DEFAULT ((0)),
- CONSTRAINT [PK_dnn_Portals] PRIMARY KEY NONCLUSTERED 
+	[PageQuota] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_PageQuota]  DEFAULT ((0)),
+	[UserQuota] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_UserQuota]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}Portals] PRIMARY KEY NONCLUSTERED 
 (
 	[PortalID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Permission]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Permission]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Permission](
+CREATE TABLE {databaseOwner}[{objectQualifier}Permission](
 	[PermissionID] [int] IDENTITY(1,1) NOT NULL,
 	[PermissionCode] [varchar](50) NOT NULL,
 	[ModuleDefID] [int] NOT NULL,
 	[PermissionKey] [varchar](20) NOT NULL,
 	[PermissionName] [varchar](50) NOT NULL,
- CONSTRAINT [PK_dnn_Permission] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Permission] PRIMARY KEY CLUSTERED 
 (
 	[PermissionID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_DesktopModules]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}DesktopModules]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_DesktopModules](
+CREATE TABLE {databaseOwner}[{objectQualifier}DesktopModules](
 	[DesktopModuleID] [int] IDENTITY(1,1) NOT NULL,
 	[FriendlyName] [nvarchar](128) NOT NULL,
 	[Description] [nvarchar](2000) NULL,
@@ -255,115 +255,115 @@ CREATE TABLE [dbo].[dnn_DesktopModules](
 	[BusinessControllerClass] [nvarchar](200) NULL,
 	[FolderName] [nvarchar](128) NOT NULL,
 	[ModuleName] [nvarchar](128) NOT NULL,
-	[SupportedFeatures] [int] NOT NULL CONSTRAINT [DF_dnn_DesktopModules_SupportedFeatures]  DEFAULT ((0)),
+	[SupportedFeatures] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}DesktopModules_SupportedFeatures]  DEFAULT ((0)),
 	[CompatibleVersions] [nvarchar](500) NULL,
- CONSTRAINT [PK_dnn_DesktopModules] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}DesktopModules] PRIMARY KEY CLUSTERED 
 (
 	[DesktopModuleID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_DesktopModules_ModuleName] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}DesktopModules_ModuleName] UNIQUE NONCLUSTERED 
 (
 	[ModuleName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Users]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Users]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Users](
+CREATE TABLE {databaseOwner}[{objectQualifier}Users](
 	[UserID] [int] IDENTITY(1,1) NOT NULL,
 	[Username] [nvarchar](100) NOT NULL,
 	[FirstName] [nvarchar](50) NOT NULL,
 	[LastName] [nvarchar](50) NOT NULL,
-	[IsSuperUser] [bit] NOT NULL CONSTRAINT [DF_dnn_Users_IsSuperUser]  DEFAULT ((0)),
+	[IsSuperUser] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Users_IsSuperUser]  DEFAULT ((0)),
 	[AffiliateId] [int] NULL,
 	[Email] [nvarchar](256) NULL,
-	[DisplayName] [nvarchar](128) NOT NULL CONSTRAINT [DF_dnn_Users_DisplayName]  DEFAULT (''),
-	[UpdatePassword] [bit] NOT NULL CONSTRAINT [DF_dnn_Users_UpdatePassword]  DEFAULT ((0)),
- CONSTRAINT [PK_dnn_Users] PRIMARY KEY CLUSTERED 
+	[DisplayName] [nvarchar](128) NOT NULL CONSTRAINT [DF_{objectQualifier}Users_DisplayName]  DEFAULT (''),
+	[UpdatePassword] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Users_UpdatePassword]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}Users] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_Users] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}Users] UNIQUE NONCLUSTERED 
 (
 	[Username] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_UserRoles]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}UserRoles]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_UserRoles](
+CREATE TABLE {databaseOwner}[{objectQualifier}UserRoles](
 	[UserRoleID] [int] IDENTITY(1,1) NOT NULL,
 	[UserID] [int] NOT NULL,
 	[RoleID] [int] NOT NULL,
 	[ExpiryDate] [datetime] NULL,
 	[IsTrialUsed] [bit] NULL,
 	[EffectiveDate] [datetime] NULL,
- CONSTRAINT [PK_dnn_UserRoles] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}UserRoles] PRIMARY KEY CLUSTERED 
 (
 	[UserRoleID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Roles]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Roles]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Roles](
+CREATE TABLE {databaseOwner}[{objectQualifier}Roles](
 	[RoleID] [int] IDENTITY(0,1) NOT NULL,
 	[PortalID] [int] NOT NULL,
 	[RoleName] [nvarchar](50) NOT NULL,
 	[Description] [nvarchar](1000) NULL,
-	[ServiceFee] [money] NULL CONSTRAINT [DF_dnn_Roles_ServiceFee]  DEFAULT ((0)),
+	[ServiceFee] [money] NULL CONSTRAINT [DF_{objectQualifier}Roles_ServiceFee]  DEFAULT ((0)),
 	[BillingFrequency] [char](1) NULL,
 	[TrialPeriod] [int] NULL,
 	[TrialFrequency] [char](1) NULL,
 	[BillingPeriod] [int] NULL,
 	[TrialFee] [money] NULL,
-	[IsPublic] [bit] NOT NULL CONSTRAINT [DF_dnn_Roles_IsPublic]  DEFAULT ((0)),
-	[AutoAssignment] [bit] NOT NULL CONSTRAINT [DF_dnn_Roles_AutoAssignment]  DEFAULT ((0)),
+	[IsPublic] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Roles_IsPublic]  DEFAULT ((0)),
+	[AutoAssignment] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Roles_AutoAssignment]  DEFAULT ((0)),
 	[RoleGroupID] [int] NULL,
 	[RSVPCode] [nvarchar](50) NULL,
 	[IconFile] [nvarchar](100) NULL,
- CONSTRAINT [PK_dnn_Roles] PRIMARY KEY NONCLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Roles] PRIMARY KEY NONCLUSTERED 
 (
 	[RoleID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_RoleName] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}RoleName] UNIQUE NONCLUSTERED 
 (
 	[PortalID] ASC,
 	[RoleName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ScheduleItemSettings]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ScheduleItemSettings]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ScheduleItemSettings](
+CREATE TABLE {databaseOwner}[{objectQualifier}ScheduleItemSettings](
 	[ScheduleID] [int] NOT NULL,
 	[SettingName] [nvarchar](50) NOT NULL,
 	[SettingValue] [nvarchar](256) NOT NULL,
- CONSTRAINT [PK_dnn_ScheduleItemSettings] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}ScheduleItemSettings] PRIMARY KEY CLUSTERED 
 (
 	[ScheduleID] ASC,
 	[SettingName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ScheduleHistory]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ScheduleHistory]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ScheduleHistory](
+CREATE TABLE {databaseOwner}[{objectQualifier}ScheduleHistory](
 	[ScheduleHistoryID] [int] IDENTITY(1,1) NOT NULL,
 	[ScheduleID] [int] NOT NULL,
 	[StartDate] [datetime] NOT NULL,
@@ -372,84 +372,84 @@ CREATE TABLE [dbo].[dnn_ScheduleHistory](
 	[LogNotes] [ntext] NULL,
 	[NextStart] [datetime] NULL,
 	[Server] [nvarchar](150) NULL,
- CONSTRAINT [PK_dnn_ScheduleHistory] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}ScheduleHistory] PRIMARY KEY CLUSTERED 
 (
 	[ScheduleHistoryID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_TabModuleSettings]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}TabModuleSettings]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_TabModuleSettings](
+CREATE TABLE {databaseOwner}[{objectQualifier}TabModuleSettings](
 	[TabModuleID] [int] NOT NULL,
 	[SettingName] [nvarchar](50) NOT NULL,
 	[SettingValue] [nvarchar](2000) NOT NULL,
- CONSTRAINT [PK_dnn_TabModuleSettings] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}TabModuleSettings] PRIMARY KEY CLUSTERED 
 (
 	[TabModuleID] ASC,
 	[SettingName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ModuleSettings]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ModuleSettings]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ModuleSettings](
+CREATE TABLE {databaseOwner}[{objectQualifier}ModuleSettings](
 	[ModuleID] [int] NOT NULL,
 	[SettingName] [nvarchar](50) NOT NULL,
 	[SettingValue] [nvarchar](2000) NOT NULL,
- CONSTRAINT [PK_dnn_ModuleSettings] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}ModuleSettings] PRIMARY KEY CLUSTERED 
 (
 	[ModuleID] ASC,
 	[SettingName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ModulePermission]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ModulePermission]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ModulePermission](
+CREATE TABLE {databaseOwner}[{objectQualifier}ModulePermission](
 	[ModulePermissionID] [int] IDENTITY(1,1) NOT NULL,
 	[ModuleID] [int] NOT NULL,
 	[PermissionID] [int] NOT NULL,
 	[RoleID] [int] NOT NULL,
 	[AllowAccess] [bit] NOT NULL,
- CONSTRAINT [PK_dnn_ModulePermission] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}ModulePermission] PRIMARY KEY CLUSTERED 
 (
 	[ModulePermissionID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_HtmlText]    Script Date: 10/05/2007 21:16:47 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}HtmlText]    Script Date: 10/05/2007 21:16:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_HtmlText](
+CREATE TABLE {databaseOwner}[{objectQualifier}HtmlText](
 	[ModuleID] [int] NOT NULL,
 	[DesktopHtml] [ntext] NOT NULL,
 	[DesktopSummary] [ntext] NULL,
 	[CreatedByUser] [int] NULL,
 	[CreatedDate] [datetime] NULL,
- CONSTRAINT [PK_dnn_HtmlText] PRIMARY KEY NONCLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}HtmlText] PRIMARY KEY NONCLUSTERED 
 (
 	[ModuleID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_TabModules]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}TabModules]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_TabModules](
+CREATE TABLE {databaseOwner}[{objectQualifier}TabModules](
 	[TabModuleID] [int] IDENTITY(1,1) NOT NULL,
 	[TabID] [int] NOT NULL,
 	[ModuleID] [int] NOT NULL,
@@ -462,26 +462,26 @@ CREATE TABLE [dbo].[dnn_TabModules](
 	[IconFile] [nvarchar](100) NULL,
 	[Visibility] [int] NOT NULL,
 	[ContainerSrc] [nvarchar](200) NULL,
-	[DisplayTitle] [bit] NOT NULL CONSTRAINT [DF_dnn_TabModules_DisplayTitle]  DEFAULT ((1)),
-	[DisplayPrint] [bit] NOT NULL CONSTRAINT [DF_dnn_TabModules_DisplayPrint]  DEFAULT ((1)),
-	[DisplaySyndicate] [bit] NOT NULL CONSTRAINT [DF_dnn_TabModules_DisplaySyndicate]  DEFAULT ((1)),
- CONSTRAINT [PK_dnn_TabModules] PRIMARY KEY CLUSTERED 
+	[DisplayTitle] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}TabModules_DisplayTitle]  DEFAULT ((1)),
+	[DisplayPrint] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}TabModules_DisplayPrint]  DEFAULT ((1)),
+	[DisplaySyndicate] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}TabModules_DisplaySyndicate]  DEFAULT ((1)),
+ CONSTRAINT [PK_{objectQualifier}TabModules] PRIMARY KEY CLUSTERED 
 (
 	[TabModuleID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_TabModules] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}TabModules] UNIQUE NONCLUSTERED 
 (
 	[TabID] ASC,
 	[ModuleID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Links]    Script Date: 10/05/2007 21:16:50 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Links]    Script Date: 10/05/2007 21:16:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Links](
+CREATE TABLE {databaseOwner}[{objectQualifier}Links](
 	[ItemID] [int] IDENTITY(0,1) NOT NULL,
 	[ModuleID] [int] NOT NULL,
 	[CreatedDate] [datetime] NULL,
@@ -496,12 +496,12 @@ PRIMARY KEY NONCLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SearchItem]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SearchItem]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SearchItem](
+CREATE TABLE {databaseOwner}[{objectQualifier}SearchItem](
 	[SearchItemID] [int] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](200) NOT NULL,
 	[Description] [nvarchar](2000) NOT NULL,
@@ -512,59 +512,59 @@ CREATE TABLE [dbo].[dnn_SearchItem](
 	[Guid] [varchar](200) NULL,
 	[HitCount] [int] NULL,
 	[ImageFileId] [int] NULL,
- CONSTRAINT [PK_dnn_SearchItem] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SearchItem] PRIMARY KEY CLUSTERED 
 (
 	[SearchItemID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_VendorClassification]    Script Date: 10/05/2007 21:16:55 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}VendorClassification]    Script Date: 10/05/2007 21:16:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_VendorClassification](
+CREATE TABLE {databaseOwner}[{objectQualifier}VendorClassification](
 	[VendorClassificationId] [int] IDENTITY(1,1) NOT NULL,
 	[VendorId] [int] NOT NULL,
 	[ClassificationId] [int] NOT NULL,
- CONSTRAINT [PK_dnn_VendorClassification] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}VendorClassification] PRIMARY KEY CLUSTERED 
 (
 	[VendorClassificationId] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_VendorClassification] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}VendorClassification] UNIQUE NONCLUSTERED 
 (
 	[VendorId] ASC,
 	[ClassificationId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SearchItemWord]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SearchItemWord]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SearchItemWord](
+CREATE TABLE {databaseOwner}[{objectQualifier}SearchItemWord](
 	[SearchItemWordID] [int] IDENTITY(1,1) NOT NULL,
 	[SearchItemID] [int] NOT NULL,
 	[SearchWordsID] [int] NOT NULL,
 	[Occurrences] [int] NOT NULL,
- CONSTRAINT [PK_dnn_SearchItemWords] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SearchItemWords] PRIMARY KEY CLUSTERED 
 (
 	[SearchItemWordID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_SearchItemWord] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}SearchItemWord] UNIQUE NONCLUSTERED 
 (
 	[SearchItemID] ASC,
 	[SearchWordsID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ModuleControls]    Script Date: 10/05/2007 21:16:50 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ModuleControls]    Script Date: 10/05/2007 21:16:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ModuleControls](
+CREATE TABLE {databaseOwner}[{objectQualifier}ModuleControls](
 	[ModuleControlID] [int] IDENTITY(1,1) NOT NULL,
 	[ModuleDefID] [int] NULL,
 	[ControlKey] [nvarchar](50) NULL,
@@ -574,11 +574,11 @@ CREATE TABLE [dbo].[dnn_ModuleControls](
 	[ControlType] [int] NOT NULL,
 	[ViewOrder] [int] NULL,
 	[HelpUrl] [nvarchar](200) NULL,
- CONSTRAINT [PK_dnn_ModuleControls] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}ModuleControls] PRIMARY KEY CLUSTERED 
 (
 	[ModuleControlID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_ModuleControls] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}ModuleControls] UNIQUE NONCLUSTERED 
 (
 	[ModuleDefID] ASC,
 	[ControlKey] ASC,
@@ -586,79 +586,79 @@ CREATE TABLE [dbo].[dnn_ModuleControls](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Modules]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Modules]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Modules](
+CREATE TABLE {databaseOwner}[{objectQualifier}Modules](
 	[ModuleID] [int] IDENTITY(0,1) NOT NULL,
 	[ModuleDefID] [int] NOT NULL,
 	[ModuleTitle] [nvarchar](256) NULL,
-	[AllTabs] [bit] NOT NULL CONSTRAINT [DF_dnn_Modules_AllTabs]  DEFAULT ((0)),
-	[IsDeleted] [bit] NOT NULL CONSTRAINT [DF_dnn_Modules_IsDeleted]  DEFAULT ((0)),
+	[AllTabs] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Modules_AllTabs]  DEFAULT ((0)),
+	[IsDeleted] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Modules_IsDeleted]  DEFAULT ((0)),
 	[InheritViewPermissions] [bit] NULL,
 	[Header] [ntext] NULL,
 	[Footer] [ntext] NULL,
 	[StartDate] [datetime] NULL,
 	[EndDate] [datetime] NULL,
 	[PortalID] [int] NULL,
- CONSTRAINT [PK_dnn_Modules] PRIMARY KEY NONCLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Modules] PRIMARY KEY NONCLUSTERED 
 (
 	[ModuleID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_UserProfile]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}UserProfile]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_UserProfile](
+CREATE TABLE {databaseOwner}[{objectQualifier}UserProfile](
 	[ProfileID] [int] IDENTITY(1,1) NOT NULL,
 	[UserID] [int] NOT NULL,
 	[PropertyDefinitionID] [int] NOT NULL,
 	[PropertyValue] [nvarchar](3750) NULL,
 	[PropertyText] [ntext] NULL,
-	[Visibility] [int] NOT NULL CONSTRAINT [DF__dnn_UserP__Visib__1352D76D]  DEFAULT ((0)),
+	[Visibility] [int] NOT NULL CONSTRAINT [DF__{objectQualifier}UserP__Visib__1352D76D]  DEFAULT ((0)),
 	[LastUpdatedDate] [datetime] NOT NULL,
- CONSTRAINT [PK_dnn_UserProfile] PRIMARY KEY NONCLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}UserProfile] PRIMARY KEY NONCLUSTERED 
 (
 	[ProfileID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_TabPermission]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}TabPermission]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_TabPermission](
+CREATE TABLE {databaseOwner}[{objectQualifier}TabPermission](
 	[TabPermissionID] [int] IDENTITY(1,1) NOT NULL,
 	[TabID] [int] NOT NULL,
 	[PermissionID] [int] NOT NULL,
 	[RoleID] [int] NOT NULL,
 	[AllowAccess] [bit] NOT NULL,
- CONSTRAINT [PK_dnn_TabPermission] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}TabPermission] PRIMARY KEY CLUSTERED 
 (
 	[TabPermissionID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Banners]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Banners]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Banners](
+CREATE TABLE {databaseOwner}[{objectQualifier}Banners](
 	[BannerId] [int] IDENTITY(1,1) NOT NULL,
 	[VendorId] [int] NOT NULL,
 	[ImageFile] [nvarchar](100) NULL,
 	[BannerName] [nvarchar](100) NOT NULL,
 	[Impressions] [int] NOT NULL,
 	[CPM] [float] NOT NULL,
-	[Views] [int] NOT NULL CONSTRAINT [DF_dnn_Banners_Views]  DEFAULT ((0)),
-	[ClickThroughs] [int] NOT NULL CONSTRAINT [DF_dnn_Banners_ClickThroughs]  DEFAULT ((0)),
+	[Views] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Banners_Views]  DEFAULT ((0)),
+	[ClickThroughs] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Banners_ClickThroughs]  DEFAULT ((0)),
 	[StartDate] [datetime] NULL,
 	[EndDate] [datetime] NULL,
 	[CreatedByUser] [nvarchar](100) NOT NULL,
@@ -666,22 +666,22 @@ CREATE TABLE [dbo].[dnn_Banners](
 	[BannerTypeId] [int] NULL,
 	[Description] [nvarchar](2000) NULL,
 	[GroupName] [nvarchar](100) NULL,
-	[Criteria] [bit] NOT NULL CONSTRAINT [DF_dnn_Banners_Criteria]  DEFAULT ((1)),
+	[Criteria] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Banners_Criteria]  DEFAULT ((1)),
 	[URL] [nvarchar](255) NULL,
-	[Width] [int] NOT NULL CONSTRAINT [DF_dnn_Banners_Width]  DEFAULT ((0)),
-	[Height] [int] NOT NULL CONSTRAINT [DF_dnn_Banners_Height]  DEFAULT ((0)),
- CONSTRAINT [PK_dnn_Banner] PRIMARY KEY CLUSTERED 
+	[Width] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Banners_Width]  DEFAULT ((0)),
+	[Height] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Banners_Height]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}Banner] PRIMARY KEY CLUSTERED 
 (
 	[BannerId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Affiliates]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Affiliates]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Affiliates](
+CREATE TABLE {databaseOwner}[{objectQualifier}Affiliates](
 	[AffiliateId] [int] IDENTITY(1,1) NOT NULL,
 	[VendorId] [int] NULL,
 	[StartDate] [datetime] NULL,
@@ -690,33 +690,33 @@ CREATE TABLE [dbo].[dnn_Affiliates](
 	[Clicks] [int] NOT NULL,
 	[CPA] [float] NOT NULL,
 	[Acquisitions] [int] NOT NULL,
- CONSTRAINT [PK_dnn_Affiliates] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Affiliates] PRIMARY KEY CLUSTERED 
 (
 	[AffiliateId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SearchItemWordPosition]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SearchItemWordPosition]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SearchItemWordPosition](
+CREATE TABLE {databaseOwner}[{objectQualifier}SearchItemWordPosition](
 	[SearchItemWordPositionID] [int] IDENTITY(1,1) NOT NULL,
 	[SearchItemWordID] [int] NOT NULL,
 	[ContentPosition] [int] NOT NULL,
- CONSTRAINT [PK_dnn_SearchItemWordPosition] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SearchItemWordPosition] PRIMARY KEY CLUSTERED 
 (
 	[SearchItemWordPositionID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_EventLogConfig]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}EventLogConfig]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_EventLogConfig](
+CREATE TABLE {databaseOwner}[{objectQualifier}EventLogConfig](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[LogTypeKey] [nvarchar](35) NULL,
 	[LogTypePortalID] [int] NULL,
@@ -728,18 +728,18 @@ CREATE TABLE [dbo].[dnn_EventLogConfig](
 	[NotificationThresholdTimeType] [int] NULL,
 	[MailFromAddress] [nvarchar](50) NOT NULL,
 	[MailToAddress] [nvarchar](50) NOT NULL,
- CONSTRAINT [PK_dnn_EventLogConfig] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}EventLogConfig] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_EventLog]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}EventLog]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_EventLog](
+CREATE TABLE {databaseOwner}[{objectQualifier}EventLog](
 	[LogGUID] [varchar](36) NOT NULL,
 	[LogTypeKey] [nvarchar](35) NOT NULL,
 	[LogConfigID] [int] NULL,
@@ -757,45 +757,45 @@ CREATE TABLE [dbo].[dnn_EventLog](
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_UrlLog]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}UrlLog]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_UrlLog](
+CREATE TABLE {databaseOwner}[{objectQualifier}UrlLog](
 	[UrlLogID] [int] IDENTITY(1,1) NOT NULL,
 	[UrlTrackingID] [int] NOT NULL,
 	[ClickDate] [datetime] NOT NULL,
 	[UserID] [int] NULL,
- CONSTRAINT [PK_dnn_UrlLog] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}UrlLog] PRIMARY KEY CLUSTERED 
 (
 	[UrlLogID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_FolderPermission]    Script Date: 10/05/2007 21:16:45 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}FolderPermission]    Script Date: 10/05/2007 21:16:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_FolderPermission](
+CREATE TABLE {databaseOwner}[{objectQualifier}FolderPermission](
 	[FolderPermissionID] [int] IDENTITY(1,1) NOT NULL,
 	[FolderID] [int] NOT NULL,
 	[PermissionID] [int] NOT NULL,
 	[RoleID] [int] NOT NULL,
 	[AllowAccess] [bit] NOT NULL,
- CONSTRAINT [PK_dnn_FolderPermission] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}FolderPermission] PRIMARY KEY CLUSTERED 
 (
 	[FolderPermissionID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Files]    Script Date: 10/05/2007 21:16:45 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Files]    Script Date: 10/05/2007 21:16:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Files](
+CREATE TABLE {databaseOwner}[{objectQualifier}Files](
 	[FileId] [int] IDENTITY(1,1) NOT NULL,
 	[PortalId] [int] NULL,
 	[FileName] [nvarchar](100) NOT NULL,
@@ -807,18 +807,18 @@ CREATE TABLE [dbo].[dnn_Files](
 	[Folder] [nvarchar](200) NULL,
 	[FolderID] [int] NOT NULL,
 	[Content] [image] NULL,
- CONSTRAINT [PK_dnn_File] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}File] PRIMARY KEY CLUSTERED 
 (
 	[FileId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Vendors]    Script Date: 10/05/2007 21:16:55 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Vendors]    Script Date: 10/05/2007 21:16:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Vendors](
+CREATE TABLE {databaseOwner}[{objectQualifier}Vendors](
 	[VendorId] [int] IDENTITY(1,1) NOT NULL,
 	[VendorName] [nvarchar](50) NOT NULL,
 	[Street] [nvarchar](50) NULL,
@@ -831,34 +831,34 @@ CREATE TABLE [dbo].[dnn_Vendors](
 	[Fax] [nvarchar](50) NULL,
 	[Email] [nvarchar](50) NULL,
 	[Website] [nvarchar](100) NULL,
-	[ClickThroughs] [int] NOT NULL CONSTRAINT [DF_dnn_Vendors_ClickThroughs]  DEFAULT ((0)),
-	[Views] [int] NOT NULL CONSTRAINT [DF_dnn_Vendors_Views]  DEFAULT ((0)),
+	[ClickThroughs] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Vendors_ClickThroughs]  DEFAULT ((0)),
+	[Views] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Vendors_Views]  DEFAULT ((0)),
 	[CreatedByUser] [nvarchar](100) NULL,
 	[CreatedDate] [datetime] NULL,
 	[LogoFile] [nvarchar](100) NULL,
 	[KeyWords] [ntext] NULL,
 	[Unit] [nvarchar](50) NULL,
-	[Authorized] [bit] NOT NULL CONSTRAINT [DF_dnn_Vendors_Authorized]  DEFAULT ((1)),
+	[Authorized] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Vendors_Authorized]  DEFAULT ((1)),
 	[FirstName] [nvarchar](50) NULL,
 	[LastName] [nvarchar](50) NULL,
 	[Cell] [varchar](50) NULL,
- CONSTRAINT [PK_dnn_Vendor] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Vendor] PRIMARY KEY CLUSTERED 
 (
 	[VendorId] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_Vendors] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}Vendors] UNIQUE NONCLUSTERED 
 (
 	[PortalId] ASC,
 	[VendorName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_UrlTracking]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}UrlTracking]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_UrlTracking](
+CREATE TABLE {databaseOwner}[{objectQualifier}UrlTracking](
 	[UrlTrackingID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NULL,
 	[Url] [nvarchar](255) NOT NULL,
@@ -867,14 +867,14 @@ CREATE TABLE [dbo].[dnn_UrlTracking](
 	[LastClick] [datetime] NULL,
 	[CreatedDate] [datetime] NOT NULL,
 	[LogActivity] [bit] NOT NULL,
-	[TrackClicks] [bit] NOT NULL CONSTRAINT [DF_dnn_UrlTracking_TrackClicks]  DEFAULT ((1)),
+	[TrackClicks] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}UrlTracking_TrackClicks]  DEFAULT ((1)),
 	[ModuleId] [int] NULL,
-	[NewWindow] [bit] NOT NULL CONSTRAINT [DF_dnn_UrlTracking_NewWindow]  DEFAULT ((0)),
- CONSTRAINT [PK_dnn_UrlTracking] PRIMARY KEY CLUSTERED 
+	[NewWindow] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}UrlTracking_NewWindow]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}UrlTracking] PRIMARY KEY CLUSTERED 
 (
 	[UrlTrackingID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_UrlTracking] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}UrlTracking] UNIQUE NONCLUSTERED 
 (
 	[PortalID] ASC,
 	[Url] ASC,
@@ -882,125 +882,125 @@ CREATE TABLE [dbo].[dnn_UrlTracking](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Urls]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Urls]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Urls](
+CREATE TABLE {databaseOwner}[{objectQualifier}Urls](
 	[UrlID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NULL,
 	[Url] [nvarchar](255) NOT NULL,
- CONSTRAINT [PK_dnn_Urls] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Urls] PRIMARY KEY CLUSTERED 
 (
 	[UrlID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_Urls] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}Urls] UNIQUE NONCLUSTERED 
 (
 	[Url] ASC,
 	[PortalID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Profile]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Profile]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Profile](
+CREATE TABLE {databaseOwner}[{objectQualifier}Profile](
 	[ProfileId] [int] IDENTITY(1,1) NOT NULL,
 	[UserId] [int] NOT NULL,
 	[PortalId] [int] NOT NULL,
 	[ProfileData] [ntext] NOT NULL,
 	[CreatedDate] [datetime] NOT NULL,
- CONSTRAINT [PK_dnn_Profile] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Profile] PRIMARY KEY CLUSTERED 
 (
 	[ProfileId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_PortalAlias]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}PortalAlias]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_PortalAlias](
+CREATE TABLE {databaseOwner}[{objectQualifier}PortalAlias](
 	[PortalAliasID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NOT NULL,
 	[HTTPAlias] [nvarchar](200) NULL,
- CONSTRAINT [PK_dnn_PortalAlias] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}PortalAlias] PRIMARY KEY CLUSTERED 
 (
 	[PortalAliasID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_PortalAlias] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}PortalAlias] UNIQUE NONCLUSTERED 
 (
 	[HTTPAlias] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SystemMessages]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SystemMessages]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SystemMessages](
+CREATE TABLE {databaseOwner}[{objectQualifier}SystemMessages](
 	[MessageID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NULL,
 	[MessageName] [nvarchar](50) NOT NULL,
 	[MessageValue] [ntext] NOT NULL,
- CONSTRAINT [PK_dnn_SystemMessages] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SystemMessages] PRIMARY KEY CLUSTERED 
 (
 	[MessageID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_SystemMessages] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}SystemMessages] UNIQUE NONCLUSTERED 
 (
 	[MessageName] ASC,
 	[PortalID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Folders]    Script Date: 10/05/2007 21:16:45 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Folders]    Script Date: 10/05/2007 21:16:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Folders](
+CREATE TABLE {databaseOwner}[{objectQualifier}Folders](
 	[FolderID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NULL,
 	[FolderPath] [varchar](300) NOT NULL,
-	[StorageLocation] [int] NOT NULL CONSTRAINT [DF_dnn_Folders_StorageLocation]  DEFAULT ((0)),
-	[IsProtected] [bit] NOT NULL CONSTRAINT [DF_dnn_Folders_IsProtected]  DEFAULT ((0)),
-	[IsCached] [bit] NOT NULL CONSTRAINT [DF_dnn_Folders_IsCached]  DEFAULT ((0)),
+	[StorageLocation] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Folders_StorageLocation]  DEFAULT ((0)),
+	[IsProtected] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Folders_IsProtected]  DEFAULT ((0)),
+	[IsCached] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Folders_IsCached]  DEFAULT ((0)),
 	[LastUpdated] [datetime] NULL,
- CONSTRAINT [PK_dnn_Folders] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Folders] PRIMARY KEY CLUSTERED 
 (
 	[FolderID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Skins]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Skins]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Skins](
+CREATE TABLE {databaseOwner}[{objectQualifier}Skins](
 	[SkinID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NULL,
 	[SkinRoot] [nvarchar](50) NOT NULL,
 	[SkinSrc] [nvarchar](200) NOT NULL,
 	[SkinType] [int] NOT NULL,
- CONSTRAINT [PK_dnn_Skins] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Skins] PRIMARY KEY CLUSTERED 
 (
 	[SkinID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ProfilePropertyDefinition]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ProfilePropertyDefinition]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ProfilePropertyDefinition](
+CREATE TABLE {databaseOwner}[{objectQualifier}ProfilePropertyDefinition](
 	[PropertyDefinitionID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NULL,
 	[ModuleDefID] [int] NULL,
@@ -1009,92 +1009,92 @@ CREATE TABLE [dbo].[dnn_ProfilePropertyDefinition](
 	[DefaultValue] [nvarchar](50) NULL,
 	[PropertyCategory] [nvarchar](50) NOT NULL,
 	[PropertyName] [nvarchar](50) NOT NULL,
-	[Length] [int] NOT NULL CONSTRAINT [DF_dnn_ProfilePropertyDefinition_Length]  DEFAULT ((0)),
+	[Length] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}ProfilePropertyDefinition_Length]  DEFAULT ((0)),
 	[Required] [bit] NOT NULL,
 	[ValidationExpression] [nvarchar](2000) NULL,
 	[ViewOrder] [int] NOT NULL,
 	[Visible] [bit] NOT NULL,
- CONSTRAINT [PK_dnn_ProfilePropertyDefinition] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}ProfilePropertyDefinition] PRIMARY KEY CLUSTERED 
 (
 	[PropertyDefinitionID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_AnonymousUsers]    Script Date: 10/05/2007 21:16:44 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}AnonymousUsers]    Script Date: 10/05/2007 21:16:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_AnonymousUsers](
+CREATE TABLE {databaseOwner}[{objectQualifier}AnonymousUsers](
 	[UserID] [char](36) NOT NULL,
 	[PortalID] [int] NOT NULL,
 	[TabID] [int] NOT NULL,
-	[CreationDate] [datetime] NOT NULL CONSTRAINT [DF_dnn_AnonymousUsers_CreationDate]  DEFAULT (getdate()),
-	[LastActiveDate] [datetime] NOT NULL CONSTRAINT [DF_dnn_AnonymousUsers_LastActiveDate]  DEFAULT (getdate()),
- CONSTRAINT [PK_dnn_AnonymousUsers] PRIMARY KEY CLUSTERED 
+	[CreationDate] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}AnonymousUsers_CreationDate]  DEFAULT (getdate()),
+	[LastActiveDate] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}AnonymousUsers_LastActiveDate]  DEFAULT (getdate()),
+ CONSTRAINT [PK_{objectQualifier}AnonymousUsers] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[PortalID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_UsersOnline]    Script Date: 10/05/2007 21:16:55 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}UsersOnline]    Script Date: 10/05/2007 21:16:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_UsersOnline](
+CREATE TABLE {databaseOwner}[{objectQualifier}UsersOnline](
 	[UserID] [int] NOT NULL,
 	[PortalID] [int] NOT NULL,
 	[TabID] [int] NOT NULL,
-	[CreationDate] [datetime] NOT NULL CONSTRAINT [DF__dnn_Users__Creat__3BFFE745]  DEFAULT (getdate()),
-	[LastActiveDate] [datetime] NOT NULL CONSTRAINT [DF__dnn_Users__LastA__3CF40B7E]  DEFAULT (getdate()),
- CONSTRAINT [PK_dnn_UsersOnline] PRIMARY KEY CLUSTERED 
+	[CreationDate] [datetime] NOT NULL CONSTRAINT [DF__{objectQualifier}Users__Creat__3BFFE745]  DEFAULT (getdate()),
+	[LastActiveDate] [datetime] NOT NULL CONSTRAINT [DF__{objectQualifier}Users__LastA__3CF40B7E]  DEFAULT (getdate()),
+ CONSTRAINT [PK_{objectQualifier}UsersOnline] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[PortalID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_PortalDesktopModules]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}PortalDesktopModules]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_PortalDesktopModules](
+CREATE TABLE {databaseOwner}[{objectQualifier}PortalDesktopModules](
 	[PortalDesktopModuleID] [int] IDENTITY(1,1) NOT NULL,
 	[PortalID] [int] NOT NULL,
 	[DesktopModuleID] [int] NOT NULL,
- CONSTRAINT [PK_dnn_PortalDesktopModules] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}PortalDesktopModules] PRIMARY KEY CLUSTERED 
 (
 	[PortalDesktopModuleID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_PortalDesktopModules] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}PortalDesktopModules] UNIQUE NONCLUSTERED 
 (
 	[PortalID] ASC,
 	[DesktopModuleID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_Tabs]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}Tabs]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_Tabs](
+CREATE TABLE {databaseOwner}[{objectQualifier}Tabs](
 	[TabID] [int] IDENTITY(0,1) NOT NULL,
-	[TabOrder] [int] NOT NULL CONSTRAINT [DF_dnn_Tabs_TabOrder]  DEFAULT ((0)),
+	[TabOrder] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Tabs_TabOrder]  DEFAULT ((0)),
 	[PortalID] [int] NULL,
 	[TabName] [nvarchar](50) NOT NULL,
-	[IsVisible] [bit] NOT NULL CONSTRAINT [DF_dnn_Tabs_IsVisible]  DEFAULT ((1)),
+	[IsVisible] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Tabs_IsVisible]  DEFAULT ((1)),
 	[ParentId] [int] NULL,
-	[Level] [int] NOT NULL CONSTRAINT [DF_dnn_Tabs_Level]  DEFAULT ((0)),
+	[Level] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Tabs_Level]  DEFAULT ((0)),
 	[IconFile] [nvarchar](100) NULL,
-	[DisableLink] [bit] NOT NULL CONSTRAINT [DF_dnn_Tabs_DisableLink]  DEFAULT ((0)),
+	[DisableLink] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Tabs_DisableLink]  DEFAULT ((0)),
 	[Title] [nvarchar](200) NULL,
 	[Description] [nvarchar](500) NULL,
 	[KeyWords] [nvarchar](500) NULL,
-	[IsDeleted] [bit] NOT NULL CONSTRAINT [DF_dnn_Tabs_IsDeleted]  DEFAULT ((0)),
+	[IsDeleted] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}Tabs_IsDeleted]  DEFAULT ((0)),
 	[Url] [nvarchar](255) NULL,
 	[SkinSrc] [nvarchar](200) NULL,
 	[ContainerSrc] [nvarchar](200) NULL,
@@ -1103,36 +1103,36 @@ CREATE TABLE [dbo].[dnn_Tabs](
 	[EndDate] [datetime] NULL,
 	[RefreshInterval] [int] NULL,
 	[PageHeadText] [nvarchar](500) NULL,
- CONSTRAINT [PK_dnn_Tabs] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}Tabs] PRIMARY KEY CLUSTERED 
 (
 	[TabID] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_UserPortals]    Script Date: 10/05/2007 21:16:54 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}UserPortals]    Script Date: 10/05/2007 21:16:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_UserPortals](
+CREATE TABLE {databaseOwner}[{objectQualifier}UserPortals](
 	[UserId] [int] NOT NULL,
 	[PortalId] [int] NOT NULL,
 	[UserPortalId] [int] IDENTITY(1,1) NOT NULL,
-	[CreatedDate] [datetime] NOT NULL CONSTRAINT [DF_dnn_UserPortals_CreatedDate]  DEFAULT (getdate()),
-	[Authorised] [bit] NOT NULL CONSTRAINT [DF_dnn_UserPortals_Authorised]  DEFAULT ((1)),
- CONSTRAINT [PK_dnn_UserPortals] PRIMARY KEY CLUSTERED 
+	[CreatedDate] [datetime] NOT NULL CONSTRAINT [DF_{objectQualifier}UserPortals_CreatedDate]  DEFAULT (getdate()),
+	[Authorised] [bit] NOT NULL CONSTRAINT [DF_{objectQualifier}UserPortals_Authorised]  DEFAULT ((1)),
+ CONSTRAINT [PK_{objectQualifier}UserPortals] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC,
 	[PortalId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_SiteLog]    Script Date: 10/05/2007 21:16:53 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}SiteLog]    Script Date: 10/05/2007 21:16:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_SiteLog](
+CREATE TABLE {databaseOwner}[{objectQualifier}SiteLog](
 	[SiteLogId] [int] IDENTITY(1,1) NOT NULL,
 	[DateTime] [smalldatetime] NOT NULL,
 	[PortalId] [int] NOT NULL,
@@ -1144,502 +1144,502 @@ CREATE TABLE [dbo].[dnn_SiteLog](
 	[UserHostName] [nvarchar](255) NULL,
 	[TabId] [int] NULL,
 	[AffiliateId] [int] NULL,
- CONSTRAINT [PK_dnn_SiteLog] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}SiteLog] PRIMARY KEY CLUSTERED 
 (
 	[SiteLogId] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_RoleGroups]    Script Date: 10/05/2007 21:16:52 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}RoleGroups]    Script Date: 10/05/2007 21:16:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_RoleGroups](
+CREATE TABLE {databaseOwner}[{objectQualifier}RoleGroups](
 	[RoleGroupID] [int] IDENTITY(0,1) NOT NULL,
 	[PortalID] [int] NOT NULL,
 	[RoleGroupName] [nvarchar](50) NOT NULL,
 	[Description] [nvarchar](1000) NULL,
- CONSTRAINT [PK_dnn_RoleGroups] PRIMARY KEY NONCLUSTERED 
+ CONSTRAINT [PK_{objectQualifier}RoleGroups] PRIMARY KEY NONCLUSTERED 
 (
 	[RoleGroupID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_RoleGroupName] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}RoleGroupName] UNIQUE NONCLUSTERED 
 (
 	[PortalID] ASC,
 	[RoleGroupName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dnn_ModuleDefinitions]    Script Date: 10/05/2007 21:16:51 ******/
+/****** Object:  Table {databaseOwner}[{objectQualifier}ModuleDefinitions]    Script Date: 10/05/2007 21:16:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[dnn_ModuleDefinitions](
+CREATE TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions](
 	[ModuleDefID] [int] IDENTITY(1,1) NOT NULL,
 	[FriendlyName] [nvarchar](128) NOT NULL,
 	[DesktopModuleID] [int] NOT NULL,
-	[DefaultCacheTime] [int] NOT NULL CONSTRAINT [DF_dnn_ModuleDefinitions_DefaultCacheTime]  DEFAULT ((0)),
- CONSTRAINT [PK_dnn_ModuleDefinitions] PRIMARY KEY NONCLUSTERED 
+	[DefaultCacheTime] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}ModuleDefinitions_DefaultCacheTime]  DEFAULT ((0)),
+ CONSTRAINT [PK_{objectQualifier}ModuleDefinitions] PRIMARY KEY NONCLUSTERED 
 (
 	[ModuleDefID] ASC
 ) ON [PRIMARY],
- CONSTRAINT [IX_dnn_ModuleDefinitions] UNIQUE NONCLUSTERED 
+ CONSTRAINT [IX_{objectQualifier}ModuleDefinitions] UNIQUE NONCLUSTERED 
 (
 	[FriendlyName] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  ForeignKey [FK_dnn_Affiliates_dnn_Vendors]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_Affiliates]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Affiliates_dnn_Vendors] FOREIGN KEY([VendorId])
-REFERENCES [dbo].[dnn_Vendors] ([VendorId])
+/****** Object:  ForeignKey [FK_{objectQualifier}Affiliates_{objectQualifier}Vendors]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Affiliates]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Affiliates_{objectQualifier}Vendors] FOREIGN KEY([VendorId])
+REFERENCES {databaseOwner}[{objectQualifier}Vendors] ([VendorId])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Affiliates] CHECK CONSTRAINT [FK_dnn_Affiliates_dnn_Vendors]
+ALTER TABLE {databaseOwner}[{objectQualifier}Affiliates] CHECK CONSTRAINT [FK_{objectQualifier}Affiliates_{objectQualifier}Vendors]
 GO
-/****** Object:  ForeignKey [FK_dnn_AnonymousUsers_dnn_Portals]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_AnonymousUsers]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_AnonymousUsers_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}AnonymousUsers_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}AnonymousUsers]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}AnonymousUsers_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_AnonymousUsers] CHECK CONSTRAINT [FK_dnn_AnonymousUsers_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}AnonymousUsers] CHECK CONSTRAINT [FK_{objectQualifier}AnonymousUsers_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_Banner_dnn_Vendor]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_Banners]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Banner_dnn_Vendor] FOREIGN KEY([VendorId])
-REFERENCES [dbo].[dnn_Vendors] ([VendorId])
+/****** Object:  ForeignKey [FK_{objectQualifier}Banner_{objectQualifier}Vendor]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Banners]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Banner_{objectQualifier}Vendor] FOREIGN KEY([VendorId])
+REFERENCES {databaseOwner}[{objectQualifier}Vendors] ([VendorId])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Banners] CHECK CONSTRAINT [FK_dnn_Banner_dnn_Vendor]
+ALTER TABLE {databaseOwner}[{objectQualifier}Banners] CHECK CONSTRAINT [FK_{objectQualifier}Banner_{objectQualifier}Vendor]
 GO
-/****** Object:  ForeignKey [FK_dnn_Classification_dnn_Classification]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_Classification]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Classification_dnn_Classification] FOREIGN KEY([ParentId])
-REFERENCES [dbo].[dnn_Classification] ([ClassificationId])
+/****** Object:  ForeignKey [FK_{objectQualifier}Classification_{objectQualifier}Classification]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Classification]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Classification_{objectQualifier}Classification] FOREIGN KEY([ParentId])
+REFERENCES {databaseOwner}[{objectQualifier}Classification] ([ClassificationId])
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Classification] CHECK CONSTRAINT [FK_dnn_Classification_dnn_Classification]
+ALTER TABLE {databaseOwner}[{objectQualifier}Classification] CHECK CONSTRAINT [FK_{objectQualifier}Classification_{objectQualifier}Classification]
 GO
-/****** Object:  ForeignKey [FK_dnn_EventLog_dnn_EventLogConfig]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_EventLog]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_EventLog_dnn_EventLogConfig] FOREIGN KEY([LogConfigID])
-REFERENCES [dbo].[dnn_EventLogConfig] ([ID])
+/****** Object:  ForeignKey [FK_{objectQualifier}EventLog_{objectQualifier}EventLogConfig]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}EventLog]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}EventLog_{objectQualifier}EventLogConfig] FOREIGN KEY([LogConfigID])
+REFERENCES {databaseOwner}[{objectQualifier}EventLogConfig] ([ID])
 GO
-ALTER TABLE [dbo].[dnn_EventLog] CHECK CONSTRAINT [FK_dnn_EventLog_dnn_EventLogConfig]
+ALTER TABLE {databaseOwner}[{objectQualifier}EventLog] CHECK CONSTRAINT [FK_{objectQualifier}EventLog_{objectQualifier}EventLogConfig]
 GO
-/****** Object:  ForeignKey [FK_dnn_EventLog_dnn_EventLogTypes]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_EventLog]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_EventLog_dnn_EventLogTypes] FOREIGN KEY([LogTypeKey])
-REFERENCES [dbo].[dnn_EventLogTypes] ([LogTypeKey])
+/****** Object:  ForeignKey [FK_{objectQualifier}EventLog_{objectQualifier}EventLogTypes]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}EventLog]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}EventLog_{objectQualifier}EventLogTypes] FOREIGN KEY([LogTypeKey])
+REFERENCES {databaseOwner}[{objectQualifier}EventLogTypes] ([LogTypeKey])
 GO
-ALTER TABLE [dbo].[dnn_EventLog] CHECK CONSTRAINT [FK_dnn_EventLog_dnn_EventLogTypes]
+ALTER TABLE {databaseOwner}[{objectQualifier}EventLog] CHECK CONSTRAINT [FK_{objectQualifier}EventLog_{objectQualifier}EventLogTypes]
 GO
-/****** Object:  ForeignKey [FK_dnn_EventLogConfig_dnn_EventLogTypes]    Script Date: 10/05/2007 21:16:44 ******/
-ALTER TABLE [dbo].[dnn_EventLogConfig]  WITH CHECK ADD  CONSTRAINT [FK_dnn_EventLogConfig_dnn_EventLogTypes] FOREIGN KEY([LogTypeKey])
-REFERENCES [dbo].[dnn_EventLogTypes] ([LogTypeKey])
+/****** Object:  ForeignKey [FK_{objectQualifier}EventLogConfig_{objectQualifier}EventLogTypes]    Script Date: 10/05/2007 21:16:44 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}EventLogConfig]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}EventLogConfig_{objectQualifier}EventLogTypes] FOREIGN KEY([LogTypeKey])
+REFERENCES {databaseOwner}[{objectQualifier}EventLogTypes] ([LogTypeKey])
 GO
-ALTER TABLE [dbo].[dnn_EventLogConfig] CHECK CONSTRAINT [FK_dnn_EventLogConfig_dnn_EventLogTypes]
+ALTER TABLE {databaseOwner}[{objectQualifier}EventLogConfig] CHECK CONSTRAINT [FK_{objectQualifier}EventLogConfig_{objectQualifier}EventLogTypes]
 GO
-/****** Object:  ForeignKey [FK_dnn_Files_dnn_Folders]    Script Date: 10/05/2007 21:16:45 ******/
-ALTER TABLE [dbo].[dnn_Files]  WITH CHECK ADD  CONSTRAINT [FK_dnn_Files_dnn_Folders] FOREIGN KEY([FolderID])
-REFERENCES [dbo].[dnn_Folders] ([FolderID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Files_{objectQualifier}Folders]    Script Date: 10/05/2007 21:16:45 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Files]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}Files_{objectQualifier}Folders] FOREIGN KEY([FolderID])
+REFERENCES {databaseOwner}[{objectQualifier}Folders] ([FolderID])
 GO
-ALTER TABLE [dbo].[dnn_Files] CHECK CONSTRAINT [FK_dnn_Files_dnn_Folders]
+ALTER TABLE {databaseOwner}[{objectQualifier}Files] CHECK CONSTRAINT [FK_{objectQualifier}Files_{objectQualifier}Folders]
 GO
-/****** Object:  ForeignKey [FK_dnn_Files_dnn_Portals]    Script Date: 10/05/2007 21:16:45 ******/
-ALTER TABLE [dbo].[dnn_Files]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Files_dnn_Portals] FOREIGN KEY([PortalId])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-ON DELETE CASCADE
-NOT FOR REPLICATION
-GO
-ALTER TABLE [dbo].[dnn_Files] CHECK CONSTRAINT [FK_dnn_Files_dnn_Portals]
-GO
-/****** Object:  ForeignKey [FK_dnn_FolderPermission_dnn_Folders]    Script Date: 10/05/2007 21:16:45 ******/
-ALTER TABLE [dbo].[dnn_FolderPermission]  WITH CHECK ADD  CONSTRAINT [FK_dnn_FolderPermission_dnn_Folders] FOREIGN KEY([FolderID])
-REFERENCES [dbo].[dnn_Folders] ([FolderID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_FolderPermission] CHECK CONSTRAINT [FK_dnn_FolderPermission_dnn_Folders]
-GO
-/****** Object:  ForeignKey [FK_dnn_FolderPermission_dnn_Permission]    Script Date: 10/05/2007 21:16:45 ******/
-ALTER TABLE [dbo].[dnn_FolderPermission]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_FolderPermission_dnn_Permission] FOREIGN KEY([PermissionID])
-REFERENCES [dbo].[dnn_Permission] ([PermissionID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_FolderPermission] CHECK CONSTRAINT [FK_dnn_FolderPermission_dnn_Permission]
-GO
-/****** Object:  ForeignKey [FK_dnn_Folders_dnn_Portals]    Script Date: 10/05/2007 21:16:45 ******/
-ALTER TABLE [dbo].[dnn_Folders]  WITH CHECK ADD  CONSTRAINT [FK_dnn_Folders_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_Folders] CHECK CONSTRAINT [FK_dnn_Folders_dnn_Portals]
-GO
-/****** Object:  ForeignKey [FK_dnn_HtmlText_dnn_Modules]    Script Date: 10/05/2007 21:16:47 ******/
-ALTER TABLE [dbo].[dnn_HtmlText]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_HtmlText_dnn_Modules] FOREIGN KEY([ModuleID])
-REFERENCES [dbo].[dnn_Modules] ([ModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Files_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:45 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Files]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Files_{objectQualifier}Portals] FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_HtmlText] CHECK CONSTRAINT [FK_dnn_HtmlText_dnn_Modules]
+ALTER TABLE {databaseOwner}[{objectQualifier}Files] CHECK CONSTRAINT [FK_{objectQualifier}Files_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK__dnn_Links__Modul__0F824689]    Script Date: 10/05/2007 21:16:50 ******/
-ALTER TABLE [dbo].[dnn_Links]  WITH NOCHECK ADD FOREIGN KEY([ModuleID])
-REFERENCES [dbo].[dnn_Modules] ([ModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}FolderPermission_{objectQualifier}Folders]    Script Date: 10/05/2007 21:16:45 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}FolderPermission]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}FolderPermission_{objectQualifier}Folders] FOREIGN KEY([FolderID])
+REFERENCES {databaseOwner}[{objectQualifier}Folders] ([FolderID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}FolderPermission] CHECK CONSTRAINT [FK_{objectQualifier}FolderPermission_{objectQualifier}Folders]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}FolderPermission_{objectQualifier}Permission]    Script Date: 10/05/2007 21:16:45 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}FolderPermission]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}FolderPermission_{objectQualifier}Permission] FOREIGN KEY([PermissionID])
+REFERENCES {databaseOwner}[{objectQualifier}Permission] ([PermissionID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}FolderPermission] CHECK CONSTRAINT [FK_{objectQualifier}FolderPermission_{objectQualifier}Permission]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}Folders_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:45 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Folders]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}Folders_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Folders] CHECK CONSTRAINT [FK_{objectQualifier}Folders_{objectQualifier}Portals]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}HtmlText_{objectQualifier}Modules]    Script Date: 10/05/2007 21:16:47 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}HtmlText]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}HtmlText_{objectQualifier}Modules] FOREIGN KEY([ModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-/****** Object:  ForeignKey [FK_dnn_ModuleControls_dnn_ModuleDefinitions]    Script Date: 10/05/2007 21:16:50 ******/
-ALTER TABLE [dbo].[dnn_ModuleControls]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_ModuleControls_dnn_ModuleDefinitions] FOREIGN KEY([ModuleDefID])
-REFERENCES [dbo].[dnn_ModuleDefinitions] ([ModuleDefID])
+ALTER TABLE {databaseOwner}[{objectQualifier}HtmlText] CHECK CONSTRAINT [FK_{objectQualifier}HtmlText_{objectQualifier}Modules]
+GO
+/****** Object:  ForeignKey [FK__{objectQualifier}Links__Modul__0F824689]    Script Date: 10/05/2007 21:16:50 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Links]  WITH NOCHECK ADD FOREIGN KEY([ModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_ModuleControls] CHECK CONSTRAINT [FK_dnn_ModuleControls_dnn_ModuleDefinitions]
-GO
-/****** Object:  ForeignKey [FK_dnn_ModuleDefinitions_dnn_DesktopModules]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_ModuleDefinitions]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_ModuleDefinitions_dnn_DesktopModules] FOREIGN KEY([DesktopModuleID])
-REFERENCES [dbo].[dnn_DesktopModules] ([DesktopModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}ModuleControls_{objectQualifier}ModuleDefinitions]    Script Date: 10/05/2007 21:16:50 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ModuleControls]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}ModuleControls_{objectQualifier}ModuleDefinitions] FOREIGN KEY([ModuleDefID])
+REFERENCES {databaseOwner}[{objectQualifier}ModuleDefinitions] ([ModuleDefID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_ModuleDefinitions] CHECK CONSTRAINT [FK_dnn_ModuleDefinitions_dnn_DesktopModules]
+ALTER TABLE {databaseOwner}[{objectQualifier}ModuleControls] CHECK CONSTRAINT [FK_{objectQualifier}ModuleControls_{objectQualifier}ModuleDefinitions]
 GO
-/****** Object:  ForeignKey [FK_dnn_ModulePermission_dnn_Modules]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_ModulePermission]  WITH CHECK ADD  CONSTRAINT [FK_dnn_ModulePermission_dnn_Modules] FOREIGN KEY([ModuleID])
-REFERENCES [dbo].[dnn_Modules] ([ModuleID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_ModulePermission] CHECK CONSTRAINT [FK_dnn_ModulePermission_dnn_Modules]
-GO
-/****** Object:  ForeignKey [FK_dnn_ModulePermission_dnn_Permission]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_ModulePermission]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_ModulePermission_dnn_Permission] FOREIGN KEY([PermissionID])
-REFERENCES [dbo].[dnn_Permission] ([PermissionID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_ModulePermission] CHECK CONSTRAINT [FK_dnn_ModulePermission_dnn_Permission]
-GO
-/****** Object:  ForeignKey [FK_dnn_Modules_dnn_ModuleDefinitions]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_Modules]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Modules_dnn_ModuleDefinitions] FOREIGN KEY([ModuleDefID])
-REFERENCES [dbo].[dnn_ModuleDefinitions] ([ModuleDefID])
+/****** Object:  ForeignKey [FK_{objectQualifier}ModuleDefinitions_{objectQualifier}DesktopModules]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}ModuleDefinitions_{objectQualifier}DesktopModules] FOREIGN KEY([DesktopModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}DesktopModules] ([DesktopModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Modules] CHECK CONSTRAINT [FK_dnn_Modules_dnn_ModuleDefinitions]
+ALTER TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions] CHECK CONSTRAINT [FK_{objectQualifier}ModuleDefinitions_{objectQualifier}DesktopModules]
 GO
-/****** Object:  ForeignKey [FK_dnn_Modules_dnn_Portals]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_Modules]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Modules_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-NOT FOR REPLICATION
+/****** Object:  ForeignKey [FK_{objectQualifier}ModulePermission_{objectQualifier}Modules]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ModulePermission]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}ModulePermission_{objectQualifier}Modules] FOREIGN KEY([ModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID])
+ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[dnn_Modules] CHECK CONSTRAINT [FK_dnn_Modules_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}ModulePermission] CHECK CONSTRAINT [FK_{objectQualifier}ModulePermission_{objectQualifier}Modules]
 GO
-/****** Object:  ForeignKey [FK_dnn_ModuleSettings_dnn_Modules]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_ModuleSettings]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_ModuleSettings_dnn_Modules] FOREIGN KEY([ModuleID])
-REFERENCES [dbo].[dnn_Modules] ([ModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}ModulePermission_{objectQualifier}Permission]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ModulePermission]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}ModulePermission_{objectQualifier}Permission] FOREIGN KEY([PermissionID])
+REFERENCES {databaseOwner}[{objectQualifier}Permission] ([PermissionID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}ModulePermission] CHECK CONSTRAINT [FK_{objectQualifier}ModulePermission_{objectQualifier}Permission]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}Modules_{objectQualifier}ModuleDefinitions]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Modules]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Modules_{objectQualifier}ModuleDefinitions] FOREIGN KEY([ModuleDefID])
+REFERENCES {databaseOwner}[{objectQualifier}ModuleDefinitions] ([ModuleDefID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_ModuleSettings] CHECK CONSTRAINT [FK_dnn_ModuleSettings_dnn_Modules]
+ALTER TABLE {databaseOwner}[{objectQualifier}Modules] CHECK CONSTRAINT [FK_{objectQualifier}Modules_{objectQualifier}ModuleDefinitions]
 GO
-/****** Object:  ForeignKey [FK_dnn_PortalAlias_dnn_Portals]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_PortalAlias]  WITH CHECK ADD  CONSTRAINT [FK_dnn_PortalAlias_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-ON DELETE CASCADE
+/****** Object:  ForeignKey [FK_{objectQualifier}Modules_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Modules]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Modules_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
+NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_PortalAlias] CHECK CONSTRAINT [FK_dnn_PortalAlias_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}Modules] CHECK CONSTRAINT [FK_{objectQualifier}Modules_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_PortalDesktopModules_dnn_DesktopModules]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_PortalDesktopModules]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_PortalDesktopModules_dnn_DesktopModules] FOREIGN KEY([DesktopModuleID])
-REFERENCES [dbo].[dnn_DesktopModules] ([DesktopModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}ModuleSettings_{objectQualifier}Modules]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ModuleSettings]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}ModuleSettings_{objectQualifier}Modules] FOREIGN KEY([ModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_PortalDesktopModules] CHECK CONSTRAINT [FK_dnn_PortalDesktopModules_dnn_DesktopModules]
+ALTER TABLE {databaseOwner}[{objectQualifier}ModuleSettings] CHECK CONSTRAINT [FK_{objectQualifier}ModuleSettings_{objectQualifier}Modules]
 GO
-/****** Object:  ForeignKey [FK_dnn_PortalDesktopModules_dnn_Portals]    Script Date: 10/05/2007 21:16:51 ******/
-ALTER TABLE [dbo].[dnn_PortalDesktopModules]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_PortalDesktopModules_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}PortalAlias_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}PortalAlias]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}PortalAlias_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}PortalAlias] CHECK CONSTRAINT [FK_{objectQualifier}PortalAlias_{objectQualifier}Portals]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}PortalDesktopModules_{objectQualifier}DesktopModules]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}PortalDesktopModules]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}PortalDesktopModules_{objectQualifier}DesktopModules] FOREIGN KEY([DesktopModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}DesktopModules] ([DesktopModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_PortalDesktopModules] CHECK CONSTRAINT [FK_dnn_PortalDesktopModules_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}PortalDesktopModules] CHECK CONSTRAINT [FK_{objectQualifier}PortalDesktopModules_{objectQualifier}DesktopModules]
 GO
-/****** Object:  ForeignKey [FK_dnn_Profile_dnn_Portals]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_Profile]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Profile_dnn_Portals] FOREIGN KEY([PortalId])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}PortalDesktopModules_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:51 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}PortalDesktopModules]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}PortalDesktopModules_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Profile] CHECK CONSTRAINT [FK_dnn_Profile_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}PortalDesktopModules] CHECK CONSTRAINT [FK_{objectQualifier}PortalDesktopModules_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_Profile_dnn_Users]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_Profile]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Profile_dnn_Users] FOREIGN KEY([UserId])
-REFERENCES [dbo].[dnn_Users] ([UserID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Profile_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Profile]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Profile_{objectQualifier}Portals] FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Profile] CHECK CONSTRAINT [FK_dnn_Profile_dnn_Users]
+ALTER TABLE {databaseOwner}[{objectQualifier}Profile] CHECK CONSTRAINT [FK_{objectQualifier}Profile_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_ProfilePropertyDefinition_dnn_Portals]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_ProfilePropertyDefinition]  WITH CHECK ADD  CONSTRAINT [FK_dnn_ProfilePropertyDefinition_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_ProfilePropertyDefinition] CHECK CONSTRAINT [FK_dnn_ProfilePropertyDefinition_dnn_Portals]
-GO
-/****** Object:  ForeignKey [FK_dnn_RoleGroups_dnn_Portals]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_RoleGroups]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_RoleGroups_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_RoleGroups] CHECK CONSTRAINT [FK_dnn_RoleGroups_dnn_Portals]
-GO
-/****** Object:  ForeignKey [FK_dnn_Roles_dnn_Portals]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_Roles]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Roles_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Profile_{objectQualifier}Users]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Profile]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Profile_{objectQualifier}Users] FOREIGN KEY([UserId])
+REFERENCES {databaseOwner}[{objectQualifier}Users] ([UserID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Roles] CHECK CONSTRAINT [FK_dnn_Roles_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}Profile] CHECK CONSTRAINT [FK_{objectQualifier}Profile_{objectQualifier}Users]
 GO
-/****** Object:  ForeignKey [FK_dnn_Roles_dnn_RoleGroups]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_Roles]  WITH CHECK ADD  CONSTRAINT [FK_dnn_Roles_dnn_RoleGroups] FOREIGN KEY([RoleGroupID])
-REFERENCES [dbo].[dnn_RoleGroups] ([RoleGroupID])
+/****** Object:  ForeignKey [FK_{objectQualifier}ProfilePropertyDefinition_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ProfilePropertyDefinition]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}ProfilePropertyDefinition_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
+ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[dnn_Roles] CHECK CONSTRAINT [FK_dnn_Roles_dnn_RoleGroups]
+ALTER TABLE {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] CHECK CONSTRAINT [FK_{objectQualifier}ProfilePropertyDefinition_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_ScheduleHistory_dnn_Schedule]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_ScheduleHistory]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_ScheduleHistory_dnn_Schedule] FOREIGN KEY([ScheduleID])
-REFERENCES [dbo].[dnn_Schedule] ([ScheduleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}RoleGroups_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}RoleGroups]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}RoleGroups_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}RoleGroups] CHECK CONSTRAINT [FK_{objectQualifier}RoleGroups_{objectQualifier}Portals]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}Roles_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Roles]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Roles_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_ScheduleHistory] CHECK CONSTRAINT [FK_dnn_ScheduleHistory_dnn_Schedule]
+ALTER TABLE {databaseOwner}[{objectQualifier}Roles] CHECK CONSTRAINT [FK_{objectQualifier}Roles_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_ScheduleItemSettings_dnn_Schedule]    Script Date: 10/05/2007 21:16:52 ******/
-ALTER TABLE [dbo].[dnn_ScheduleItemSettings]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_ScheduleItemSettings_dnn_Schedule] FOREIGN KEY([ScheduleID])
-REFERENCES [dbo].[dnn_Schedule] ([ScheduleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Roles_{objectQualifier}RoleGroups]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Roles]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}Roles_{objectQualifier}RoleGroups] FOREIGN KEY([RoleGroupID])
+REFERENCES {databaseOwner}[{objectQualifier}RoleGroups] ([RoleGroupID])
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Roles] CHECK CONSTRAINT [FK_{objectQualifier}Roles_{objectQualifier}RoleGroups]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}ScheduleHistory_{objectQualifier}Schedule]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ScheduleHistory]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}ScheduleHistory_{objectQualifier}Schedule] FOREIGN KEY([ScheduleID])
+REFERENCES {databaseOwner}[{objectQualifier}Schedule] ([ScheduleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_ScheduleItemSettings] CHECK CONSTRAINT [FK_dnn_ScheduleItemSettings_dnn_Schedule]
+ALTER TABLE {databaseOwner}[{objectQualifier}ScheduleHistory] CHECK CONSTRAINT [FK_{objectQualifier}ScheduleHistory_{objectQualifier}Schedule]
 GO
-/****** Object:  ForeignKey [FK_dnn_SearchItem_dnn_Modules]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_SearchItem]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_SearchItem_dnn_Modules] FOREIGN KEY([ModuleId])
-REFERENCES [dbo].[dnn_Modules] ([ModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}ScheduleItemSettings_{objectQualifier}Schedule]    Script Date: 10/05/2007 21:16:52 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}ScheduleItemSettings]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}ScheduleItemSettings_{objectQualifier}Schedule] FOREIGN KEY([ScheduleID])
+REFERENCES {databaseOwner}[{objectQualifier}Schedule] ([ScheduleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_SearchItem] CHECK CONSTRAINT [FK_dnn_SearchItem_dnn_Modules]
+ALTER TABLE {databaseOwner}[{objectQualifier}ScheduleItemSettings] CHECK CONSTRAINT [FK_{objectQualifier}ScheduleItemSettings_{objectQualifier}Schedule]
 GO
-/****** Object:  ForeignKey [FK_dnn_SearchItemWord_dnn_SearchItem]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_SearchItemWord]  WITH CHECK ADD  CONSTRAINT [FK_dnn_SearchItemWord_dnn_SearchItem] FOREIGN KEY([SearchItemID])
-REFERENCES [dbo].[dnn_SearchItem] ([SearchItemID])
+/****** Object:  ForeignKey [FK_{objectQualifier}SearchItem_{objectQualifier}Modules]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItem]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}SearchItem_{objectQualifier}Modules] FOREIGN KEY([ModuleId])
+REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID])
+ON DELETE CASCADE
+NOT FOR REPLICATION
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItem] CHECK CONSTRAINT [FK_{objectQualifier}SearchItem_{objectQualifier}Modules]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}SearchItemWord_{objectQualifier}SearchItem]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItemWord]  WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}SearchItemWord_{objectQualifier}SearchItem] FOREIGN KEY([SearchItemID])
+REFERENCES {databaseOwner}[{objectQualifier}SearchItem] ([SearchItemID])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[dnn_SearchItemWord] CHECK CONSTRAINT [FK_dnn_SearchItemWord_dnn_SearchItem]
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItemWord] CHECK CONSTRAINT [FK_{objectQualifier}SearchItemWord_{objectQualifier}SearchItem]
 GO
-/****** Object:  ForeignKey [FK_dnn_SearchItemWord_dnn_SearchWord]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_SearchItemWord]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_SearchItemWord_dnn_SearchWord] FOREIGN KEY([SearchWordsID])
-REFERENCES [dbo].[dnn_SearchWord] ([SearchWordsID])
+/****** Object:  ForeignKey [FK_{objectQualifier}SearchItemWord_{objectQualifier}SearchWord]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItemWord]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}SearchItemWord_{objectQualifier}SearchWord] FOREIGN KEY([SearchWordsID])
+REFERENCES {databaseOwner}[{objectQualifier}SearchWord] ([SearchWordsID])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[dnn_SearchItemWord] CHECK CONSTRAINT [FK_dnn_SearchItemWord_dnn_SearchWord]
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItemWord] CHECK CONSTRAINT [FK_{objectQualifier}SearchItemWord_{objectQualifier}SearchWord]
 GO
-/****** Object:  ForeignKey [FK_dnn_SearchItemWordPosition_dnn_SearchItemWord]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_SearchItemWordPosition]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_SearchItemWordPosition_dnn_SearchItemWord] FOREIGN KEY([SearchItemWordID])
-REFERENCES [dbo].[dnn_SearchItemWord] ([SearchItemWordID])
+/****** Object:  ForeignKey [FK_{objectQualifier}SearchItemWordPosition_{objectQualifier}SearchItemWord]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItemWordPosition]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}SearchItemWordPosition_{objectQualifier}SearchItemWord] FOREIGN KEY([SearchItemWordID])
+REFERENCES {databaseOwner}[{objectQualifier}SearchItemWord] ([SearchItemWordID])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[dnn_SearchItemWordPosition] CHECK CONSTRAINT [FK_dnn_SearchItemWordPosition_dnn_SearchItemWord]
+ALTER TABLE {databaseOwner}[{objectQualifier}SearchItemWordPosition] CHECK CONSTRAINT [FK_{objectQualifier}SearchItemWordPosition_{objectQualifier}SearchItemWord]
 GO
-/****** Object:  ForeignKey [FK_dnn_SiteLog_dnn_Portals]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_SiteLog]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_SiteLog_dnn_Portals] FOREIGN KEY([PortalId])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}SiteLog_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}SiteLog]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}SiteLog_{objectQualifier}Portals] FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_SiteLog] CHECK CONSTRAINT [FK_dnn_SiteLog_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}SiteLog] CHECK CONSTRAINT [FK_{objectQualifier}SiteLog_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_Skins_dnn_Portals]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_Skins]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Skins_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Skins_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Skins]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Skins_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Skins] CHECK CONSTRAINT [FK_dnn_Skins_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}Skins] CHECK CONSTRAINT [FK_{objectQualifier}Skins_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_SystemMessages_dnn_Portals]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_SystemMessages]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_SystemMessages_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
-ON DELETE CASCADE
-NOT FOR REPLICATION
-GO
-ALTER TABLE [dbo].[dnn_SystemMessages] CHECK CONSTRAINT [FK_dnn_SystemMessages_dnn_Portals]
-GO
-/****** Object:  ForeignKey [FK_dnn_TabModules_dnn_Modules]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_TabModules]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_TabModules_dnn_Modules] FOREIGN KEY([ModuleID])
-REFERENCES [dbo].[dnn_Modules] ([ModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}SystemMessages_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}SystemMessages]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}SystemMessages_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_TabModules] CHECK CONSTRAINT [FK_dnn_TabModules_dnn_Modules]
+ALTER TABLE {databaseOwner}[{objectQualifier}SystemMessages] CHECK CONSTRAINT [FK_{objectQualifier}SystemMessages_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_TabModules_dnn_Tabs]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_TabModules]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_TabModules_dnn_Tabs] FOREIGN KEY([TabID])
-REFERENCES [dbo].[dnn_Tabs] ([TabID])
+/****** Object:  ForeignKey [FK_{objectQualifier}TabModules_{objectQualifier}Modules]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}TabModules]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}TabModules_{objectQualifier}Modules] FOREIGN KEY([ModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_TabModules] CHECK CONSTRAINT [FK_dnn_TabModules_dnn_Tabs]
+ALTER TABLE {databaseOwner}[{objectQualifier}TabModules] CHECK CONSTRAINT [FK_{objectQualifier}TabModules_{objectQualifier}Modules]
 GO
-/****** Object:  ForeignKey [FK_dnn_TabModuleSettings_dnn_TabModules]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_TabModuleSettings]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_TabModuleSettings_dnn_TabModules] FOREIGN KEY([TabModuleID])
-REFERENCES [dbo].[dnn_TabModules] ([TabModuleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}TabModules_{objectQualifier}Tabs]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}TabModules]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}TabModules_{objectQualifier}Tabs] FOREIGN KEY([TabID])
+REFERENCES {databaseOwner}[{objectQualifier}Tabs] ([TabID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_TabModuleSettings] CHECK CONSTRAINT [FK_dnn_TabModuleSettings_dnn_TabModules]
+ALTER TABLE {databaseOwner}[{objectQualifier}TabModules] CHECK CONSTRAINT [FK_{objectQualifier}TabModules_{objectQualifier}Tabs]
 GO
-/****** Object:  ForeignKey [FK_dnn_TabPermission_dnn_Permission]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_TabPermission]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_TabPermission_dnn_Permission] FOREIGN KEY([PermissionID])
-REFERENCES [dbo].[dnn_Permission] ([PermissionID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_TabPermission] CHECK CONSTRAINT [FK_dnn_TabPermission_dnn_Permission]
-GO
-/****** Object:  ForeignKey [FK_dnn_TabPermission_dnn_Tabs]    Script Date: 10/05/2007 21:16:53 ******/
-ALTER TABLE [dbo].[dnn_TabPermission]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_TabPermission_dnn_Tabs] FOREIGN KEY([TabID])
-REFERENCES [dbo].[dnn_Tabs] ([TabID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_TabPermission] CHECK CONSTRAINT [FK_dnn_TabPermission_dnn_Tabs]
-GO
-/****** Object:  ForeignKey [FK_dnn_Tabs_dnn_Portals]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_Tabs]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Tabs_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}TabModuleSettings_{objectQualifier}TabModules]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}TabModuleSettings]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}TabModuleSettings_{objectQualifier}TabModules] FOREIGN KEY([TabModuleID])
+REFERENCES {databaseOwner}[{objectQualifier}TabModules] ([TabModuleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Tabs] CHECK CONSTRAINT [FK_dnn_Tabs_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}TabModuleSettings] CHECK CONSTRAINT [FK_{objectQualifier}TabModuleSettings_{objectQualifier}TabModules]
 GO
-/****** Object:  ForeignKey [FK_dnn_Tabs_dnn_Tabs]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_Tabs]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Tabs_dnn_Tabs] FOREIGN KEY([ParentId])
-REFERENCES [dbo].[dnn_Tabs] ([TabID])
-NOT FOR REPLICATION
+/****** Object:  ForeignKey [FK_{objectQualifier}TabPermission_{objectQualifier}Permission]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}TabPermission]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}TabPermission_{objectQualifier}Permission] FOREIGN KEY([PermissionID])
+REFERENCES {databaseOwner}[{objectQualifier}Permission] ([PermissionID])
+ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[dnn_Tabs] CHECK CONSTRAINT [FK_dnn_Tabs_dnn_Tabs]
+ALTER TABLE {databaseOwner}[{objectQualifier}TabPermission] CHECK CONSTRAINT [FK_{objectQualifier}TabPermission_{objectQualifier}Permission]
 GO
-/****** Object:  ForeignKey [FK_dnn_UrlLog_dnn_UrlTracking]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UrlLog]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UrlLog_dnn_UrlTracking] FOREIGN KEY([UrlTrackingID])
-REFERENCES [dbo].[dnn_UrlTracking] ([UrlTrackingID])
+/****** Object:  ForeignKey [FK_{objectQualifier}TabPermission_{objectQualifier}Tabs]    Script Date: 10/05/2007 21:16:53 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}TabPermission]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}TabPermission_{objectQualifier}Tabs] FOREIGN KEY([TabID])
+REFERENCES {databaseOwner}[{objectQualifier}Tabs] ([TabID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}TabPermission] CHECK CONSTRAINT [FK_{objectQualifier}TabPermission_{objectQualifier}Tabs]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}Tabs_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Tabs]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Tabs_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UrlLog] CHECK CONSTRAINT [FK_dnn_UrlLog_dnn_UrlTracking]
+ALTER TABLE {databaseOwner}[{objectQualifier}Tabs] CHECK CONSTRAINT [FK_{objectQualifier}Tabs_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_Urls_dnn_Portals]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_Urls]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Urls_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Tabs_{objectQualifier}Tabs]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Tabs]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Tabs_{objectQualifier}Tabs] FOREIGN KEY([ParentId])
+REFERENCES {databaseOwner}[{objectQualifier}Tabs] ([TabID])
+NOT FOR REPLICATION
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Tabs] CHECK CONSTRAINT [FK_{objectQualifier}Tabs_{objectQualifier}Tabs]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}UrlLog_{objectQualifier}UrlTracking]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UrlLog]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UrlLog_{objectQualifier}UrlTracking] FOREIGN KEY([UrlTrackingID])
+REFERENCES {databaseOwner}[{objectQualifier}UrlTracking] ([UrlTrackingID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Urls] CHECK CONSTRAINT [FK_dnn_Urls_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}UrlLog] CHECK CONSTRAINT [FK_{objectQualifier}UrlLog_{objectQualifier}UrlTracking]
 GO
-/****** Object:  ForeignKey [FK_dnn_UrlTracking_dnn_Portals]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UrlTracking]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UrlTracking_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}Urls_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Urls]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Urls_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UrlTracking] CHECK CONSTRAINT [FK_dnn_UrlTracking_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}Urls] CHECK CONSTRAINT [FK_{objectQualifier}Urls_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_UserPortals_dnn_Portals]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UserPortals]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UserPortals_dnn_Portals] FOREIGN KEY([PortalId])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}UrlTracking_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UrlTracking]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UrlTracking_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UserPortals] CHECK CONSTRAINT [FK_dnn_UserPortals_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}UrlTracking] CHECK CONSTRAINT [FK_{objectQualifier}UrlTracking_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_UserPortals_dnn_Users]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UserPortals]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UserPortals_dnn_Users] FOREIGN KEY([UserId])
-REFERENCES [dbo].[dnn_Users] ([UserID])
+/****** Object:  ForeignKey [FK_{objectQualifier}UserPortals_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UserPortals]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UserPortals_{objectQualifier}Portals] FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UserPortals] CHECK CONSTRAINT [FK_dnn_UserPortals_dnn_Users]
+ALTER TABLE {databaseOwner}[{objectQualifier}UserPortals] CHECK CONSTRAINT [FK_{objectQualifier}UserPortals_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_UserProfile_dnn_ProfilePropertyDefinition]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UserProfile]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UserProfile_dnn_ProfilePropertyDefinition] FOREIGN KEY([PropertyDefinitionID])
-REFERENCES [dbo].[dnn_ProfilePropertyDefinition] ([PropertyDefinitionID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_UserProfile] CHECK CONSTRAINT [FK_dnn_UserProfile_dnn_ProfilePropertyDefinition]
-GO
-/****** Object:  ForeignKey [FK_dnn_UserProfile_dnn_Users]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UserProfile]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UserProfile_dnn_Users] FOREIGN KEY([UserID])
-REFERENCES [dbo].[dnn_Users] ([UserID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[dnn_UserProfile] CHECK CONSTRAINT [FK_dnn_UserProfile_dnn_Users]
-GO
-/****** Object:  ForeignKey [FK_dnn_UserRoles_dnn_Roles]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UserRoles]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UserRoles_dnn_Roles] FOREIGN KEY([RoleID])
-REFERENCES [dbo].[dnn_Roles] ([RoleID])
+/****** Object:  ForeignKey [FK_{objectQualifier}UserPortals_{objectQualifier}Users]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UserPortals]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UserPortals_{objectQualifier}Users] FOREIGN KEY([UserId])
+REFERENCES {databaseOwner}[{objectQualifier}Users] ([UserID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UserRoles] CHECK CONSTRAINT [FK_dnn_UserRoles_dnn_Roles]
+ALTER TABLE {databaseOwner}[{objectQualifier}UserPortals] CHECK CONSTRAINT [FK_{objectQualifier}UserPortals_{objectQualifier}Users]
 GO
-/****** Object:  ForeignKey [FK_dnn_UserRoles_dnn_Users]    Script Date: 10/05/2007 21:16:54 ******/
-ALTER TABLE [dbo].[dnn_UserRoles]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UserRoles_dnn_Users] FOREIGN KEY([UserID])
-REFERENCES [dbo].[dnn_Users] ([UserID])
+/****** Object:  ForeignKey [FK_{objectQualifier}UserProfile_{objectQualifier}ProfilePropertyDefinition]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UserProfile]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UserProfile_{objectQualifier}ProfilePropertyDefinition] FOREIGN KEY([PropertyDefinitionID])
+REFERENCES {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] ([PropertyDefinitionID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}UserProfile] CHECK CONSTRAINT [FK_{objectQualifier}UserProfile_{objectQualifier}ProfilePropertyDefinition]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}UserProfile_{objectQualifier}Users]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UserProfile]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UserProfile_{objectQualifier}Users] FOREIGN KEY([UserID])
+REFERENCES {databaseOwner}[{objectQualifier}Users] ([UserID])
+ON DELETE CASCADE
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}UserProfile] CHECK CONSTRAINT [FK_{objectQualifier}UserProfile_{objectQualifier}Users]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}UserRoles_{objectQualifier}Roles]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UserRoles]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UserRoles_{objectQualifier}Roles] FOREIGN KEY([RoleID])
+REFERENCES {databaseOwner}[{objectQualifier}Roles] ([RoleID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UserRoles] CHECK CONSTRAINT [FK_dnn_UserRoles_dnn_Users]
+ALTER TABLE {databaseOwner}[{objectQualifier}UserRoles] CHECK CONSTRAINT [FK_{objectQualifier}UserRoles_{objectQualifier}Roles]
 GO
-/****** Object:  ForeignKey [FK_dnn_UsersOnline_dnn_Portals]    Script Date: 10/05/2007 21:16:55 ******/
-ALTER TABLE [dbo].[dnn_UsersOnline]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UsersOnline_dnn_Portals] FOREIGN KEY([PortalID])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}UserRoles_{objectQualifier}Users]    Script Date: 10/05/2007 21:16:54 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UserRoles]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UserRoles_{objectQualifier}Users] FOREIGN KEY([UserID])
+REFERENCES {databaseOwner}[{objectQualifier}Users] ([UserID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UsersOnline] CHECK CONSTRAINT [FK_dnn_UsersOnline_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}UserRoles] CHECK CONSTRAINT [FK_{objectQualifier}UserRoles_{objectQualifier}Users]
 GO
-/****** Object:  ForeignKey [FK_dnn_UsersOnline_dnn_Users]    Script Date: 10/05/2007 21:16:55 ******/
-ALTER TABLE [dbo].[dnn_UsersOnline]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_UsersOnline_dnn_Users] FOREIGN KEY([UserID])
-REFERENCES [dbo].[dnn_Users] ([UserID])
+/****** Object:  ForeignKey [FK_{objectQualifier}UsersOnline_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:55 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UsersOnline]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UsersOnline_{objectQualifier}Portals] FOREIGN KEY([PortalID])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_UsersOnline] CHECK CONSTRAINT [FK_dnn_UsersOnline_dnn_Users]
+ALTER TABLE {databaseOwner}[{objectQualifier}UsersOnline] CHECK CONSTRAINT [FK_{objectQualifier}UsersOnline_{objectQualifier}Portals]
 GO
-/****** Object:  ForeignKey [FK_dnn_VendorClassification_dnn_Classification]    Script Date: 10/05/2007 21:16:55 ******/
-ALTER TABLE [dbo].[dnn_VendorClassification]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_VendorClassification_dnn_Classification] FOREIGN KEY([ClassificationId])
-REFERENCES [dbo].[dnn_Classification] ([ClassificationId])
+/****** Object:  ForeignKey [FK_{objectQualifier}UsersOnline_{objectQualifier}Users]    Script Date: 10/05/2007 21:16:55 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}UsersOnline]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}UsersOnline_{objectQualifier}Users] FOREIGN KEY([UserID])
+REFERENCES {databaseOwner}[{objectQualifier}Users] ([UserID])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_VendorClassification] CHECK CONSTRAINT [FK_dnn_VendorClassification_dnn_Classification]
+ALTER TABLE {databaseOwner}[{objectQualifier}UsersOnline] CHECK CONSTRAINT [FK_{objectQualifier}UsersOnline_{objectQualifier}Users]
 GO
-/****** Object:  ForeignKey [FK_dnn_VendorClassification_dnn_Vendors]    Script Date: 10/05/2007 21:16:55 ******/
-ALTER TABLE [dbo].[dnn_VendorClassification]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_VendorClassification_dnn_Vendors] FOREIGN KEY([VendorId])
-REFERENCES [dbo].[dnn_Vendors] ([VendorId])
+/****** Object:  ForeignKey [FK_{objectQualifier}VendorClassification_{objectQualifier}Classification]    Script Date: 10/05/2007 21:16:55 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}VendorClassification]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}VendorClassification_{objectQualifier}Classification] FOREIGN KEY([ClassificationId])
+REFERENCES {databaseOwner}[{objectQualifier}Classification] ([ClassificationId])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_VendorClassification] CHECK CONSTRAINT [FK_dnn_VendorClassification_dnn_Vendors]
+ALTER TABLE {databaseOwner}[{objectQualifier}VendorClassification] CHECK CONSTRAINT [FK_{objectQualifier}VendorClassification_{objectQualifier}Classification]
 GO
-/****** Object:  ForeignKey [FK_dnn_Vendor_dnn_Portals]    Script Date: 10/05/2007 21:16:55 ******/
-ALTER TABLE [dbo].[dnn_Vendors]  WITH NOCHECK ADD  CONSTRAINT [FK_dnn_Vendor_dnn_Portals] FOREIGN KEY([PortalId])
-REFERENCES [dbo].[dnn_Portals] ([PortalID])
+/****** Object:  ForeignKey [FK_{objectQualifier}VendorClassification_{objectQualifier}Vendors]    Script Date: 10/05/2007 21:16:55 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}VendorClassification]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}VendorClassification_{objectQualifier}Vendors] FOREIGN KEY([VendorId])
+REFERENCES {databaseOwner}[{objectQualifier}Vendors] ([VendorId])
 ON DELETE CASCADE
 NOT FOR REPLICATION
 GO
-ALTER TABLE [dbo].[dnn_Vendors] CHECK CONSTRAINT [FK_dnn_Vendor_dnn_Portals]
+ALTER TABLE {databaseOwner}[{objectQualifier}VendorClassification] CHECK CONSTRAINT [FK_{objectQualifier}VendorClassification_{objectQualifier}Vendors]
+GO
+/****** Object:  ForeignKey [FK_{objectQualifier}Vendor_{objectQualifier}Portals]    Script Date: 10/05/2007 21:16:55 ******/
+ALTER TABLE {databaseOwner}[{objectQualifier}Vendors]  WITH NOCHECK ADD  CONSTRAINT [FK_{objectQualifier}Vendor_{objectQualifier}Portals] FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalID])
+ON DELETE CASCADE
+NOT FOR REPLICATION
+GO
+ALTER TABLE {databaseOwner}[{objectQualifier}Vendors] CHECK CONSTRAINT [FK_{objectQualifier}Vendor_{objectQualifier}Portals]
 GO

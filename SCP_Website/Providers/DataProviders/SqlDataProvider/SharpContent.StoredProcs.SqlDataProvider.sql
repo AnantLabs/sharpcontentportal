@@ -1,31 +1,31 @@
-/****** Object:  StoredProcedure [dbo].[dnn_GetPasswordQuestions]    Script Date: 10/07/2007 08:22:25 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPasswordQuestions]    Script Date: 10/07/2007 08:22:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPasswordQuestions] 
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPasswordQuestions] 
 	@locale nvarchar(10)
 AS
 
 DECLARE @count int
 
-SELECT @count = COUNT(*) FROM dnn_Questions WHERE LOWER([Locale]) = LOWER(@locale)
+SELECT @count = COUNT(*) FROM {objectQualifier}Questions WHERE LOWER([Locale]) = LOWER(@locale)
   
 IF (@count = 0)
 	BEGIN
-		SELECT * FROM dnn_Questions WHERE LOWER([Locale]) = 'en-us' OR [locale] IS NULL
+		SELECT * FROM {objectQualifier}Questions WHERE LOWER([Locale]) = 'en-us' OR [locale] IS NULL
 	END
 ELSE
 	BEGIN
-		SELECT * FROM dnn_Questions WHERE LOWER([Locale]) = LOWER(@locale)
+		SELECT * FROM {objectQualifier}Questions WHERE LOWER([Locale]) = LOWER(@locale)
 	END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetVendorsByEmail]    Script Date: 10/05/2007 21:22:33 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetVendorsByEmail]    Script Date: 10/05/2007 21:22:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetVendorsByEmail]
+CREATE procedure {databaseOwner}[{objectQualifier}GetVendorsByEmail]
 	@Filter nvarchar(50),
 	@PortalID int,
 	@PageSize int,
@@ -46,7 +46,7 @@ AS
 
 	INSERT INTO #PageIndex (VendorId)
 	SELECT VendorId
-	FROM dnn_Vendors
+	FROM {objectQualifier}Vendors
 	WHERE ( (Email = @Filter) AND ((PortalId = @PortalId) or (@PortalId is null and PortalId is null)) )
 	ORDER BY VendorId DESC
 
@@ -55,22 +55,22 @@ AS
 	FROM #PageIndex
 
 
-	SELECT dnn_Vendors.*,
-       		'Banners' = ( select count(*) from dnn_Banners where dnn_Banners.VendorId = dnn_Vendors.VendorId )
-	FROM dnn_Vendors
+	SELECT {objectQualifier}Vendors.*,
+       		'Banners' = ( select count(*) from {objectQualifier}Banners where {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId )
+	FROM {objectQualifier}Vendors
 	INNER JOIN #PageIndex PageIndex
-		ON dnn_Vendors.VendorId = PageIndex.VendorId
+		ON {objectQualifier}Vendors.VendorId = PageIndex.VendorId
 	WHERE ( (PageIndex.IndexID > @PageLowerBound) OR @PageLowerBound is null )	
 		AND ( (PageIndex.IndexID < @PageUpperBound) OR @PageUpperBound is null )	
 	ORDER BY
 		PageIndex.IndexID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetVendorsByName]    Script Date: 10/05/2007 21:22:33 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetVendorsByName]    Script Date: 10/05/2007 21:22:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetVendorsByName]
+CREATE procedure {databaseOwner}[{objectQualifier}GetVendorsByName]
 	@Filter nvarchar(50),
 	@PortalID int,
 	@PageSize int,
@@ -91,7 +91,7 @@ AS
 
 	INSERT INTO #PageIndex (VendorId)
 	SELECT VendorId
-	FROM dnn_Vendors
+	FROM {objectQualifier}Vendors
 	WHERE ( (VendorName like @Filter + '%') AND ((PortalId = @PortalId) or (@PortalId is null and PortalId is null)) )
 	ORDER BY VendorId DESC
 
@@ -100,22 +100,22 @@ AS
 	FROM #PageIndex
 
 
-	SELECT dnn_Vendors.*,
-       		'Banners' = ( select count(*) from dnn_Banners where dnn_Banners.VendorId = dnn_Vendors.VendorId )
-	FROM dnn_Vendors
+	SELECT {objectQualifier}Vendors.*,
+       		'Banners' = ( select count(*) from {objectQualifier}Banners where {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId )
+	FROM {objectQualifier}Vendors
 	INNER JOIN #PageIndex PageIndex
-		ON dnn_Vendors.VendorId = PageIndex.VendorId
+		ON {objectQualifier}Vendors.VendorId = PageIndex.VendorId
 	WHERE ( (PageIndex.IndexID > @PageLowerBound) OR @PageLowerBound is null )	
 		AND ( (PageIndex.IndexID < @PageUpperBound) OR @PageUpperBound is null )	
 	ORDER BY
 		PageIndex.IndexID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetVendors]    Script Date: 10/05/2007 21:22:33 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetVendors]    Script Date: 10/05/2007 21:22:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetVendors]
+CREATE procedure {databaseOwner}[{objectQualifier}GetVendors]
 	@PortalID int,
 	@UnAuthorized bit,
 	@PageSize int,
@@ -136,7 +136,7 @@ AS
 
 	INSERT INTO #PageIndex (VendorId)
 	SELECT VendorId
-	FROM dnn_Vendors
+	FROM {objectQualifier}Vendors
 	WHERE ( ((Authorized = 0 AND @UnAuthorized = 1) OR @UnAuthorized = 0 ) AND ((PortalId = @PortalId) or (@PortalId is null and PortalId is null)) )
 	ORDER BY VendorId DESC
 
@@ -145,22 +145,22 @@ AS
 	FROM #PageIndex
 
 
-	SELECT dnn_Vendors.*,
-       		'Banners' = ( select count(*) from dnn_Banners where dnn_Banners.VendorId = dnn_Vendors.VendorId )
-	FROM dnn_Vendors
+	SELECT {objectQualifier}Vendors.*,
+       		'Banners' = ( select count(*) from {objectQualifier}Banners where {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId )
+	FROM {objectQualifier}Vendors
 	INNER JOIN #PageIndex PageIndex
-		ON dnn_Vendors.VendorId = PageIndex.VendorId
+		ON {objectQualifier}Vendors.VendorId = PageIndex.VendorId
 	WHERE ( (PageIndex.IndexID > @PageLowerBound) OR @PageLowerBound is null )	
 		AND ( (PageIndex.IndexID < @PageUpperBound) OR @PageUpperBound is null )	
 	ORDER BY
 		PageIndex.IndexID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetEventLog]    Script Date: 10/05/2007 21:21:50 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetEventLog]    Script Date: 10/05/2007 21:21:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetEventLog]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetEventLog]
 	@PortalID int,
 	@LogTypeKey nvarchar(35),
 	@PageSize int,
@@ -180,21 +180,21 @@ AS
 	)
 
 	INSERT INTO #PageIndex (LogGUID)
-	SELECT dnn_EventLog.LogGUID
-	FROM dnn_EventLog
-	INNER JOIN dnn_EventLogConfig
-		ON dnn_EventLog.LogConfigID = dnn_EventLogConfig.ID
+	SELECT {objectQualifier}EventLog.LogGUID
+	FROM {objectQualifier}EventLog
+	INNER JOIN {objectQualifier}EventLogConfig
+		ON {objectQualifier}EventLog.LogConfigID = {objectQualifier}EventLogConfig.ID
 	WHERE (LogPortalID = @PortalID or @PortalID IS NULL)
-		AND (dnn_EventLog.LogTypeKey = @LogTypeKey or @LogTypeKey IS NULL)
+		AND ({objectQualifier}EventLog.LogTypeKey = @LogTypeKey or @LogTypeKey IS NULL)
 	ORDER BY LogCreateDate DESC
 
 
-	SELECT dnn_EventLog.*
-	FROM dnn_EventLog
-	INNER JOIN dnn_EventLogConfig
-		ON dnn_EventLog.LogConfigID = dnn_EventLogConfig.ID
+	SELECT {objectQualifier}EventLog.*
+	FROM {objectQualifier}EventLog
+	INNER JOIN {objectQualifier}EventLogConfig
+		ON {objectQualifier}EventLog.LogConfigID = {objectQualifier}EventLogConfig.ID
 	INNER JOIN #PageIndex PageIndex
-		ON dnn_EventLog.LogGUID = PageIndex.LogGUID
+		ON {objectQualifier}EventLog.LogGUID = PageIndex.LogGUID
 	WHERE PageIndex.IndexID			> @PageLowerBound	
 		AND	PageIndex.IndexID			< @PageUpperBound	
 	ORDER BY
@@ -203,12 +203,12 @@ AS
 	SELECT COUNT(*) as TotalRecords
 	FROM #PageIndex
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUsersByUserName]    Script Date: 10/05/2007 21:22:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUsersByUserName]    Script Date: 10/05/2007 21:22:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUsersByUserName]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByUserName]
     @PortalId			int,
     @UserNameToMatch	nvarchar(256),
     @PageIndex			int,
@@ -230,13 +230,13 @@ BEGIN
 
     -- Insert into our temp table
     INSERT INTO #PageIndexForUsers (UserId)
-        SELECT UserId FROM	dnn_vw_Users 
+        SELECT UserId FROM	{objectQualifier}vw_Users 
         WHERE  Username LIKE @UserNameToMatch
 			AND ( PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
 	    ORDER BY UserName
 
     SELECT  *
-    FROM	dnn_vw_Users u, 
+    FROM	{objectQualifier}vw_Users u, 
 			#PageIndexForUsers p
     WHERE  u.UserId = p.UserId
 			AND ( PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
@@ -247,12 +247,12 @@ BEGIN
     FROM    #PageIndexForUsers
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUsersByProfileProperty]    Script Date: 10/05/2007 21:22:31 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUsersByProfileProperty]    Script Date: 10/05/2007 21:22:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUsersByProfileProperty]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByProfileProperty]
     @PortalId		int,
     @PropertyName   nvarchar(256),
     @PropertyValue  nvarchar(256),
@@ -276,15 +276,15 @@ BEGIN
     -- Insert into our temp table
     INSERT INTO #PageIndexForUsers (UserId)
         SELECT U.UserId 
-		FROM   dnn_ProfilePropertyDefinition P
-			INNER JOIN dnn_UserProfile UP ON P.PropertyDefinitionID = UP.PropertyDefinitionID 
-			INNER JOIN dnn_Users U ON UP.UserID = U.UserID
+		FROM   {objectQualifier}ProfilePropertyDefinition P
+			INNER JOIN {objectQualifier}UserProfile UP ON P.PropertyDefinitionID = UP.PropertyDefinitionID 
+			INNER JOIN {objectQualifier}Users U ON UP.UserID = U.UserID
 		WHERE (PropertyName = @PropertyName) AND (PropertyValue LIKE @PropertyValue OR PropertyText LIKE @PropertyValue )
 			AND (P.Portalid = @PortalId OR (P.PortalId Is Null AND @PortalId is null ))
 		ORDER BY U.DisplayName
 
     SELECT  *
-    FROM	dnn_vw_Users u, 
+    FROM	{objectQualifier}vw_Users u, 
 			#PageIndexForUsers p
     WHERE  u.UserId = p.UserId
 			AND ( PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
@@ -296,12 +296,12 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUsersByEmail]    Script Date: 10/05/2007 21:22:30 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUsersByEmail]    Script Date: 10/05/2007 21:22:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUsersByEmail]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByEmail]
     @PortalId		int,
     @EmailToMatch   nvarchar(256),
     @PageIndex      int,
@@ -324,19 +324,19 @@ BEGIN
     -- Insert into our temp table
     IF( @EmailToMatch IS NULL )
         INSERT INTO #PageIndexForUsers (UserId)
-            SELECT UserId FROM	dnn_vw_Users 
+            SELECT UserId FROM	{objectQualifier}vw_Users 
             WHERE  Email IS NULL
 				AND ( PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
             ORDER BY Email
     ELSE
         INSERT INTO #PageIndexForUsers (UserId)
-            SELECT UserId FROM	dnn_vw_Users 
+            SELECT UserId FROM	{objectQualifier}vw_Users 
             WHERE  LOWER(Email) LIKE LOWER(@EmailToMatch)
 				AND ( PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
             ORDER BY Email
 
     SELECT  *
-    FROM	dnn_vw_Users u, 
+    FROM	{objectQualifier}vw_Users u, 
 			#PageIndexForUsers p
     WHERE  u.UserId = p.UserId
 			AND ( PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
@@ -348,12 +348,12 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAllUsers]    Script Date: 10/05/2007 21:21:47 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAllUsers]    Script Date: 10/05/2007 21:21:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetAllUsers]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetAllUsers]
 
     @PortalId		int,
     @PageIndex      int,
@@ -375,12 +375,12 @@ BEGIN
 
     -- Insert into our temp table
     INSERT INTO #PageIndexForUsers (UserId)
-        SELECT UserId FROM	dnn_vw_Users 
+        SELECT UserId FROM	{objectQualifier}vw_Users 
 		WHERE (PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
 		ORDER BY FirstName + ' ' + LastName
 
     SELECT  *
-    FROM	dnn_vw_Users u, 
+    FROM	{objectQualifier}vw_Users u, 
 			#PageIndexForUsers p
     WHERE  u.UserId = p.UserId 
 		AND (PortalId = @PortalId OR (PortalId Is Null AND @PortalId is null ))
@@ -392,12 +392,12 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalsByName]    Script Date: 10/05/2007 21:22:07 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalsByName]    Script Date: 10/05/2007 21:22:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortalsByName]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalsByName]
     @NameToMatch	nvarchar(256),
     @PageIndex			int,
     @PageSize			int
@@ -418,12 +418,12 @@ BEGIN
 
     -- Insert into our temp table
     INSERT INTO #PageIndexForPortals (PortalId)
-        SELECT PortalId FROM	dnn_vw_Portals
+        SELECT PortalId FROM	{objectQualifier}vw_Portals
         WHERE  PortalName LIKE @NameToMatch
 	    ORDER BY PortalName
 
     SELECT  *
-    FROM	dnn_vw_Portals p, 
+    FROM	{objectQualifier}vw_Portals p, 
 			#PageIndexForPortals i
     WHERE  p.PortalId = i.PortalId
 			AND i.IndexId >= @PageLowerBound AND i.IndexId <= @PageUpperBound
@@ -433,25 +433,25 @@ BEGIN
     FROM    #PageIndexForPortals
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetCurrencies]    Script Date: 10/05/2007 21:21:48 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetCurrencies]    Script Date: 10/05/2007 21:21:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetCurrencies]
+create procedure {databaseOwner}[{objectQualifier}GetCurrencies]
 
 as
 
 select Code,
        Description
-from dnn_CodeCurrency
+from {objectQualifier}CodeCurrency
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTables]    Script Date: 10/05/2007 21:22:23 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTables]    Script Date: 10/05/2007 21:22:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetTables]
+create procedure {databaseOwner}[{objectQualifier}GetTables]
 
 as
 
@@ -464,12 +464,12 @@ select 'TableName' = [name]
 from   sysobjects 
 where  xtype = 'U'
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUsersByRolename]    Script Date: 10/05/2007 21:22:31 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUsersByRolename]    Script Date: 10/05/2007 21:22:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUsersByRolename]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByRolename]
 
 	@PortalId	int,
 	@Rolename	nvarchar(50)
@@ -487,44 +487,44 @@ SELECT
 		U.Email, 
 		U.AffiliateId, 
 		U.UpdatePassword
-	FROM dnn_UserPortals AS UP 
-			RIGHT OUTER JOIN dnn_UserRoles  UR 
-			INNER JOIN dnn_Roles R ON UR.RoleID = R.RoleID 
-			RIGHT OUTER JOIN dnn_Users AS U ON UR.UserID = U.UserID 
+	FROM {objectQualifier}UserPortals AS UP 
+			RIGHT OUTER JOIN {objectQualifier}UserRoles  UR 
+			INNER JOIN {objectQualifier}Roles R ON UR.RoleID = R.RoleID 
+			RIGHT OUTER JOIN {objectQualifier}Users AS U ON UR.UserID = U.UserID 
 		ON UP.UserId = U.UserID	
 	WHERE ( UP.PortalId = @PortalId OR @PortalId IS Null )
 		AND (R.RoleName = @Rolename)
 		AND (R.PortalId = @PortalId OR @PortalId IS Null )
 	ORDER BY U.FirstName + ' ' + U.LastName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRolesByUser]    Script Date: 10/05/2007 21:22:11 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRolesByUser]    Script Date: 10/05/2007 21:22:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetRolesByUser]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetRolesByUser]
     
 	@UserId        int,
 	@PortalId      int
 
 AS
 
-SELECT dnn_Roles.RoleName,
-       dnn_Roles.RoleId
-	FROM dnn_UserRoles
-		INNER JOIN dnn_Users on dnn_UserRoles.UserId = dnn_Users.UserId
-		INNER JOIN dnn_Roles on dnn_UserRoles.RoleId = dnn_Roles.RoleId
-	WHERE  dnn_Users.UserId = @UserId
-		AND    dnn_Roles.PortalId = @PortalId
+SELECT {objectQualifier}Roles.RoleName,
+       {objectQualifier}Roles.RoleId
+	FROM {objectQualifier}UserRoles
+		INNER JOIN {objectQualifier}Users on {objectQualifier}UserRoles.UserId = {objectQualifier}Users.UserId
+		INNER JOIN {objectQualifier}Roles on {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId
+	WHERE  {objectQualifier}Users.UserId = @UserId
+		AND    {objectQualifier}Roles.PortalId = @PortalId
 		AND    (EffectiveDate <= getdate() or EffectiveDate is null)
 		AND    (ExpiryDate >= getdate() or ExpiryDate is null)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFoldersByUser]    Script Date: 10/05/2007 21:21:55 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFoldersByUser]    Script Date: 10/05/2007 21:21:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFoldersByUser]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFoldersByUser]
 	@PortalID int,
 	@UserID int,
 	@IncludeSecure bit,
@@ -541,11 +541,11 @@ SELECT DISTINCT
 	F.IsProtected,
 	F.IsCached,
 	F.LastUpdated
-FROM dbo.dnn_Roles R
-	INNER JOIN dbo.dnn_UserRoles UR ON R.RoleID = UR.RoleID 
-	RIGHT OUTER JOIN dbo.dnn_Folders F
-		INNER JOIN dbo.dnn_FolderPermission FP ON F.FolderID = FP.FolderID 
-		INNER JOIN dbo.dnn_Permission P ON FP.PermissionID = P.PermissionID 
+FROM {databaseOwner}{objectQualifier}Roles R
+	INNER JOIN {databaseOwner}{objectQualifier}UserRoles UR ON R.RoleID = UR.RoleID 
+	RIGHT OUTER JOIN {databaseOwner}{objectQualifier}Folders F
+		INNER JOIN {databaseOwner}{objectQualifier}FolderPermission FP ON F.FolderID = FP.FolderID 
+		INNER JOIN {databaseOwner}{objectQualifier}Permission P ON FP.PermissionID = P.PermissionID 
 	ON R.RoleID = FP.RoleID
 WHERE (	UR.UserID = @UserID
 			OR (FP.RoleID = - 1 AND @UserID IS NOT Null)
@@ -560,12 +560,12 @@ WHERE (	UR.UserID = @UserID
 	)
 ORDER BY F.FolderPath
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalRoles]    Script Date: 10/05/2007 21:22:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalRoles]    Script Date: 10/05/2007 21:22:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortalRoles]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalRoles]
 
 	@PortalId     int
 
@@ -586,19 +586,19 @@ SELECT R.RoleId,
        'AutoAssignment' = case when R.AutoAssignment = 1 then 'True' else 'False' end,
        RSVPCode,
        IconFile
-FROM dbo.dnn_Roles R
-	LEFT OUTER JOIN dbo.dnn_Lists L1 on R.BillingFrequency = L1.Value
-	LEFT OUTER JOIN dbo.dnn_Lists L2 on R.TrialFrequency = L2.Value
+FROM {databaseOwner}{objectQualifier}Roles R
+	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L1 on R.BillingFrequency = L1.Value
+	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L2 on R.TrialFrequency = L2.Value
 WHERE  PortalId = @PortalId
 	OR     PortalId is null
 ORDER BY R.RoleName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddRole]    Script Date: 10/05/2007 21:21:17 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddRole]    Script Date: 10/05/2007 21:21:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddRole]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddRole]
 
 	@PortalId         int,
 	@RoleGroupId      int,
@@ -617,7 +617,7 @@ CREATE PROCEDURE [dbo].[dnn_AddRole]
 
 AS
 
-INSERT INTO dbo.dnn_Roles (
+INSERT INTO {databaseOwner}{objectQualifier}Roles (
   PortalId,
   RoleGroupId,
   RoleName,
@@ -652,12 +652,12 @@ VALUES (
 
 SELECT SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRolesByGroup]    Script Date: 10/05/2007 21:22:10 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRolesByGroup]    Script Date: 10/05/2007 21:22:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetRolesByGroup]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetRolesByGroup]
 
 	@RoleGroupId     int,
 	@PortalId		 int
@@ -679,31 +679,31 @@ SELECT R.RoleId,
        'AutoAssignment' = case when R.AutoAssignment = 1 then 'True' else 'False' end,
        R.RSVPCode,
        R.IconFile
-FROM dbo.dnn_Roles R
-	LEFT OUTER JOIN dbo.dnn_Lists L1 on R.BillingFrequency = L1.Value
-	LEFT OUTER JOIN dbo.dnn_Lists L2 on R.TrialFrequency = L2.Value
+FROM {databaseOwner}{objectQualifier}Roles R
+	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L1 on R.BillingFrequency = L1.Value
+	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L2 on R.TrialFrequency = L2.Value
 WHERE  (RoleGroupId = @RoleGroupId OR (RoleGroupId IS NULL AND @RoleGroupId IS NULL))
 	AND PortalId = @PortalId
 ORDER BY R.RoleName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRoles]    Script Date: 10/05/2007 21:22:10 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRoles]    Script Date: 10/05/2007 21:22:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetRoles]
+create procedure {databaseOwner}[{objectQualifier}GetRoles]
 
 as
 
 select *
-from   dbo.dnn_Roles
+from   {databaseOwner}{objectQualifier}Roles
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_IsUserInRole]    Script Date: 10/05/2007 21:22:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}IsUserInRole]    Script Date: 10/05/2007 21:22:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_IsUserInRole]
+create procedure {databaseOwner}[{objectQualifier}IsUserInRole]
     
 @UserId        int,
 @RoleId        int,
@@ -711,21 +711,21 @@ create procedure [dbo].[dnn_IsUserInRole]
 
 as
 
-select dnn_UserRoles.UserId,
-       dnn_UserRoles.RoleId
-from dnn_UserRoles
-inner join dnn_Roles on dnn_UserRoles.RoleId = dnn_Roles.RoleId
-where  dnn_UserRoles.UserId = @UserId
-and    dnn_UserRoles.RoleId = @RoleId
-and    dnn_Roles.PortalId = @PortalId
-and    (dnn_UserRoles.ExpiryDate >= getdate() or dnn_UserRoles.ExpiryDate is null)
+select {objectQualifier}UserRoles.UserId,
+       {objectQualifier}UserRoles.RoleId
+from {objectQualifier}UserRoles
+inner join {objectQualifier}Roles on {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId
+where  {objectQualifier}UserRoles.UserId = @UserId
+and    {objectQualifier}UserRoles.RoleId = @RoleId
+and    {objectQualifier}Roles.PortalId = @PortalId
+and    ({objectQualifier}UserRoles.ExpiryDate >= getdate() or {objectQualifier}UserRoles.ExpiryDate is null)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUserRole]    Script Date: 10/05/2007 21:22:29 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserRole]    Script Date: 10/05/2007 21:22:29 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetUserRole]
+CREATE procedure {databaseOwner}[{objectQualifier}GetUserRole]
 
 	@PortalId int, 
 	@UserId int, 
@@ -738,19 +738,19 @@ SELECT	r.*,
         ur.EffectiveDate, 
         ur.ExpiryDate, 
         ur.IsTrialUsed
-	FROM	dnn_UserRoles ur
-		INNER JOIN dnn_UserPortals up on ur.UserId = up.UserId
-		INNER JOIN dnn_Roles r on r.RoleID = ur.RoleID
+	FROM	{objectQualifier}UserRoles ur
+		INNER JOIN {objectQualifier}UserPortals up on ur.UserId = up.UserId
+		INNER JOIN {objectQualifier}Roles r on r.RoleID = ur.RoleID
 	WHERE   up.UserId = @UserId
 		AND     up.PortalId = @PortalId
 		AND     ur.RoleId = @RoleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRole]    Script Date: 10/05/2007 21:22:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRole]    Script Date: 10/05/2007 21:22:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetRole]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetRole]
 
 	@RoleId   int,
 	@PortalId int
@@ -772,16 +772,16 @@ SELECT RoleId,
        AutoAssignment,
        RSVPCode,
        IconFile
-FROM   dnn_Roles
+FROM   {objectQualifier}Roles
 WHERE  RoleId = @RoleId
 	AND    PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRoleByName]    Script Date: 10/05/2007 21:22:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRoleByName]    Script Date: 10/05/2007 21:22:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetRoleByName]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetRoleByName]
 
 	@PortalId int,
 	@RoleName nvarchar(50)
@@ -803,43 +803,43 @@ SELECT RoleId,
        AutoAssignment,
        RSVPCode,
        IconFile
-FROM   dnn_Roles
+FROM   {objectQualifier}Roles
 WHERE  PortalId = @PortalId 
 	AND RoleName = @RoleName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteRole]    Script Date: 10/05/2007 21:21:37 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteRole]    Script Date: 10/05/2007 21:21:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_DeleteRole]
+CREATE procedure {databaseOwner}[{objectQualifier}DeleteRole]
 
 @RoleId int
 
 as
 
 delete 
-from dnn_FolderPermission
+from {objectQualifier}FolderPermission
 where  RoleId = @RoleId
 
 delete 
-from dnn_ModulePermission
+from {objectQualifier}ModulePermission
 where  RoleId = @RoleId
 
 delete 
-from dnn_TabPermission
+from {objectQualifier}TabPermission
 where  RoleId = @RoleId
 
 delete 
-from dnn_Roles
+from {objectQualifier}Roles
 where  RoleId = @RoleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUserRoles]    Script Date: 10/05/2007 21:22:29 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserRoles]    Script Date: 10/05/2007 21:22:29 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUserRoles]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUserRoles]
     
 @PortalId  int,
 @UserId    int
@@ -854,18 +854,18 @@ SELECT
 	UR.EffectiveDate, 
     UR.ExpiryDate, 
 	UR.IsTrialUsed
-FROM dnn_UserRoles UR
-	INNER JOIN dnn_Users U ON UR.UserID = U.UserID 
-	INNER JOIN dnn_Roles R ON UR.RoleID = R.RoleID 
+FROM {objectQualifier}UserRoles UR
+	INNER JOIN {objectQualifier}Users U ON UR.UserID = U.UserID 
+	INNER JOIN {objectQualifier}Roles R ON UR.RoleID = R.RoleID 
 WHERE
 	U.UserID = @UserId AND R.PortalID = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabPermissionsByTabID]    Script Date: 10/05/2007 21:22:25 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabPermissionsByTabID]    Script Date: 10/05/2007 21:22:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabPermissionsByTabID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabPermissionsByTabID]
 	@TabID int, 
 	@PermissionID int
 AS
@@ -887,24 +887,24 @@ SELECT
 	P.[PermissionKey],
 	P.[PermissionName]
 FROM
-	dbo.dnn_TabPermission M
+	{databaseOwner}{objectQualifier}TabPermission M
 LEFT JOIN
-	dbo.dnn_Permission P
+	{databaseOwner}{objectQualifier}Permission P
 ON	M.PermissionID = P.PermissionID
 LEFT JOIN
-	dbo.dnn_Roles R
+	{databaseOwner}{objectQualifier}Roles R
 ON	M.RoleID = R.RoleID
 WHERE
 	(M.[TabID] = @TabID
 	OR (M.TabID IS NULL and P.PermissionCode = 'SYSTEM_TAB'))
 AND	(P.[PermissionID] = @PermissionID or @PermissionID = -1)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetServices]    Script Date: 10/05/2007 21:22:17 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetServices]    Script Date: 10/05/2007 21:22:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetServices]
+CREATE procedure {databaseOwner}[{objectQualifier}GetServices]
     
 @PortalId  int,
 @UserId    int = null
@@ -920,22 +920,22 @@ select RoleId,
        'TrialFee' = case when R.TrialFrequency <> 'N' then R.TrialFee else null end,
        'TrialPeriod' = case when R.TrialFrequency <> 'N' then R.TrialPeriod else null end,
        'TrialFrequency' = case when R.TrialFrequency <> 'N' then L2.[Text] else '' end,
-       'ExpiryDate' = ( select ExpiryDate from dbo.dnn_UserRoles where dbo.dnn_UserRoles.RoleId = R.RoleId and dbo.dnn_UserRoles.UserId = @UserId ),
-       'Subscribed' = ( select UserRoleId from dbo.dnn_UserRoles where dbo.dnn_UserRoles.RoleId = R.RoleId and dbo.dnn_UserRoles.UserId = @UserId )
-from dbo.dnn_Roles R
-inner join dbo.dnn_Lists L1 on R.BillingFrequency = L1.Value
-left outer join dbo.dnn_Lists L2 on R.TrialFrequency = L2.Value
+       'ExpiryDate' = ( select ExpiryDate from {databaseOwner}{objectQualifier}UserRoles where {databaseOwner}{objectQualifier}UserRoles.RoleId = R.RoleId and {databaseOwner}{objectQualifier}UserRoles.UserId = @UserId ),
+       'Subscribed' = ( select UserRoleId from {databaseOwner}{objectQualifier}UserRoles where {databaseOwner}{objectQualifier}UserRoles.RoleId = R.RoleId and {databaseOwner}{objectQualifier}UserRoles.UserId = @UserId )
+from {databaseOwner}{objectQualifier}Roles R
+inner join {databaseOwner}{objectQualifier}Lists L1 on R.BillingFrequency = L1.Value
+left outer join {databaseOwner}{objectQualifier}Lists L2 on R.TrialFrequency = L2.Value
 where  R.PortalId = @PortalId
 and    R.IsPublic = 1
 and L1.ListName='Frequency'
 and L2.ListName='Frequency'
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateRole]    Script Date: 10/05/2007 21:22:55 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateRole]    Script Date: 10/05/2007 21:22:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateRole]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateRole]
 
 	@RoleId           int,
 	@RoleGroupId      int,
@@ -953,7 +953,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateRole]
 
 AS
 
-UPDATE dbo.dnn_Roles
+UPDATE {databaseOwner}{objectQualifier}Roles
 SET    RoleGroupId = @RoleGroupId,
        Description = @Description,
        ServiceFee = @ServiceFee,
@@ -968,12 +968,12 @@ SET    RoleGroupId = @RoleGroupId,
        IconFile = @IconFile
 WHERE  RoleId = @RoleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUserRolesByUsername]    Script Date: 10/05/2007 21:22:30 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserRolesByUsername]    Script Date: 10/05/2007 21:22:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUserRolesByUsername]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUserRolesByUsername]
 
 @PortalId int, 
 @Username nvarchar(100), 
@@ -990,9 +990,9 @@ IF @UserName Is Null
 				UR.EffectiveDate,
 				UR.ExpiryDate,
 				UR.IsTrialUsed
-			FROM	dnn_UserRoles UR
-				INNER JOIN dnn_Users U ON UR.UserID = U.UserID
-				INNER JOIN dnn_Roles R ON R.RoleID = UR.RoleID
+			FROM	{objectQualifier}UserRoles UR
+				INNER JOIN {objectQualifier}Users U ON UR.UserID = U.UserID
+				INNER JOIN {objectQualifier}Roles R ON R.RoleID = UR.RoleID
 			WHERE  R.PortalId = @PortalId
 				AND    (R.Rolename = @Rolename or @RoleName is NULL)
 	END
@@ -1007,9 +1007,9 @@ ELSE
 						UR.EffectiveDate,
 						UR.ExpiryDate,
 						UR.IsTrialUsed
-					FROM	dnn_UserRoles UR
-						INNER JOIN dnn_Users U ON UR.UserID = U.UserID
-						INNER JOIN dnn_Roles R ON R.RoleID = UR.RoleID
+					FROM	{objectQualifier}UserRoles UR
+						INNER JOIN {objectQualifier}Users U ON UR.UserID = U.UserID
+						INNER JOIN {objectQualifier}Roles R ON R.RoleID = UR.RoleID
 					WHERE  R.PortalId = @PortalId
 						AND    (U.Username = @Username or @Username is NULL)
 			END
@@ -1022,23 +1022,23 @@ ELSE
 						UR.EffectiveDate,
 						UR.ExpiryDate,
 						UR.IsTrialUsed
-					FROM	dnn_UserRoles UR
-						INNER JOIN dnn_Users U ON UR.UserID = U.UserID
-						INNER JOIN dnn_Roles R ON R.RoleID = UR.RoleID
+					FROM	{objectQualifier}UserRoles UR
+						INNER JOIN {objectQualifier}Users U ON UR.UserID = U.UserID
+						INNER JOIN {objectQualifier}Roles R ON R.RoleID = UR.RoleID
 					WHERE  R.PortalId = @PortalId
 						AND    (R.Rolename = @Rolename or @RoleName is NULL)
 						AND    (U.Username = @Username or @Username is NULL)
 			END
 	END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddHtmlText]    Script Date: 10/05/2007 21:21:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddHtmlText]    Script Date: 10/05/2007 21:21:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 /** Create Stored Procedures **/
 
-create procedure [dbo].[dnn_AddHtmlText]
+create procedure {databaseOwner}[{objectQualifier}AddHtmlText]
 
 	@ModuleId       int,
 	@DesktopHtml    ntext,
@@ -1047,7 +1047,7 @@ create procedure [dbo].[dnn_AddHtmlText]
 
 as
 
-insert into dnn_HtmlText (
+insert into {objectQualifier}HtmlText (
 	ModuleId,
 	DesktopHtml,
 	DesktopSummary,
@@ -1062,12 +1062,12 @@ values (
 	getdate()
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateHtmlText]    Script Date: 10/05/2007 21:22:44 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateHtmlText]    Script Date: 10/05/2007 21:22:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateHtmlText]
+create procedure {databaseOwner}[{objectQualifier}UpdateHtmlText]
 
 	@ModuleId       int,
 	@DesktopHtml    ntext,
@@ -1076,34 +1076,34 @@ create procedure [dbo].[dnn_UpdateHtmlText]
 
 as
 
-update dnn_HtmlText
+update {objectQualifier}HtmlText
 set    DesktopHtml    = @DesktopHtml,
        DesktopSummary = @DesktopSummary,
        CreatedByUser  = @UserID,
        CreatedDate    = getdate()
 where  ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetHtmlText]    Script Date: 10/05/2007 21:21:56 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetHtmlText]    Script Date: 10/05/2007 21:21:56 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetHtmlText]
+create procedure {databaseOwner}[{objectQualifier}GetHtmlText]
 
 	@ModuleId int
 
 as
 
 select *
-from dnn_HtmlText
+from {objectQualifier}HtmlText
 where  ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRoleGroup]    Script Date: 10/05/2007 21:22:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRoleGroup]    Script Date: 10/05/2007 21:22:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetRoleGroup]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetRoleGroup]
 
 	@PortalId		int,
 	@RoleGroupId    int
@@ -1115,16 +1115,16 @@ SELECT
 	PortalId,
 	RoleGroupName,
 	Description
-FROM dbo.dnn_RoleGroups
+FROM {databaseOwner}{objectQualifier}RoleGroups
 WHERE  (RoleGroupId = @RoleGroupId OR RoleGroupId IS NULL AND @RoleGroupId IS NULL)
 	AND    PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateRoleGroup]    Script Date: 10/05/2007 21:22:55 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateRoleGroup]    Script Date: 10/05/2007 21:22:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateRoleGroup]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateRoleGroup]
 
 	@RoleGroupId      int,
 	@RoleGroupName	  nvarchar(50),
@@ -1132,32 +1132,32 @@ CREATE PROCEDURE [dbo].[dnn_UpdateRoleGroup]
 
 AS
 
-UPDATE dbo.dnn_RoleGroups
+UPDATE {databaseOwner}{objectQualifier}RoleGroups
 SET    RoleGroupName = @RoleGroupName,
 	   Description = @Description
 WHERE  RoleGroupId = @RoleGroupId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteRoleGroup]    Script Date: 10/05/2007 21:21:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteRoleGroup]    Script Date: 10/05/2007 21:21:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteRoleGroup]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteRoleGroup]
 
 	@RoleGroupId      int
 	
 AS
 
 DELETE  
-FROM dbo.dnn_RoleGroups
+FROM {databaseOwner}{objectQualifier}RoleGroups
 WHERE  RoleGroupId = @RoleGroupId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddRoleGroup]    Script Date: 10/05/2007 21:21:18 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddRoleGroup]    Script Date: 10/05/2007 21:21:18 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddRoleGroup]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddRoleGroup]
 
 	@PortalId         int,
 	@RoleGroupName    nvarchar(50),
@@ -1165,7 +1165,7 @@ CREATE PROCEDURE [dbo].[dnn_AddRoleGroup]
 
 AS
 
-INSERT INTO dbo.dnn_RoleGroups (
+INSERT INTO {databaseOwner}{objectQualifier}RoleGroups (
   PortalId,
   RoleGroupName,
   Description
@@ -1178,12 +1178,12 @@ VALUES (
 
 SELECT SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetRoleGroups]    Script Date: 10/05/2007 21:22:10 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetRoleGroups]    Script Date: 10/05/2007 21:22:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetRoleGroups]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetRoleGroups]
 
 	@PortalId		int
 	
@@ -1194,64 +1194,64 @@ SELECT
 	PortalId,
 	RoleGroupName,
 	Description
-FROM dbo.dnn_RoleGroups
+FROM {databaseOwner}{objectQualifier}RoleGroups
 WHERE  PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetScheduleByTypeFullName]    Script Date: 10/05/2007 21:22:12 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetScheduleByTypeFullName]    Script Date: 10/05/2007 21:22:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetScheduleByTypeFullName]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetScheduleByTypeFullName]
 	@TypeFullName varchar(200),
 	@Server varchar(150)
 AS
 
 	SELECT S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, S.Servers
-	FROM dnn_Schedule S
+	FROM {objectQualifier}Schedule S
 	WHERE S.TypeFullName = @TypeFullName 
 	AND (S.Servers LIKE ',%' + @Server + '%,' or S.Servers IS NULL)
 	GROUP BY S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, S.Servers
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetScheduleNextTask]    Script Date: 10/05/2007 21:22:12 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetScheduleNextTask]    Script Date: 10/05/2007 21:22:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetScheduleNextTask]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetScheduleNextTask]
 	@Server varchar(150)
 AS
 SELECT TOP 1 S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart
-FROM dnn_Schedule S
-LEFT JOIN dnn_ScheduleHistory SH
+FROM {objectQualifier}Schedule S
+LEFT JOIN {objectQualifier}ScheduleHistory SH
 ON S.ScheduleID = SH.ScheduleID
-WHERE ((SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM dnn_ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC)
+WHERE ((SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM {objectQualifier}ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC)
 OR  SH.ScheduleHistoryID IS NULL) AND S.Enabled = 1)
 AND (S.Servers LIKE ',%' + @Server + '%,' or S.Servers IS NULL)
 GROUP BY S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart
 ORDER BY SH.NextStart ASC
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetScheduleByEvent]    Script Date: 10/05/2007 21:22:11 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetScheduleByEvent]    Script Date: 10/05/2007 21:22:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetScheduleByEvent]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetScheduleByEvent]
 @EventName varchar(50),
 @Server varchar(150)
 AS
 SELECT S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled
-FROM dbo.dnn_Schedule S
+FROM {databaseOwner}{objectQualifier}Schedule S
 WHERE S.AttachToEvent = @EventName
 AND (S.Servers LIKE ',%' + @Server + '%,' or S.Servers IS NULL)
 GROUP BY S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSchedule]    Script Date: 10/05/2007 21:22:56 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSchedule]    Script Date: 10/05/2007 21:22:56 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateSchedule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateSchedule]
 @ScheduleID int
 ,@TypeFullName varchar(200)
 ,@TimeLapse int
@@ -1265,7 +1265,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateSchedule]
 ,@ObjectDependencies varchar(300)
 ,@Servers varchar(150)
 AS
-UPDATE dbo.dnn_Schedule
+UPDATE {databaseOwner}{objectQualifier}Schedule
 SET TypeFullName = @TypeFullName
 ,TimeLapse = @TimeLapse
 ,TimeLapseMeasurement = @TimeLapseMeasurement
@@ -1279,61 +1279,61 @@ SET TypeFullName = @TypeFullName
 ,Servers = @Servers
 WHERE ScheduleID = @ScheduleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSchedule]    Script Date: 10/05/2007 21:22:11 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSchedule]    Script Date: 10/05/2007 21:22:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSchedule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSchedule]
 	@Server varchar(150)
 AS
 SELECT S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart, S.Servers
-FROM dnn_Schedule S
-LEFT JOIN dnn_ScheduleHistory SH
+FROM {objectQualifier}Schedule S
+LEFT JOIN {objectQualifier}ScheduleHistory SH
 ON S.ScheduleID = SH.ScheduleID
-WHERE (SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM dnn_ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC)
+WHERE (SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM {objectQualifier}ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC)
 OR  SH.ScheduleHistoryID IS NULL)
 AND (@Server IS NULL or S.Servers LIKE ',%' + @Server + '%,' or S.Servers IS NULL)
 GROUP BY S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart, S.Servers
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetScheduleByScheduleID]    Script Date: 10/05/2007 21:22:11 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetScheduleByScheduleID]    Script Date: 10/05/2007 21:22:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetScheduleByScheduleID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetScheduleByScheduleID]
 @ScheduleID int
 AS
 SELECT S.*
-FROM dbo.dnn_Schedule S
+FROM {databaseOwner}{objectQualifier}Schedule S
 WHERE S.ScheduleID = @ScheduleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_PurgeScheduleHistory]    Script Date: 10/05/2007 21:22:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}PurgeScheduleHistory]    Script Date: 10/05/2007 21:22:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_PurgeScheduleHistory]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}PurgeScheduleHistory]
 AS
-DELETE FROM dbo.dnn_ScheduleHistory
-FROM dbo.dnn_Schedule s
+DELETE FROM {databaseOwner}{objectQualifier}ScheduleHistory
+FROM {databaseOwner}{objectQualifier}Schedule s
 WHERE
     (
     SELECT COUNT(*)
-    FROM dbo.dnn_ScheduleHistory sh
+    FROM {databaseOwner}{objectQualifier}ScheduleHistory sh
     WHERE
-        sh.ScheduleID = dbo.dnn_ScheduleHistory.ScheduleID AND
+        sh.ScheduleID = {databaseOwner}{objectQualifier}ScheduleHistory.ScheduleID AND
         sh.ScheduleID = s.ScheduleID AND
-        sh.StartDate >= dbo.dnn_ScheduleHistory.StartDate
+        sh.StartDate >= {databaseOwner}{objectQualifier}ScheduleHistory.StartDate
     ) > s.RetainHistoryNum
 AND RetainHistoryNum<>-1
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSchedule]    Script Date: 10/05/2007 21:21:19 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSchedule]    Script Date: 10/05/2007 21:21:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddSchedule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddSchedule]
 @TypeFullName varchar(200)
 ,@TimeLapse int
 ,@TimeLapseMeasurement varchar(2)
@@ -1346,7 +1346,7 @@ CREATE PROCEDURE [dbo].[dnn_AddSchedule]
 ,@ObjectDependencies varchar(300)
 ,@Servers varchar(150)
 AS
-INSERT INTO dnn_Schedule
+INSERT INTO {objectQualifier}Schedule
 (TypeFullName
 ,TimeLapse
 ,TimeLapseMeasurement
@@ -1376,53 +1376,53 @@ VALUES
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetScheduleHistory]    Script Date: 10/05/2007 21:22:12 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetScheduleHistory]    Script Date: 10/05/2007 21:22:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetScheduleHistory]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetScheduleHistory]
 @ScheduleID int
 AS
 SELECT S.ScheduleID, S.TypeFullName, SH.StartDate, SH.EndDate, SH.Succeeded, SH.LogNotes, SH.NextStart, SH.Server
-FROM dbo.dnn_Schedule S
-INNER JOIN dbo.dnn_ScheduleHistory SH
+FROM {databaseOwner}{objectQualifier}Schedule S
+INNER JOIN {databaseOwner}{objectQualifier}ScheduleHistory SH
 ON S.ScheduleID = SH.ScheduleID
 WHERE S.ScheduleID = @ScheduleID or @ScheduleID = -1
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSchedule]    Script Date: 10/05/2007 21:21:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSchedule]    Script Date: 10/05/2007 21:21:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteSchedule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteSchedule]
 @ScheduleID int
 AS
-DELETE FROM dbo.dnn_Schedule
+DELETE FROM {databaseOwner}{objectQualifier}Schedule
 WHERE ScheduleID = @ScheduleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabPanes]    Script Date: 10/05/2007 21:22:25 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabPanes]    Script Date: 10/05/2007 21:22:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetTabPanes]
+create procedure {databaseOwner}[{objectQualifier}GetTabPanes]
 
 @TabId    int
 
 as
 
 select distinct(PaneName) as PaneName
-from   dnn_TabModules
+from   {objectQualifier}TabModules
 where  TabId = @TabId
 order by PaneName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateModuleOrder]    Script Date: 10/05/2007 21:22:47 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateModuleOrder]    Script Date: 10/05/2007 21:22:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateModuleOrder]
+create procedure {databaseOwner}[{objectQualifier}UpdateModuleOrder]
 
 @TabId              int,
 @ModuleId           int,
@@ -1431,18 +1431,18 @@ create procedure [dbo].[dnn_UpdateModuleOrder]
 
 as
 
-update dnn_TabModules
+update {objectQualifier}TabModules
 set    ModuleOrder = @ModuleOrder,
        PaneName = @PaneName
 where  TabId = @TabId
 and    ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchModules]    Script Date: 10/05/2007 21:22:15 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchModules]    Script Date: 10/05/2007 21:22:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchModules]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchModules]
 
 @PortalID int
 
@@ -1479,13 +1479,13 @@ SELECT M.ModuleID,
        MC.ControlType,
        MC.ControlTitle,
        MC.HelpURL
-FROM dnn_Modules M
-	INNER JOIN dnn_TabModules TM ON M.ModuleId = TM.ModuleId
-	INNER JOIN dnn_Tabs T ON TM.TabId = T.TabId
-	INNER JOIN dnn_ModuleDefinitions MD ON M.ModuleDefId = MD.ModuleDefId
-	INNER JOIN dnn_DesktopModules DM ON MD.DesktopModuleId = DM.DesktopModuleId
-	INNER JOIN dnn_ModuleControls MC ON MD.ModuleDefId = MC.ModuleDefId
-	LEFT OUTER JOIN dnn_Files F ON TM.IconFile = 'fileid=' + convert(varchar,F.FileID)
+FROM {objectQualifier}Modules M
+	INNER JOIN {objectQualifier}TabModules TM ON M.ModuleId = TM.ModuleId
+	INNER JOIN {objectQualifier}Tabs T ON TM.TabId = T.TabId
+	INNER JOIN {objectQualifier}ModuleDefinitions MD ON M.ModuleDefId = MD.ModuleDefId
+	INNER JOIN {objectQualifier}DesktopModules DM ON MD.DesktopModuleId = DM.DesktopModuleId
+	INNER JOIN {objectQualifier}ModuleControls MC ON MD.ModuleDefId = MC.ModuleDefId
+	LEFT OUTER JOIN {objectQualifier}Files F ON TM.IconFile = 'fileid=' + convert(varchar,F.FileID)
 WHERE  M.IsDeleted = 0  
 	AND T.IsDeleted = 0  
 	AND ControlKey is null 
@@ -1499,12 +1499,12 @@ WHERE  M.IsDeleted = 0
 	AND (T.PortalID = @PortalID OR (T.PortalID IS NULL AND @PortalID Is NULL))
 ORDER BY TM.ModuleOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchSettings]    Script Date: 10/05/2007 21:22:16 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchSettings]    Script Date: 10/05/2007 21:22:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSearchSettings]
+create procedure {databaseOwner}[{objectQualifier}GetSearchSettings]
 
 	@ModuleID	int
 
@@ -1513,21 +1513,21 @@ AS
 select     	tm.ModuleID, 
 			settings.SettingName, 
 			settings.SettingValue
-from	dnn_Tabs searchTabs INNER JOIN
-		dnn_TabModules searchTabModules ON searchTabs.TabID = searchTabModules.TabID INNER JOIN
-        dnn_Portals p ON searchTabs.PortalID = p.PortalID INNER JOIN
-        dnn_Tabs t ON p.PortalID = t.PortalID INNER JOIN
-        dnn_TabModules tm ON t.TabID = tm.TabID INNER JOIN
-        dnn_ModuleSettings settings ON searchTabModules.ModuleID = settings.ModuleID
+from	{objectQualifier}Tabs searchTabs INNER JOIN
+		{objectQualifier}TabModules searchTabModules ON searchTabs.TabID = searchTabModules.TabID INNER JOIN
+        {objectQualifier}Portals p ON searchTabs.PortalID = p.PortalID INNER JOIN
+        {objectQualifier}Tabs t ON p.PortalID = t.PortalID INNER JOIN
+        {objectQualifier}TabModules tm ON t.TabID = tm.TabID INNER JOIN
+        {objectQualifier}ModuleSettings settings ON searchTabModules.ModuleID = settings.ModuleID
 where   searchTabs.TabName = N'Search Admin'
 and		tm.ModuleID = @ModuleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabModuleOrder]    Script Date: 10/05/2007 21:22:24 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabModuleOrder]    Script Date: 10/05/2007 21:22:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetTabModuleOrder]
+create procedure {databaseOwner}[{objectQualifier}GetTabModuleOrder]
 
 @TabId    int, 
 @PaneName nvarchar(50)
@@ -1535,17 +1535,17 @@ create procedure [dbo].[dnn_GetTabModuleOrder]
 as
 
 select *
-from   dnn_TabModules 
+from   {objectQualifier}TabModules 
 where  TabId = @TabId 
 and    PaneName = @PaneName
 order by ModuleOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchResultModules]    Script Date: 10/05/2007 21:22:15 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchResultModules]    Script Date: 10/05/2007 21:22:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetSearchResultModules]
+CREATE procedure {databaseOwner}[{objectQualifier}GetSearchResultModules]
 
 @PortalID int
 
@@ -1554,20 +1554,20 @@ AS
 SELECT     
 		TM.TabID, 
 		T.TabName  AS SearchTabName
-FROM	dnn_Modules M
-INNER JOIN	dnn_ModuleDefinitions MD ON MD.ModuleDefID = M.ModuleDefID 
-INNER JOIN	dnn_TabModules TM ON TM.ModuleID = M.ModuleID 
-INNER JOIN	dnn_Tabs T ON T.TabID = TM.TabID
+FROM	{objectQualifier}Modules M
+INNER JOIN	{objectQualifier}ModuleDefinitions MD ON MD.ModuleDefID = M.ModuleDefID 
+INNER JOIN	{objectQualifier}TabModules TM ON TM.ModuleID = M.ModuleID 
+INNER JOIN	{objectQualifier}Tabs T ON T.TabID = TM.TabID
 WHERE	MD.FriendlyName = N'Search Results'
 	AND T.PortalID = @PortalID
 	AND T.IsDeleted = 0
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddTabModule]    Script Date: 10/05/2007 21:21:25 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddTabModule]    Script Date: 10/05/2007 21:21:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddTabModule]
+create procedure {databaseOwner}[{objectQualifier}AddTabModule]
     
 @TabId                         int,
 @ModuleId                      int,
@@ -1586,7 +1586,7 @@ create procedure [dbo].[dnn_AddTabModule]
 
 as
 
-insert into dnn_TabModules ( 
+insert into {objectQualifier}TabModules ( 
   TabId,
   ModuleId,
   ModuleOrder,
@@ -1619,12 +1619,12 @@ values (
   @DisplaySyndicate
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateTabModule]    Script Date: 10/05/2007 21:23:02 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateTabModule]    Script Date: 10/05/2007 21:23:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateTabModule]
+create procedure {databaseOwner}[{objectQualifier}UpdateTabModule]
 
 @TabId               int,
 @ModuleId            int,
@@ -1643,7 +1643,7 @@ create procedure [dbo].[dnn_UpdateTabModule]
 
 as
 
-update dnn_TabModules
+update {objectQualifier}TabModules
 set    ModuleOrder = @ModuleOrder,
        PaneName = @PaneName,
        CacheTime = @CacheTime,
@@ -1659,12 +1659,12 @@ set    ModuleOrder = @ModuleOrder,
 where  TabId = @TabId
 and    ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteTabModule]    Script Date: 10/05/2007 21:21:41 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteTabModule]    Script Date: 10/05/2007 21:21:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteTabModule]
+create procedure {databaseOwner}[{objectQualifier}DeleteTabModule]
 
 @TabId      int,
 @ModuleId   int
@@ -1672,16 +1672,16 @@ create procedure [dbo].[dnn_DeleteTabModule]
 as
 
 delete
-from   dnn_TabModules 
+from   {objectQualifier}TabModules 
 where  TabId = @TabId
 and    ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItems]    Script Date: 10/05/2007 21:22:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItems]    Script Date: 10/05/2007 21:22:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchItems]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchItems]
 
 @PortalId int,
 @TabId int,
@@ -1692,23 +1692,23 @@ AS
 SELECT si.*,
        'AuthorName' = u.FirstName + ' ' + u.LastName,
        t.TabId
-FROM   dbo.dnn_SearchItem si
-	LEFT OUTER JOIN dbo.dnn_Users u ON si.Author = u.UserID
-	INNER JOIN dbo.dnn_Modules m ON si.ModuleId = m.ModuleID 
-	INNER JOIN dbo.dnn_TabModules tm ON m.ModuleId = tm.ModuleID 
-	INNER JOIN dbo.dnn_Tabs t ON tm.TabID = t.TabID
-	INNER JOIN dbo.dnn_Portals p ON t.PortalID = p.PortalID
+FROM   {databaseOwner}{objectQualifier}SearchItem si
+	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Users u ON si.Author = u.UserID
+	INNER JOIN {databaseOwner}{objectQualifier}Modules m ON si.ModuleId = m.ModuleID 
+	INNER JOIN {databaseOwner}{objectQualifier}TabModules tm ON m.ModuleId = tm.ModuleID 
+	INNER JOIN {databaseOwner}{objectQualifier}Tabs t ON tm.TabID = t.TabID
+	INNER JOIN {databaseOwner}{objectQualifier}Portals p ON t.PortalID = p.PortalID
 WHERE (p.PortalId = @PortalId or @PortalId is null)
 	AND   (t.TabId = @TabId or @TabId is null)
 	AND   (m.ModuleId = @ModuleId or @ModuleId is null)
 ORDER BY PubDate DESC
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchResults]    Script Date: 10/05/2007 21:22:16 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchResults]    Script Date: 10/05/2007 21:22:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetSearchResults]
+CREATE procedure {databaseOwner}[{objectQualifier}GetSearchResults]
 	@PortalID int,
 	@Word nVarChar(100)
 AS
@@ -1727,13 +1727,13 @@ SELECT si.SearchItemID,
 	si.ImageFileId,
 	u.FirstName + ' ' + u.LastName As AuthorName,
 	m.PortalId
-FROM    dnn_SearchWord sw
-	INNER JOIN dnn_SearchItemWord siw ON sw.SearchWordsID = siw.SearchWordsID
-	INNER JOIN dnn_SearchItem si ON siw.SearchItemID = si.SearchItemID
-	INNER JOIN dnn_Modules m ON si.ModuleId = m.ModuleID
-	LEFT OUTER JOIN dnn_TabModules tm ON si.ModuleId = tm.ModuleID
-	INNER JOIN dnn_Tabs t ON tm.TabID = t.TabID
-	LEFT OUTER JOIN dnn_Users u ON si.Author = u.UserID
+FROM    {objectQualifier}SearchWord sw
+	INNER JOIN {objectQualifier}SearchItemWord siw ON sw.SearchWordsID = siw.SearchWordsID
+	INNER JOIN {objectQualifier}SearchItem si ON siw.SearchItemID = si.SearchItemID
+	INNER JOIN {objectQualifier}Modules m ON si.ModuleId = m.ModuleID
+	LEFT OUTER JOIN {objectQualifier}TabModules tm ON si.ModuleId = tm.ModuleID
+	INNER JOIN {objectQualifier}Tabs t ON tm.TabID = t.TabID
+	LEFT OUTER JOIN {objectQualifier}Users u ON si.Author = u.UserID
 WHERE   (((m.StartDate Is Null) OR (GetDate() > m.StartDate)) AND ((m.EndDate Is Null) OR (GetDate() < m.EndDate)))
 	AND (((t.StartDate Is Null) OR (GetDate() > t.StartDate)) AND ((t.EndDate Is Null) OR (GetDate() < t.EndDate)))
 	AND (sw.Word = @Word) 
@@ -1742,12 +1742,12 @@ WHERE   (((m.StartDate Is Null) OR (GetDate() > m.StartDate)) AND ((m.EndDate Is
 	AND (t.PortalID = @PortalID)
 ORDER BY Relevance DESC
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUrlLog]    Script Date: 10/05/2007 21:22:27 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUrlLog]    Script Date: 10/05/2007 21:22:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetUrlLog]
+create procedure {databaseOwner}[{objectQualifier}GetUrlLog]
 
 @URLTrackingID int,
 @StartDate     datetime,
@@ -1755,29 +1755,29 @@ create procedure [dbo].[dnn_GetUrlLog]
 
 as
 
-select dnn_UrlLog.*,
-       'FullName' = dnn_Users.FirstName + ' ' + dnn_Users.LastName
-from   dnn_UrlLog
-inner join dnn_UrlTracking on dnn_UrlLog.UrlTrackingId = dnn_UrlTracking.UrlTrackingId
-left outer join dnn_Users on dnn_UrlLog.UserId = dnn_Users.UserId
-where  dnn_UrlLog.UrlTrackingID = @UrlTrackingID
+select {objectQualifier}UrlLog.*,
+       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
+from   {objectQualifier}UrlLog
+inner join {objectQualifier}UrlTracking on {objectQualifier}UrlLog.UrlTrackingId = {objectQualifier}UrlTracking.UrlTrackingId
+left outer join {objectQualifier}Users on {objectQualifier}UrlLog.UserId = {objectQualifier}Users.UserId
+where  {objectQualifier}UrlLog.UrlTrackingID = @UrlTrackingID
 and    ((ClickDate >= @StartDate) or @StartDate is null)
 and    ((ClickDate <= @EndDate) or @EndDate is null)
 order by ClickDate
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddUrlLog]    Script Date: 10/05/2007 21:21:27 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddUrlLog]    Script Date: 10/05/2007 21:21:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddUrlLog]
+create procedure {databaseOwner}[{objectQualifier}AddUrlLog]
 
 @UrlTrackingID int,
 @UserID        int
 
 as
 
-insert into dnn_UrlLog (
+insert into {objectQualifier}UrlLog (
   UrlTrackingID,
   ClickDate,
   UserID
@@ -1788,12 +1788,12 @@ values (
   @UserID
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog4]    Script Date: 10/05/2007 21:22:19 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog4]    Script Date: 10/05/2007 21:22:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog4]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog4]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -1805,20 +1805,20 @@ as
 select Referrer,
  'Requests' = count(*),
  'LastRequest' = max(DateTime)
-from dnn_SiteLog
-where dnn_SiteLog.PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+from {objectQualifier}SiteLog
+where {objectQualifier}SiteLog.PortalId = @PortalId
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 and Referrer is not null
 and Referrer not like '%' + @PortalAlias + '%'
 group by Referrer
 order by Requests desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog3]    Script Date: 10/05/2007 21:22:18 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog3]    Script Date: 10/05/2007 21:22:18 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog3]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog3]
 
 	@PortalId int,
 	@PortalAlias nvarchar(50),
@@ -1827,23 +1827,23 @@ create procedure [dbo].[dnn_GetSiteLog3]
 
 as
 
-select 'Name' = dnn_Users.FirstName + ' ' + dnn_Users.LastName,
+select 'Name' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
 	'Requests' = count(*),
 	'LastRequest' = max(DateTime)
-from dnn_SiteLog
-inner join dnn_Users on dnn_SiteLog.UserId = dnn_Users.UserId
-where dnn_SiteLog.PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
-and dnn_SiteLog.UserId is not null
-group by dnn_Users.FirstName + ' ' + dnn_Users.LastName
+from {objectQualifier}SiteLog
+inner join {objectQualifier}Users on {objectQualifier}SiteLog.UserId = {objectQualifier}Users.UserId
+where {objectQualifier}SiteLog.PortalId = @PortalId
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.UserId is not null
+group by {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
 order by Requests desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSiteLog]    Script Date: 10/05/2007 21:21:40 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSiteLog]    Script Date: 10/05/2007 21:21:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteSiteLog]
+create procedure {databaseOwner}[{objectQualifier}DeleteSiteLog]
 
 @DateTime                      datetime, 
 @PortalId                      int
@@ -1851,16 +1851,16 @@ create procedure [dbo].[dnn_DeleteSiteLog]
 as
 
 delete
-from dnn_SiteLog
+from {objectQualifier}SiteLog
 where  PortalId = @PortalId
 and    DateTime < @DateTime
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog2]    Script Date: 10/05/2007 21:22:18 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog2]    Script Date: 10/05/2007 21:22:18 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog2]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog2]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -1869,48 +1869,48 @@ create procedure [dbo].[dnn_GetSiteLog2]
 
 as
 
-select dnn_SiteLog.DateTime,
+select {objectQualifier}SiteLog.DateTime,
  'Name' = 
  case
-when dnn_SiteLog.UserId is null then null
-else dnn_Users.FirstName + ' ' + dnn_Users.LastName
+when {objectQualifier}SiteLog.UserId is null then null
+else {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
 end,
  'Referrer' = 
  case 
- when dnn_SiteLog.Referrer like '%' + @PortalAlias + '%' then null 
- else dnn_SiteLog.Referrer
+ when {objectQualifier}SiteLog.Referrer like '%' + @PortalAlias + '%' then null 
+ else {objectQualifier}SiteLog.Referrer
  end,
  'UserAgent' = 
  case 
- when dnn_SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
- when dnn_SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
- when dnn_SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
- when dnn_SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
- when dnn_SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
- when dnn_SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
- when dnn_SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
- when dnn_SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
- when dnn_SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
- when dnn_SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
- when dnn_SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
- when dnn_SiteLog.UserAgent like '%Mozilla/5%' then 'Netscape Navigator 6+'
- else dnn_SiteLog.UserAgent
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/5%' then 'Netscape Navigator 6+'
+ else {objectQualifier}SiteLog.UserAgent
  end,
- dnn_SiteLog.UserHostAddress,
- dnn_Tabs.TabName
-from dnn_SiteLog
-left outer join dnn_Users on dnn_SiteLog.UserId = dnn_Users.UserId 
-left outer join dnn_Tabs on dnn_SiteLog.TabId = dnn_Tabs.TabId 
-where dnn_SiteLog.PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
-order by dnn_SiteLog.DateTime desc
+ {objectQualifier}SiteLog.UserHostAddress,
+ {objectQualifier}Tabs.TabName
+from {objectQualifier}SiteLog
+left outer join {objectQualifier}Users on {objectQualifier}SiteLog.UserId = {objectQualifier}Users.UserId 
+left outer join {objectQualifier}Tabs on {objectQualifier}SiteLog.TabId = {objectQualifier}Tabs.TabId 
+where {objectQualifier}SiteLog.PortalId = @PortalId
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
+order by {objectQualifier}SiteLog.DateTime desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog12]    Script Date: 10/05/2007 21:22:18 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog12]    Script Date: 10/05/2007 21:22:18 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog12]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog12]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -1922,19 +1922,19 @@ as
 select AffiliateId,
  'Requests' = count(*),
  'LastReferral' = max(DateTime)
-from dnn_SiteLog
-where dnn_SiteLog.PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+from {objectQualifier}SiteLog
+where {objectQualifier}SiteLog.PortalId = @PortalId
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 and AffiliateId is not null
 group by AffiliateId
 order by Requests desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog6]    Script Date: 10/05/2007 21:22:20 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog6]    Script Date: 10/05/2007 21:22:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog6]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog6]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -1945,20 +1945,20 @@ as
 
 select 'Hour' = datepart(hour,DateTime),
  'Views' = count(*),
- 'Visitors' = count(distinct dnn_SiteLog.UserHostAddress),
- 'Users' = count(distinct dnn_SiteLog.UserId)
-from dnn_SiteLog
+ 'Visitors' = count(distinct {objectQualifier}SiteLog.UserHostAddress),
+ 'Users' = count(distinct {objectQualifier}SiteLog.UserId)
+from {objectQualifier}SiteLog
 where PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 group by datepart(hour,DateTime)
 order by Hour
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSiteLog]    Script Date: 10/05/2007 21:21:22 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSiteLog]    Script Date: 10/05/2007 21:21:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddSiteLog]
+create procedure {databaseOwner}[{objectQualifier}AddSiteLog]
 
 @DateTime                      datetime, 
 @PortalId                      int,
@@ -1975,7 +1975,7 @@ as
  
 declare @SiteLogHistory int
 
-insert into dnn_SiteLog ( 
+insert into {objectQualifier}SiteLog ( 
   DateTime,
   PortalId,
   UserId,
@@ -2000,12 +2000,12 @@ values (
   @AffiliateId
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog7]    Script Date: 10/05/2007 21:22:20 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog7]    Script Date: 10/05/2007 21:22:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog7]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog7]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -2016,20 +2016,20 @@ as
 
 select 'WeekDay' = datepart(weekday,DateTime),
  'Views' = count(*),
- 'Visitors' = count(distinct dnn_SiteLog.UserHostAddress),
- 'Users' = count(distinct dnn_SiteLog.UserId)
-from dnn_SiteLog
+ 'Visitors' = count(distinct {objectQualifier}SiteLog.UserHostAddress),
+ 'Users' = count(distinct {objectQualifier}SiteLog.UserId)
+from {objectQualifier}SiteLog
 where PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 group by datepart(weekday,DateTime)
 order by WeekDay
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog1]    Script Date: 10/05/2007 21:22:17 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog1]    Script Date: 10/05/2007 21:22:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog1]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog1]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -2040,20 +2040,20 @@ as
 
 select 'Date' = convert(varchar,DateTime,102),
  'Views' = count(*),
- 'Visitors' = count(distinct dnn_SiteLog.UserHostAddress),
- 'Users' = count(distinct dnn_SiteLog.UserId)
-from dnn_SiteLog
+ 'Visitors' = count(distinct {objectQualifier}SiteLog.UserHostAddress),
+ 'Users' = count(distinct {objectQualifier}SiteLog.UserId)
+from {objectQualifier}SiteLog
 where PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 group by convert(varchar,DateTime,102)
 order by Date desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog8]    Script Date: 10/05/2007 21:22:21 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog8]    Script Date: 10/05/2007 21:22:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog8]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog8]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -2064,20 +2064,20 @@ as
 
 select 'Month' = datepart(month,DateTime),
  'Views' = count(*),
- 'Visitors' = count(distinct dnn_SiteLog.UserHostAddress),
- 'Users' = count(distinct dnn_SiteLog.UserId)
-from dnn_SiteLog
+ 'Visitors' = count(distinct {objectQualifier}SiteLog.UserHostAddress),
+ 'Users' = count(distinct {objectQualifier}SiteLog.UserId)
+from {objectQualifier}SiteLog
 where PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 group by datepart(month,DateTime)
 order by Month
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog5]    Script Date: 10/05/2007 21:22:19 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog5]    Script Date: 10/05/2007 21:22:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog5]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog5]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -2088,48 +2088,48 @@ as
 
 select'UserAgent' = 
  case 
- when dnn_SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
- when dnn_SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
- when dnn_SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
- when dnn_SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
- when dnn_SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
- when dnn_SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
- when dnn_SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
- when dnn_SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
- when dnn_SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
- when dnn_SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
- when dnn_SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
- when dnn_SiteLog.UserAgent like '%Mozilla/5%' then 'Netscape Navigator 6+'
- else dnn_SiteLog.UserAgent
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/5%' then 'Netscape Navigator 6+'
+ else {objectQualifier}SiteLog.UserAgent
  end,
  'Requests' = count(*),
  'LastRequest' = max(DateTime)
-from dnn_SiteLog
+from {objectQualifier}SiteLog
 where PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 group by case 
- when dnn_SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
- when dnn_SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
- when dnn_SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
- when dnn_SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
- when dnn_SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
- when dnn_SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
- when dnn_SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
- when dnn_SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
- when dnn_SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
- when dnn_SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
- when dnn_SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
- when dnn_SiteLog.UserAgent like '%Mozilla/5%' then 'Netscape Navigator 6+'
- else dnn_SiteLog.UserAgent
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
+ when {objectQualifier}SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
+ when {objectQualifier}SiteLog.UserAgent like '%Mozilla/5%' then 'Netscape Navigator 6+'
+ else {objectQualifier}SiteLog.UserAgent
  end
 order by Requests desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSiteLog9]    Script Date: 10/05/2007 21:22:21 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSiteLog9]    Script Date: 10/05/2007 21:22:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSiteLog9]
+create procedure {databaseOwner}[{objectQualifier}GetSiteLog9]
 
 @PortalId int,
 @PortalAlias nvarchar(50),
@@ -2138,49 +2138,49 @@ create procedure [dbo].[dnn_GetSiteLog9]
 
 as
 
-select 'Page' = dnn_Tabs.TabName,
+select 'Page' = {objectQualifier}Tabs.TabName,
  'Requests' = count(*),
  'LastRequest' = max(DateTime)
-from dnn_SiteLog
-inner join dnn_Tabs on dnn_SiteLog.TabId = dnn_Tabs.TabId
-where dnn_SiteLog.PortalId = @PortalId
-and dnn_SiteLog.DateTime between @StartDate and @EndDate
-and dnn_SiteLog.TabId is not null
-group by dnn_Tabs.TabName
+from {objectQualifier}SiteLog
+inner join {objectQualifier}Tabs on {objectQualifier}SiteLog.TabId = {objectQualifier}Tabs.TabId
+where {objectQualifier}SiteLog.PortalId = @PortalId
+and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
+and {objectQualifier}SiteLog.TabId is not null
+group by {objectQualifier}Tabs.TabName
 order by Requests desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetLinks]    Script Date: 10/05/2007 21:21:56 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetLinks]    Script Date: 10/05/2007 21:21:56 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetLinks]
+CREATE procedure {databaseOwner}[{objectQualifier}GetLinks]
 
 @ModuleId int
 
 as
 
-select dnn_Links.ItemId,
-       dnn_Links.ModuleId,
-       dnn_Links.CreatedByUser,
-       dnn_Links.CreatedDate,
-       dnn_Links.Title,
-       dnn_Links.URL,
-       dnn_Links.ViewOrder,
-       dnn_Links.Description,
-       dnn_UrlTracking.TrackClicks,
-       dnn_UrlTracking.NewWindow
-from   dnn_Links
-left outer join dnn_UrlTracking on dnn_Links.URL = dnn_UrlTracking.Url and dnn_UrlTracking.ModuleId = @ModuleID 
-where  dnn_Links.ModuleId = @ModuleId
-order by dnn_Links.ViewOrder, dnn_Links.Title
+select {objectQualifier}Links.ItemId,
+       {objectQualifier}Links.ModuleId,
+       {objectQualifier}Links.CreatedByUser,
+       {objectQualifier}Links.CreatedDate,
+       {objectQualifier}Links.Title,
+       {objectQualifier}Links.URL,
+       {objectQualifier}Links.ViewOrder,
+       {objectQualifier}Links.Description,
+       {objectQualifier}UrlTracking.TrackClicks,
+       {objectQualifier}UrlTracking.NewWindow
+from   {objectQualifier}Links
+left outer join {objectQualifier}UrlTracking on {objectQualifier}Links.URL = {objectQualifier}UrlTracking.Url and {objectQualifier}UrlTracking.ModuleId = @ModuleID 
+where  {objectQualifier}Links.ModuleId = @ModuleId
+order by {objectQualifier}Links.ViewOrder, {objectQualifier}Links.Title
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateLink]    Script Date: 10/05/2007 21:22:44 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateLink]    Script Date: 10/05/2007 21:22:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateLink]
+create procedure {databaseOwner}[{objectQualifier}UpdateLink]
 
 	@ItemId      int,
 	@UserId      int,
@@ -2191,7 +2191,7 @@ create procedure [dbo].[dnn_UpdateLink]
 
 as
 
-update dnn_Links
+update {objectQualifier}Links
 set    CreatedByUser = @UserId,
        CreatedDate   = GetDate(),
        Title         = @Title,
@@ -2200,14 +2200,14 @@ set    CreatedByUser = @UserId,
        Description   = @Description
 where  ItemId = @ItemId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddLink]    Script Date: 10/05/2007 21:21:10 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddLink]    Script Date: 10/05/2007 21:21:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 /** Create Optimized Stored Procedures **/
 
-create procedure [dbo].[dnn_AddLink]
+create procedure {databaseOwner}[{objectQualifier}AddLink]
 
 	@ModuleId    int,
 	@UserId      int,
@@ -2218,7 +2218,7 @@ create procedure [dbo].[dnn_AddLink]
 
 as
 
-insert into dnn_Links (
+insert into {objectQualifier}Links (
 	ModuleId,
 	CreatedByUser,
 	CreatedDate,
@@ -2239,54 +2239,54 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetLink]    Script Date: 10/05/2007 21:21:56 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetLink]    Script Date: 10/05/2007 21:21:56 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetLink]
+CREATE procedure {databaseOwner}[{objectQualifier}GetLink]
 
 @ItemId   int,
 @ModuleId int
 
 as
 
-select  dnn_Links.ItemId,
-	dnn_Links.ModuleId,
-	dnn_Links.Title,
-	dnn_Links.URL,
-        dnn_Links.ViewOrder,
-        dnn_Links.Description,
-        dnn_Links.CreatedByUser,
-        dnn_Links.CreatedDate,
-        dnn_UrlTracking.TrackClicks,
-        dnn_UrlTracking.NewWindow
-from    dnn_Links
-left outer join dnn_UrlTracking on dnn_Links.URL = dnn_UrlTracking.Url and dnn_UrlTracking.ModuleId = @ModuleID 
-where  dnn_Links.ItemId = @ItemId
-and    dnn_Links.ModuleId = @ModuleId
+select  {objectQualifier}Links.ItemId,
+	{objectQualifier}Links.ModuleId,
+	{objectQualifier}Links.Title,
+	{objectQualifier}Links.URL,
+        {objectQualifier}Links.ViewOrder,
+        {objectQualifier}Links.Description,
+        {objectQualifier}Links.CreatedByUser,
+        {objectQualifier}Links.CreatedDate,
+        {objectQualifier}UrlTracking.TrackClicks,
+        {objectQualifier}UrlTracking.NewWindow
+from    {objectQualifier}Links
+left outer join {objectQualifier}UrlTracking on {objectQualifier}Links.URL = {objectQualifier}UrlTracking.Url and {objectQualifier}UrlTracking.ModuleId = @ModuleID 
+where  {objectQualifier}Links.ItemId = @ItemId
+and    {objectQualifier}Links.ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteLink]    Script Date: 10/05/2007 21:21:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteLink]    Script Date: 10/05/2007 21:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteLink]
+create procedure {databaseOwner}[{objectQualifier}DeleteLink]
 
 	@ItemId int
 
 as
 
 delete
-from dnn_Links
+from {objectQualifier}Links
 where  ItemId = @ItemId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateTabPermission]    Script Date: 10/05/2007 21:23:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateTabPermission]    Script Date: 10/05/2007 21:23:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateTabPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateTabPermission]
 	@TabPermissionID int, 
 	@TabID int, 
 	@PermissionID int, 
@@ -2294,7 +2294,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateTabPermission]
 	@AllowAccess bit
 AS
 
-UPDATE dbo.dnn_TabPermission SET
+UPDATE {databaseOwner}{objectQualifier}TabPermission SET
 	[TabID] = @TabID,
 	[PermissionID] = @PermissionID,
 	[RoleID] = @RoleID,
@@ -2302,19 +2302,19 @@ UPDATE dbo.dnn_TabPermission SET
 WHERE
 	[TabPermissionID] = @TabPermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddTabPermission]    Script Date: 10/05/2007 21:21:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddTabPermission]    Script Date: 10/05/2007 21:21:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddTabPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddTabPermission]
 	@TabID int,
 	@PermissionID int,
 	@RoleID int,
 	@AllowAccess bit
 AS
 
-INSERT INTO dbo.dnn_TabPermission (
+INSERT INTO {databaseOwner}{objectQualifier}TabPermission (
 	[TabID],
 	[PermissionID],
 	[RoleID],
@@ -2328,38 +2328,38 @@ INSERT INTO dbo.dnn_TabPermission (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteTabPermissionsByTabID]    Script Date: 10/05/2007 21:21:42 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteTabPermissionsByTabID]    Script Date: 10/05/2007 21:21:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteTabPermissionsByTabID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteTabPermissionsByTabID]
 	@TabID int
 AS
 
-DELETE FROM dbo.dnn_TabPermission
+DELETE FROM {databaseOwner}{objectQualifier}TabPermission
 WHERE
 	[TabID] = @TabID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteTabPermission]    Script Date: 10/05/2007 21:21:42 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteTabPermission]    Script Date: 10/05/2007 21:21:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteTabPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteTabPermission]
 	@TabPermissionID int
 AS
 
-DELETE FROM dbo.dnn_TabPermission
+DELETE FROM {databaseOwner}{objectQualifier}TabPermission
 WHERE
 	[TabPermissionID] = @TabPermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddUser]    Script Date: 10/05/2007 21:21:28 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddUser]    Script Date: 10/05/2007 21:21:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddUser]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddUser]
 
 	@PortalID		int,
 	@Username		nvarchar(100),
@@ -2377,12 +2377,12 @@ AS
 DECLARE @UserID int
 
 SELECT @UserID = UserID
-	FROM   dnn_Users
+	FROM   {objectQualifier}Users
 	WHERE  Username = @Username
 
 IF @UserID is null
 	BEGIN
-		INSERT INTO dnn_Users (
+		INSERT INTO {objectQualifier}Users (
 			Username,
 			FirstName, 
 			LastName, 
@@ -2408,9 +2408,9 @@ IF @UserID is null
 
 IF @IsSuperUser = 0
 	BEGIN
-		IF not exists ( SELECT 1 FROM dnn_UserPortals WHERE UserID = @UserID AND PortalID = @PortalID )
+		IF not exists ( SELECT 1 FROM {objectQualifier}UserPortals WHERE UserID = @UserID AND PortalID = @PortalID )
 			BEGIN
-				INSERT INTO dnn_UserPortals (
+				INSERT INTO {objectQualifier}UserPortals (
 					UserID,
 					PortalID,
 					Authorised
@@ -2425,25 +2425,25 @@ IF @IsSuperUser = 0
 
 SELECT @UserID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteUserPortal]    Script Date: 10/05/2007 21:21:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteUserPortal]    Script Date: 10/05/2007 21:21:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_DeleteUserPortal]
+CREATE procedure {databaseOwner}[{objectQualifier}DeleteUserPortal]
 	@UserId   int,
 	@PortalId int
 AS
 
-	DELETE FROM dnn_UserPortals
+	DELETE FROM {objectQualifier}UserPortals
 	WHERE Userid = @UserId and PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateUser]    Script Date: 10/05/2007 21:23:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateUser]    Script Date: 10/05/2007 21:23:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateUser]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateUser]
 
 	@UserId         int,
 	@PortalId		int,
@@ -2455,7 +2455,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateUser]
 	@Authorised		bit
 
 AS
-UPDATE dnn_Users
+UPDATE {objectQualifier}Users
 SET
 	FirstName = @FirstName,
     LastName = @LastName,
@@ -2464,50 +2464,50 @@ SET
 	UpdatePassword = @UpdatePassword
 WHERE  UserId = @UserId
 
-UPDATE dnn_UserPortals
+UPDATE {objectQualifier}UserPortals
 SET
 	Authorised = @Authorised
 WHERE  UserId = @UserId
 	AND PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUsers]    Script Date: 10/05/2007 21:22:30 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUsers]    Script Date: 10/05/2007 21:22:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetUsers]
+create procedure {databaseOwner}[{objectQualifier}GetUsers]
 
 @PortalId int
 
 as
 
 select *
-from dnn_Users U
-left join dnn_UserPortals UP on U.UserId = UP.UserId
+from {objectQualifier}Users U
+left join {objectQualifier}UserPortals UP on U.UserId = UP.UserId
 where ( UP.PortalId = @PortalId or @PortalId is null )
 order by U.FirstName + ' ' + U.LastName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleControl]    Script Date: 10/05/2007 21:21:58 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleControl]    Script Date: 10/05/2007 21:21:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetModuleControl]
+create procedure {databaseOwner}[{objectQualifier}GetModuleControl]
 
 @ModuleControlId int
 
 as
 
 select *
-from   dnn_ModuleControls
+from   {objectQualifier}ModuleControls
 where  ModuleControlId = @ModuleControlId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleControlByKeyAndSrc]    Script Date: 10/05/2007 21:21:58 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleControlByKeyAndSrc]    Script Date: 10/05/2007 21:21:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  PROCEDURE [dbo].[dnn_GetModuleControlByKeyAndSrc]
+CREATE  PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControlByKeyAndSrc]
 
 @ModuleDefId int,
 @ControlKey nvarchar(50),
@@ -2522,74 +2522,74 @@ SELECT     ModuleControlID,
            IconFile, 
            ControlType, 
            ViewOrder
-from       dbo.dnn_ModuleControls
+from       {databaseOwner}{objectQualifier}ModuleControls
 where ((ModuleDefId is null and @ModuleDefId is null) or (ModuleDefID = @ModuleDefID))
 and ((ControlKey is null and @ControlKey is null) or (ControlKey = @ControlKey))
 and ((ControlSrc is null and @ControlSrc is null) or (ControlSrc = @ControlSrc))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModuleControl]    Script Date: 10/05/2007 21:21:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModuleControl]    Script Date: 10/05/2007 21:21:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteModuleControl]
+create procedure {databaseOwner}[{objectQualifier}DeleteModuleControl]
 
 @ModuleControlId int
 
 as
 
 delete
-from   dnn_ModuleControls
+from   {objectQualifier}ModuleControls
 where  ModuleControlId = @ModuleControlId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleControls]    Script Date: 10/05/2007 21:21:59 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleControls]    Script Date: 10/05/2007 21:21:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetModuleControls]
+create procedure {databaseOwner}[{objectQualifier}GetModuleControls]
 
 @ModuleDefId int
 
 as
 
 select *
-from   dnn_ModuleControls
+from   {objectQualifier}ModuleControls
 where  (ModuleDefId is null and @ModuleDefId is null) or (ModuleDefId = @ModuleDefId)
 order  by ControlKey, ViewOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleControlsByKey]    Script Date: 10/05/2007 21:21:59 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleControlsByKey]    Script Date: 10/05/2007 21:21:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetModuleControlsByKey]
+create procedure {databaseOwner}[{objectQualifier}GetModuleControlsByKey]
 
 @ControlKey        nvarchar(50),
 @ModuleDefId       int
 
 as
 
-select dnn_ModuleDefinitions.*,
+select {objectQualifier}ModuleDefinitions.*,
        ModuleControlID,
        ControlTitle,
        ControlSrc,
        IconFile,
        ControlType,
        HelpUrl
-from   dnn_ModuleControls
-left outer join dnn_ModuleDefinitions on dnn_ModuleControls.ModuleDefId = dnn_ModuleDefinitions.ModuleDefId
+from   {objectQualifier}ModuleControls
+left outer join {objectQualifier}ModuleDefinitions on {objectQualifier}ModuleControls.ModuleDefId = {objectQualifier}ModuleDefinitions.ModuleDefId
 where  ((ControlKey is null and @ControlKey is null) or (ControlKey = @ControlKey))
-and    ((dnn_ModuleControls.ModuleDefId is null and @ModuleDefId is null) or (dnn_ModuleControls.ModuleDefId = @ModuleDefId))
+and    (({objectQualifier}ModuleControls.ModuleDefId is null and @ModuleDefId is null) or ({objectQualifier}ModuleControls.ModuleDefId = @ModuleDefId))
 and    ControlType >= -1
 order by ViewOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddModuleControl]    Script Date: 10/05/2007 21:21:12 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddModuleControl]    Script Date: 10/05/2007 21:21:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  procedure [dbo].[dnn_AddModuleControl]
+CREATE  procedure {databaseOwner}[{objectQualifier}AddModuleControl]
     
 @ModuleDefID                   int,
 @ControlKey                    nvarchar(50),
@@ -2602,7 +2602,7 @@ CREATE  procedure [dbo].[dnn_AddModuleControl]
 
 as
 
-insert into dnn_ModuleControls (
+insert into {objectQualifier}ModuleControls (
   ModuleDefID,
   ControlKey,
   ControlTitle,
@@ -2625,12 +2625,12 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateModuleControl]    Script Date: 10/05/2007 21:22:47 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateModuleControl]    Script Date: 10/05/2007 21:22:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  procedure [dbo].[dnn_UpdateModuleControl]
+CREATE  procedure {databaseOwner}[{objectQualifier}UpdateModuleControl]
 
 @ModuleControlId               int,
 @ModuleDefID                   int,
@@ -2644,7 +2644,7 @@ CREATE  procedure [dbo].[dnn_UpdateModuleControl]
 
 as
 
-update dnn_ModuleControls
+update {objectQualifier}ModuleControls
 set    ModuleDefId       = @ModuleDefId,
        ControlKey        = @ControlKey,
        ControlTitle      = @ControlTitle,
@@ -2655,43 +2655,43 @@ set    ModuleDefId       = @ModuleDefId,
        HelpUrl           = @HelpUrl
 where  ModuleControlId = @ModuleControlId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteFolderPermissionsByFolderPath]    Script Date: 10/05/2007 21:21:33 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteFolderPermissionsByFolderPath]    Script Date: 10/05/2007 21:21:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteFolderPermissionsByFolderPath]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteFolderPermissionsByFolderPath]
 	@PortalID int,
 	@FolderPath varchar(300)
 AS
 DECLARE @FolderID int
-SELECT @FolderID = FolderID FROM dbo.dnn_Folders
+SELECT @FolderID = FolderID FROM {databaseOwner}{objectQualifier}Folders
 WHERE FolderPath = @FolderPath
 AND ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 
-DELETE FROM dbo.dnn_FolderPermission
+DELETE FROM {databaseOwner}{objectQualifier}FolderPermission
 WHERE
 	[FolderID] = @FolderID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteFolderPermission]    Script Date: 10/05/2007 21:21:33 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteFolderPermission]    Script Date: 10/05/2007 21:21:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteFolderPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteFolderPermission]
 	@FolderPermissionID int
 AS
 
-DELETE FROM dbo.dnn_FolderPermission
+DELETE FROM {databaseOwner}{objectQualifier}FolderPermission
 WHERE
 	[FolderPermissionID] = @FolderPermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateFolderPermission]    Script Date: 10/05/2007 21:22:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateFolderPermission]    Script Date: 10/05/2007 21:22:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateFolderPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateFolderPermission]
 	@FolderPermissionID int, 
 	@FolderID int, 
 	@PermissionID int, 
@@ -2699,7 +2699,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateFolderPermission]
 	@AllowAccess bit
 AS
 
-UPDATE dbo.dnn_FolderPermission SET
+UPDATE {databaseOwner}{objectQualifier}FolderPermission SET
 	[FolderID] = @FolderID,
 	[PermissionID] = @PermissionID,
 	[RoleID] = @RoleID,
@@ -2707,19 +2707,19 @@ UPDATE dbo.dnn_FolderPermission SET
 WHERE
 	[FolderPermissionID] = @FolderPermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddFolderPermission]    Script Date: 10/05/2007 21:21:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddFolderPermission]    Script Date: 10/05/2007 21:21:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddFolderPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddFolderPermission]
 	@FolderID int,
 	@PermissionID int,
 	@RoleID int,
 	@AllowAccess bit
 AS
 
-INSERT INTO dbo.dnn_FolderPermission (
+INSERT INTO {databaseOwner}{objectQualifier}FolderPermission (
 	[FolderID],
 	[PermissionID],
 	[RoleID],
@@ -2733,12 +2733,12 @@ INSERT INTO dbo.dnn_FolderPermission (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDefaultLanguageByModule]    Script Date: 10/05/2007 21:21:49 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDefaultLanguageByModule]    Script Date: 10/05/2007 21:21:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetDefaultLanguageByModule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetDefaultLanguageByModule]
 (
 	@ModuleList varchar(1000)
 )
@@ -2772,34 +2772,34 @@ BEGIN
 	END	
 
 SELECT DISTINCT m.ModuleID, p.DefaultLanguage
-FROM            dnn_Modules  m
-INNER JOIN      dnn_Portals p ON p.PortalID = m.PortalID
+FROM            {objectQualifier}Modules  m
+INNER JOIN      {objectQualifier}Portals p ON p.PortalID = m.PortalID
 WHERE		m.ModuleID in (SELECT ModuleID FROM @TempList)
 ORDER BY        m.ModuleID	
 		
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModule]    Script Date: 10/05/2007 21:21:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModule]    Script Date: 10/05/2007 21:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteModule]
+create procedure {databaseOwner}[{objectQualifier}DeleteModule]
 
 @ModuleId   int
 
 as
 
 delete
-from   dnn_Modules 
+from   {objectQualifier}Modules 
 where  ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddModule]    Script Date: 10/05/2007 21:21:11 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddModule]    Script Date: 10/05/2007 21:21:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddModule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddModule]
     
 	@PortalId                      int,
 	@ModuleDefId                   int,
@@ -2814,7 +2814,7 @@ CREATE PROCEDURE [dbo].[dnn_AddModule]
 
 AS
 
-INSERT INTO dnn_Modules ( 
+INSERT INTO {objectQualifier}Modules ( 
   PortalId,
   ModuleDefId,
   ModuleTitle,
@@ -2841,38 +2841,38 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeletePortalInfo]    Script Date: 10/05/2007 21:21:37 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeletePortalInfo]    Script Date: 10/05/2007 21:21:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeletePortalInfo]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeletePortalInfo]
 	@PortalId int
 
 AS
 
 /* Delete all the Portal Modules */
 DELETE
-FROM dnn_Modules
+FROM {objectQualifier}Modules
 WHERE PortalId = @PortalId
 
 /* Delete all the Portal Search Items */
-DELETE dnn_Modules
-FROM  dnn_Modules 
-	INNER JOIN dnn_SearchItem ON dnn_Modules.ModuleID = dnn_SearchItem.ModuleId
+DELETE {objectQualifier}Modules
+FROM  {objectQualifier}Modules 
+	INNER JOIN {objectQualifier}SearchItem ON {objectQualifier}Modules.ModuleID = {objectQualifier}SearchItem.ModuleId
 WHERE	PortalId = @PortalId
 
 /* Delete Portal */
 DELETE
-FROM dnn_Portals
+FROM {objectQualifier}Portals
 WHERE  PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPermissionsByModuleID]    Script Date: 10/05/2007 21:22:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPermissionsByModuleID]    Script Date: 10/05/2007 21:22:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPermissionsByModuleID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPermissionsByModuleID]
 	@ModuleID int
 AS
 
@@ -2883,17 +2883,17 @@ SELECT
 	P.[PermissionKey],
 	P.[PermissionName]
 FROM
-	dbo.dnn_Permission P
+	{databaseOwner}{objectQualifier}Permission P
 WHERE
-	P.ModuleDefID = (SELECT ModuleDefID FROM dbo.dnn_Modules WHERE ModuleID = @ModuleID)
+	P.ModuleDefID = (SELECT ModuleDefID FROM {databaseOwner}{objectQualifier}Modules WHERE ModuleID = @ModuleID)
 OR 	P.PermissionCode = 'SYSTEM_MODULE_DEFINITION'
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateModule]    Script Date: 10/05/2007 21:22:46 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateModule]    Script Date: 10/05/2007 21:22:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateModule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateModule]
 
 	@ModuleId               int,
 	@ModuleTitle            nvarchar(256),
@@ -2907,7 +2907,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateModule]
 
 AS
 
-UPDATE dnn_Modules
+UPDATE {objectQualifier}Modules
 SET    ModuleTitle = @ModuleTitle,
        AllTabs = @AllTabs,
        Header = @Header,
@@ -2918,12 +2918,12 @@ SET    ModuleTitle = @ModuleTitle,
        IsDeleted = @IsDeleted
 WHERE  ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_FindDatabaseVersion]    Script Date: 10/05/2007 21:21:45 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}FindDatabaseVersion]    Script Date: 10/05/2007 21:21:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_FindDatabaseVersion]
+create procedure {databaseOwner}[{objectQualifier}FindDatabaseVersion]
 
 @Major  int,
 @Minor  int,
@@ -2932,17 +2932,17 @@ create procedure [dbo].[dnn_FindDatabaseVersion]
 as
 
 select 1
-from   dnn_Version
+from   {objectQualifier}Version
 where  Major = @Major
 and    Minor = @Minor
 and    Build = @Build
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateDatabaseVersion]    Script Date: 10/05/2007 21:22:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateDatabaseVersion]    Script Date: 10/05/2007 21:22:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateDatabaseVersion]
+create procedure {databaseOwner}[{objectQualifier}UpdateDatabaseVersion]
 
 @Major  int,
 @Minor  int,
@@ -2950,7 +2950,7 @@ create procedure [dbo].[dnn_UpdateDatabaseVersion]
 
 as
 
-insert into dnn_Version (
+insert into {objectQualifier}Version (
   Major,
   Minor,
   Build,
@@ -2963,27 +2963,27 @@ values (
   getdate()
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDatabaseVersion]    Script Date: 10/05/2007 21:21:49 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDatabaseVersion]    Script Date: 10/05/2007 21:21:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetDatabaseVersion]
+create procedure {databaseOwner}[{objectQualifier}GetDatabaseVersion]
 
 as
 
 select Major,
        Minor,
        Build
-from   dnn_Version 
-where  VersionId = ( select max(VersionId) from dnn_Version )
+from   {objectQualifier}Version 
+where  VersionId = ( select max(VersionId) from {objectQualifier}Version )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetVendorClassifications]    Script Date: 10/05/2007 21:22:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetVendorClassifications]    Script Date: 10/05/2007 21:22:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetVendorClassifications]
+create procedure {databaseOwner}[{objectQualifier}GetVendorClassifications]
 
 @VendorId  int
 
@@ -2991,31 +2991,31 @@ as
 
 select ClassificationId,
        ClassificationName,
-       'IsAssociated' = case when exists ( select 1 from dnn_VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = dnn_Classification.ClassificationId ) then 1 else 0 end
-from dnn_Classification
+       'IsAssociated' = case when exists ( select 1 from {objectQualifier}VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = {objectQualifier}Classification.ClassificationId ) then 1 else 0 end
+from {objectQualifier}Classification
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteUsersOnline]    Script Date: 10/05/2007 21:21:44 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteUsersOnline]    Script Date: 10/05/2007 21:21:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteUsersOnline]
+create procedure {databaseOwner}[{objectQualifier}DeleteUsersOnline]
 
 	@TimeWindow	int
 	
 as
 	-- Clean up the anonymous users table
-	DELETE from dnn_AnonymousUsers WHERE LastActiveDate < DateAdd(minute, -@TimeWindow, GetDate())	
+	DELETE from {objectQualifier}AnonymousUsers WHERE LastActiveDate < DateAdd(minute, -@TimeWindow, GetDate())	
 
 	-- Clean up the users online table
-	DELETE from dnn_UsersOnline WHERE LastActiveDate < DateAdd(minute, -@TimeWindow, GetDate())
+	DELETE from {objectQualifier}UsersOnline WHERE LastActiveDate < DateAdd(minute, -@TimeWindow, GetDate())
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateOnlineUser]    Script Date: 10/05/2007 21:22:49 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateOnlineUser]    Script Date: 10/05/2007 21:22:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateOnlineUser]
+create procedure {databaseOwner}[{objectQualifier}UpdateOnlineUser]
 
 @UserID 	int,
 @PortalID 	int,
@@ -3024,9 +3024,9 @@ create procedure [dbo].[dnn_UpdateOnlineUser]
 
 as
 BEGIN
-	IF EXISTS (SELECT UserID FROM dnn_UsersOnline WHERE UserID = @UserID and PortalID = @PortalID)
+	IF EXISTS (SELECT UserID FROM {objectQualifier}UsersOnline WHERE UserID = @UserID and PortalID = @PortalID)
 		UPDATE 
-			dnn_UsersOnline
+			{objectQualifier}UsersOnline
 		SET 
 			TabID = @TabID,
 			LastActiveDate = @LastActiveDate
@@ -3036,36 +3036,36 @@ BEGIN
 			PortalID = @PortalID
 	ELSE
 		INSERT INTO
-			dnn_UsersOnline
+			{objectQualifier}UsersOnline
 			(UserID, PortalID, TabID, CreationDate, LastActiveDate) 
 		VALUES
 			(@UserId, @PortalID, @TabID, GetDate(), @LastActiveDate)
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetOnlineUser]    Script Date: 10/05/2007 21:22:02 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetOnlineUser]    Script Date: 10/05/2007 21:22:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetOnlineUser]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetOnlineUser]
 	@UserID int
 
 AS
 
 SELECT
-		dnn_UsersOnline.UserID,
-		dnn_Users.UserName
-	FROM   dnn_UsersOnline
-	INNER JOIN dnn_Users ON dnn_UsersOnline.UserID = dnn_Users.UserID
-	WHERE  dnn_UsersOnline.UserID = @UserID
+		{objectQualifier}UsersOnline.UserID,
+		{objectQualifier}Users.UserName
+	FROM   {objectQualifier}UsersOnline
+	INNER JOIN {objectQualifier}Users ON {objectQualifier}UsersOnline.UserID = {objectQualifier}Users.UserID
+	WHERE  {objectQualifier}UsersOnline.UserID = @UserID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSearchItem]    Script Date: 10/05/2007 21:21:20 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSearchItem]    Script Date: 10/05/2007 21:21:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddSearchItem]
+create procedure {databaseOwner}[{objectQualifier}AddSearchItem]
 
 	@Title nvarchar(200),
 	@Description nvarchar(2000),
@@ -3078,7 +3078,7 @@ create procedure [dbo].[dnn_AddSearchItem]
 
 as
 
-insert into dnn_SearchItem (
+insert into {objectQualifier}SearchItem (
 	Title,
 	Description,
 	Author,
@@ -3103,25 +3103,25 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchItem]    Script Date: 10/05/2007 21:21:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchItem]    Script Date: 10/05/2007 21:21:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteSearchItem]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteSearchItem]
 	@SearchItemID int
 AS
 
-DELETE FROM dbo.dnn_SearchItem
+DELETE FROM {databaseOwner}{objectQualifier}SearchItem
 WHERE
 	[SearchItemID] = @SearchItemID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItem]    Script Date: 10/05/2007 21:22:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItem]    Script Date: 10/05/2007 21:22:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSearchItem]
+create procedure {databaseOwner}[{objectQualifier}GetSearchItem]
 	@ModuleId int,
 	@SearchKey varchar(100) 
 AS
@@ -3138,17 +3138,17 @@ select
 	[HitCount],
 	ImageFileId
 from
-	dnn_SearchItem
+	{objectQualifier}SearchItem
 where
 	[ModuleID] = @ModuleID AND
 	[SearchKey] = @SearchKey
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSearchItem]    Script Date: 10/05/2007 21:22:58 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSearchItem]    Script Date: 10/05/2007 21:22:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateSearchItem]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateSearchItem]
 	@SearchItemID int, 
 	@Title nvarchar(200), 
 	@Description nvarchar(2000), 
@@ -3161,7 +3161,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateSearchItem]
 	@ImageFileId int
 AS
 
-UPDATE dnn_SearchItem 
+UPDATE {objectQualifier}SearchItem 
 SET	[Title] = @Title,
 	[Description] = @Description,
 	[Author] = @Author,
@@ -3173,12 +3173,12 @@ SET	[Title] = @Title,
 	ImageFileId = 	@ImageFileId
 WHERE   [SearchItemID] = @SearchItemID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_ListSearchItem]    Script Date: 10/05/2007 21:22:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}ListSearchItem]    Script Date: 10/05/2007 21:22:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_ListSearchItem]
+create procedure {databaseOwner}[{objectQualifier}ListSearchItem]
 
 AS
 
@@ -3194,56 +3194,56 @@ select
 	[HitCount],
 	ImageFileId
 from
-	dnn_SearchItem
+	{objectQualifier}SearchItem
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchItems]    Script Date: 10/05/2007 21:21:39 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchItems]    Script Date: 10/05/2007 21:21:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_DeleteSearchItems]
+CREATE procedure {databaseOwner}[{objectQualifier}DeleteSearchItems]
 (
 	@ModuleID int
 )
 AS
 
 DELETE
-FROM	dnn_SearchItem
+FROM	{objectQualifier}SearchItem
 WHERE	ModuleID = @ModuleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchIndexers]    Script Date: 10/05/2007 21:22:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchIndexers]    Script Date: 10/05/2007 21:22:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSearchIndexers]
+create procedure {databaseOwner}[{objectQualifier}GetSearchIndexers]
 
 as
 
-select dnn_SearchIndexer.*
-from dnn_SearchIndexer
+select {objectQualifier}SearchIndexer.*
+from {objectQualifier}SearchIndexer
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModuleDefinition]    Script Date: 10/05/2007 21:21:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModuleDefinition]    Script Date: 10/05/2007 21:21:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteModuleDefinition]
+create procedure {databaseOwner}[{objectQualifier}DeleteModuleDefinition]
 
 @ModuleDefId int
 
 as
 
 delete
-from dnn_ModuleDefinitions
+from {objectQualifier}ModuleDefinitions
 where  ModuleDefId = @ModuleDefId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddModuleDefinition]    Script Date: 10/05/2007 21:21:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddModuleDefinition]    Script Date: 10/05/2007 21:21:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_AddModuleDefinition]
+CREATE procedure {databaseOwner}[{objectQualifier}AddModuleDefinition]
 
 	@DesktopModuleId int,    
 	@FriendlyName    nvarchar(128),
@@ -3251,7 +3251,7 @@ CREATE procedure [dbo].[dnn_AddModuleDefinition]
 
 as
 
-insert into dnn_ModuleDefinitions (
+insert into {objectQualifier}ModuleDefinitions (
   DesktopModuleId,
   FriendlyName,
   DefaultCacheTime
@@ -3264,12 +3264,12 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateModuleDefinition]    Script Date: 10/05/2007 21:22:47 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateModuleDefinition]    Script Date: 10/05/2007 21:22:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdateModuleDefinition]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdateModuleDefinition]
 
 	@ModuleDefId int,    
 	@FriendlyName    nvarchar(128),
@@ -3277,17 +3277,17 @@ CREATE procedure [dbo].[dnn_UpdateModuleDefinition]
 
 as
 
-update dnn_ModuleDefinitions 
+update {objectQualifier}ModuleDefinitions 
 	SET FriendlyName = @FriendlyName,
 		DefaultCacheTime = @DefaultCacheTime
 	WHERE ModuleDefId = @ModuleDefId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleDefinitionByName]    Script Date: 10/05/2007 21:22:00 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleDefinitionByName]    Script Date: 10/05/2007 21:22:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetModuleDefinitionByName]
+create procedure {databaseOwner}[{objectQualifier}GetModuleDefinitionByName]
 
 @DesktopModuleId int,    
 @FriendlyName    nvarchar(128)
@@ -3295,46 +3295,46 @@ create procedure [dbo].[dnn_GetModuleDefinitionByName]
 as
 
 select *
-from   dnn_ModuleDefinitions
+from   {objectQualifier}ModuleDefinitions
 where  DesktopModuleId = @DesktopModuleId
 and    FriendlyName = @FriendlyName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleDefinition]    Script Date: 10/05/2007 21:21:59 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleDefinition]    Script Date: 10/05/2007 21:21:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetModuleDefinition]
+create procedure {databaseOwner}[{objectQualifier}GetModuleDefinition]
 
 @ModuleDefId int
 
 as
 
 select *
-from dnn_ModuleDefinitions
+from {objectQualifier}ModuleDefinitions
 where  ModuleDefId = @ModuleDefId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleDefinitions]    Script Date: 10/05/2007 21:22:00 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleDefinitions]    Script Date: 10/05/2007 21:22:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetModuleDefinitions]
+CREATE procedure {databaseOwner}[{objectQualifier}GetModuleDefinitions]
 
 @DesktopModuleId int
 
 as
 
 select *
-from   dbo.dnn_ModuleDefinitions
+from   {databaseOwner}{objectQualifier}ModuleDefinitions
 where  DesktopModuleId = @DesktopModuleId or @DesktopModuleId = -1
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateFile]    Script Date: 10/05/2007 21:22:42 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateFile]    Script Date: 10/05/2007 21:22:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateFile]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateFile]
 	@FileId      int,
 	@FileName    nvarchar(100),
 	@Extension   nvarchar(100),
@@ -3347,7 +3347,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateFile]
 
 AS
 
-UPDATE dnn_Files
+UPDATE {objectQualifier}Files
 SET    FileName = @FileName,
        Extension = @Extension,
        Size = @Size,
@@ -3358,12 +3358,12 @@ SET    FileName = @FileName,
        FolderID = @FolderID
 WHERE  FileId = @FileId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFileById]    Script Date: 10/05/2007 21:21:52 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFileById]    Script Date: 10/05/2007 21:21:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetFileById]
+create procedure {databaseOwner}[{objectQualifier}GetFileById]
 
 @FileId   int,
 @PortalId int
@@ -3371,93 +3371,93 @@ create procedure [dbo].[dnn_GetFileById]
 as
 
 select FileId,
-       dnn_Folders.PortalId,
+       {objectQualifier}Folders.PortalId,
        FileName,
        Extension,
        Size,
        Width,
        Height,
        ContentType,
-       dnn_Files.FolderID,
+       {objectQualifier}Files.FolderID,
        'Folder' = FolderPath,
        StorageLocation,
        IsCached
-from   dnn_Files
-inner join dnn_Folders on dnn_Files.FolderID = dnn_Folders.FolderID
+from   {objectQualifier}Files
+inner join {objectQualifier}Folders on {objectQualifier}Files.FolderID = {objectQualifier}Folders.FolderID
 where  FileId = @FileId
-and    ((dnn_Folders.PortalId = @PortalId) or (@PortalId is null and dnn_Folders.PortalId is null))
+and    (({objectQualifier}Folders.PortalId = @PortalId) or (@PortalId is null and {objectQualifier}Folders.PortalId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleSettings]    Script Date: 10/05/2007 21:22:02 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleSettings]    Script Date: 10/05/2007 21:22:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModuleSettings]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModuleSettings]
 
 @ModuleId int
 
 AS
 SELECT 
 	SettingName,
-	CASE WHEN LEFT(LOWER(dnn_ModuleSettings.SettingValue), 6) = 'fileid' 
+	CASE WHEN LEFT(LOWER({objectQualifier}ModuleSettings.SettingValue), 6) = 'fileid' 
 		THEN
 			(SELECT Folder + FileName  
-				FROM dnn_Files 
-				WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = dnn_ModuleSettings.SettingValue
+				FROM {objectQualifier}Files 
+				WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = {objectQualifier}ModuleSettings.SettingValue
 			) 
 		ELSE 
-			dnn_ModuleSettings.SettingValue  
+			{objectQualifier}ModuleSettings.SettingValue  
 		END 
 	AS SettingValue
-FROM dnn_ModuleSettings 
+FROM {objectQualifier}ModuleSettings 
 WHERE  ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetVendor]    Script Date: 10/05/2007 21:22:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetVendor]    Script Date: 10/05/2007 21:22:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetVendor]
+CREATE procedure {databaseOwner}[{objectQualifier}GetVendor]
 
 @VendorId int,
 @PortalId int
 
 as
 
-select dnn_Vendors.VendorName, 
-       dnn_Vendors.Unit, 
-       dnn_Vendors.Street, 
-       dnn_Vendors.City, 
-       dnn_Vendors.Region, 
-       dnn_Vendors.Country, 
-       dnn_Vendors.PostalCode, 
-       dnn_Vendors.Telephone,
-       dnn_Vendors.Fax,
-       dnn_Vendors.Cell,
-       dnn_Vendors.Email,
-       dnn_Vendors.Website,
-       dnn_Vendors.FirstName,
-       dnn_Vendors.LastName,
-       dnn_Vendors.ClickThroughs,
-       dnn_Vendors.Views,
-       'CreatedByUser' = dnn_Users.FirstName + ' ' + dnn_Users.LastName,
-       dnn_Vendors.CreatedDate,
-      'LogoFile' = case when dnn_Files.FileName is null then dnn_Vendors.LogoFile else dnn_Files.Folder + dnn_Files.FileName end,
-       dnn_Vendors.KeyWords,
-       dnn_Vendors.Authorized,
-       dnn_Vendors.PortalId
-from dnn_Vendors
-left outer join dnn_Users on dnn_Vendors.CreatedByUser = dnn_Users.UserId
-left outer join dnn_Files on dnn_Vendors.LogoFile = 'fileid=' + convert(varchar,dnn_Files.FileID)
+select {objectQualifier}Vendors.VendorName, 
+       {objectQualifier}Vendors.Unit, 
+       {objectQualifier}Vendors.Street, 
+       {objectQualifier}Vendors.City, 
+       {objectQualifier}Vendors.Region, 
+       {objectQualifier}Vendors.Country, 
+       {objectQualifier}Vendors.PostalCode, 
+       {objectQualifier}Vendors.Telephone,
+       {objectQualifier}Vendors.Fax,
+       {objectQualifier}Vendors.Cell,
+       {objectQualifier}Vendors.Email,
+       {objectQualifier}Vendors.Website,
+       {objectQualifier}Vendors.FirstName,
+       {objectQualifier}Vendors.LastName,
+       {objectQualifier}Vendors.ClickThroughs,
+       {objectQualifier}Vendors.Views,
+       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+       {objectQualifier}Vendors.CreatedDate,
+      'LogoFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Vendors.LogoFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
+       {objectQualifier}Vendors.KeyWords,
+       {objectQualifier}Vendors.Authorized,
+       {objectQualifier}Vendors.PortalId
+from {objectQualifier}Vendors
+left outer join {objectQualifier}Users on {objectQualifier}Vendors.CreatedByUser = {objectQualifier}Users.UserId
+left outer join {objectQualifier}Files on {objectQualifier}Vendors.LogoFile = 'fileid=' + convert(varchar,{objectQualifier}Files.FileID)
 where  VendorId = @VendorId
-and    ((dnn_Vendors.PortalId = @PortalId) or (dnn_Vendors.PortalId is null and @PortalId is null))
+and    (({objectQualifier}Vendors.PortalId = @PortalId) or ({objectQualifier}Vendors.PortalId is null and @PortalId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddFile]    Script Date: 10/05/2007 21:21:08 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddFile]    Script Date: 10/05/2007 21:21:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddFile]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddFile]
 
 	@PortalId    int,
 	@FileName    nvarchar(100),
@@ -3472,11 +3472,11 @@ AS
 
 DECLARE @FileID int
 
-SELECT @FileId = FileID FROM dnn_Files WHERE FolderID = @FolderID AND FileName = @FileName
+SELECT @FileId = FileID FROM {objectQualifier}Files WHERE FolderID = @FolderID AND FileName = @FileName
 
 IF @FileID IS Null
     BEGIN
-      INSERT INTO dnn_Files (
+      INSERT INTO {objectQualifier}Files (
         PortalId,
         FileName,
         Extension,
@@ -3503,7 +3503,7 @@ IF @FileID IS Null
     END
 ELSE
     BEGIN
-      UPDATE dnn_Files
+      UPDATE {objectQualifier}Files
       SET    FileName = @FileName,
              Extension = @Extension,
              Size = @Size,
@@ -3517,12 +3517,12 @@ ELSE
 
 SELECT @FileID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetBanner]    Script Date: 10/05/2007 21:21:48 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetBanner]    Script Date: 10/05/2007 21:21:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetBanner]
+CREATE procedure {databaseOwner}[{objectQualifier}GetBanner]
 
 @BannerId int,
 @VendorId int,
@@ -3530,95 +3530,95 @@ CREATE procedure [dbo].[dnn_GetBanner]
 
 as
 
-select dnn_Banners.BannerId,
-       dnn_Banners.VendorId,
-       'ImageFile' = case when dnn_Files.FileName is null then dnn_Banners.ImageFile else dnn_Files.Folder + dnn_Files.FileName end,
-       dnn_Banners.BannerName,
-       dnn_Banners.Impressions,
-       dnn_Banners.CPM,
-       dnn_Banners.Views,
-       dnn_Banners.ClickThroughs,
-       dnn_Banners.StartDate,
-       dnn_Banners.EndDate,
-       'CreatedByUser' = dnn_Users.FirstName + ' ' + dnn_Users.LastName,
-       dnn_Banners.CreatedDate,
-       dnn_Banners.BannerTypeId,
-       dnn_Banners.Description,
-       dnn_Banners.GroupName,
-       dnn_Banners.Criteria,
-       dnn_Banners.URL,        
-       dnn_Banners.Width,
-       dnn_Banners.Height
-FROM   dnn_Banners 
-INNER JOIN dnn_Vendors ON dnn_Banners.VendorId = dnn_Vendors.VendorId 
-LEFT OUTER JOIN dnn_Users ON dnn_Banners.CreatedByUser = dnn_Users.UserID
-left outer join dnn_Files on dnn_Banners.ImageFile = 'FileId=' + convert(varchar,dnn_Files.FileID)
-where  dnn_Banners.BannerId = @BannerId
-and   dnn_Banners.vendorId = @VendorId
-AND (dnn_Vendors.PortalId = @PortalID or (dnn_Vendors.PortalId is null and @portalid is null))
+select {objectQualifier}Banners.BannerId,
+       {objectQualifier}Banners.VendorId,
+       'ImageFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Banners.ImageFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
+       {objectQualifier}Banners.BannerName,
+       {objectQualifier}Banners.Impressions,
+       {objectQualifier}Banners.CPM,
+       {objectQualifier}Banners.Views,
+       {objectQualifier}Banners.ClickThroughs,
+       {objectQualifier}Banners.StartDate,
+       {objectQualifier}Banners.EndDate,
+       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+       {objectQualifier}Banners.CreatedDate,
+       {objectQualifier}Banners.BannerTypeId,
+       {objectQualifier}Banners.Description,
+       {objectQualifier}Banners.GroupName,
+       {objectQualifier}Banners.Criteria,
+       {objectQualifier}Banners.URL,        
+       {objectQualifier}Banners.Width,
+       {objectQualifier}Banners.Height
+FROM   {objectQualifier}Banners 
+INNER JOIN {objectQualifier}Vendors ON {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId 
+LEFT OUTER JOIN {objectQualifier}Users ON {objectQualifier}Banners.CreatedByUser = {objectQualifier}Users.UserID
+left outer join {objectQualifier}Files on {objectQualifier}Banners.ImageFile = 'FileId=' + convert(varchar,{objectQualifier}Files.FileID)
+where  {objectQualifier}Banners.BannerId = @BannerId
+and   {objectQualifier}Banners.vendorId = @VendorId
+AND ({objectQualifier}Vendors.PortalId = @PortalID or ({objectQualifier}Vendors.PortalId is null and @portalid is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateFileContent]    Script Date: 10/05/2007 21:22:42 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateFileContent]    Script Date: 10/05/2007 21:22:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdateFileContent]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdateFileContent]
 
 @FileId      int,
 @Content     image
 
 as
 
-update dnn_Files
+update {objectQualifier}Files
 set    Content = @Content
 where  FileId = @FileId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteFiles]    Script Date: 10/05/2007 21:21:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteFiles]    Script Date: 10/05/2007 21:21:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteFiles]
+create procedure {databaseOwner}[{objectQualifier}DeleteFiles]
 
 @PortalId int
 
 as
 
 delete 
-from   dnn_Files
+from   {objectQualifier}Files
 where  ((PortalId = @PortalId) or (@PortalId is null and PortalId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleSetting]    Script Date: 10/05/2007 21:22:01 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleSetting]    Script Date: 10/05/2007 21:22:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModuleSetting]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModuleSetting]
 
 @ModuleId      int,
 @SettingName   nvarchar(50)
 
 AS
 SELECT 
-	CASE WHEN LEFT(LOWER(dnn_ModuleSettings.SettingValue), 6) = 'fileid' 
+	CASE WHEN LEFT(LOWER({objectQualifier}ModuleSettings.SettingValue), 6) = 'fileid' 
 		THEN
 			(SELECT Folder + FileName  
-				FROM dnn_Files 
-				WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = dnn_ModuleSettings.SettingValue
+				FROM {objectQualifier}Files 
+				WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = {objectQualifier}ModuleSettings.SettingValue
 			) 
 		ELSE 
-			dnn_ModuleSettings.SettingValue  
+			{objectQualifier}ModuleSettings.SettingValue  
 		END 
 	AS SettingValue
-FROM dnn_ModuleSettings 
+FROM {objectQualifier}ModuleSettings 
 WHERE  ModuleId = @ModuleId AND SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteFile]    Script Date: 10/05/2007 21:21:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteFile]    Script Date: 10/05/2007 21:21:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteFile]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteFile]
 	@PortalId int,
 	@FileName nvarchar(100),
 	@FolderID int
@@ -3626,17 +3626,17 @@ CREATE PROCEDURE [dbo].[dnn_DeleteFile]
 AS
 
 DELETE 
-FROM   dnn_Files
+FROM   {objectQualifier}Files
 WHERE  FileName = @FileName
 AND    FolderID = @FolderID
 AND    ((PortalId = @PortalId) OR (@PortalId IS Null AND PortalId IS Null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFileContent]    Script Date: 10/05/2007 21:21:53 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFileContent]    Script Date: 10/05/2007 21:21:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetFileContent]
+CREATE procedure {databaseOwner}[{objectQualifier}GetFileContent]
 
 @FileId   int,
 @PortalId int
@@ -3644,16 +3644,16 @@ CREATE procedure [dbo].[dnn_GetFileContent]
 as
 
 select Content
-from   dnn_Files
+from   {objectQualifier}Files
 where  FileId = @FileId
-and    ((dnn_Files.PortalId = @PortalId) or (@PortalId is null and dnn_Files.PortalId is null))
+and    (({objectQualifier}Files.PortalId = @PortalId) or (@PortalId is null and {objectQualifier}Files.PortalId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFiles]    Script Date: 10/05/2007 21:21:53 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFiles]    Script Date: 10/05/2007 21:21:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFiles]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFiles]
 
 @PortalId   int,
 @FolderID   int
@@ -3674,21 +3674,21 @@ SELECT
              StorageLocation,
              IsCached
 FROM 
-	dnn_Files F
+	{objectQualifier}Files F
 INNER JOIN 
-	dnn_Folders FO on F.FolderID = FO.FolderID
+	{objectQualifier}Folders FO on F.FolderID = FO.FolderID
 WHERE   
 	F.FolderID = @FolderID
 AND     
 	((FO.PortalId = @PortalId) or (@PortalId is NULL AND FO.PortalId is NULL))
 ORDER BY FileName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFile]    Script Date: 10/05/2007 21:21:52 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFile]    Script Date: 10/05/2007 21:21:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetFile]
+CREATE procedure {databaseOwner}[{objectQualifier}GetFile]
 
 @FileName  nvarchar(100),
 @PortalId  int,
@@ -3697,29 +3697,29 @@ CREATE procedure [dbo].[dnn_GetFile]
 as
 
 select FileId,
-       dnn_Folders.PortalId,
+       {objectQualifier}Folders.PortalId,
        FileName,
        Extension,
        Size,
        Width,
        Height,
        ContentType,
-       dnn_Files.FolderID,
+       {objectQualifier}Files.FolderID,
        'Folder' = FolderPath,
        StorageLocation,
        IsCached
-from dnn_Files
-inner join dnn_Folders on dnn_Files.FolderID = dnn_Folders.FolderID
+from {objectQualifier}Files
+inner join {objectQualifier}Folders on {objectQualifier}Files.FolderID = {objectQualifier}Folders.FolderID
 where  FileName = @FileName 
-and    dnn_Files.FolderID = @FolderID
-and    ((dnn_Folders.PortalId = @PortalId) or (@PortalId is null and dnn_Folders.PortalId is null))
+and    {objectQualifier}Files.FolderID = @FolderID
+and    (({objectQualifier}Folders.PortalId = @PortalId) or (@PortalId is null and {objectQualifier}Folders.PortalId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_FindBanners]    Script Date: 10/05/2007 21:21:45 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}FindBanners]    Script Date: 10/05/2007 21:21:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_FindBanners]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FindBanners]
 	@PortalId     int,
 	@BannerTypeId int,
 	@GroupName    nvarchar(100)
@@ -3732,8 +3732,8 @@ SELECT  B.BannerId,
 		CASE WHEN LEFT(LOWER(ImageFile), 6) = 'fileid' 
 			THEN
 				(SELECT Folder + FileName  
-					FROM dnn_Files 
-					WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = ImageFile
+					FROM {objectQualifier}Files 
+					WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = ImageFile
 				) 
 			ELSE 
 				ImageFile  
@@ -3751,8 +3751,8 @@ SELECT  B.BannerId,
         Criteria,
         B.Width,
         B.Height
-FROM    dnn_Banners B
-INNER JOIN dnn_Vendors V ON B.VendorId = V.VendorId
+FROM    {objectQualifier}Banners B
+INNER JOIN {objectQualifier}Vendors V ON B.VendorId = V.VendorId
 WHERE   (B.BannerTypeId = @BannerTypeId or @BannerTypeId is null)
 AND     (B.GroupName = @GroupName or @GroupName is null)
 AND     ((V.PortalId = @PortalId) or (@PortalId is null and V.PortalId is null))
@@ -3760,12 +3760,12 @@ AND     V.Authorized = 1
 AND     (getdate() <= B.EndDate or B.EndDate is null)
 ORDER BY BannerId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAllFiles]    Script Date: 10/05/2007 21:21:46 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAllFiles]    Script Date: 10/05/2007 21:21:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetAllFiles]
+CREATE procedure {databaseOwner}[{objectQualifier}GetAllFiles]
 
 AS
 
@@ -3783,45 +3783,45 @@ SELECT
 	     StorageLocation,
              IsCached
 FROM 
-	dnn_Files F
+	{objectQualifier}Files F
 
 INNER JOIN 
-	dnn_Folders FO on F.FolderID = FO.FolderID
+	{objectQualifier}Folders FO on F.FolderID = FO.FolderID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalSpaceUsed]    Script Date: 10/05/2007 21:22:07 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalSpaceUsed]    Script Date: 10/05/2007 21:22:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortalSpaceUsed]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalSpaceUsed]
 	@PortalId int
 AS
 
 SELECT 'SpaceUsed' = SUM(CAST(Size as bigint))
-FROM   dnn_Files
+FROM   {objectQualifier}Files
 WHERE  ((PortalId = @PortalId) OR (@PortalId is null and PortalId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeletePropertyDefinition]    Script Date: 10/05/2007 21:21:37 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeletePropertyDefinition]    Script Date: 10/05/2007 21:21:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeletePropertyDefinition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeletePropertyDefinition]
 
 	@PropertyDefinitionId int
 
 AS
 
-UPDATE dbo.dnn_ProfilePropertyDefinition 
+UPDATE {databaseOwner}{objectQualifier}ProfilePropertyDefinition 
 	SET Deleted = 1
 	WHERE  PropertyDefinitionId = @PropertyDefinitionId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddPropertyDefinition]    Script Date: 10/05/2007 21:21:16 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddPropertyDefinition]    Script Date: 10/05/2007 21:21:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddPropertyDefinition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddPropertyDefinition]
 	@PortalId int,
 	@ModuleDefId int,
 	@DataType int,
@@ -3838,13 +3838,13 @@ AS
 DECLARE @PropertyDefinitionId int
 
 SELECT @PropertyDefinitionId = PropertyDefinitionId
-	FROM   dnn_ProfilePropertyDefinition
+	FROM   {objectQualifier}ProfilePropertyDefinition
 	WHERE  (PortalId = @PortalId OR (PortalId IS NULL AND @PortalId IS NULL))
 		AND PropertyName = @PropertyName
 
 IF @PropertyDefinitionId is null
 	BEGIN
-		INSERT dnn_ProfilePropertyDefinition	(
+		INSERT {objectQualifier}ProfilePropertyDefinition	(
 				PortalId,
 				ModuleDefId,
 				Deleted,
@@ -3877,7 +3877,7 @@ IF @PropertyDefinitionId is null
 	END
 ELSE
 	BEGIN
-		UPDATE dnn_ProfilePropertyDefinition 
+		UPDATE {objectQualifier}ProfilePropertyDefinition 
 			SET DataType = @DataType,
 				ModuleDefId = @ModuleDefId,
 				DefaultValue = @DefaultValue,
@@ -3893,44 +3893,44 @@ ELSE
 	
 SELECT @PropertyDefinitionId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPropertyDefinitionsByPortal]    Script Date: 10/05/2007 21:22:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPropertyDefinitionsByPortal]    Script Date: 10/05/2007 21:22:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPropertyDefinitionsByPortal]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPropertyDefinitionsByPortal]
 
 	@PortalID	int
 
 AS
-SELECT	dbo.dnn_ProfilePropertyDefinition.*
-	FROM	dbo.dnn_ProfilePropertyDefinition
+SELECT	{databaseOwner}{objectQualifier}ProfilePropertyDefinition.*
+	FROM	{databaseOwner}{objectQualifier}ProfilePropertyDefinition
 	WHERE  (PortalId = @PortalId OR (PortalId IS NULL AND @PortalId IS NULL))
 		AND Deleted = 0
 	ORDER BY ViewOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPropertyDefinitionByName]    Script Date: 10/05/2007 21:22:08 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPropertyDefinitionByName]    Script Date: 10/05/2007 21:22:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPropertyDefinitionByName]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPropertyDefinitionByName]
 	@PortalID	int,
 	@Name		nvarchar(50)
 
 AS
 SELECT	*
-	FROM	dnn_ProfilePropertyDefinition
+	FROM	{objectQualifier}ProfilePropertyDefinition
 	WHERE  (PortalId = @PortalId OR (PortalId IS NULL AND @PortalId IS NULL))
 		AND PropertyName = @Name
 	ORDER BY ViewOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdatePropertyDefinition]    Script Date: 10/05/2007 21:22:54 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdatePropertyDefinition]    Script Date: 10/05/2007 21:22:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdatePropertyDefinition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdatePropertyDefinition]
 	@PropertyDefinitionId int,
 	@DataType int,
 	@DefaultValue nvarchar(50),
@@ -3944,7 +3944,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdatePropertyDefinition]
 
 as
 
-UPDATE dbo.dnn_ProfilePropertyDefinition 
+UPDATE {databaseOwner}{objectQualifier}ProfilePropertyDefinition 
 	SET DataType = @DataType,
 		DefaultValue = @DefaultValue,
 		PropertyCategory = @PropertyCategory,
@@ -3956,43 +3956,43 @@ UPDATE dbo.dnn_ProfilePropertyDefinition
         Length = @Length
 	WHERE PropertyDefinitionId = @PropertyDefinitionId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPropertyDefinitionsByCategory]    Script Date: 10/05/2007 21:22:08 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPropertyDefinitionsByCategory]    Script Date: 10/05/2007 21:22:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPropertyDefinitionsByCategory]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPropertyDefinitionsByCategory]
 	@PortalID	int,
 	@Category	nvarchar(50)
 
 AS
 SELECT	*
-	FROM	dnn_ProfilePropertyDefinition
+	FROM	{objectQualifier}ProfilePropertyDefinition
 	WHERE  (PortalId = @PortalId OR (PortalId IS NULL AND @PortalId IS NULL))
 		AND PropertyCategory = @Category
 	ORDER BY ViewOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPropertyDefinition]    Script Date: 10/05/2007 21:22:08 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPropertyDefinition]    Script Date: 10/05/2007 21:22:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPropertyDefinition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPropertyDefinition]
 
 	@PropertyDefinitionID	int
 
 AS
-SELECT	dbo.dnn_ProfilePropertyDefinition.*
-FROM	dbo.dnn_ProfilePropertyDefinition
+SELECT	{databaseOwner}{objectQualifier}ProfilePropertyDefinition.*
+FROM	{databaseOwner}{objectQualifier}ProfilePropertyDefinition
 WHERE PropertyDefinitionID = @PropertyDefinitionID
 	AND Deleted = 0
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateAnonymousUser]    Script Date: 10/05/2007 21:22:36 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateAnonymousUser]    Script Date: 10/05/2007 21:22:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateAnonymousUser]
+create procedure {databaseOwner}[{objectQualifier}UpdateAnonymousUser]
 
 @UserID 	char(36),
 @PortalID 	int,
@@ -4001,9 +4001,9 @@ create procedure [dbo].[dnn_UpdateAnonymousUser]
 
 as
 BEGIN
-	IF EXISTS (SELECT UserID FROM dnn_AnonymousUsers WHERE UserID = @UserID and PortalID = @PortalID)
+	IF EXISTS (SELECT UserID FROM {objectQualifier}AnonymousUsers WHERE UserID = @UserID and PortalID = @PortalID)
 		UPDATE 
-			dnn_AnonymousUsers
+			{objectQualifier}AnonymousUsers
 		SET 
 			TabID = @TabID,
 			LastActiveDate = @LastActiveDate
@@ -4013,19 +4013,19 @@ BEGIN
 			PortalID = @PortalID
 	ELSE
 		INSERT INTO
-			dnn_AnonymousUsers
+			{objectQualifier}AnonymousUsers
 			(UserID, PortalID, TabID, CreationDate, LastActiveDate) 
 		VALUES
 			(@UserId, @PortalID, @TabID, GetDate(), @LastActiveDate)
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetEventLogPendingNotifConfig]    Script Date: 10/05/2007 21:21:51 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetEventLogPendingNotifConfig]    Script Date: 10/05/2007 21:21:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetEventLogPendingNotifConfig]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetEventLogPendingNotifConfig]
 AS
 
 SELECT 	COUNT(*) as PendingNotifs,
@@ -4040,10 +4040,10 @@ SELECT 	COUNT(*) as PendingNotifs,
 	elc.NotificationThresholdTimeType,
 	elc.MailToAddress, 
 	elc.MailFromAddress
-FROM dbo.dnn_EventLogConfig elc
-INNER JOIN dbo.dnn_EventLog
-ON dbo.dnn_EventLog.LogConfigID = elc.ID
-WHERE dbo.dnn_EventLog.LogNotificationPending = 1
+FROM {databaseOwner}{objectQualifier}EventLogConfig elc
+INNER JOIN {databaseOwner}{objectQualifier}EventLog
+ON {databaseOwner}{objectQualifier}EventLog.LogConfigID = elc.ID
+WHERE {databaseOwner}{objectQualifier}EventLog.LogNotificationPending = 1
 GROUP BY elc.ID,
 	elc.LogTypeKey, 
 	elc.LogTypePortalID, 
@@ -4056,12 +4056,12 @@ GROUP BY elc.ID,
 	elc.MailToAddress, 
 	elc.MailFromAddress
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddEventLog]    Script Date: 10/05/2007 21:21:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddEventLog]    Script Date: 10/05/2007 21:21:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddEventLog]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddEventLog]
 	@LogGUID varchar(36),
 	@LogTypeKey nvarchar(35),
 	@LogUserID int,
@@ -4073,7 +4073,7 @@ CREATE PROCEDURE [dbo].[dnn_AddEventLog]
 	@LogProperties ntext,
 	@LogConfigID int
 AS
-INSERT INTO dbo.dnn_EventLog
+INSERT INTO {databaseOwner}{objectQualifier}EventLog
 	(LogGUID,
 	LogTypeKey,
 	LogUserID,
@@ -4122,16 +4122,16 @@ SELECT TOP 1 @NotificationActive = EmailNotificationIsActive,
 			--days
 			WHEN NotificationThresholdTimeType=4  THEN DateAdd(Day, NotificationThresholdTime * -1, @CurrentDateTime)
 		END
-FROM dbo.dnn_EventLogConfig
+FROM {databaseOwner}{objectQualifier}EventLogConfig
 WHERE ID = @LogConfigID
 
 IF @NotificationActive=1
 BEGIN
 	
 	SELECT @ThresholdQueue = COUNT(*)
-	FROM dbo.dnn_EventLog
-	INNER JOIN dbo.dnn_EventLogConfig
-	ON dbo.dnn_EventLog.LogConfigID = dbo.dnn_EventLogConfig.ID
+	FROM {databaseOwner}{objectQualifier}EventLog
+	INNER JOIN {databaseOwner}{objectQualifier}EventLogConfig
+	ON {databaseOwner}{objectQualifier}EventLog.LogConfigID = {databaseOwner}{objectQualifier}EventLogConfig.ID
 	WHERE LogCreateDate > @MinDateTime
 
 	PRINT 'MinDateTime=' + convert(varchar(20), @MinDateTime)
@@ -4140,7 +4140,7 @@ BEGIN
 
 	IF @ThresholdQueue > @NotificationThreshold
 	BEGIN
-		UPDATE dbo.dnn_EventLog
+		UPDATE {databaseOwner}{objectQualifier}EventLog
 		SET LogNotificationPending = 1 
 		WHERE LogConfigID = @LogConfigID
 		AND LogNotificationPending IS NULL		
@@ -4148,87 +4148,87 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetEventLogPendingNotif]    Script Date: 10/05/2007 21:21:51 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetEventLogPendingNotif]    Script Date: 10/05/2007 21:21:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetEventLogPendingNotif]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetEventLogPendingNotif]
 	@LogConfigID int
 AS
 SELECT *
-FROM dbo.dnn_EventLog
+FROM {databaseOwner}{objectQualifier}EventLog
 WHERE LogNotificationPending = 1
 AND LogConfigID = @LogConfigID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateEventLogPendingNotif]    Script Date: 10/05/2007 21:22:40 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateEventLogPendingNotif]    Script Date: 10/05/2007 21:22:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateEventLogPendingNotif]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateEventLogPendingNotif]
 	@LogConfigID int
 AS
-UPDATE dbo.dnn_EventLog
+UPDATE {databaseOwner}{objectQualifier}EventLog
 SET LogNotificationPending = 0
 WHERE LogNotificationPending = 1
 AND LogConfigID = @LogConfigID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetEventLogByLogGUID]    Script Date: 10/05/2007 21:21:51 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetEventLogByLogGUID]    Script Date: 10/05/2007 21:21:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetEventLogByLogGUID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetEventLogByLogGUID]
 	@LogGUID varchar(36)
 AS
 SELECT *
-FROM dbo.dnn_EventLog
+FROM {databaseOwner}{objectQualifier}EventLog
 WHERE (LogGUID = @LogGUID)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_PurgeEventLog]    Script Date: 10/05/2007 21:22:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}PurgeEventLog]    Script Date: 10/05/2007 21:22:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_PurgeEventLog]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}PurgeEventLog]
 AS
-DELETE FROM dbo.dnn_EventLog
-FROM dbo.dnn_EventLogConfig elc
+DELETE FROM {databaseOwner}{objectQualifier}EventLog
+FROM {databaseOwner}{objectQualifier}EventLogConfig elc
 WHERE 
     (
     SELECT COUNT(*)
-    FROM dbo.dnn_EventLog el
+    FROM {databaseOwner}{objectQualifier}EventLog el
     WHERE el.LogConfigID = elc.ID
-	and dbo.dnn_EventLog.LogTypeKey = el.LogTypeKey
-	and el.LogCreateDate >= dbo.dnn_EventLog.LogCreateDate
+	and {databaseOwner}{objectQualifier}EventLog.LogTypeKey = el.LogTypeKey
+	and el.LogCreateDate >= {databaseOwner}{objectQualifier}EventLog.LogCreateDate
     ) > elc.KeepMostRecent
 AND elc.KeepMostRecent<>-1
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteEventLog]    Script Date: 10/05/2007 21:21:31 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteEventLog]    Script Date: 10/05/2007 21:21:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteEventLog]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteEventLog]
 	@LogGUID varchar(36)
 AS
-DELETE FROM dbo.dnn_EventLog
+DELETE FROM {databaseOwner}{objectQualifier}EventLog
 WHERE LogGUID = @LogGUID or @LogGUID IS NULL
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddPortalDesktopModule]    Script Date: 10/05/2007 21:21:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddPortalDesktopModule]    Script Date: 10/05/2007 21:21:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddPortalDesktopModule]
+create procedure {databaseOwner}[{objectQualifier}AddPortalDesktopModule]
 
 @PortalId int,
 @DesktopModuleId int
 
 as
 
-insert into dnn_PortalDesktopModules ( 
+insert into {objectQualifier}PortalDesktopModules ( 
   PortalId,
   DesktopModuleId
 )
@@ -4239,40 +4239,40 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDesktopModulesByPortal]    Script Date: 10/05/2007 21:21:50 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDesktopModulesByPortal]    Script Date: 10/05/2007 21:21:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetDesktopModulesByPortal]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetDesktopModulesByPortal]
 
 	@PortalId int
 
 AS
 
-SELECT distinct(dnn_DesktopModules.DesktopModuleId) AS DesktopModuleId,
-       dnn_DesktopModules.FriendlyName,
-       dnn_DesktopModules.Description,
-       dnn_DesktopModules.Version,
-       dnn_DesktopModules.ispremium,
-       dnn_DesktopModules.isadmin,
-       dnn_DesktopModules.businesscontrollerclass,
-       dnn_DesktopModules.foldername,
-       dnn_DesktopModules.modulename,
-       dnn_DesktopModules.supportedfeatures,
-       dnn_DesktopModules.compatibleversions
-FROM dnn_DesktopModules
-LEFT OUTER JOIN dnn_PortalDesktopModules on dnn_DesktopModules.DesktopModuleId = dnn_PortalDesktopModules.DesktopModuleId
+SELECT distinct({objectQualifier}DesktopModules.DesktopModuleId) AS DesktopModuleId,
+       {objectQualifier}DesktopModules.FriendlyName,
+       {objectQualifier}DesktopModules.Description,
+       {objectQualifier}DesktopModules.Version,
+       {objectQualifier}DesktopModules.ispremium,
+       {objectQualifier}DesktopModules.isadmin,
+       {objectQualifier}DesktopModules.businesscontrollerclass,
+       {objectQualifier}DesktopModules.foldername,
+       {objectQualifier}DesktopModules.modulename,
+       {objectQualifier}DesktopModules.supportedfeatures,
+       {objectQualifier}DesktopModules.compatibleversions
+FROM {objectQualifier}DesktopModules
+LEFT OUTER JOIN {objectQualifier}PortalDesktopModules on {objectQualifier}DesktopModules.DesktopModuleId = {objectQualifier}PortalDesktopModules.DesktopModuleId
 WHERE  IsAdmin = 0
 AND    ( IsPremium = 0 OR (PortalId = @PortalId AND PortalDesktopModuleId IS NOT Null)) 
 ORDER BY FriendlyName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeletePortalDesktopModules]    Script Date: 10/05/2007 21:21:37 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeletePortalDesktopModules]    Script Date: 10/05/2007 21:21:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeletePortalDesktopModules]
+create procedure {databaseOwner}[{objectQualifier}DeletePortalDesktopModules]
 
 @PortalId        int,
 @DesktopModuleId int
@@ -4280,38 +4280,38 @@ create procedure [dbo].[dnn_DeletePortalDesktopModules]
 as
 
 delete
-from   dnn_PortalDesktopModules
+from   {objectQualifier}PortalDesktopModules
 where  ((PortalId = @PortalId) or (@PortalId is null and @DesktopModuleId is not null))
 and    ((DesktopModuleId = @DesktopModuleId) or (@DesktopModuleId is null and @PortalId is not null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalDesktopModules]    Script Date: 10/05/2007 21:22:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalDesktopModules]    Script Date: 10/05/2007 21:22:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetPortalDesktopModules]
+create procedure {databaseOwner}[{objectQualifier}GetPortalDesktopModules]
 
 @PortalId int,
 @DesktopModuleId int
 
 as
 
-select dnn_PortalDesktopModules.*,
+select {objectQualifier}PortalDesktopModules.*,
        PortalName,
        FriendlyName
-from   dnn_PortalDesktopModules
-inner join dnn_Portals on dnn_PortalDesktopModules.PortalId = dnn_Portals.PortalId
-inner join dnn_DesktopModules on dnn_PortalDesktopModules.DesktopModuleId = dnn_DesktopModules.DesktopModuleId
-where  ((dnn_PortalDesktopModules.PortalId = @PortalId) or @PortalId is null)
-and    ((dnn_PortalDesktopModules.DesktopModuleId = @DesktopModuleId) or @DesktopModuleId is null)
-order by dnn_PortalDesktopModules.PortalId, dnn_PortalDesktopModules.DesktopModuleId
+from   {objectQualifier}PortalDesktopModules
+inner join {objectQualifier}Portals on {objectQualifier}PortalDesktopModules.PortalId = {objectQualifier}Portals.PortalId
+inner join {objectQualifier}DesktopModules on {objectQualifier}PortalDesktopModules.DesktopModuleId = {objectQualifier}DesktopModules.DesktopModuleId
+where  (({objectQualifier}PortalDesktopModules.PortalId = @PortalId) or @PortalId is null)
+and    (({objectQualifier}PortalDesktopModules.DesktopModuleId = @DesktopModuleId) or @DesktopModuleId is null)
+order by {objectQualifier}PortalDesktopModules.PortalId, {objectQualifier}PortalDesktopModules.DesktopModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateTabOrder]    Script Date: 10/05/2007 21:23:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateTabOrder]    Script Date: 10/05/2007 21:23:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateTabOrder]
+create procedure {databaseOwner}[{objectQualifier}UpdateTabOrder]
 
 @TabId    int,
 @TabOrder int,
@@ -4320,52 +4320,52 @@ create procedure [dbo].[dnn_UpdateTabOrder]
 
 as
 
-update dnn_Tabs
+update {objectQualifier}Tabs
 set    TabOrder = @TabOrder,
        Level = @Level,
        ParentId = @ParentId
 where  TabId = @TabId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_VerifyPortalTab]    Script Date: 10/05/2007 21:23:08 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}VerifyPortalTab]    Script Date: 10/05/2007 21:23:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_VerifyPortalTab]
+create procedure {databaseOwner}[{objectQualifier}VerifyPortalTab]
 
 @PortalId int,
 @TabId    int
 
 as
 
-select dnn_Tabs.TabId
-from dnn_Tabs
-left outer join dnn_Portals on dnn_Tabs.PortalId = dnn_Portals.PortalId
+select {objectQualifier}Tabs.TabId
+from {objectQualifier}Tabs
+left outer join {objectQualifier}Portals on {objectQualifier}Tabs.PortalId = {objectQualifier}Portals.PortalId
 where  TabId = @TabId
-and    ( dnn_Portals.PortalId = @PortalId or dnn_Tabs.PortalId is null )
+and    ( {objectQualifier}Portals.PortalId = @PortalId or {objectQualifier}Tabs.PortalId is null )
 and    IsDeleted = 0
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteTab]    Script Date: 10/05/2007 21:21:41 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteTab]    Script Date: 10/05/2007 21:21:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteTab]
+create procedure {databaseOwner}[{objectQualifier}DeleteTab]
 
 @TabId int
 
 as
 
 delete
-from dnn_Tabs
+from {objectQualifier}Tabs
 where  TabId = @TabId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabCount]    Script Date: 10/05/2007 21:22:23 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabCount]    Script Date: 10/05/2007 21:22:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabCount]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabCount]
 	
 	@PortalId	int
 
@@ -4373,21 +4373,21 @@ AS
 
 DECLARE @AdminTabId int
 SET @AdminTabId = (SELECT AdminTabId 
-						FROM dnn_Portals 
+						FROM {objectQualifier}Portals 
 						WHERE PortalID = @PortalID)
 
 SELECT COUNT(*) - 1 
-FROM  dnn_Tabs
+FROM  {objectQualifier}Tabs
 WHERE (PortalID = @PortalID) 
 	AND (TabID <> @AdminTabId) 
 	AND (ParentId <> @AdminTabId OR ParentId IS NULL)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddTab]    Script Date: 10/05/2007 21:21:24 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddTab]    Script Date: 10/05/2007 21:21:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_AddTab]
+CREATE procedure {databaseOwner}[{objectQualifier}AddTab]
 
 @PortalId           int,
 @TabName            nvarchar(50),
@@ -4409,7 +4409,7 @@ CREATE procedure [dbo].[dnn_AddTab]
 
 as
 
-insert into dnn_Tabs (
+insert into {objectQualifier}Tabs (
     PortalId,
     TabName,
     IsVisible,
@@ -4452,29 +4452,29 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_VerifyPortal]    Script Date: 10/05/2007 21:23:07 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}VerifyPortal]    Script Date: 10/05/2007 21:23:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_VerifyPortal]
+create procedure {databaseOwner}[{objectQualifier}VerifyPortal]
 
 @PortalId int
 
 as
 
-select dnn_Tabs.TabId
-from dnn_Tabs
-inner join dnn_Portals on dnn_Tabs.PortalId = dnn_Portals.PortalId
-where dnn_Portals.PortalId = @PortalId
-and dnn_Tabs.TabOrder = 1
+select {objectQualifier}Tabs.TabId
+from {objectQualifier}Tabs
+inner join {objectQualifier}Portals on {objectQualifier}Tabs.PortalId = {objectQualifier}Portals.PortalId
+where {objectQualifier}Portals.PortalId = @PortalId
+and {objectQualifier}Tabs.TabOrder = 1
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateTab]    Script Date: 10/05/2007 21:23:01 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateTab]    Script Date: 10/05/2007 21:23:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdateTab]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdateTab]
 
 @TabId              int,
 @TabName            nvarchar(50),
@@ -4497,7 +4497,7 @@ CREATE procedure [dbo].[dnn_UpdateTab]
 
 as
 
-update dnn_Tabs
+update {objectQualifier}Tabs
 set    TabName            = @TabName,
        IsVisible          = @IsVisible,
        DisableLink        = @DisableLink,
@@ -4517,12 +4517,12 @@ set    TabName            = @TabName,
 	   PageHeadText		  = @PageHeadText
 where  TabId = @TabId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalByTab]    Script Date: 10/05/2007 21:22:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalByTab]    Script Date: 10/05/2007 21:22:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetPortalByTab]
+CREATE procedure {databaseOwner}[{objectQualifier}GetPortalByTab]
 
 @TabId int,
 @HTTPAlias nvarchar(200)
@@ -4530,17 +4530,17 @@ CREATE procedure [dbo].[dnn_GetPortalByTab]
 as
 
 select HTTPAlias
-from dbo.dnn_PortalAlias
-inner join dbo.dnn_Tabs on dbo.dnn_PortalAlias.PortalId = dbo.dnn_Tabs.PortalId
+from {databaseOwner}{objectQualifier}PortalAlias
+inner join {databaseOwner}{objectQualifier}Tabs on {databaseOwner}{objectQualifier}PortalAlias.PortalId = {databaseOwner}{objectQualifier}Tabs.PortalId
 where  TabId = @TabId
 and    HTTPAlias = @HTTPAlias
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteUserRole]    Script Date: 10/05/2007 21:21:44 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteUserRole]    Script Date: 10/05/2007 21:21:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteUserRole]
+create procedure {databaseOwner}[{objectQualifier}DeleteUserRole]
 
 @UserId int,
 @RoleId int
@@ -4548,16 +4548,16 @@ create procedure [dbo].[dnn_DeleteUserRole]
 as
 
 delete
-from dnn_UserRoles
+from {objectQualifier}UserRoles
 where  UserId = @UserId
 and    RoleId = @RoleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddUserRole]    Script Date: 10/05/2007 21:21:29 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddUserRole]    Script Date: 10/05/2007 21:21:29 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddUserRole]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddUserRole]
 
 	@PortalId		int,
 	@UserId			int,
@@ -4571,12 +4571,12 @@ DECLARE @UserRoleId int
 SELECT @UserRoleId = null
 
 SELECT @UserRoleId = UserRoleId
-	FROM   dnn_UserRoles
+	FROM   {objectQualifier}UserRoles
 	WHERE  UserId = @UserId AND RoleId = @RoleId
  
 IF @UserRoleId IS NOT NULL
 	BEGIN
-		UPDATE dnn_UserRoles
+		UPDATE {objectQualifier}UserRoles
 			SET ExpiryDate = @ExpiryDate,
 				EffectiveDate = @EffectiveDate	
 			WHERE  UserRoleId = @UserRoleId
@@ -4584,7 +4584,7 @@ IF @UserRoleId IS NOT NULL
 	END
 ELSE
 	BEGIN
-		INSERT INTO dnn_UserRoles (
+		INSERT INTO {objectQualifier}UserRoles (
 			UserId,
 			RoleId,
 			EffectiveDate,
@@ -4600,35 +4600,35 @@ ELSE
 	SELECT SCOPE_IDENTITY()
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateUserRole]    Script Date: 10/05/2007 21:23:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateUserRole]    Script Date: 10/05/2007 21:23:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateUserRole] 
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateUserRole] 
     @UserRoleId int, 
 	@EffectiveDate	datetime = null,
 	@ExpiryDate		datetime = null
 AS
 
-UPDATE dnn_UserRoles 
+UPDATE {objectQualifier}UserRoles 
 	SET ExpiryDate = @ExpiryDate,
 		EffectiveDate = @EffectiveDate	
 	WHERE  UserRoleId = @UserRoleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddModulePermission]    Script Date: 10/05/2007 21:21:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddModulePermission]    Script Date: 10/05/2007 21:21:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddModulePermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddModulePermission]
 	@ModuleID int,
 	@PermissionID int,
 	@RoleID int,
 	@AllowAccess bit
 AS
 
-INSERT INTO dbo.dnn_ModulePermission (
+INSERT INTO {databaseOwner}{objectQualifier}ModulePermission (
 	[ModuleID],
 	[PermissionID],
 	[RoleID],
@@ -4642,38 +4642,38 @@ INSERT INTO dbo.dnn_ModulePermission (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModulePermissionsByModuleID]    Script Date: 10/05/2007 21:21:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModulePermissionsByModuleID]    Script Date: 10/05/2007 21:21:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteModulePermissionsByModuleID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteModulePermissionsByModuleID]
 	@ModuleID int
 AS
 
-DELETE FROM dbo.dnn_ModulePermission
+DELETE FROM {databaseOwner}{objectQualifier}ModulePermission
 WHERE
 	[ModuleID] = @ModuleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModulePermission]    Script Date: 10/05/2007 21:21:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModulePermission]    Script Date: 10/05/2007 21:21:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteModulePermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteModulePermission]
 	@ModulePermissionID int
 AS
 
-DELETE FROM dbo.dnn_ModulePermission
+DELETE FROM {databaseOwner}{objectQualifier}ModulePermission
 WHERE
 	[ModulePermissionID] = @ModulePermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateModulePermission]    Script Date: 10/05/2007 21:22:48 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateModulePermission]    Script Date: 10/05/2007 21:22:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateModulePermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateModulePermission]
 	@ModulePermissionID int, 
 	@ModuleID int, 
 	@PermissionID int, 
@@ -4681,7 +4681,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateModulePermission]
 	@AllowAccess bit
 AS
 
-UPDATE dbo.dnn_ModulePermission SET
+UPDATE {databaseOwner}{objectQualifier}ModulePermission SET
 	[ModuleID] = @ModuleID,
 	[PermissionID] = @PermissionID,
 	[RoleID] = @RoleID,
@@ -4689,12 +4689,12 @@ UPDATE dbo.dnn_ModulePermission SET
 WHERE
 	[ModulePermissionID] = @ModulePermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddScheduleItemSetting]    Script Date: 10/05/2007 21:21:19 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddScheduleItemSetting]    Script Date: 10/05/2007 21:21:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddScheduleItemSetting]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddScheduleItemSetting]
 
 @ScheduleID     int,
 @Name           nvarchar(50),
@@ -4702,16 +4702,16 @@ CREATE PROCEDURE [dbo].[dnn_AddScheduleItemSetting]
 
 as
 
-IF EXISTS ( SELECT * FROM dbo.dnn_ScheduleItemSettings WHERE ScheduleID = @ScheduleID AND SettingName = @Name)
+IF EXISTS ( SELECT * FROM {databaseOwner}{objectQualifier}ScheduleItemSettings WHERE ScheduleID = @ScheduleID AND SettingName = @Name)
 BEGIN 
-	UPDATE	dbo.dnn_ScheduleItemSettings
+	UPDATE	{databaseOwner}{objectQualifier}ScheduleItemSettings
 	SET		SettingValue = @Value
 	WHERE	ScheduleID = @ScheduleID
 	AND		SettingName = @Name
 END 
 ELSE 
 BEGIN 
-	INSERT INTO dbo.dnn_ScheduleItemSettings (
+	INSERT INTO {databaseOwner}{objectQualifier}ScheduleItemSettings (
 		ScheduleID,
 		SettingName,
 		Settingvalue
@@ -4723,64 +4723,64 @@ BEGIN
 	)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetScheduleItemSettings]    Script Date: 10/05/2007 21:22:12 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetScheduleItemSettings]    Script Date: 10/05/2007 21:22:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetScheduleItemSettings] 
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetScheduleItemSettings] 
 @ScheduleID int
 AS
 SELECT *
-FROM dbo.dnn_ScheduleItemSettings
+FROM {databaseOwner}{objectQualifier}ScheduleItemSettings
 WHERE ScheduleID = @ScheduleID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteVendor]    Script Date: 10/05/2007 21:21:44 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteVendor]    Script Date: 10/05/2007 21:21:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteVendor]
+create procedure {databaseOwner}[{objectQualifier}DeleteVendor]
 
 @VendorId int
 
 as
 
 delete
-from dnn_Vendors
+from {objectQualifier}Vendors
 where  VendorId = @VendorId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAffiliate]    Script Date: 10/05/2007 21:21:46 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAffiliate]    Script Date: 10/05/2007 21:21:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetAffiliate]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetAffiliate]
 	@AffiliateId int,
 	@VendorId int,
 	@PortalID int
 AS
 
-	SELECT	dnn_Affiliates.AffiliateId,
-		dnn_Affiliates.VendorId,
-		dnn_Affiliates.StartDate,
-		dnn_Affiliates.EndDate,
-		dnn_Affiliates.CPC,
-		dnn_Affiliates.Clicks,
-		dnn_Affiliates.CPA,
-		dnn_Affiliates.Acquisitions
-	FROM	dnn_Affiliates 
-	INNER JOIN dnn_Vendors ON dnn_Affiliates.VendorId = dnn_Vendors.VendorId
-	WHERE	dnn_Affiliates.AffiliateId = @AffiliateId
-	AND	dnn_Affiliates.VendorId = @VendorId
-	AND	(dnn_Vendors.PortalId = @PortalID or (dnn_Vendors.PortalId is null and @portalid is null))
+	SELECT	{objectQualifier}Affiliates.AffiliateId,
+		{objectQualifier}Affiliates.VendorId,
+		{objectQualifier}Affiliates.StartDate,
+		{objectQualifier}Affiliates.EndDate,
+		{objectQualifier}Affiliates.CPC,
+		{objectQualifier}Affiliates.Clicks,
+		{objectQualifier}Affiliates.CPA,
+		{objectQualifier}Affiliates.Acquisitions
+	FROM	{objectQualifier}Affiliates 
+	INNER JOIN {objectQualifier}Vendors ON {objectQualifier}Affiliates.VendorId = {objectQualifier}Vendors.VendorId
+	WHERE	{objectQualifier}Affiliates.AffiliateId = @AffiliateId
+	AND	{objectQualifier}Affiliates.VendorId = @VendorId
+	AND	({objectQualifier}Vendors.PortalId = @PortalID or ({objectQualifier}Vendors.PortalId is null and @portalid is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddVendor]    Script Date: 10/05/2007 21:21:30 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddVendor]    Script Date: 10/05/2007 21:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_AddVendor]
+CREATE procedure {databaseOwner}[{objectQualifier}AddVendor]
 
 @PortalId 	int,
 @VendorName nvarchar(50),
@@ -4804,7 +4804,7 @@ CREATE procedure [dbo].[dnn_AddVendor]
 
 as
 
-insert into dnn_Vendors (
+insert into {objectQualifier}Vendors (
   VendorName,
   Unit,
   Street,
@@ -4855,30 +4855,30 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetBannerGroups]    Script Date: 10/05/2007 21:21:48 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetBannerGroups]    Script Date: 10/05/2007 21:21:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetBannerGroups]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetBannerGroups]
 	@PortalId int
 AS
 
 SELECT  GroupName
-FROM dbo.dnn_Banners
-INNER JOIN dbo.dnn_Vendors ON 
-	dbo.dnn_Banners.VendorId = dbo.dnn_Vendors.VendorId
-WHERE (dbo.dnn_Vendors.PortalId = @PortalId) OR 
-	(@PortalId is null and dbo.dnn_Vendors.PortalId is null)
+FROM {databaseOwner}{objectQualifier}Banners
+INNER JOIN {databaseOwner}{objectQualifier}Vendors ON 
+	{databaseOwner}{objectQualifier}Banners.VendorId = {databaseOwner}{objectQualifier}Vendors.VendorId
+WHERE ({databaseOwner}{objectQualifier}Vendors.PortalId = @PortalId) OR 
+	(@PortalId is null and {databaseOwner}{objectQualifier}Vendors.PortalId is null)
 GROUP BY GroupName
 ORDER BY GroupName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateVendor]    Script Date: 10/05/2007 21:23:07 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateVendor]    Script Date: 10/05/2007 21:23:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdateVendor]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdateVendor]
 
 @VendorId	int,
 @VendorName nvarchar(50),
@@ -4902,7 +4902,7 @@ CREATE procedure [dbo].[dnn_UpdateVendor]
 
 as
 
-update dnn_Vendors
+update {objectQualifier}Vendors
 set    VendorName    = @VendorName,
        Unit          = @Unit,
        Street        = @Street,
@@ -4924,12 +4924,12 @@ set    VendorName    = @VendorName,
        Authorized    = @Authorized
 where  VendorId = @VendorId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItemWordBySearchWord]    Script Date: 10/05/2007 21:22:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItemWordBySearchWord]    Script Date: 10/05/2007 21:22:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchItemWordBySearchWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchItemWordBySearchWord]
 	@SearchWordsID int
 AS
 
@@ -4939,61 +4939,61 @@ SELECT
 	[SearchWordsID],
 	[Occurrences]
 FROM
-	dbo.dnn_SearchItemWord
+	{databaseOwner}{objectQualifier}SearchItemWord
 WHERE
 	[SearchWordsID]=@SearchWordsID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchItemWords]    Script Date: 10/05/2007 21:21:39 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchItemWords]    Script Date: 10/05/2007 21:21:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteSearchItemWords]
+create procedure {databaseOwner}[{objectQualifier}DeleteSearchItemWords]
 	@SearchItemID int
 AS
 
-delete from dbo.dnn_SearchItemWord
+delete from {databaseOwner}{objectQualifier}SearchItemWord
 where
 	[SearchItemID] = @SearchItemID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSearchItemWord]    Script Date: 10/05/2007 21:22:58 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSearchItemWord]    Script Date: 10/05/2007 21:22:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateSearchItemWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateSearchItemWord]
 	@SearchItemWordID int, 
 	@SearchItemID int, 
 	@SearchWordsID int, 
 	@Occurrences int 
 AS
 
-UPDATE dbo.dnn_SearchItemWord SET
+UPDATE {databaseOwner}{objectQualifier}SearchItemWord SET
 	[SearchItemID] = @SearchItemID,
 	[SearchWordsID] = @SearchWordsID,
 	[Occurrences] = @Occurrences
 WHERE
 	[SearchItemWordID] = @SearchItemWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchItemWord]    Script Date: 10/05/2007 21:21:39 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchItemWord]    Script Date: 10/05/2007 21:21:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteSearchItemWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteSearchItemWord]
 	@SearchItemWordID int
 AS
 
-DELETE FROM dbo.dnn_SearchItemWord
+DELETE FROM {databaseOwner}{objectQualifier}SearchItemWord
 WHERE
 	[SearchItemWordID] = @SearchItemWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItemWord]    Script Date: 10/05/2007 21:22:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItemWord]    Script Date: 10/05/2007 21:22:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchItemWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchItemWord]
 	@SearchItemWordID int
 	
 AS
@@ -5004,16 +5004,16 @@ SELECT
 	[SearchWordsID],
 	[Occurrences]
 FROM
-	dbo.dnn_SearchItemWord
+	{databaseOwner}{objectQualifier}SearchItemWord
 WHERE
 	[SearchItemWordID] = @SearchItemWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSearchItemWord]    Script Date: 10/05/2007 21:21:21 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSearchItemWord]    Script Date: 10/05/2007 21:21:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddSearchItemWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddSearchItemWord]
 	@SearchItemID int,
 	@SearchWordsID int,
 	@Occurrences int
@@ -5022,14 +5022,14 @@ AS
 
 DECLARE @ID int
 SELECT @id = SearchItemWordID 
-	FROM dnn_SearchItemWord
+	FROM {objectQualifier}SearchItemWord
 	WHERE SearchItemID=@SearchItemID 
 		AND SearchWordsID=@SearchWordsID
  
 
 IF @ID IS NULL
 	BEGIN
-		INSERT INTO dnn_SearchItemWord (
+		INSERT INTO {objectQualifier}SearchItemWord (
 			[SearchItemID],
 			[SearchWordsID],
 			[Occurrences]
@@ -5044,19 +5044,19 @@ IF @ID IS NULL
 	END
 ELSE
 
-	UPDATE dnn_SearchItemWord 
+	UPDATE {objectQualifier}SearchItemWord 
 		SET Occurrences = @Occurrences 
 		WHERE SearchItemWordID=@id 
 			AND Occurrences<>@Occurrences
 
 SELECT @id
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_ListSearchItemWord]    Script Date: 10/05/2007 21:22:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}ListSearchItemWord]    Script Date: 10/05/2007 21:22:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_ListSearchItemWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}ListSearchItemWord]
 AS
 
 SELECT
@@ -5065,14 +5065,14 @@ SELECT
 	[SearchWordsID],
 	[Occurrences]
 FROM
-	dbo.dnn_SearchItemWord
+	{databaseOwner}{objectQualifier}SearchItemWord
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItemWordBySearchItem]    Script Date: 10/05/2007 21:22:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItemWordBySearchItem]    Script Date: 10/05/2007 21:22:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchItemWordBySearchItem]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchItemWordBySearchItem]
 	@SearchItemID int
 AS
 
@@ -5082,30 +5082,30 @@ SELECT
 	[SearchWordsID],
 	[Occurrences]
 FROM
-	dbo.dnn_SearchItemWord
+	{databaseOwner}{objectQualifier}SearchItemWord
 WHERE
 	[SearchItemID]=@SearchItemID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModuleSetting]    Script Date: 10/05/2007 21:21:36 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModuleSetting]    Script Date: 10/05/2007 21:21:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}DeleteModuleSetting]
 @ModuleId      int,
 @SettingName   nvarchar(50)
 as
 
-DELETE FROM dnn_ModuleSettings 
+DELETE FROM {objectQualifier}ModuleSettings 
 WHERE ModuleId = @ModuleId
 AND SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateModuleSetting]    Script Date: 10/05/2007 21:22:48 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateModuleSetting]    Script Date: 10/05/2007 21:22:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}UpdateModuleSetting]
 
 @ModuleId      int,
 @SettingName   nvarchar(50),
@@ -5113,29 +5113,29 @@ create procedure [dbo].[dnn_UpdateModuleSetting]
 
 as
 
-update dnn_ModuleSettings
+update {objectQualifier}ModuleSettings
 set SettingValue = @SettingValue
 where ModuleId = @ModuleId
 and SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteModuleSettings]    Script Date: 10/05/2007 21:21:36 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteModuleSettings]    Script Date: 10/05/2007 21:21:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteModuleSettings]
+create procedure {databaseOwner}[{objectQualifier}DeleteModuleSettings]
 @ModuleId      int
 as
 
-DELETE FROM dnn_ModuleSettings 
+DELETE FROM {objectQualifier}ModuleSettings 
 WHERE ModuleId = @ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddModuleSetting]    Script Date: 10/05/2007 21:21:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddModuleSetting]    Script Date: 10/05/2007 21:21:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}AddModuleSetting]
 
 @ModuleId      int,
 @SettingName   nvarchar(50),
@@ -5143,7 +5143,7 @@ create procedure [dbo].[dnn_AddModuleSetting]
 
 as
 
-insert into dnn_ModuleSettings ( 
+insert into {objectQualifier}ModuleSettings ( 
   ModuleId, 
   SettingName, 
   SettingValue 
@@ -5154,19 +5154,19 @@ values (
   @SettingValue 
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddEventLogType]    Script Date: 10/05/2007 21:21:07 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddEventLogType]    Script Date: 10/05/2007 21:21:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddEventLogType]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddEventLogType]
 	@LogTypeKey nvarchar(35),
 	@LogTypeFriendlyName nvarchar(50),
 	@LogTypeDescription nvarchar(128),
 	@LogTypeOwner nvarchar(100),
 	@LogTypeCSSClass nvarchar(40)
 AS
-	INSERT INTO dbo.dnn_EventLogTypes
+	INSERT INTO {databaseOwner}{objectQualifier}EventLogTypes
 	(LogTypeKey,
 	LogTypeFriendlyName,
 	LogTypeDescription,
@@ -5179,52 +5179,52 @@ VALUES
 	@LogTypeOwner,
 	@LogTypeCSSClass)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetEventLogType]    Script Date: 10/05/2007 21:21:51 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetEventLogType]    Script Date: 10/05/2007 21:21:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetEventLogType]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetEventLogType]
 AS
 SELECT *
-FROM dbo.dnn_EventLogTypes
+FROM {databaseOwner}{objectQualifier}EventLogTypes
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateEventLogType]    Script Date: 10/05/2007 21:22:41 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateEventLogType]    Script Date: 10/05/2007 21:22:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateEventLogType]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateEventLogType]
 	@LogTypeKey nvarchar(35),
 	@LogTypeFriendlyName nvarchar(50),
 	@LogTypeDescription nvarchar(128),
 	@LogTypeOwner nvarchar(100),
 	@LogTypeCSSClass nvarchar(40)
 AS
-UPDATE dbo.dnn_EventLogTypes
+UPDATE {databaseOwner}{objectQualifier}EventLogTypes
 	SET LogTypeFriendlyName = @LogTypeFriendlyName,
 	LogTypeDescription = @LogTypeDescription,
 	LogTypeOwner = @LogTypeOwner,
 	LogTypeCSSClass = @LogTypeCSSClass
 WHERE	LogTypeKey = @LogTypeKey
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteEventLogType]    Script Date: 10/05/2007 21:21:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteEventLogType]    Script Date: 10/05/2007 21:21:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteEventLogType]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteEventLogType]
 	@LogTypeKey nvarchar(35)
 AS
-DELETE FROM dbo.dnn_EventLogTypes
+DELETE FROM {databaseOwner}{objectQualifier}EventLogTypes
 WHERE	LogTypeKey = @LogTypeKey
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateEventLogConfig]    Script Date: 10/05/2007 21:22:40 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateEventLogConfig]    Script Date: 10/05/2007 21:22:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateEventLogConfig]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateEventLogConfig]
 	@ID int,
 	@LogTypeKey nvarchar(35),
 	@LogTypePortalID int,
@@ -5237,7 +5237,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateEventLogConfig]
 	@MailFromAddress nvarchar(50),
 	@MailToAddress nvarchar(50)
 AS
-UPDATE dbo.dnn_EventLogConfig
+UPDATE {databaseOwner}{objectQualifier}EventLogConfig
 SET 	LogTypeKey = @LogTypeKey,
 	LogTypePortalID = @LogTypePortalID,
 	LoggingIsActive = @LoggingIsActive,
@@ -5250,12 +5250,12 @@ SET 	LogTypeKey = @LogTypeKey,
 	MailToAddress = @MailToAddress
 WHERE	ID = @ID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddEventLogConfig]    Script Date: 10/05/2007 21:21:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddEventLogConfig]    Script Date: 10/05/2007 21:21:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddEventLogConfig]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddEventLogConfig]
 	@LogTypeKey nvarchar(35),
 	@LogTypePortalID int,
 	@LoggingIsActive bit,
@@ -5267,7 +5267,7 @@ CREATE PROCEDURE [dbo].[dnn_AddEventLogConfig]
 	@MailFromAddress nvarchar(50),
 	@MailToAddress nvarchar(50)
 AS
-INSERT INTO dbo.dnn_EventLogConfig
+INSERT INTO {databaseOwner}{objectQualifier}EventLogConfig
 	(LogTypeKey,
 	LogTypePortalID,
 	LoggingIsActive,
@@ -5290,35 +5290,35 @@ VALUES
 	@MailFromAddress,
 	@MailToAddress)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetEventLogConfig]    Script Date: 10/05/2007 21:21:51 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetEventLogConfig]    Script Date: 10/05/2007 21:21:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetEventLogConfig]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetEventLogConfig]
 	@ID int
 AS
 SELECT *
-FROM dbo.dnn_EventLogConfig
+FROM {databaseOwner}{objectQualifier}EventLogConfig
 WHERE (ID = @ID or @ID IS NULL)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteEventLogConfig]    Script Date: 10/05/2007 21:21:32 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteEventLogConfig]    Script Date: 10/05/2007 21:21:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteEventLogConfig]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteEventLogConfig]
 	@ID int
 AS
-DELETE FROM dbo.dnn_EventLogConfig
+DELETE FROM {databaseOwner}{objectQualifier}EventLogConfig
 WHERE ID = @ID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddUrlTracking]    Script Date: 10/05/2007 21:21:27 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddUrlTracking]    Script Date: 10/05/2007 21:21:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddUrlTracking]
+create procedure {databaseOwner}[{objectQualifier}AddUrlTracking]
 
 @PortalID     int,
 @Url          nvarchar(255),
@@ -5330,7 +5330,7 @@ create procedure [dbo].[dnn_AddUrlTracking]
 
 as
 
-insert into dnn_UrlTracking (
+insert into {objectQualifier}UrlTracking (
   PortalID,
   Url,
   UrlType,
@@ -5355,12 +5355,12 @@ values (
   @NewWindow
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUrlTracking]    Script Date: 10/05/2007 21:22:27 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUrlTracking]    Script Date: 10/05/2007 21:22:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetUrlTracking]
+create procedure {databaseOwner}[{objectQualifier}GetUrlTracking]
 
 @PortalID     int,
 @Url          nvarchar(255),
@@ -5369,17 +5369,17 @@ create procedure [dbo].[dnn_GetUrlTracking]
 as
 
 select *
-from   dnn_UrlTracking
+from   {objectQualifier}UrlTracking
 where  PortalID = @PortalID
 and    Url = @Url
 and    ((ModuleId = @ModuleId) or (ModuleId is null and @ModuleId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateUrlTracking]    Script Date: 10/05/2007 21:23:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateUrlTracking]    Script Date: 10/05/2007 21:23:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateUrlTracking]
+create procedure {databaseOwner}[{objectQualifier}UpdateUrlTracking]
 
 @PortalID     int,
 @Url          nvarchar(255),
@@ -5390,7 +5390,7 @@ create procedure [dbo].[dnn_UpdateUrlTracking]
 
 as
 
-update dnn_UrlTracking
+update {objectQualifier}UrlTracking
 set    LogActivity = @LogActivity,
        TrackClicks = @TrackClicks,
        NewWindow = @NewWindow
@@ -5398,12 +5398,12 @@ where  PortalID = @PortalID
 and    Url = @Url
 and    ((ModuleId = @ModuleId) or (ModuleId is null and @ModuleId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateUrlTrackingStats]    Script Date: 10/05/2007 21:23:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateUrlTrackingStats]    Script Date: 10/05/2007 21:23:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateUrlTrackingStats]
+create procedure {databaseOwner}[{objectQualifier}UpdateUrlTrackingStats]
 
 @PortalID     int,
 @Url          nvarchar(255),
@@ -5411,19 +5411,19 @@ create procedure [dbo].[dnn_UpdateUrlTrackingStats]
 
 as
 
-update dnn_UrlTracking
+update {objectQualifier}UrlTracking
 set    Clicks = Clicks + 1,
        LastClick = getdate()
 where  PortalID = @PortalID
 and    Url = @Url
 and    ((ModuleId = @ModuleId) or (ModuleId is null and @ModuleId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteUrlTracking]    Script Date: 10/05/2007 21:21:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteUrlTracking]    Script Date: 10/05/2007 21:21:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteUrlTracking]
+create procedure {databaseOwner}[{objectQualifier}DeleteUrlTracking]
 
 @PortalID     int,
 @Url          nvarchar(255),
@@ -5432,17 +5432,17 @@ create procedure [dbo].[dnn_DeleteUrlTracking]
 as
 
 delete
-from   dnn_UrlTracking
+from   {objectQualifier}UrlTracking
 where  PortalID = @PortalID
 and    Url = @Url
 and    ((ModuleId = @ModuleId) or (ModuleId is null and @ModuleId is null))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateAffiliate]    Script Date: 10/05/2007 21:22:35 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateAffiliate]    Script Date: 10/05/2007 21:22:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateAffiliate]
+create procedure {databaseOwner}[{objectQualifier}UpdateAffiliate]
 
 @AffiliateId int,
 @StartDate         datetime,
@@ -5452,19 +5452,19 @@ create procedure [dbo].[dnn_UpdateAffiliate]
 
 as
 
-update dnn_Affiliates
+update {objectQualifier}Affiliates
 set    StartDate   = @StartDate,
        EndDate     = @EndDate,
        CPC         = @CPC,
        CPA         = @CPA
 where  AffiliateId = @AffiliateId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddAffiliate]    Script Date: 10/05/2007 21:21:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddAffiliate]    Script Date: 10/05/2007 21:21:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddAffiliate]
+create procedure {databaseOwner}[{objectQualifier}AddAffiliate]
 
 @VendorId      int,
 @StartDate     datetime,
@@ -5474,7 +5474,7 @@ create procedure [dbo].[dnn_AddAffiliate]
 
 as
 
-insert into dnn_Affiliates (
+insert into {objectQualifier}Affiliates (
     VendorId,
     StartDate,
     EndDate,
@@ -5495,12 +5495,12 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateAffiliateStats]    Script Date: 10/05/2007 21:22:36 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateAffiliateStats]    Script Date: 10/05/2007 21:22:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateAffiliateStats]
+create procedure {databaseOwner}[{objectQualifier}UpdateAffiliateStats]
 
 @AffiliateId  int,
 @Clicks       int,
@@ -5508,19 +5508,19 @@ create procedure [dbo].[dnn_UpdateAffiliateStats]
 
 as
 
-update dnn_Affiliates
+update {objectQualifier}Affiliates
 set    Clicks = Clicks + @Clicks,
        Acquisitions = Acquisitions + @Acquisitions
 where  VendorId = @AffiliateId 
 and    ( StartDate < getdate() or StartDate is null ) 
 and    ( EndDate > getdate() or EndDate is null )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAffiliates]    Script Date: 10/05/2007 21:21:46 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAffiliates]    Script Date: 10/05/2007 21:21:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetAffiliates]
+create procedure {databaseOwner}[{objectQualifier}GetAffiliates]
 
 @VendorId int
 
@@ -5535,47 +5535,47 @@ select AffiliateId,
        CPA,
        Acquisitions,
        'CPATotal' = Acquisitions * CPA
-from   dnn_Affiliates
+from   {objectQualifier}Affiliates
 where  VendorId = @VendorId
 order  by StartDate desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteAffiliate]    Script Date: 10/05/2007 21:21:31 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteAffiliate]    Script Date: 10/05/2007 21:21:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteAffiliate]
+create procedure {databaseOwner}[{objectQualifier}DeleteAffiliate]
 
 @AffiliateId int
 
 as
 
 delete
-from   dnn_Affiliates
+from   {objectQualifier}Affiliates
 where  AffiliateId = @AffiliateId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUrls]    Script Date: 10/05/2007 21:22:27 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUrls]    Script Date: 10/05/2007 21:22:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetUrls]
+create procedure {databaseOwner}[{objectQualifier}GetUrls]
 
 @PortalID     int
 
 as
 
 select *
-from   dnn_Urls
+from   {objectQualifier}Urls
 where  PortalID = @PortalID
 order by Url
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUrl]    Script Date: 10/05/2007 21:22:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUrl]    Script Date: 10/05/2007 21:22:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetUrl]
+create procedure {databaseOwner}[{objectQualifier}GetUrl]
 
 @PortalID     int,
 @Url          nvarchar(255)
@@ -5583,23 +5583,23 @@ create procedure [dbo].[dnn_GetUrl]
 as
 
 select *
-from   dnn_Urls
+from   {objectQualifier}Urls
 where  PortalID = @PortalID
 and    Url = @Url
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddUrl]    Script Date: 10/05/2007 21:21:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddUrl]    Script Date: 10/05/2007 21:21:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddUrl]
+create procedure {databaseOwner}[{objectQualifier}AddUrl]
 
 @PortalID     int,
 @Url          nvarchar(255)
 
 as
 
-insert into dnn_Urls (
+insert into {objectQualifier}Urls (
   PortalID,
   Url
 )
@@ -5608,12 +5608,12 @@ values (
   @Url
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteUrl]    Script Date: 10/05/2007 21:21:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteUrl]    Script Date: 10/05/2007 21:21:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteUrl]
+create procedure {databaseOwner}[{objectQualifier}DeleteUrl]
 
 @PortalID     int,
 @Url          nvarchar(255)
@@ -5621,16 +5621,16 @@ create procedure [dbo].[dnn_DeleteUrl]
 as
 
 delete
-from   dnn_Urls
+from   {objectQualifier}Urls
 where  PortalID = @PortalID
 and    Url = @Url
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateBanner]    Script Date: 10/05/2007 21:22:37 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateBanner]    Script Date: 10/05/2007 21:22:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateBanner]
+create procedure {databaseOwner}[{objectQualifier}UpdateBanner]
 
 @BannerId     int,
 @BannerName   nvarchar(100),
@@ -5650,7 +5650,7 @@ create procedure [dbo].[dnn_UpdateBanner]
 
 as
 
-update dnn_Banners
+update {objectQualifier}Banners
 set    ImageFile     = @ImageFile,
        BannerName    = @BannerName,
        URL           = @URL,
@@ -5668,12 +5668,12 @@ set    ImageFile     = @ImageFile,
        Height        = @Height
 where  BannerId = @BannerId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddBanner]    Script Date: 10/05/2007 21:21:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddBanner]    Script Date: 10/05/2007 21:21:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddBanner]
+create procedure {databaseOwner}[{objectQualifier}AddBanner]
 
 @BannerName    nvarchar(100),
 @VendorId      int,
@@ -5693,7 +5693,7 @@ create procedure [dbo].[dnn_AddBanner]
 
 as
 
-insert into dnn_Banners (
+insert into {objectQualifier}Banners (
     VendorId,
     ImageFile,
     BannerName,
@@ -5736,27 +5736,27 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteBanner]    Script Date: 10/05/2007 21:21:31 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteBanner]    Script Date: 10/05/2007 21:21:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteBanner]
+create procedure {databaseOwner}[{objectQualifier}DeleteBanner]
 
 @BannerId int
 
 as
 
 delete
-from dnn_Banners
+from {objectQualifier}Banners
 where  BannerId = @BannerId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetBanners]    Script Date: 10/05/2007 21:21:48 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetBanners]    Script Date: 10/05/2007 21:21:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetBanners]
+create procedure {databaseOwner}[{objectQualifier}GetBanners]
 
 @VendorId int
 
@@ -5777,33 +5777,33 @@ select BannerId,
        Criteria,
        Width,
        Height
-from   dnn_Banners
+from   {objectQualifier}Banners
 where  VendorId = @VendorId
 order  by CreatedDate desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateBannerClickThrough]    Script Date: 10/05/2007 21:22:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateBannerClickThrough]    Script Date: 10/05/2007 21:22:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateBannerClickThrough]
+create procedure {databaseOwner}[{objectQualifier}UpdateBannerClickThrough]
 
 @BannerId int,
 @VendorId int
 
 as
 
-update dnn_Banners
+update {objectQualifier}Banners
 set    ClickThroughs = ClickThroughs + 1
 where  BannerId = @BannerId
 and    VendorId = @VendorId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateBannerViews]    Script Date: 10/05/2007 21:22:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateBannerViews]    Script Date: 10/05/2007 21:22:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateBannerViews]
+create procedure {databaseOwner}[{objectQualifier}UpdateBannerViews]
 
 @BannerId  int, 
 @StartDate datetime, 
@@ -5811,25 +5811,25 @@ create procedure [dbo].[dnn_UpdateBannerViews]
 
 as
 
-update dnn_Banners
+update {objectQualifier}Banners
 set    Views = Views + 1,
        StartDate = @StartDate,
        EndDate = @EndDate
 where  BannerId = @BannerId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddProfile]    Script Date: 10/05/2007 21:21:15 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddProfile]    Script Date: 10/05/2007 21:21:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddProfile]
+create procedure {databaseOwner}[{objectQualifier}AddProfile]
 
 @UserId        int, 
 @PortalId      int
 
 as
 
-insert into dnn_Profile (
+insert into {objectQualifier}Profile (
   UserId,
   PortalId,
   ProfileData,
@@ -5842,12 +5842,12 @@ values (
   getdate()
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetProfile]    Script Date: 10/05/2007 21:22:07 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetProfile]    Script Date: 10/05/2007 21:22:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetProfile]
+create procedure {databaseOwner}[{objectQualifier}GetProfile]
 
 @UserId    int, 
 @PortalId  int
@@ -5855,16 +5855,16 @@ create procedure [dbo].[dnn_GetProfile]
 as
 
 select *
-from   dnn_Profile
+from   {objectQualifier}Profile
 where  UserId = @UserId 
 and    PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateProfile]    Script Date: 10/05/2007 21:22:53 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateProfile]    Script Date: 10/05/2007 21:22:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateProfile]
+create procedure {databaseOwner}[{objectQualifier}UpdateProfile]
 
 @UserId        int, 
 @PortalId      int,
@@ -5872,40 +5872,40 @@ create procedure [dbo].[dnn_UpdateProfile]
 
 as
 
-update dnn_Profile
+update {objectQualifier}Profile
 set    ProfileData = @ProfileData,
        CreatedDate = getdate()
 where  UserId = @UserId
 and    PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAllProfiles]    Script Date: 10/05/2007 21:21:46 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAllProfiles]    Script Date: 10/05/2007 21:21:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetAllProfiles]
+create procedure {databaseOwner}[{objectQualifier}GetAllProfiles]
 AS
-SELECT * FROM dnn_Profile
+SELECT * FROM {objectQualifier}Profile
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchCommonWord]    Script Date: 10/05/2007 21:21:38 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchCommonWord]    Script Date: 10/05/2007 21:21:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteSearchCommonWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteSearchCommonWord]
 	@CommonWordID int
 AS
 
-DELETE FROM dbo.dnn_SearchCommonWords
+DELETE FROM {databaseOwner}{objectQualifier}SearchCommonWords
 WHERE
 	[CommonWordID] = @CommonWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchCommonWordByID]    Script Date: 10/05/2007 21:22:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchCommonWordByID]    Script Date: 10/05/2007 21:22:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchCommonWordByID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchCommonWordByID]
 	@CommonWordID int
 	
 AS
@@ -5915,21 +5915,21 @@ SELECT
 	[CommonWord],
 	[Locale]
 FROM
-	dbo.dnn_SearchCommonWords
+	{databaseOwner}{objectQualifier}SearchCommonWords
 WHERE
 	[CommonWordID] = @CommonWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSearchCommonWord]    Script Date: 10/05/2007 21:21:20 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSearchCommonWord]    Script Date: 10/05/2007 21:21:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddSearchCommonWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddSearchCommonWord]
 	@CommonWord nvarchar(255),
 	@Locale nvarchar(10)
 AS
 
-INSERT INTO dbo.dnn_SearchCommonWords (
+INSERT INTO {databaseOwner}{objectQualifier}SearchCommonWords (
 	[CommonWord],
 	[Locale]
 ) VALUES (
@@ -5939,12 +5939,12 @@ INSERT INTO dbo.dnn_SearchCommonWords (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchCommonWordsByLocale]    Script Date: 10/05/2007 21:22:13 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchCommonWordsByLocale]    Script Date: 10/05/2007 21:22:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchCommonWordsByLocale]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchCommonWordsByLocale]
 	@Locale nvarchar(10)
 	
 AS
@@ -5954,108 +5954,108 @@ SELECT
 	[CommonWord],
 	[Locale]
 FROM
-	dbo.dnn_SearchCommonWords
+	{databaseOwner}{objectQualifier}SearchCommonWords
 WHERE
 	[Locale] = @Locale
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSearchCommonWord]    Script Date: 10/05/2007 21:22:57 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSearchCommonWord]    Script Date: 10/05/2007 21:22:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateSearchCommonWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateSearchCommonWord]
 	@CommonWordID int, 
 	@CommonWord nvarchar(255), 
 	@Locale nvarchar(10) 
 AS
 
-UPDATE dbo.dnn_SearchCommonWords SET
+UPDATE {databaseOwner}{objectQualifier}SearchCommonWords SET
 	[CommonWord] = @CommonWord,
 	[Locale] = @Locale
 WHERE
 	[CommonWordID] = @CommonWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalAliasByPortalID]    Script Date: 10/05/2007 21:22:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalAliasByPortalID]    Script Date: 10/05/2007 21:22:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetPortalAliasByPortalID]
+CREATE procedure {databaseOwner}[{objectQualifier}GetPortalAliasByPortalID]
 
 @PortalID int
 
 as
 
 select *
-from dbo.dnn_PortalAlias
+from {databaseOwner}{objectQualifier}PortalAlias
 where (PortalID = @PortalID or @PortalID = -1)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalByAlias]    Script Date: 10/05/2007 21:22:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalByAlias]    Script Date: 10/05/2007 21:22:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetPortalByAlias]
+CREATE procedure {databaseOwner}[{objectQualifier}GetPortalByAlias]
 
 @HTTPAlias nvarchar(200)
 
 as
 
 select 'PortalId' = min(PortalId)
-from dbo.dnn_PortalAlias
+from {databaseOwner}{objectQualifier}PortalAlias
 where  HTTPAlias = @HTTPAlias
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeletePortalAlias]    Script Date: 10/05/2007 21:21:36 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeletePortalAlias]    Script Date: 10/05/2007 21:21:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_DeletePortalAlias]
+CREATE procedure {databaseOwner}[{objectQualifier}DeletePortalAlias]
 @PortalAliasID int
 
 as
 
-DELETE FROM dbo.dnn_PortalAlias 
+DELETE FROM {databaseOwner}{objectQualifier}PortalAlias 
 WHERE PortalAliasID = @PortalAliasID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalAliasByPortalAliasID]    Script Date: 10/05/2007 21:22:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalAliasByPortalAliasID]    Script Date: 10/05/2007 21:22:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetPortalAliasByPortalAliasID]
+CREATE procedure {databaseOwner}[{objectQualifier}GetPortalAliasByPortalAliasID]
 
 @PortalAliasID int
 
 as
 
 select *
-from dbo.dnn_PortalAlias
+from {databaseOwner}{objectQualifier}PortalAlias
 where PortalAliasID = @PortalAliasID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdatePortalAlias]    Script Date: 10/05/2007 21:22:50 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdatePortalAlias]    Script Date: 10/05/2007 21:22:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdatePortalAlias]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdatePortalAlias]
 @PortalAliasID int,
 @PortalID int,
 @HTTPAlias nvarchar(200)
 
 as
 
-UPDATE dbo.dnn_PortalAlias 
+UPDATE {databaseOwner}{objectQualifier}PortalAlias 
 SET HTTPAlias = @HTTPAlias
 WHERE PortalID = @PortalID
 AND	  PortalAliasID = @PortalAliasID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalAlias]    Script Date: 10/05/2007 21:22:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalAlias]    Script Date: 10/05/2007 21:22:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetPortalAlias]
+CREATE procedure {databaseOwner}[{objectQualifier}GetPortalAlias]
 
 @HTTPAlias nvarchar(200),
 @PortalID int
@@ -6063,50 +6063,50 @@ CREATE procedure [dbo].[dnn_GetPortalAlias]
 as
 
 select *
-from dbo.dnn_PortalAlias
+from {databaseOwner}{objectQualifier}PortalAlias
 where HTTPAlias = @HTTPAlias 
 and PortalID = @PortalID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddPortalAlias]    Script Date: 10/05/2007 21:21:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddPortalAlias]    Script Date: 10/05/2007 21:21:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_AddPortalAlias]
+CREATE procedure {databaseOwner}[{objectQualifier}AddPortalAlias]
 
 @PortalID int,
 @HTTPAlias nvarchar(200)
 
 as
 
-INSERT INTO dbo.dnn_PortalAlias 
+INSERT INTO {databaseOwner}{objectQualifier}PortalAlias 
 (PortalID, HTTPAlias)
 VALUES
 (@PortalID, @HTTPAlias)
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdatePortalAliasOnInstall]    Script Date: 10/05/2007 21:22:50 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdatePortalAliasOnInstall]    Script Date: 10/05/2007 21:22:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdatePortalAliasOnInstall]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdatePortalAliasOnInstall]
 
 @PortalAlias nvarchar(200)
 
 as
 
-update dbo.dnn_PortalAlias 
+update {databaseOwner}{objectQualifier}PortalAlias 
 set    HTTPAlias = @PortalAlias
 where  HTTPAlias = '_default'
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetList]    Script Date: 10/05/2007 21:21:57 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetList]    Script Date: 10/05/2007 21:21:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetList]
+CREATE procedure {databaseOwner}[{objectQualifier}GetList]
 	@ListName nvarchar(50),
 	@ParentKey nvarchar(150),
 	@DefinitionID int
@@ -6119,14 +6119,14 @@ Begin
 	E.[Level],	
 	E.[DefinitionID],
 	E.[ParentID],	
-	(SELECT MAX([SortOrder]) FROM dnn_Lists WHERE [ListName] = E.[ListName]) As [MaxSortOrder],
-	(SELECT COUNT(EntryID) FROM dnn_Lists WHERE [ListName] = E.[ListName] AND ParentID = E.[ParentID]) As EntryCount,
-	IsNull((SELECT [ListName] + '.' + [Value] + ':' FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [Key],	
-	IsNull((SELECT [ListName] + '.' + [Text] + ':' FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [DisplayName],
-	IsNull((SELECT [ListName] + '.' + [Value] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
-	IsNull((SELECT [ListName] + '.' + [Text] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
-	IsNull((SELECT [ListName] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList]
-	From dnn_Lists E (nolock)
+	(SELECT MAX([SortOrder]) FROM {objectQualifier}Lists WHERE [ListName] = E.[ListName]) As [MaxSortOrder],
+	(SELECT COUNT(EntryID) FROM {objectQualifier}Lists WHERE [ListName] = E.[ListName] AND ParentID = E.[ParentID]) As EntryCount,
+	IsNull((SELECT [ListName] + '.' + [Value] + ':' FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [Key],	
+	IsNull((SELECT [ListName] + '.' + [Text] + ':' FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [DisplayName],
+	IsNull((SELECT [ListName] + '.' + [Value] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
+	IsNull((SELECT [ListName] + '.' + [Text] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
+	IsNull((SELECT [ListName] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList]
+	From {objectQualifier}Lists E (nolock)
 	where  ([ListName] = @ListName or @ListName='')
 	and (DefinitionID = @DefinitionID or @DefinitionID = -1)
 	Order By E.[Level],[DisplayName]
@@ -6143,27 +6143,27 @@ Begin
 	E.[Level],	
 	E.[DefinitionID],
 	E.[ParentID],	
-	(SELECT MAX([SortOrder]) FROM dnn_Lists WHERE [ListName] = E.[ListName]) As [MaxSortOrder],
-	(SELECT COUNT(EntryID) FROM dnn_Lists WHERE [ListName] = E.[ListName] AND ParentID = E.[ParentID]) As EntryCount,
-	IsNull((SELECT [ListName] + '.' + [Value] + ':' FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [Key],	
-	IsNull((SELECT [ListName] + '.' + [Text] + ':' FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [DisplayName],
-	IsNull((SELECT [ListName] + '.' + [Value] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
-	IsNull((SELECT [ListName] + '.' + [Text] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
-	IsNull((SELECT [ListName] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList]
+	(SELECT MAX([SortOrder]) FROM {objectQualifier}Lists WHERE [ListName] = E.[ListName]) As [MaxSortOrder],
+	(SELECT COUNT(EntryID) FROM {objectQualifier}Lists WHERE [ListName] = E.[ListName] AND ParentID = E.[ParentID]) As EntryCount,
+	IsNull((SELECT [ListName] + '.' + [Value] + ':' FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [Key],	
+	IsNull((SELECT [ListName] + '.' + [Text] + ':' FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') + E.[ListName] As [DisplayName],
+	IsNull((SELECT [ListName] + '.' + [Value] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
+	IsNull((SELECT [ListName] + '.' + [Text] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
+	IsNull((SELECT [ListName] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList]
 	
-	From dnn_Lists E (nolock)
+	From {objectQualifier}Lists E (nolock)
 	where  [ListName] = @ListName And
-	[ParentID] = (SELECT [EntryID] From dnn_Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)	
+	[ParentID] = (SELECT [EntryID] From {objectQualifier}Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)	
 	Order By E.[Level], [DisplayName]
 
 End
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteList]    Script Date: 10/05/2007 21:21:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteList]    Script Date: 10/05/2007 21:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_DeleteList]
+CREATE procedure {databaseOwner}[{objectQualifier}DeleteList]
 
 @ListName nvarchar(50),
 @ParentKey nvarchar(150)
@@ -6176,17 +6176,17 @@ If @ParentKey = ''
 Begin
 	-- need to store entries which to be deleted to clean up their sub entries
 	DECLARE allentry_cursor CURSOR FOR
-	SELECT [EntryID] FROM dnn_Lists Where  [ListName] = @ListName	
+	SELECT [EntryID] FROM {objectQualifier}Lists Where  [ListName] = @ListName	
 	-- then delete their sub entires
 	OPEN allentry_cursor
 	FETCH NEXT FROM allentry_cursor INTO @EntryID
 	While @@FETCH_STATUS = 0
 	Begin	
-		Delete dnn_Lists Where [ParentID] = @EntryID
+		Delete {objectQualifier}Lists Where [ParentID] = @EntryID
    		FETCH NEXT FROM allentry_cursor INTO @EntryID
 	End
 	-- Delete entries belong to this list
-	Delete dnn_Lists
+	Delete {objectQualifier}Lists
 	Where  [ListName] = @ListName
 End
 Else
@@ -6199,28 +6199,28 @@ Begin
 
 	-- need to store entries which to be deleted to clean up their sub entries
 	DECLARE selentry_cursor CURSOR FOR
-	SELECT [EntryID] FROM dnn_Lists Where  [ListName] = @ListName And
-	[ParentID] = (SELECT [EntryID] From dnn_Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)
+	SELECT [EntryID] FROM {objectQualifier}Lists Where  [ListName] = @ListName And
+	[ParentID] = (SELECT [EntryID] From {objectQualifier}Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)
 	-- delete their sub entires
 	OPEN selentry_cursor
 	FETCH NEXT FROM selentry_cursor INTO @EntryID
 	While @@FETCH_STATUS = 0
 	Begin	
-		Delete dnn_Lists Where [ParentID] = @EntryID
+		Delete {objectQualifier}Lists Where [ParentID] = @EntryID
    		FETCH NEXT FROM selentry_cursor INTO @EntryID
 	End
 	-- delete entry list
-	Delete dnn_Lists 
+	Delete {objectQualifier}Lists 
 	where  [ListName] = @ListName And
-	[ParentID] = (SELECT [EntryID] From dnn_Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)	
+	[ParentID] = (SELECT [EntryID] From {objectQualifier}Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)	
 End
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateListSortOrder]    Script Date: 10/05/2007 21:22:45 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateListSortOrder]    Script Date: 10/05/2007 21:22:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateListSortOrder]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateListSortOrder]
 (
 @EntryID	int, 
 @MoveUp		bit
@@ -6231,33 +6231,33 @@ DECLARE @ParentID int
 DECLARE @CurrentSortValue int
 DECLARE @ReplaceSortValue int
 -- Get the current sort order
-SELECT @CurrentSortValue = [SortOrder], @EntryListName = [ListName], @ParentID = [ParentID] FROM dnn_Lists (nolock) WHERE [EntryID] = @EntryID
+SELECT @CurrentSortValue = [SortOrder], @EntryListName = [ListName], @ParentID = [ParentID] FROM {objectQualifier}Lists (nolock) WHERE [EntryID] = @EntryID
 -- Move the item up or down?
 IF (@MoveUp = 1)
   BEGIN
     IF (@CurrentSortValue != 1) -- we rearrange sort order only if list enable sort order - sortorder >= 1
       BEGIN
         SET @ReplaceSortValue = @CurrentSortValue - 1
-        UPDATE dnn_Lists SET [SortOrder] = @CurrentSortValue WHERE [SortOrder] = @ReplaceSortValue And [ListName] = @EntryListName And [ParentID] = @ParentID
-        UPDATE dnn_Lists SET [SortOrder] = @ReplaceSortValue WHERE [EntryID] = @EntryID
+        UPDATE {objectQualifier}Lists SET [SortOrder] = @CurrentSortValue WHERE [SortOrder] = @ReplaceSortValue And [ListName] = @EntryListName And [ParentID] = @ParentID
+        UPDATE {objectQualifier}Lists SET [SortOrder] = @ReplaceSortValue WHERE [EntryID] = @EntryID
       END
   END
 ELSE
   BEGIN
-    IF (@CurrentSortValue < (SELECT MAX([SortOrder]) FROM dnn_Lists))
+    IF (@CurrentSortValue < (SELECT MAX([SortOrder]) FROM {objectQualifier}Lists))
     BEGIN
       SET @ReplaceSortValue = @CurrentSortValue + 1
-      UPDATE dnn_Lists SET [SortOrder] = @CurrentSortValue WHERE SortOrder = @ReplaceSortValue And [ListName] = @EntryListName  And [ParentID] = @ParentID
-      UPDATE dnn_Lists SET [SortOrder] = @ReplaceSortValue WHERE EntryID = @EntryID
+      UPDATE {objectQualifier}Lists SET [SortOrder] = @CurrentSortValue WHERE SortOrder = @ReplaceSortValue And [ListName] = @EntryListName  And [ParentID] = @ParentID
+      UPDATE {objectQualifier}Lists SET [SortOrder] = @ReplaceSortValue WHERE EntryID = @EntryID
     END
   END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateListEntry]    Script Date: 10/05/2007 21:22:45 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateListEntry]    Script Date: 10/05/2007 21:22:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateListEntry]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateListEntry]
 
 @EntryID int, 
 @ListName nvarchar(50), 
@@ -6267,7 +6267,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateListEntry]
 
 AS
 
-UPDATE dnn_Lists
+UPDATE {objectQualifier}Lists
 SET	
 	[ListName] = @ListName,
 	[Value] = @Value,
@@ -6275,12 +6275,12 @@ SET
 	[Description] = @Description
 WHERE 	[EntryID] = @EntryID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteListEntryByID]    Script Date: 10/05/2007 21:21:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteListEntryByID]    Script Date: 10/05/2007 21:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_DeleteListEntryByID]
+CREATE procedure {databaseOwner}[{objectQualifier}DeleteListEntryByID]
 
 @EntryId   int,
 @DeleteChild bit
@@ -6288,22 +6288,22 @@ CREATE procedure [dbo].[dnn_DeleteListEntryByID]
 as
 
 Delete
-From dnn_Lists
+From {objectQualifier}Lists
 Where  [EntryID] = @EntryID
 
 If @DeleteChild = 1
 Begin
 	Delete 
-	From dnn_Lists
+	From {objectQualifier}Lists
 	Where [ParentID] = @EntryID
 End
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetListEntries]    Script Date: 10/05/2007 21:21:57 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetListEntries]    Script Date: 10/05/2007 21:21:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetListEntries]
+CREATE procedure {databaseOwner}[{objectQualifier}GetListEntries]
 
 @ListName nvarchar(50),
 @ParentKey nvarchar(150),
@@ -6326,11 +6326,11 @@ Begin
 	E.[Description], 	
 	E.[ListName] + '.' + E.[Value] As [Key],	
 	E.[ListName] + '.' + E.[Text] As [DisplayName],
-	IsNull((SELECT [ListName] + '.' + [Value] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
-	IsNull((SELECT [ListName] + '.' + [Text] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
-	IsNull((SELECT [ListName] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList],		
-	(SELECT COUNT(DISTINCT [ParentID]) FROM dnn_Lists (nolock) WHERE [ParentID] = E.[EntryID]) As HasChildren
-	From dnn_Lists E (nolock)
+	IsNull((SELECT [ListName] + '.' + [Value] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
+	IsNull((SELECT [ListName] + '.' + [Text] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
+	IsNull((SELECT [ListName] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList],		
+	(SELECT COUNT(DISTINCT [ParentID]) FROM {objectQualifier}Lists (nolock) WHERE [ParentID] = E.[EntryID]) As HasChildren
+	From {objectQualifier}Lists E (nolock)
 	Where (E.[ListName] = @ListName or @ListName='')
 	and (E.[DefinitionID]=@DefinitionID or @DefinitionID = -1)
 	and (E.[EntryID]=@EntryID or @EntryID = -1)
@@ -6356,26 +6356,26 @@ Begin
 	E.[Description], 	
 	E.[ListName] + '.' + E.[Value] As [Key],	
 	E.[ListName] + '.' + E.[Text] As [DisplayName],
-	IsNull((SELECT [ListName] + '.' + [Value] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
-	IsNull((SELECT [ListName] + '.' + [Text] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
-	IsNull((SELECT [ListName] FROM dnn_Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList],	
-	(SELECT COUNT(DISTINCT [ParentID]) FROM dnn_Lists (nolock) WHERE [ParentID] = E.[EntryID]) As HasChildren
-	From dnn_Lists E (nolock)
+	IsNull((SELECT [ListName] + '.' + [Value] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [ParentKey],
+	IsNull((SELECT [ListName] + '.' + [Text] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]), '') As [Parent],
+	IsNull((SELECT [ListName] FROM {objectQualifier}Lists WHERE [EntryID] = E.[ParentID]),'') As [ParentList],	
+	(SELECT COUNT(DISTINCT [ParentID]) FROM {objectQualifier}Lists (nolock) WHERE [ParentID] = E.[EntryID]) As HasChildren
+	From {objectQualifier}Lists E (nolock)
 	where  [ListName] = @ListName 
 	and (E.[DefinitionID]=@DefinitionID or @DefinitionID = -1)
 	and (E.[EntryID]=@EntryID or @EntryID = -1)
 	and (E.[Value]=@Value or @Value = '')
-	and [ParentID] = (SELECT [EntryID] From dnn_Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)
+	and [ParentID] = (SELECT [EntryID] From {objectQualifier}Lists Where [ListName] = @ParentListName And [Value] = @ParentValue)
 	Order By E.[Level], E.[ListName], E.[SortOrder], E.[Text]
 
 End
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddListEntry]    Script Date: 10/05/2007 21:21:11 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddListEntry]    Script Date: 10/05/2007 21:21:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_AddListEntry]
+CREATE procedure {databaseOwner}[{objectQualifier}AddListEntry]
 
 @ListName nvarchar(50), 
 @Value nvarchar(100), 
@@ -6393,7 +6393,7 @@ DECLARE @SortOrder int
 
 IF @EnableSortOrder = 1
 BEGIN
-	SET @SortOrder = IsNull((SELECT MAX ([SortOrder]) From dnn_Lists Where [ListName] = @ListName), 0) + 1
+	SET @SortOrder = IsNull((SELECT MAX ([SortOrder]) From {objectQualifier}Lists Where [ListName] = @ListName), 0) + 1
 END
 ELSE
 BEGIN
@@ -6407,7 +6407,7 @@ BEGIN
 	DECLARE @ParentValue nvarchar(100)
 	SET @ParentListName = LEFT(@ParentKey, CHARINDEX( '.', @ParentKey) - 1)
 	SET @ParentValue = RIGHT(@ParentKey, LEN(@ParentKey) -  CHARINDEX( '.', @ParentKey))
-	SELECT @ParentID = [EntryID], @Level = ([Level] + 1) From dnn_Lists Where [ListName] = @ParentListName And [Value] = @ParentValue
+	SELECT @ParentID = [EntryID], @Level = ([Level] + 1) From {objectQualifier}Lists Where [ListName] = @ParentListName And [Value] = @ParentValue
 
 	Print 'ParentListName: ' + @ParentListName
 	Print 'ParentValue: ' + @ParentValue
@@ -6420,13 +6420,13 @@ BEGIN
 END
 
 -- Check if this entry exists
-If EXISTS (SELECT [EntryID] From dnn_Lists WHERE [ListName] = @ListName And [Value] = @Value And [Text] = @Text And [ParentID] = @ParentID)
+If EXISTS (SELECT [EntryID] From {objectQualifier}Lists WHERE [ListName] = @ListName And [Value] = @Value And [Text] = @Text And [ParentID] = @ParentID)
 BEGIN
 select -1
 Return 
 END
 
-insert into dnn_Lists 
+insert into {objectQualifier}Lists 
 	(
   	[ListName],
 	[Value],
@@ -6450,12 +6450,12 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateFolder]    Script Date: 10/05/2007 21:22:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateFolder]    Script Date: 10/05/2007 21:22:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateFolder]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateFolder]
 
 	@PortalID int,
 	@FolderID int,
@@ -6467,7 +6467,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdateFolder]
 
 AS
 
-UPDATE dnn_Folders
+UPDATE {objectQualifier}Folders
 SET    FolderPath = @FolderPath,
        StorageLocation = @StorageLocation,
        IsProtected = @IsProtected,
@@ -6476,57 +6476,57 @@ SET    FolderPath = @FolderPath,
 WHERE  ((PortalID = @PortalID) OR (PortalID IS Null AND @PortalID IS Null))
 AND    FolderID = @FolderID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteFolder]    Script Date: 10/05/2007 21:21:33 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteFolder]    Script Date: 10/05/2007 21:21:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteFolder]
+create procedure {databaseOwner}[{objectQualifier}DeleteFolder]
 	@PortalID int,
 	@FolderPath varchar(300)
 AS
-	DELETE FROM dnn_Folders
+	DELETE FROM {objectQualifier}Folders
 	WHERE ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 	AND FolderPath = @FolderPath
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFolderByFolderPath]    Script Date: 10/05/2007 21:21:54 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFolderByFolderPath]    Script Date: 10/05/2007 21:21:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFolderByFolderPath]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFolderByFolderPath]
 	@PortalID int,
 	@FolderPath nvarchar(300)
 AS
 SELECT *
-	FROM dbo.dnn_Folders
+	FROM {databaseOwner}{objectQualifier}Folders
 	WHERE ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 		AND (FolderPath = @FolderPath)
 	ORDER BY FolderPath
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFolders]    Script Date: 10/05/2007 21:21:55 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFolders]    Script Date: 10/05/2007 21:21:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFolders]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFolders]
 	@PortalID int,
 	@FolderID int,
 	@FolderPath nvarchar(300)
 AS
 SELECT *
-	FROM dnn_Folders
+	FROM {objectQualifier}Folders
 	WHERE ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 		AND (FolderID = @FolderID or @FolderID = -1)
 		AND (FolderPath = @FolderPath or @FolderPath = '')
 	ORDER BY FolderPath
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddFolder]    Script Date: 10/05/2007 21:21:08 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddFolder]    Script Date: 10/05/2007 21:21:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddFolder]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddFolder]
 
 	@PortalID int,
 	@FolderPath varchar(300),
@@ -6537,7 +6537,7 @@ CREATE PROCEDURE [dbo].[dnn_AddFolder]
 
 AS
 
-INSERT INTO dnn_Folders (
+INSERT INTO {objectQualifier}Folders (
   PortalID, 
   FolderPath, 
   StorageLocation, 
@@ -6556,38 +6556,38 @@ VALUES (
 
 SELECT SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFolderByFolderID]    Script Date: 10/05/2007 21:21:53 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFolderByFolderID]    Script Date: 10/05/2007 21:21:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFolderByFolderID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFolderByFolderID]
 	@PortalID int,
 	@FolderID int
 AS
 SELECT *
-	FROM dbo.dnn_Folders
+	FROM {databaseOwner}{objectQualifier}Folders
 	WHERE ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 		AND (FolderID = @FolderID)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteTabModuleSettings]    Script Date: 10/05/2007 21:21:42 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteTabModuleSettings]    Script Date: 10/05/2007 21:21:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteTabModuleSettings]
+create procedure {databaseOwner}[{objectQualifier}DeleteTabModuleSettings]
 @TabModuleId      int
 as
 
-DELETE FROM dnn_TabModuleSettings 
+DELETE FROM {objectQualifier}TabModuleSettings 
 WHERE TabModuleId = @TabModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddTabModuleSetting]    Script Date: 10/05/2007 21:21:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddTabModuleSetting]    Script Date: 10/05/2007 21:21:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddTabModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}AddTabModuleSetting]
 
 @TabModuleId   int,
 @SettingName   nvarchar(50),
@@ -6595,7 +6595,7 @@ create procedure [dbo].[dnn_AddTabModuleSetting]
 
 as
 
-insert into dnn_TabModuleSettings ( 
+insert into {objectQualifier}TabModuleSettings ( 
   TabModuleId,
   SettingName, 
   SettingValue 
@@ -6606,26 +6606,26 @@ values (
   @SettingValue 
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteTabModuleSetting]    Script Date: 10/05/2007 21:21:42 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteTabModuleSetting]    Script Date: 10/05/2007 21:21:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteTabModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}DeleteTabModuleSetting]
 @TabModuleId      int,
 @SettingName   nvarchar(50)
 as
 
-DELETE FROM dnn_TabModuleSettings 
+DELETE FROM {objectQualifier}TabModuleSettings 
 WHERE TabModuleId = @TabModuleId
 AND SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateTabModuleSetting]    Script Date: 10/05/2007 21:23:02 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateTabModuleSetting]    Script Date: 10/05/2007 21:23:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateTabModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}UpdateTabModuleSetting]
 
 @TabModuleId   int,
 @SettingName   nvarchar(50),
@@ -6633,17 +6633,17 @@ create procedure [dbo].[dnn_UpdateTabModuleSetting]
 
 as
 
-update dnn_TabModuleSettings
+update {objectQualifier}TabModuleSettings
 set    SettingValue = @SettingValue
 where  TabModuleId = @TabModuleId
 and    SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabModuleSettings]    Script Date: 10/05/2007 21:22:24 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabModuleSettings]    Script Date: 10/05/2007 21:22:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetTabModuleSettings]
+create procedure {databaseOwner}[{objectQualifier}GetTabModuleSettings]
 
 @TabModuleId int
 
@@ -6651,15 +6651,15 @@ as
 
 select SettingName,
        SettingValue
-from   dnn_TabModuleSettings 
+from   {objectQualifier}TabModuleSettings 
 where  TabModuleId = @TabModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabModuleSetting]    Script Date: 10/05/2007 21:22:24 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabModuleSetting]    Script Date: 10/05/2007 21:22:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetTabModuleSetting]
+create procedure {databaseOwner}[{objectQualifier}GetTabModuleSetting]
 
 @TabModuleId int,
 @SettingName nvarchar(50)
@@ -6668,40 +6668,40 @@ as
 
 select SettingName,
        SettingValue
-from   dnn_TabModuleSettings 
+from   {objectQualifier}TabModuleSettings 
 where  TabModuleId = @TabModuleId
 and    SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateScheduleHistory]    Script Date: 10/05/2007 21:22:57 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateScheduleHistory]    Script Date: 10/05/2007 21:22:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateScheduleHistory]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateScheduleHistory]
 @ScheduleHistoryID int,
 @EndDate datetime,
 @Succeeded bit,
 @LogNotes ntext,
 @NextStart datetime
 AS
-UPDATE dbo.dnn_ScheduleHistory
+UPDATE {databaseOwner}{objectQualifier}ScheduleHistory
 SET	EndDate = @EndDate,
 	Succeeded = @Succeeded,
 	LogNotes = @LogNotes,
 	NextStart = @NextStart
 WHERE ScheduleHistoryID = @ScheduleHistoryID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddScheduleHistory]    Script Date: 10/05/2007 21:21:19 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddScheduleHistory]    Script Date: 10/05/2007 21:21:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddScheduleHistory]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddScheduleHistory]
 @ScheduleID int,
 @StartDate datetime,
 @Server varchar(150)
 AS
-INSERT INTO dbo.dnn_ScheduleHistory
+INSERT INTO {databaseOwner}{objectQualifier}ScheduleHistory
 (ScheduleID,
 StartDate,
 Server)
@@ -6712,12 +6712,12 @@ VALUES
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUserProfile]    Script Date: 10/05/2007 21:22:29 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserProfile]    Script Date: 10/05/2007 21:22:29 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetUserProfile]
+CREATE procedure {databaseOwner}[{objectQualifier}GetUserProfile]
 
 	@UserId int
 
@@ -6729,15 +6729,15 @@ SELECT
 	'PropertyValue' = case when (PropertyValue Is Null) then PropertyText else PropertyValue end,
 	Visibility,
 	LastUpdatedDate
-	FROM	dnn_UserProfile
+	FROM	{objectQualifier}UserProfile
 	WHERE   UserId = @UserId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateUserProfileProperty]    Script Date: 10/05/2007 21:23:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateUserProfileProperty]    Script Date: 10/05/2007 21:23:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateUserProfileProperty]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateUserProfileProperty]
 
 	@ProfileID				int,
 	@UserID					int,
@@ -6750,13 +6750,13 @@ AS
 IF @ProfileID IS NULL OR @ProfileID = -1
 	-- Try the UserID/PropertyDefinitionID to see if the Profile property exists
 	SELECT @ProfileID = ProfileID
-		FROM   dnn_UserProfile
+		FROM   {objectQualifier}UserProfile
 		WHERE  UserID = @UserID AND PropertyDefinitionID = @PropertyDefinitionID
  
 IF @ProfileID IS NOT NULL
 	-- Update Property
 	BEGIN
-		UPDATE dnn_UserProfile
+		UPDATE {objectQualifier}UserProfile
 			SET PropertyValue = case when (DATALENGTH(@PropertyValue) > 7500) then NULL else @PropertyValue end,
 				PropertyText = case when (DATALENGTH(@PropertyValue) > 7500) then @PropertyValue else NULL end,
 				Visibility = @Visibility,
@@ -6767,7 +6767,7 @@ IF @ProfileID IS NOT NULL
 ELSE
 	-- Insert New Property
 	BEGIN
-		INSERT INTO dnn_UserProfile (
+		INSERT INTO {objectQualifier}UserProfile (
 			UserID,
 			PropertyDefinitionID,
 			PropertyValue,
@@ -6787,34 +6787,34 @@ ELSE
 	SELECT SCOPE_IDENTITY()
 END
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteVendorClassifications]    Script Date: 10/05/2007 21:21:45 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteVendorClassifications]    Script Date: 10/05/2007 21:21:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteVendorClassifications]
+create procedure {databaseOwner}[{objectQualifier}DeleteVendorClassifications]
 
 @VendorId  int
 
 as
 
 delete
-from dnn_VendorClassification
+from {objectQualifier}VendorClassification
 where  VendorId = @VendorId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddVendorClassification]    Script Date: 10/05/2007 21:21:30 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddVendorClassification]    Script Date: 10/05/2007 21:21:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddVendorClassification]
+create procedure {databaseOwner}[{objectQualifier}AddVendorClassification]
 
 @VendorId           int,
 @ClassificationId   int
 
 as
 
-insert into dnn_VendorClassification ( 
+insert into {objectQualifier}VendorClassification ( 
   VendorId,
   ClassificationId
 )
@@ -6825,12 +6825,12 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_ListSearchItemWordPosition]    Script Date: 10/05/2007 21:22:34 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}ListSearchItemWordPosition]    Script Date: 10/05/2007 21:22:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_ListSearchItemWordPosition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}ListSearchItemWordPosition]
 AS
 
 SELECT
@@ -6838,14 +6838,14 @@ SELECT
 	[SearchItemWordID],
 	[ContentPosition]
 FROM
-	dbo.dnn_SearchItemWordPosition
+	{databaseOwner}{objectQualifier}SearchItemWordPosition
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItemWordPosition]    Script Date: 10/05/2007 21:22:15 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItemWordPosition]    Script Date: 10/05/2007 21:22:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchItemWordPosition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchItemWordPosition]
 	@SearchItemWordPositionID int
 	
 AS
@@ -6855,46 +6855,46 @@ SELECT
 	[SearchItemWordID],
 	[ContentPosition]
 FROM
-	dbo.dnn_SearchItemWordPosition
+	{databaseOwner}{objectQualifier}SearchItemWordPosition
 WHERE
 	[SearchItemWordPositionID] = @SearchItemWordPositionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSearchItemWordPosition]    Script Date: 10/05/2007 21:22:59 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSearchItemWordPosition]    Script Date: 10/05/2007 21:22:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateSearchItemWordPosition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateSearchItemWordPosition]
 	@SearchItemWordPositionID int, 
 	@SearchItemWordID int, 
 	@ContentPosition int 
 AS
 
-UPDATE dbo.dnn_SearchItemWordPosition SET
+UPDATE {databaseOwner}{objectQualifier}SearchItemWordPosition SET
 	[SearchItemWordID] = @SearchItemWordID,
 	[ContentPosition] = @ContentPosition
 WHERE
 	[SearchItemWordPositionID] = @SearchItemWordPositionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchItemWordPosition]    Script Date: 10/05/2007 21:21:39 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchItemWordPosition]    Script Date: 10/05/2007 21:21:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteSearchItemWordPosition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteSearchItemWordPosition]
 	@SearchItemWordPositionID int
 AS
 
-DELETE FROM dbo.dnn_SearchItemWordPosition
+DELETE FROM {databaseOwner}{objectQualifier}SearchItemWordPosition
 WHERE
 	[SearchItemWordPositionID] = @SearchItemWordPositionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchItemWordPositionBySearchItemWord]    Script Date: 10/05/2007 21:22:15 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchItemWordPositionBySearchItemWord]    Script Date: 10/05/2007 21:22:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchItemWordPositionBySearchItemWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchItemWordPositionBySearchItemWord]
 	@SearchItemWordID int
 AS
 
@@ -6903,16 +6903,16 @@ SELECT
 	[SearchItemWordID],
 	[ContentPosition]
 FROM
-	dbo.dnn_SearchItemWordPosition
+	{databaseOwner}{objectQualifier}SearchItemWordPosition
 WHERE
 	[SearchItemWordID]=@SearchItemWordID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSearchItemWordPosition]    Script Date: 10/05/2007 21:21:21 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSearchItemWordPosition]    Script Date: 10/05/2007 21:21:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  PROCEDURE [dbo].[dnn_AddSearchItemWordPosition]
+CREATE  PROCEDURE {databaseOwner}[{objectQualifier}AddSearchItemWordPosition]
 	@SearchItemWordID int,
 	@ContentPositions varChar(2000)
 AS
@@ -6945,17 +6945,17 @@ AS
 		END
 	END	
 
-	INSERT INTO dbo.dnn_SearchItemWordPosition (
+	INSERT INTO {databaseOwner}{objectQualifier}SearchItemWordPosition (
 		[SearchItemWordID],
 		[ContentPosition]) 
 	SELECT ItemWordID, Position FROM @TempList
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSystemMessage]    Script Date: 10/05/2007 21:21:41 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSystemMessage]    Script Date: 10/05/2007 21:21:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteSystemMessage]
+create procedure {databaseOwner}[{objectQualifier}DeleteSystemMessage]
 
 @PortalID     int,
 @MessageName  nvarchar(50)
@@ -6963,16 +6963,16 @@ create procedure [dbo].[dnn_DeleteSystemMessage]
 as
 
 delete
-from   dnn_SystemMessages
+from   {objectQualifier}SystemMessages
 where  PortalID = @PortalID
 and    MessageName = @MessageName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSystemMessage]    Script Date: 10/05/2007 21:21:23 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSystemMessage]    Script Date: 10/05/2007 21:21:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddSystemMessage]
+create procedure {databaseOwner}[{objectQualifier}AddSystemMessage]
 
 @PortalID     int,
 @MessageName  nvarchar(50),
@@ -6980,7 +6980,7 @@ create procedure [dbo].[dnn_AddSystemMessage]
 
 as
 
-insert into dnn_SystemMessages (
+insert into {objectQualifier}SystemMessages (
   PortalID,
   MessageName,
   MessageValue
@@ -6991,12 +6991,12 @@ values (
   @MessageValue
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSystemMessage]    Script Date: 10/05/2007 21:22:59 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSystemMessage]    Script Date: 10/05/2007 21:22:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdateSystemMessage]
+create procedure {databaseOwner}[{objectQualifier}UpdateSystemMessage]
 
 @PortalID     int,
 @MessageName  nvarchar(50),
@@ -7004,17 +7004,17 @@ create procedure [dbo].[dnn_UpdateSystemMessage]
 
 as
 
-update dnn_SystemMessages
+update {objectQualifier}SystemMessages
 set    MessageValue = @MessageValue
 where  ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 and    MessageName = @MessageName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSystemMessage]    Script Date: 10/05/2007 21:22:22 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSystemMessage]    Script Date: 10/05/2007 21:22:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSystemMessage]
+create procedure {databaseOwner}[{objectQualifier}GetSystemMessage]
 
 @PortalID     int,
 @MessageName  nvarchar(50)
@@ -7022,42 +7022,42 @@ create procedure [dbo].[dnn_GetSystemMessage]
 as
 
 select MessageValue
-from   dnn_SystemMessages
+from   {objectQualifier}SystemMessages
 where  ((PortalID = @PortalID) or (PortalID is null and @PortalID is null)) 
 and    MessageName = @MessageName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSystemMessages]    Script Date: 10/05/2007 21:22:22 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSystemMessages]    Script Date: 10/05/2007 21:22:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSystemMessages]
+create procedure {databaseOwner}[{objectQualifier}GetSystemMessages]
 
 as
 
 select MessageName
-from   dnn_SystemMessages
+from   {objectQualifier}SystemMessages
 where  PortalID is null
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSearchWord]    Script Date: 10/05/2007 21:21:40 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSearchWord]    Script Date: 10/05/2007 21:21:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeleteSearchWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteSearchWord]
 	@SearchWordsID int
 AS
 
-DELETE FROM dbo.dnn_SearchWord
+DELETE FROM {databaseOwner}{objectQualifier}SearchWord
 WHERE
 	[SearchWordsID] = @SearchWordsID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchWords]    Script Date: 10/05/2007 21:22:16 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchWords]    Script Date: 10/05/2007 21:22:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchWords]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchWords]
 AS
 
 SELECT
@@ -7065,46 +7065,46 @@ SELECT
 	[Word],
 	[HitCount]
 FROM
-	dbo.dnn_SearchWord
+	{databaseOwner}{objectQualifier}SearchWord
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateSearchWord]    Script Date: 10/05/2007 21:22:59 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateSearchWord]    Script Date: 10/05/2007 21:22:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdateSearchWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateSearchWord]
 	@SearchWordsID int, 
 	@Word nvarchar(100), 
 	@IsCommon bit, 
 	@HitCount int 
 AS
 
-UPDATE dbo.dnn_SearchWord SET
+UPDATE {databaseOwner}{objectQualifier}SearchWord SET
 	[Word] = @Word,
 	[IsCommon] = @IsCommon,
 	[HitCount] = @HitCount
 WHERE
 	[SearchWordsID] = @SearchWordsID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSearchWord]    Script Date: 10/05/2007 21:21:21 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSearchWord]    Script Date: 10/05/2007 21:21:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddSearchWord]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddSearchWord]
 	@Word nvarchar(100)
  
 AS
 
 DECLARE @id int
 SELECT @id = SearchWordsID 
-	FROM dnn_SearchWord
+	FROM {objectQualifier}SearchWord
 	WHERE Word = @Word
  
 
 IF @id IS NULL
 	BEGIN
-		INSERT INTO dnn_SearchWord (
+		INSERT INTO {objectQualifier}SearchWord (
 			[Word],
 			[IsCommon],
 			[HitCount]
@@ -7120,12 +7120,12 @@ IF @id IS NULL
 ELSE
 	SELECT @id
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSearchWordByID]    Script Date: 10/05/2007 21:22:16 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSearchWordByID]    Script Date: 10/05/2007 21:22:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSearchWordByID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSearchWordByID]
 	@SearchWordsID int
 	
 AS
@@ -7136,43 +7136,43 @@ SELECT
 	[IsCommon],
 	[HitCount]
 FROM
-	dbo.dnn_SearchWord
+	{databaseOwner}{objectQualifier}SearchWord
 WHERE
 	[SearchWordsID] = @SearchWordsID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetHostSettings]    Script Date: 10/05/2007 21:21:56 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetHostSettings]    Script Date: 10/05/2007 21:21:56 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetHostSettings]
+CREATE procedure {databaseOwner}[{objectQualifier}GetHostSettings]
 as
 select SettingName,
        SettingValue,
        SettingIsSecure
-from dnn_HostSettings
+from {objectQualifier}HostSettings
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetHostSetting]    Script Date: 10/05/2007 21:21:55 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetHostSetting]    Script Date: 10/05/2007 21:21:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetHostSetting]
+create procedure {databaseOwner}[{objectQualifier}GetHostSetting]
 
 @SettingName nvarchar(50)
 
 as
 
 select SettingValue
-from dnn_HostSettings
+from {objectQualifier}HostSettings
 where  SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddHostSetting]    Script Date: 10/05/2007 21:21:09 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddHostSetting]    Script Date: 10/05/2007 21:21:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_AddHostSetting]
+CREATE procedure {databaseOwner}[{objectQualifier}AddHostSetting]
 
 @SettingName   nvarchar(50),
 @SettingValue  nvarchar(256),
@@ -7180,7 +7180,7 @@ CREATE procedure [dbo].[dnn_AddHostSetting]
 
 as
 
-insert into dnn_HostSettings (
+insert into {objectQualifier}HostSettings (
   SettingName,
   SettingValue,
   SettingIsSecure
@@ -7191,12 +7191,12 @@ values (
   @SettingIsSecure
 )
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateHostSetting]    Script Date: 10/05/2007 21:22:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateHostSetting]    Script Date: 10/05/2007 21:22:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_UpdateHostSetting]
+CREATE procedure {databaseOwner}[{objectQualifier}UpdateHostSetting]
 
 @SettingName   nvarchar(50),
 @SettingValue  nvarchar(256),
@@ -7204,16 +7204,16 @@ CREATE procedure [dbo].[dnn_UpdateHostSetting]
 
 as
 
-update dnn_HostSettings
+update {objectQualifier}HostSettings
 set    SettingValue = @SettingValue, SettingIsSecure = @SettingIsSecure
 where  SettingName = @SettingName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddPortalInfo]    Script Date: 10/05/2007 21:21:15 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddPortalInfo]    Script Date: 10/05/2007 21:21:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddPortalInfo]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddPortalInfo]
 	@PortalName         nvarchar(128),
 	@Currency           char(3),
 	@ExpiryDate         datetime,
@@ -7227,7 +7227,7 @@ CREATE PROCEDURE [dbo].[dnn_AddPortalInfo]
 as
 DECLARE @PortalID int
 
-insert into dnn_Portals (
+insert into {objectQualifier}Portals (
   PortalName,
   ExpiryDate,
   UserRegistration,
@@ -7262,17 +7262,17 @@ SET @PortalID = SCOPE_IDENTITY()
 
 IF @HomeDirectory = ''
 BEGIN
-	UPDATE dnn_Portals SET HomeDirectory = 'Portals/' + convert(varchar(10), @PortalID) WHERE PortalID = @PortalID
+	UPDATE {objectQualifier}Portals SET HomeDirectory = 'Portals/' + convert(varchar(10), @PortalID) WHERE PortalID = @PortalID
 END
 
 SELECT @PortalID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdatePortalSetup]    Script Date: 10/05/2007 21:22:53 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdatePortalSetup]    Script Date: 10/05/2007 21:22:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_UpdatePortalSetup]
+create procedure {databaseOwner}[{objectQualifier}UpdatePortalSetup]
 
 @PortalId            int,
 @AdministratorId     int,
@@ -7286,7 +7286,7 @@ create procedure [dbo].[dnn_UpdatePortalSetup]
 
 as
 
-update dnn_Portals
+update {objectQualifier}Portals
 set    AdministratorId = @AdministratorId, 
        AdministratorRoleId = @AdministratorRoleId, 
        RegisteredRoleId = @RegisteredRoleId,
@@ -7297,23 +7297,23 @@ set    AdministratorId = @AdministratorId,
        AdminTabId = @AdminTabId
 where  PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalCount]    Script Date: 10/05/2007 21:22:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalCount]    Script Date: 10/05/2007 21:22:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortalCount]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalCount]
 
 AS
 SELECT COUNT(*)
-FROM dnn_Portals
+FROM {objectQualifier}Portals
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdatePortalInfo]    Script Date: 10/05/2007 21:22:52 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdatePortalInfo]    Script Date: 10/05/2007 21:22:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdatePortalInfo]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdatePortalInfo]
 
 	@PortalId           int,
 	@PortalName         nvarchar(128),
@@ -7344,7 +7344,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdatePortalInfo]
 	@HomeDirectory		varchar(100)
 
 as
-update dbo.dnn_Portals
+update {databaseOwner}{objectQualifier}Portals
 set    PortalName = @PortalName,
        LogoFile = @LogoFile,
        FooterText = @FooterText,
@@ -7373,12 +7373,12 @@ set    PortalName = @PortalName,
        HomeDirectory = @HomeDirectory
 where  PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPermissionsByFolderPath]    Script Date: 10/05/2007 21:22:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPermissionsByFolderPath]    Script Date: 10/05/2007 21:22:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPermissionsByFolderPath]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPermissionsByFolderPath]
 	@PortalID int,
 	@FolderPath varchar(300)
 AS
@@ -7389,16 +7389,16 @@ SELECT
 	P.[PermissionKey],
 	P.[PermissionName]
 FROM
-	dbo.dnn_Permission P
+	{databaseOwner}{objectQualifier}Permission P
 WHERE
 	P.PermissionCode = 'SYSTEM_FOLDER'
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPermission]    Script Date: 10/05/2007 21:22:02 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPermission]    Script Date: 10/05/2007 21:22:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPermission]
 	@PermissionID int
 AS
 
@@ -7409,16 +7409,16 @@ SELECT
 	[PermissionKey],
 	[PermissionName]
 FROM
-	dbo.dnn_Permission
+	{databaseOwner}{objectQualifier}Permission
 WHERE
 	[PermissionID] = @PermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPermissionsByModuleDefID]    Script Date: 10/05/2007 21:22:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPermissionsByModuleDefID]    Script Date: 10/05/2007 21:22:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPermissionsByModuleDefID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPermissionsByModuleDefID]
 	@ModuleDefID int
 AS
 SELECT
@@ -7428,16 +7428,16 @@ SELECT
 	P.[PermissionKey],
 	P.[PermissionName]
 FROM
-	dnn_Permission P
+	{objectQualifier}Permission P
 WHERE
 	P.ModuleDefID = @ModuleDefID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPermissionByCodeAndKey]    Script Date: 10/05/2007 21:22:03 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPermissionByCodeAndKey]    Script Date: 10/05/2007 21:22:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPermissionByCodeAndKey]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPermissionByCodeAndKey]
 	@PermissionCode varchar(50),
 	@PermissionKey varchar(20)
 AS
@@ -7449,31 +7449,31 @@ SELECT
 	P.[PermissionKey],
 	P.[PermissionName]
 FROM
-	dbo.dnn_Permission P
+	{databaseOwner}{objectQualifier}Permission P
 WHERE
 	(P.PermissionCode = @PermissionCode or @PermissionCode IS NULL)
 	AND
 	(P.PermissionKey = @PermissionKey or @PermissionKey IS NULL)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeletePermission]    Script Date: 10/05/2007 21:21:36 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeletePermission]    Script Date: 10/05/2007 21:21:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_DeletePermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeletePermission]
 	@PermissionID int
 AS
 
-DELETE FROM dbo.dnn_Permission
+DELETE FROM {databaseOwner}{objectQualifier}Permission
 WHERE
 	[PermissionID] = @PermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPermissionsByTabID]    Script Date: 10/05/2007 21:22:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPermissionsByTabID]    Script Date: 10/05/2007 21:22:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPermissionsByTabID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPermissionsByTabID]
 	@TabID int
 AS
 
@@ -7484,23 +7484,23 @@ SELECT
 	P.[ModuleDefID],
 	P.[PermissionName]
 FROM
-	dbo.dnn_Permission P
+	{databaseOwner}{objectQualifier}Permission P
 WHERE
 	P.PermissionCode = 'SYSTEM_TAB'
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddPermission]    Script Date: 10/05/2007 21:21:14 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddPermission]    Script Date: 10/05/2007 21:21:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddPermission]
 	@ModuleDefID int,
 	@PermissionCode varchar(50),
 	@PermissionKey varchar(20),
 	@PermissionName varchar(50)
 AS
 
-INSERT INTO dbo.dnn_Permission (
+INSERT INTO {databaseOwner}{objectQualifier}Permission (
 	[ModuleDefID],
 	[PermissionCode],
 	[PermissionKey],
@@ -7514,12 +7514,12 @@ INSERT INTO dbo.dnn_Permission (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdatePermission]    Script Date: 10/05/2007 21:22:49 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdatePermission]    Script Date: 10/05/2007 21:22:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_UpdatePermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdatePermission]
 	@PermissionID int, 
 	@PermissionCode varchar(50),
 	@ModuleDefID int, 
@@ -7527,7 +7527,7 @@ CREATE PROCEDURE [dbo].[dnn_UpdatePermission]
 	@PermissionName varchar(50) 
 AS
 
-UPDATE dbo.dnn_Permission SET
+UPDATE {databaseOwner}{objectQualifier}Permission SET
 	[ModuleDefID] = @ModuleDefID,
 	[PermissionCode] = @PermissionCode,
 	[PermissionKey] = @PermissionKey,
@@ -7535,26 +7535,26 @@ UPDATE dbo.dnn_Permission SET
 WHERE
 	[PermissionID] = @PermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSkins]    Script Date: 10/05/2007 21:22:22 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSkins]    Script Date: 10/05/2007 21:22:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetSkins]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetSkins]
 
 @PortalID		int
 
 AS
 SELECT *
-FROM	dnn_Skins
+FROM	{objectQualifier}Skins
 WHERE   (PortalID = @PortalID) OR (PortalID is null And @PortalId Is Null)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddSkin]    Script Date: 10/05/2007 21:21:23 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddSkin]    Script Date: 10/05/2007 21:21:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_AddSkin]
+create procedure {databaseOwner}[{objectQualifier}AddSkin]
 
 @SkinRoot               nvarchar(50),
 @PortalID		int,
@@ -7563,7 +7563,7 @@ create procedure [dbo].[dnn_AddSkin]
 
 as
 
-insert into dnn_Skins (
+insert into {objectQualifier}Skins (
   SkinRoot,
   PortalID,
   SkinType,
@@ -7578,12 +7578,12 @@ values (
 
 select SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSkin]    Script Date: 10/05/2007 21:22:21 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSkin]    Script Date: 10/05/2007 21:22:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetSkin]
+create procedure {databaseOwner}[{objectQualifier}GetSkin]
 
 @SkinRoot               nvarchar(50),
 @PortalID		int,
@@ -7592,18 +7592,18 @@ create procedure [dbo].[dnn_GetSkin]
 as
 	
 select *
-from	dnn_Skins
+from	{objectQualifier}Skins
 where   SkinRoot = @SkinRoot
 and     SkinType = @SkinType
 and     ( PortalID is null or PortalID = @PortalID )
 order by PortalID desc
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteSkin]    Script Date: 10/05/2007 21:21:40 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteSkin]    Script Date: 10/05/2007 21:21:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteSkin]
+create procedure {databaseOwner}[{objectQualifier}DeleteSkin]
 
 @SkinRoot               nvarchar(50),
 @PortalID		int,
@@ -7612,17 +7612,17 @@ create procedure [dbo].[dnn_DeleteSkin]
 as
 
 delete
-from   dnn_Skins
+from   {objectQualifier}Skins
 where   SkinRoot = @SkinRoot
 and     SkinType = @SkinType
 and    ((PortalID is null and @PortalID is null) or (PortalID = @PortalID))
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_UpdateDesktopModule]    Script Date: 10/05/2007 21:22:39 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateDesktopModule]    Script Date: 10/05/2007 21:22:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  PROCEDURE [dbo].[dnn_UpdateDesktopModule]
+CREATE  PROCEDURE {databaseOwner}[{objectQualifier}UpdateDesktopModule]
 
 	@DesktopModuleId	int,    
 	@ModuleName		nvarchar(128),
@@ -7638,7 +7638,7 @@ CREATE  PROCEDURE [dbo].[dnn_UpdateDesktopModule]
 
 AS
 
-UPDATE 	dnn_DesktopModules
+UPDATE 	{objectQualifier}DesktopModules
 SET    	ModuleName = @ModuleName,
 	FolderName = @FolderName,
 	FriendlyName = @FriendlyName,
@@ -7651,72 +7651,72 @@ SET    	ModuleName = @ModuleName,
 	CompatibleVersions = @CompatibleVersions
 WHERE  DesktopModuleId = @DesktopModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDesktopModuleByModuleName]    Script Date: 10/05/2007 21:21:50 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDesktopModuleByModuleName]    Script Date: 10/05/2007 21:21:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetDesktopModuleByModuleName]
+CREATE procedure {databaseOwner}[{objectQualifier}GetDesktopModuleByModuleName]
 
 	@ModuleName    nvarchar(128)
 
 as
 
 select *
-from   dnn_DesktopModules
+from   {objectQualifier}DesktopModules
 where  ModuleName = @ModuleName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDesktopModule]    Script Date: 10/05/2007 21:21:49 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDesktopModule]    Script Date: 10/05/2007 21:21:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetDesktopModule]
+create procedure {databaseOwner}[{objectQualifier}GetDesktopModule]
 
 @DesktopModuleId int
 
 as
 
 select *
-from   dnn_DesktopModules
+from   {objectQualifier}DesktopModules
 where  DesktopModuleId = @DesktopModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDesktopModuleByFriendlyName]    Script Date: 10/05/2007 21:21:49 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDesktopModuleByFriendlyName]    Script Date: 10/05/2007 21:21:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetDesktopModuleByFriendlyName]
+CREATE procedure {databaseOwner}[{objectQualifier}GetDesktopModuleByFriendlyName]
 
 	@FriendlyName    nvarchar(128)
 
 as
 
 select *
-from   dnn_DesktopModules
+from   {objectQualifier}DesktopModules
 where  FriendlyName = @FriendlyName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteDesktopModule]    Script Date: 10/05/2007 21:21:31 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteDesktopModule]    Script Date: 10/05/2007 21:21:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteDesktopModule]
+create procedure {databaseOwner}[{objectQualifier}DeleteDesktopModule]
 
 @DesktopModuleId int
 
 as
 
 delete
-from dnn_DesktopModules
+from {objectQualifier}DesktopModules
 where  DesktopModuleId = @DesktopModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddDesktopModule]    Script Date: 10/05/2007 21:21:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddDesktopModule]    Script Date: 10/05/2007 21:21:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddDesktopModule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddDesktopModule]
     
 	@ModuleName		nvarchar(128),
 	@FolderName		nvarchar(128),
@@ -7731,7 +7731,7 @@ CREATE PROCEDURE [dbo].[dnn_AddDesktopModule]
 
 AS
 
-INSERT INTO dnn_DesktopModules (
+INSERT INTO {objectQualifier}DesktopModules (
 	ModuleName,
 	FolderName,
 	FriendlyName,
@@ -7758,492 +7758,492 @@ VALUES (
 
 SELECT SCOPE_IDENTITY()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetDesktopModules]    Script Date: 10/05/2007 21:21:50 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetDesktopModules]    Script Date: 10/05/2007 21:21:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_GetDesktopModules]
+create procedure {databaseOwner}[{objectQualifier}GetDesktopModules]
 
 as
 
 select *
-from   dnn_DesktopModules
+from   {objectQualifier}DesktopModules
 where  IsAdmin = 0
 order  by FriendlyName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetSuperUsers]    Script Date: 10/05/2007 21:22:22 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetSuperUsers]    Script Date: 10/05/2007 21:22:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[dnn_GetSuperUsers]
+CREATE procedure {databaseOwner}[{objectQualifier}GetSuperUsers]
 
 as
 
 select U.*,
        'PortalId' = -1,
        'FullName' = U.FirstName + ' ' + U.LastName
-from   dnn_Users U
+from   {objectQualifier}Users U
 where  U.IsSuperUser = 1
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_DeleteUser]    Script Date: 10/05/2007 21:21:43 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}DeleteUser]    Script Date: 10/05/2007 21:21:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[dnn_DeleteUser]
+create procedure {databaseOwner}[{objectQualifier}DeleteUser]
 
 @UserId   int
 
 as
 
 delete
-from dnn_Users
+from {objectQualifier}Users
 where  UserId = @UserId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_AddDefaultPropertyDefinitions]    Script Date: 10/05/2007 21:21:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}AddDefaultPropertyDefinitions]    Script Date: 10/05/2007 21:21:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_AddDefaultPropertyDefinitions]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddDefaultPropertyDefinitions]
 	@PortalId int
 
 AS
 	DECLARE @TextDataType as int
-	SELECT @TextDataType = (SELECT EntryID FROM dnn_Lists WHERE ListName = 'DataType' AND Value = 'Text')
+	SELECT @TextDataType = (SELECT EntryID FROM {objectQualifier}Lists WHERE ListName = 'DataType' AND Value = 'Text')
 	DECLARE @CountryDataType as int
-	SELECT @CountryDataType = (SELECT EntryID FROM dnn_Lists WHERE ListName = 'DataType' AND Value = 'Country')
+	SELECT @CountryDataType = (SELECT EntryID FROM {objectQualifier}Lists WHERE ListName = 'DataType' AND Value = 'Country')
 	DECLARE @RegionDataType as int
-	SELECT @RegionDataType = (SELECT EntryID FROM dnn_Lists WHERE ListName = 'DataType' AND Value = 'Region')
+	SELECT @RegionDataType = (SELECT EntryID FROM {objectQualifier}Lists WHERE ListName = 'DataType' AND Value = 'Region')
 	DECLARE @TimeZoneDataType as int
-	SELECT @TimeZoneDataType = (SELECT EntryID FROM dnn_Lists WHERE ListName = 'DataType' AND Value = 'TimeZone')
+	SELECT @TimeZoneDataType = (SELECT EntryID FROM {objectQualifier}Lists WHERE ListName = 'DataType' AND Value = 'TimeZone')
 	DECLARE @LocaleDataType as int
-	SELECT @LocaleDataType = (SELECT EntryID FROM dnn_Lists WHERE ListName = 'DataType' AND Value = 'Locale')
+	SELECT @LocaleDataType = (SELECT EntryID FROM {objectQualifier}Lists WHERE ListName = 'DataType' AND Value = 'Locale')
 	DECLARE @RichTextDataType as int
-	SELECT @RichTextDataType = (SELECT EntryID FROM dnn_Lists WHERE ListName = 'DataType' AND Value = 'RichText')
+	SELECT @RichTextDataType = (SELECT EntryID FROM {objectQualifier}Lists WHERE ListName = 'DataType' AND Value = 'RichText')
 	
 	DECLARE @RC int
 
 	--Add Name Properties
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','Prefix', 0, '', 1, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','FirstName' ,0, '', 3, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','MiddleName' ,0, '', 5, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','LastName' ,0, '', 7, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','Suffix' ,0, '', 9, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','Prefix', 0, '', 1, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','FirstName' ,0, '', 3, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','MiddleName' ,0, '', 5, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','LastName' ,0, '', 7, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Name','Suffix' ,0, '', 9, 1, 50
 	
 	--Add Address Properties
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','Unit' ,0, '', 11, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','Street' ,0, '', 13, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','City' ,0, '', 15, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @RegionDataType, '', 'Address','Region' ,0, '', 17, 1, 0
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @CountryDataType, '', 'Address','Country' ,0, '', 19, 1, 0
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','PostalCode' ,0, '', 21, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','Unit' ,0, '', 11, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','Street' ,0, '', 13, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','City' ,0, '', 15, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @RegionDataType, '', 'Address','Region' ,0, '', 17, 1, 0
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @CountryDataType, '', 'Address','Country' ,0, '', 19, 1, 0
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Address','PostalCode' ,0, '', 21, 1, 50
 
 	--Add Contact Info Properties
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Telephone' ,0, '', 23, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Cell' ,0, '', 25, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Fax' ,0, '', 27, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Website' ,0, '', 29, 1, 50
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','IM' ,0, '', 31, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Telephone' ,0, '', 23, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Cell' ,0, '', 25, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Fax' ,0, '', 27, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','Website' ,0, '', 29, 1, 50
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TextDataType, '', 'Contact Info','IM' ,0, '', 31, 1, 50
 
 	--Add Preferences Properties
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @RichTextDataType, '', 'Preferences','Biography' ,0, '', 33, 1, 0
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @TimeZoneDataType, '', 'Preferences','TimeZone' ,0, '', 35, 1, 0
-	EXECUTE @RC = dbo.[dnn_AddPropertyDefinition] @PortalId, -1, @LocaleDataType, '', 'Preferences','PreferredLocale' ,0, '', 37, 1, 0
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @RichTextDataType, '', 'Preferences','Biography' ,0, '', 33, 1, 0
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @TimeZoneDataType, '', 'Preferences','TimeZone' ,0, '', 35, 1, 0
+	EXECUTE @RC = {databaseOwner}[{objectQualifier}AddPropertyDefinition] @PortalId, -1, @LocaleDataType, '', 'Preferences','PreferredLocale' ,0, '', 37, 1, 0
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModulePermissionsByTabID]    Script Date: 10/05/2007 21:22:01 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModulePermissionsByTabID]    Script Date: 10/05/2007 21:22:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModulePermissionsByTabID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermissionsByTabID]
 	
 	@TabID int
 
 AS
 SELECT *
-FROM dnn_vw_ModulePermissions MP
-	INNER JOIN dnn_TabModules TM on MP.ModuleID = TM.ModuleID
+FROM {objectQualifier}vw_ModulePermissions MP
+	INNER JOIN {objectQualifier}TabModules TM on MP.ModuleID = TM.ModuleID
 WHERE  TM.TabID = @TabID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAllTabsModules]    Script Date: 10/05/2007 21:21:47 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAllTabsModules]    Script Date: 10/05/2007 21:21:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetAllTabsModules]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetAllTabsModules]
 
 	@PortalId int,
 	@AllTabs bit
 
 AS
 SELECT	* 
-FROM dnn_vw_Modules M
+FROM {objectQualifier}vw_Modules M
 WHERE  M.PortalId = @PortalId 
 	AND M.AllTabs = @AllTabs
 	AND M.Tabmoduleid =(SELECT min(tabmoduleid) 
-		FROM dnn_tabmodules
+		FROM {objectQualifier}tabmodules
 		WHERE Moduleid = M.ModuleID)
 ORDER BY M.ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetOnlineUsers]    Script Date: 10/05/2007 21:22:02 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetOnlineUsers]    Script Date: 10/05/2007 21:22:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetOnlineUsers]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetOnlineUsers]
 	@PortalID int
 
 AS
 SELECT 
 	*
-	FROM dnn_UsersOnline UO
-		INNER JOIN dnn_vw_Users U ON UO.UserID = U.UserID 
-		INNER JOIN dnn_UserPortals UP ON U.UserID = UP.UserId
+	FROM {objectQualifier}UsersOnline UO
+		INNER JOIN {objectQualifier}vw_Users U ON UO.UserID = U.UserID 
+		INNER JOIN {objectQualifier}UserPortals UP ON U.UserID = UP.UserId
 	WHERE  UP.PortalID = @PortalID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModulePermissionsByPortal]    Script Date: 10/05/2007 21:22:01 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModulePermissionsByPortal]    Script Date: 10/05/2007 21:22:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModulePermissionsByPortal]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermissionsByPortal]
 	
 	@PortalID int
 
 AS
 SELECT *
-FROM dnn_vw_ModulePermissions MP
-	INNER JOIN dnn_Modules AS M ON MP.ModuleID = M.ModuleID 
+FROM {objectQualifier}vw_ModulePermissions MP
+	INNER JOIN {objectQualifier}Modules AS M ON MP.ModuleID = M.ModuleID 
 WHERE  M.PortalID = @PortalID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModulePermission]    Script Date: 10/05/2007 21:22:00 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModulePermission]    Script Date: 10/05/2007 21:22:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModulePermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermission]
 	
 	@ModulePermissionID int
 
 AS
 SELECT *
-FROM dnn_vw_ModulePermissions
+FROM {objectQualifier}vw_ModulePermissions
 WHERE ModulePermissionID = @ModulePermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModulePermissionsByModuleID]    Script Date: 10/05/2007 21:22:00 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModulePermissionsByModuleID]    Script Date: 10/05/2007 21:22:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModulePermissionsByModuleID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermissionsByModuleID]
 	
 	@ModuleID int, 
 	@PermissionID int
 
 AS
 SELECT *
-FROM dnn_vw_ModulePermissions
+FROM {objectQualifier}vw_ModulePermissions
 WHERE (@ModuleID = -1 
 			OR ModuleID = @ModuleID
 			OR (ModuleID IS NULL AND PermissionCode = 'SYSTEM_MODULE_DEFINITION')
 		)
 	AND	(PermissionID = @PermissionID OR @PermissionID = -1)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAllTabs]    Script Date: 10/05/2007 21:21:47 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAllTabs]    Script Date: 10/05/2007 21:21:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetAllTabs]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetAllTabs]
 
 AS
 SELECT *
-FROM   dnn_vw_Tabs
+FROM   {objectQualifier}vw_Tabs
 ORDER BY TabOrder, TabName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabsByParentId]    Script Date: 10/05/2007 21:22:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabsByParentId]    Script Date: 10/05/2007 21:22:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabsByParentId]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabsByParentId]
 
 @ParentId int
 
 AS
 SELECT *
-FROM   dnn_vw_Tabs
+FROM   {objectQualifier}vw_Tabs
 WHERE  ParentId = @ParentId
 ORDER BY TabOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTab]    Script Date: 10/05/2007 21:22:23 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTab]    Script Date: 10/05/2007 21:22:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTab]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTab]
 
 @TabId    int
 
 AS
 SELECT *
-FROM   dnn_vw_Tabs
+FROM   {objectQualifier}vw_Tabs
 WHERE  TabId = @TabId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabs]    Script Date: 10/05/2007 21:22:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabs]    Script Date: 10/05/2007 21:22:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabs]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabs]
 
 @PortalId int
 
 AS
 SELECT *
-FROM   dnn_vw_Tabs
+FROM   {objectQualifier}vw_Tabs
 WHERE  PortalId = @PortalId OR (PortalID IS NULL AND @PortalID IS NULL)
 ORDER BY TabOrder, TabName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabByName]    Script Date: 10/05/2007 21:22:23 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabByName]    Script Date: 10/05/2007 21:22:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabByName]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabByName]
 
 @TabName  nvarchar(50),
 @PortalId int
 
 as
 SELECT *
-FROM   dnn_vw_Tabs
+FROM   {objectQualifier}vw_Tabs
 where  TabName = @TabName
 and    ((PortalId = @PortalId) or (@PortalId is null AND PortalId is null))
 order by TabID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUserByUsername]    Script Date: 10/05/2007 21:22:28 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserByUsername]    Script Date: 10/05/2007 21:22:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUserByUsername]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUserByUsername]
 
 	@PortalId int,
 	@Username nvarchar(100)
 
 AS
-SELECT * FROM dnn_vw_Users
+SELECT * FROM {objectQualifier}vw_Users
 WHERE  Username = @Username
 	AND    (PortalId = @PortalId OR IsSuperUser = 1 OR @PortalId is null)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUnAuthorizedUsers]    Script Date: 10/05/2007 21:22:26 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUnAuthorizedUsers]    Script Date: 10/05/2007 21:22:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUnAuthorizedUsers]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUnAuthorizedUsers]
     @PortalId			int
 AS
 
 SELECT  *
-FROM	dnn_vw_Users
+FROM	{objectQualifier}vw_Users
 WHERE  PortalId = @PortalId
 	AND Authorised = 0
 ORDER BY UserName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUserCountByPortal]    Script Date: 10/05/2007 21:22:28 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserCountByPortal]    Script Date: 10/05/2007 21:22:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUserCountByPortal]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUserCountByPortal]
 
 	@PortalId int
 
 AS
 
-	SELECT COUNT(*) FROM dnn_vw_Users 
+	SELECT COUNT(*) FROM {objectQualifier}vw_Users 
 		WHERE PortalID = @PortalID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetUser]    Script Date: 10/05/2007 21:22:28 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUser]    Script Date: 10/05/2007 21:22:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetUser]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUser]
 
 	@PortalId int,
 	@UserId int
 
 AS
-SELECT * FROM dnn_vw_Users U
+SELECT * FROM {objectQualifier}vw_Users U
 WHERE  UserId = @UserId
 	AND    (PortalId = @PortalId or IsSuperUser = 1)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModule]    Script Date: 10/05/2007 21:21:58 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModule]    Script Date: 10/05/2007 21:21:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModule]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModule]
 
 	@ModuleId int,
 	@TabId    int
 	
 AS
 SELECT	* 
-FROM dnn_vw_Modules
+FROM {objectQualifier}vw_Modules
 WHERE   ModuleId = @ModuleId
 AND     (TabId = @TabId or @TabId is null)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModules]    Script Date: 10/05/2007 21:22:01 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModules]    Script Date: 10/05/2007 21:22:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModules]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModules]
 
 	@PortalId int
 	
 AS
 SELECT	* 
-FROM dnn_vw_Modules
+FROM {objectQualifier}vw_Modules
 WHERE  PortalId = @PortalId
 ORDER BY ModuleId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabModules]    Script Date: 10/05/2007 21:22:24 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabModules]    Script Date: 10/05/2007 21:22:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabModules]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabModules]
 
 	@TabId int
 
 AS
 SELECT	* 
-FROM dnn_vw_Modules
+FROM {objectQualifier}vw_Modules
 WHERE  TabId = @TabId
 ORDER BY ModuleOrder
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetAllModules]    Script Date: 10/05/2007 21:21:46 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetAllModules]    Script Date: 10/05/2007 21:21:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetAllModules]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetAllModules]
 
 AS
 SELECT	* 
-FROM dnn_vw_Modules
+FROM {objectQualifier}vw_Modules
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetModuleByDefinition]    Script Date: 10/05/2007 21:21:58 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetModuleByDefinition]    Script Date: 10/05/2007 21:21:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetModuleByDefinition]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModuleByDefinition]
 
 	@PortalId int,
 	@FriendlyName nvarchar(128)
 	
 AS
 SELECT	* 
-FROM dnn_vw_Modules
+FROM {objectQualifier}vw_Modules
 WHERE  ((PortalId = @PortalId) or (PortalId is null and @PortalID is null))
 	AND FriendlyName = @FriendlyName
 	AND IsDeleted = 0
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortal]    Script Date: 10/05/2007 21:22:04 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortal]    Script Date: 10/05/2007 21:22:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortal]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortal]
 
 	@PortalId  int
 
 AS
 SELECT *
-FROM dnn_vw_Portals
+FROM {objectQualifier}vw_Portals
 WHERE PortalId = @PortalId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortalByPortalAliasID]    Script Date: 10/05/2007 21:22:05 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortalByPortalAliasID]    Script Date: 10/05/2007 21:22:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortalByPortalAliasID]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalByPortalAliasID]
 
 	@PortalAliasId  int
 
 AS
 SELECT P.*
-FROM dnn_vw_Portals P
-	INNER JOIN dnn_PortalAlias PA ON P.PortalID = PA.PortalID
+FROM {objectQualifier}vw_Portals P
+	INNER JOIN {objectQualifier}PortalAlias PA ON P.PortalID = PA.PortalID
 WHERE PA.PortalAliasId = @PortalAliasId
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetExpiredPortals]    Script Date: 10/05/2007 21:21:52 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetExpiredPortals]    Script Date: 10/05/2007 21:21:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetExpiredPortals]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetExpiredPortals]
 
 AS
-SELECT * FROM dnn_vw_Portals
+SELECT * FROM {objectQualifier}vw_Portals
 WHERE ExpiryDate < getDate()
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetPortals]    Script Date: 10/05/2007 21:22:06 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetPortals]    Script Date: 10/05/2007 21:22:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetPortals]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortals]
 
 AS
 SELECT *
-FROM dnn_vw_Portals
+FROM {objectQualifier}vw_Portals
 ORDER BY PortalName
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabPermissionsByPortal]    Script Date: 10/05/2007 21:22:25 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabPermissionsByPortal]    Script Date: 10/05/2007 21:22:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabPermissionsByPortal]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabPermissionsByPortal]
 	
 	@PortalID int
 
 AS
 SELECT *
-FROM dnn_vw_TabPermissions TP
+FROM {objectQualifier}vw_TabPermissions TP
 WHERE 	PortalID = @PortalID OR (PortalId IS NULL AND @PortalId IS NULL)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetTabPermission]    Script Date: 10/05/2007 21:22:25 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetTabPermission]    Script Date: 10/05/2007 21:22:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetTabPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabPermission]
 
 	@TabPermissionID int
 
 AS
 SELECT *
-FROM dnn_vw_TabPermissions
+FROM {objectQualifier}vw_TabPermissions
 WHERE TabPermissionID = @TabPermissionID
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFolderPermissionsByFolderPath]    Script Date: 10/05/2007 21:21:54 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFolderPermissionsByFolderPath]    Script Date: 10/05/2007 21:21:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFolderPermissionsByFolderPath]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFolderPermissionsByFolderPath]
 	
 	@PortalID int,
 	@FolderPath varchar(300), 
@@ -8251,24 +8251,24 @@ CREATE PROCEDURE [dbo].[dnn_GetFolderPermissionsByFolderPath]
 
 AS
 SELECT *
-FROM dnn_vw_FolderPermissions
+FROM {objectQualifier}vw_FolderPermissions
 
 WHERE	((FolderPath = @FolderPath 
 				AND ((PortalID = @PortalID) OR (PortalID IS NULL AND @PortalID IS NULL)))
 			OR (FolderPath IS NULL AND PermissionCode = 'SYSTEM_FOLDER'))
 	AND	(PermissionID = @PermissionID OR @PermissionID = -1)
 GO
-/****** Object:  StoredProcedure [dbo].[dnn_GetFolderPermission]    Script Date: 10/05/2007 21:21:54 ******/
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetFolderPermission]    Script Date: 10/05/2007 21:21:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[dnn_GetFolderPermission]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFolderPermission]
 	
 	@FolderPermissionID int
 
 AS
 SELECT *
-FROM dnn_vw_FolderPermissions
+FROM {objectQualifier}vw_FolderPermissions
 WHERE FolderPermissionID = @FolderPermissionID
 GO

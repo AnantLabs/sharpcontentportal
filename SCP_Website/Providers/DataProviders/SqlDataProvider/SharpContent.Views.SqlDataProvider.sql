@@ -1,9 +1,9 @@
-/****** Object:  View [dbo].[dnn_vw_ModulePermissions]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_ModulePermissions]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_ModulePermissions]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_ModulePermissions]
 AS
 SELECT     
 	MP.ModulePermissionID, 
@@ -16,16 +16,16 @@ SELECT
     P.ModuleDefID, 
     P.PermissionKey, 
     P.PermissionName 
-FROM dnn_ModulePermission AS MP 
-	LEFT OUTER JOIN dnn_Permission AS P ON MP.PermissionID = P.PermissionID 
-	LEFT OUTER JOIN dnn_Roles AS R ON MP.RoleID = R.RoleID
+FROM {objectQualifier}ModulePermission AS MP 
+	LEFT OUTER JOIN {objectQualifier}Permission AS P ON MP.PermissionID = P.PermissionID 
+	LEFT OUTER JOIN {objectQualifier}Roles AS R ON MP.RoleID = R.RoleID
 GO
-/****** Object:  View [dbo].[dnn_vw_Portals]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_Portals]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_Portals]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_Portals]
 AS
 SELECT     
 	PortalID, 
@@ -33,8 +33,8 @@ SELECT
 	CASE WHEN LEFT(LOWER(LogoFile), 6) = 'fileid' 
 		THEN
 			(SELECT Folder + FileName  
-				FROM dnn_Files 
-				WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = LogoFile
+				FROM {objectQualifier}Files 
+				WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = LogoFile
 			) 
 		ELSE 
 			LogoFile  
@@ -57,8 +57,8 @@ SELECT
 	CASE WHEN LEFT(LOWER(BackgroundFile), 6) = 'fileid' 
 		THEN
 			(SELECT Folder + FileName  
-				FROM dnn_Files 
-				WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = BackgroundFile
+				FROM {objectQualifier}Files 
+				WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = BackgroundFile
 			) 
 		ELSE 
 			BackgroundFile  
@@ -78,18 +78,18 @@ SELECT
     HomeTabId, 
 	LoginTabId, 
 	UserTabId,
-    (SELECT TabID FROM dnn_Tabs WHERE (PortalID IS NULL) AND (ParentId IS NULL)) AS SuperTabId,
-	(SELECT RoleName FROM dnn_Roles WHERE (RoleID = P.AdministratorRoleId)) AS AdministratorRoleName,
-	(SELECT RoleName FROM dnn_Roles WHERE (RoleID = P.RegisteredRoleId)) AS RegisteredRoleName
-FROM dnn_Portals AS P
-LEFT OUTER JOIN dnn_Users AS U ON P.AdministratorId = U.UserID
+    (SELECT TabID FROM {objectQualifier}Tabs WHERE (PortalID IS NULL) AND (ParentId IS NULL)) AS SuperTabId,
+	(SELECT RoleName FROM {objectQualifier}Roles WHERE (RoleID = P.AdministratorRoleId)) AS AdministratorRoleName,
+	(SELECT RoleName FROM {objectQualifier}Roles WHERE (RoleID = P.RegisteredRoleId)) AS RegisteredRoleName
+FROM {objectQualifier}Portals AS P
+LEFT OUTER JOIN {objectQualifier}Users AS U ON P.AdministratorId = U.UserID
 GO
-/****** Object:  View [dbo].[dnn_vw_FolderPermissions]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_FolderPermissions]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_FolderPermissions]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_FolderPermissions]
 AS
 SELECT     
 	FP.FolderPermissionID, 
@@ -103,17 +103,17 @@ SELECT
 	P.PermissionKey, 
 	P.PermissionName, 
 	F.PortalID
-FROM dnn_FolderPermission AS FP 
-	LEFT OUTER JOIN dnn_Folders AS F ON FP.FolderID = F.FolderID 
-	LEFT OUTER JOIN dnn_Permission AS P ON FP.PermissionID = P.PermissionID 
-	LEFT OUTER JOIN dnn_Roles AS R ON FP.RoleID = R.RoleID
+FROM {objectQualifier}FolderPermission AS FP 
+	LEFT OUTER JOIN {objectQualifier}Folders AS F ON FP.FolderID = F.FolderID 
+	LEFT OUTER JOIN {objectQualifier}Permission AS P ON FP.PermissionID = P.PermissionID 
+	LEFT OUTER JOIN {objectQualifier}Roles AS R ON FP.RoleID = R.RoleID
 GO
-/****** Object:  View [dbo].[dnn_vw_TabPermissions]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_TabPermissions]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_TabPermissions]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_TabPermissions]
 AS
 SELECT     
 	TP.TabPermissionID, 
@@ -127,17 +127,17 @@ SELECT
     P.PermissionKey, 
     P.PermissionName,
     T.PortalId
-FROM dnn_TabPermission AS TP 
-	INNER JOIN dnn_Tabs AS T ON TP.TabID = T.TabID	
-	LEFT OUTER JOIN dnn_Permission AS P ON TP.PermissionID = P.PermissionID 
-	LEFT OUTER JOIN dnn_Roles AS R ON TP.RoleID = R.RoleID
+FROM {objectQualifier}TabPermission AS TP 
+	INNER JOIN {objectQualifier}Tabs AS T ON TP.TabID = T.TabID	
+	LEFT OUTER JOIN {objectQualifier}Permission AS P ON TP.PermissionID = P.PermissionID 
+	LEFT OUTER JOIN {objectQualifier}Roles AS R ON TP.RoleID = R.RoleID
 GO
-/****** Object:  View [dbo].[dnn_vw_Modules]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_Modules]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_Modules]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_Modules]
 AS
 SELECT	
 	    M.PortalID,
@@ -155,8 +155,8 @@ SELECT
 		CASE WHEN LEFT(LOWER(TM.IconFile), 6) = 'fileid' 
 			THEN
 				(SELECT Folder + FileName  
-					FROM dnn_Files 
-					WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = TM.IconFile
+					FROM {objectQualifier}Files 
+					WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = TM.IconFile
 				) 
 			ELSE 
 				TM.IconFile  
@@ -180,21 +180,21 @@ SELECT
        MC.ControlType,
        MC.ControlTitle,
        MC.HelpURL
-FROM   dnn_ModuleDefinitions AS MD 
-	INNER JOIN dnn_Modules AS M ON MD.ModuleDefID = M.ModuleDefID 
-	INNER JOIN dnn_DesktopModules AS DM ON MD.DesktopModuleID = DM.DesktopModuleID 
-	INNER JOIN dnn_ModuleControls AS MC ON MD.ModuleDefID = MC.ModuleDefID 
-	LEFT OUTER JOIN dnn_Tabs AS T 
-		INNER JOIN dnn_TabModules AS TM ON T.TabID = TM.TabID 
+FROM   {objectQualifier}ModuleDefinitions AS MD 
+	INNER JOIN {objectQualifier}Modules AS M ON MD.ModuleDefID = M.ModuleDefID 
+	INNER JOIN {objectQualifier}DesktopModules AS DM ON MD.DesktopModuleID = DM.DesktopModuleID 
+	INNER JOIN {objectQualifier}ModuleControls AS MC ON MD.ModuleDefID = MC.ModuleDefID 
+	LEFT OUTER JOIN {objectQualifier}Tabs AS T 
+		INNER JOIN {objectQualifier}TabModules AS TM ON T.TabID = TM.TabID 
 	ON M.ModuleID = TM.ModuleID
 WHERE     (MC.ControlKey IS NULL)
 GO
-/****** Object:  View [dbo].[dnn_vw_Users]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_Users]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_Users]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_Users]
 AS
 SELECT 
 	U.UserId,
@@ -208,15 +208,15 @@ SELECT
     U.AffiliateId,
     U.UpdatePassword,
     UP.Authorised
-FROM dnn_Users U
-	LEFT OUTER JOIN dnn_UserPortals UP On U.UserId = UP.UserId
+FROM {objectQualifier}Users U
+	LEFT OUTER JOIN {objectQualifier}UserPortals UP On U.UserId = UP.UserId
 GO
-/****** Object:  View [dbo].[dnn_vw_Tabs]    Script Date: 10/05/2007 20:57:24 ******/
+/****** Object:  View {databaseOwner}[{objectQualifier}vw_Tabs]    Script Date: 10/05/2007 20:57:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE VIEW [dbo].[dnn_vw_Tabs]
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_Tabs]
 AS
 SELECT     
 	T.TabID, 
@@ -229,8 +229,8 @@ SELECT
 	CASE WHEN LEFT(LOWER(T.IconFile), 6) = 'fileid' 
 		THEN
 			(SELECT Folder + FileName  
-				FROM dnn_Files 
-				WHERE 'fileid=' + convert(varchar,dnn_Files.FileID) = T.IconFile
+				FROM {objectQualifier}Files 
+				WHERE 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) = T.IconFile
 			) 
 		ELSE 
 			T.IconFile  
@@ -247,8 +247,8 @@ SELECT
     T.StartDate, 
     T.EndDate, 
 	T.URL, 
-    CASE WHEN EXISTS (SELECT 1 FROM dnn_Tabs T2 WHERE T2.ParentId = T .TabId) THEN 'true' ELSE 'false' END AS 'HasChildren', 
+    CASE WHEN EXISTS (SELECT 1 FROM {objectQualifier}Tabs T2 WHERE T2.ParentId = T .TabId) THEN 'true' ELSE 'false' END AS 'HasChildren', 
     T.RefreshInterval, 
     T.PageHeadText
-FROM dbo.dnn_Tabs AS T
+FROM {databaseOwner}{objectQualifier}Tabs AS T
 GO

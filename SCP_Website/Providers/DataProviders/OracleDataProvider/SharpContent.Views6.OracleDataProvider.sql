@@ -100,7 +100,7 @@ ON TP.RoleID = R.RoleID
 
 /* Message : Created View :scp_VW_TABS */
 CREATE OR REPLACE FORCE VIEW {databaseOwner}SCP_VW_TABS  AS 
-SELECT  T.TabID, T.TabOrder, T.PortalID, T.TabName, T.IsVisible, T.ParentId, T.Level_, CASE 
+SELECT  T.TabID, T.TabOrder, T.PortalID, T.TabName, T.IsVisible, T.ParentId, T."Level", CASE 
 WHEN SUBSTR(LOWER(T.IconFile), 1, 6)='fileid' THEN (
 		SELECT  Folder || FileName
 		 FROM {databaseOwner}SCP_Files 

@@ -1,9 +1,9 @@
-/****** Object:  Table [dbo].[aspnet_SchemaVersions]    Script Date: 10/05/2007 21:13:42 ******/
+/****** Object:  Table dbo.[aspnet_SchemaVersions]    Script Date: 10/05/2007 21:13:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_SchemaVersions](
+CREATE TABLE dbo.[aspnet_SchemaVersions](
 	[Feature] [nvarchar](128) NOT NULL,
 	[CompatibleSchemaVersion] [nvarchar](128) NOT NULL,
 	[IsCurrentVersion] [bit] NOT NULL,
@@ -14,12 +14,12 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[aspnet_Applications]    Script Date: 10/05/2007 21:13:41 ******/
+/****** Object:  Table dbo.[aspnet_Applications]    Script Date: 10/05/2007 21:13:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_Applications](
+CREATE TABLE dbo.[aspnet_Applications](
 	[ApplicationName] [nvarchar](256) NOT NULL,
 	[LoweredApplicationName] [nvarchar](256) NOT NULL,
 	[ApplicationId] [uniqueidentifier] NOT NULL DEFAULT (newid()),
@@ -38,12 +38,12 @@ UNIQUE NONCLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[aspnet_Users]    Script Date: 10/05/2007 21:13:42 ******/
+/****** Object:  Table dbo.[aspnet_Users]    Script Date: 10/05/2007 21:13:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_Users](
+CREATE TABLE dbo.[aspnet_Users](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL DEFAULT (newid()),
 	[UserName] [nvarchar](256) NOT NULL,
@@ -57,12 +57,12 @@ PRIMARY KEY NONCLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[aspnet_Roles]    Script Date: 10/05/2007 21:13:42 ******/
+/****** Object:  Table dbo.[aspnet_Roles]    Script Date: 10/05/2007 21:13:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_Roles](
+CREATE TABLE dbo.[aspnet_Roles](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[RoleId] [uniqueidentifier] NOT NULL DEFAULT (newid()),
 	[RoleName] [nvarchar](256) NOT NULL,
@@ -74,12 +74,12 @@ PRIMARY KEY NONCLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[aspnet_Membership]    Script Date: 10/05/2007 21:13:42 ******/
+/****** Object:  Table dbo.[aspnet_Membership]    Script Date: 10/05/2007 21:13:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_Membership](
+CREATE TABLE dbo.[aspnet_Membership](
 	[ApplicationId] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
 	[Password] [nvarchar](128) NOT NULL,
@@ -107,12 +107,12 @@ PRIMARY KEY NONCLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[aspnet_Profile]    Script Date: 10/05/2007 21:13:42 ******/
+/****** Object:  Table dbo.[aspnet_Profile]    Script Date: 10/05/2007 21:13:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_Profile](
+CREATE TABLE dbo.[aspnet_Profile](
 	[UserId] [uniqueidentifier] NOT NULL,
 	[PropertyNames] [ntext] NOT NULL,
 	[PropertyValuesString] [ntext] NOT NULL,
@@ -124,12 +124,12 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[aspnet_UsersInRoles]    Script Date: 10/05/2007 21:13:42 ******/
+/****** Object:  Table dbo.[aspnet_UsersInRoles]    Script Date: 10/05/2007 21:13:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[aspnet_UsersInRoles](
+CREATE TABLE dbo.[aspnet_UsersInRoles](
 	[UserId] [uniqueidentifier] NOT NULL,
 	[RoleId] [uniqueidentifier] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -140,30 +140,30 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 /****** Object:  ForeignKey [FK__aspnet_Me__Appli__5555A4F4]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_Membership]  WITH CHECK ADD FOREIGN KEY([ApplicationId])
-REFERENCES [dbo].[aspnet_Applications] ([ApplicationId])
+ALTER TABLE dbo.[aspnet_Membership]  WITH CHECK ADD FOREIGN KEY([ApplicationId])
+REFERENCES dbo.[aspnet_Applications] ([ApplicationId])
 GO
 /****** Object:  ForeignKey [FK__aspnet_Me__UserI__5649C92D]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_Membership]  WITH CHECK ADD FOREIGN KEY([UserId])
-REFERENCES [dbo].[aspnet_Users] ([UserId])
+ALTER TABLE dbo.[aspnet_Membership]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES dbo.[aspnet_Users] ([UserId])
 GO
 /****** Object:  ForeignKey [FK__aspnet_Pr__UserI__6A50C1DA]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_Profile]  WITH CHECK ADD FOREIGN KEY([UserId])
-REFERENCES [dbo].[aspnet_Users] ([UserId])
+ALTER TABLE dbo.[aspnet_Profile]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES dbo.[aspnet_Users] ([UserId])
 GO
 /****** Object:  ForeignKey [FK__aspnet_Ro__Appli__73DA2C14]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_Roles]  WITH CHECK ADD FOREIGN KEY([ApplicationId])
-REFERENCES [dbo].[aspnet_Applications] ([ApplicationId])
+ALTER TABLE dbo.[aspnet_Roles]  WITH CHECK ADD FOREIGN KEY([ApplicationId])
+REFERENCES dbo.[aspnet_Applications] ([ApplicationId])
 GO
 /****** Object:  ForeignKey [FK__aspnet_Us__Appli__451F3D2B]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_Users]  WITH CHECK ADD FOREIGN KEY([ApplicationId])
-REFERENCES [dbo].[aspnet_Applications] ([ApplicationId])
+ALTER TABLE dbo.[aspnet_Users]  WITH CHECK ADD FOREIGN KEY([ApplicationId])
+REFERENCES dbo.[aspnet_Applications] ([ApplicationId])
 GO
 /****** Object:  ForeignKey [FK__aspnet_Us__RoleI__789EE131]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_UsersInRoles]  WITH CHECK ADD FOREIGN KEY([RoleId])
-REFERENCES [dbo].[aspnet_Roles] ([RoleId])
+ALTER TABLE dbo.[aspnet_UsersInRoles]  WITH CHECK ADD FOREIGN KEY([RoleId])
+REFERENCES dbo.[aspnet_Roles] ([RoleId])
 GO
 /****** Object:  ForeignKey [FK__aspnet_Us__UserI__77AABCF8]    Script Date: 10/05/2007 21:13:42 ******/
-ALTER TABLE [dbo].[aspnet_UsersInRoles]  WITH CHECK ADD FOREIGN KEY([UserId])
-REFERENCES [dbo].[aspnet_Users] ([UserId])
+ALTER TABLE dbo.[aspnet_UsersInRoles]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES dbo.[aspnet_Users] ([UserId])
 GO
