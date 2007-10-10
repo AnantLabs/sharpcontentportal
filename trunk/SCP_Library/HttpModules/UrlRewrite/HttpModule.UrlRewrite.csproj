@@ -95,9 +95,6 @@
     <Compile Include="Config\RewriterRuleCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FriendlyUrlProvider.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RewriterUtils.cs">
       <SubType>Code</SubType>
     </Compile>
