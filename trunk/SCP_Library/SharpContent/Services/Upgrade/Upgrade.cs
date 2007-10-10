@@ -321,7 +321,6 @@ namespace SharpContent.Services.Upgrade
                 XmlNode adminNode = node.SelectSingleNode("administrator");
                 string strFirstName = XmlUtils.GetNodeValue(adminNode, "firstname", "");
                 string strLastName = XmlUtils.GetNodeValue(adminNode, "lastname", "");
-                string strAccount = XmlUtils.GetNodeValue(adminNode, "account", "");
                 string strUserName = XmlUtils.GetNodeValue(adminNode, "username", "");
                 string strPassword = XmlUtils.GetNodeValue(adminNode, "password", "");
                 string strQuestion = XmlUtils.GetNodeValue(adminNode, "question", "");
@@ -374,7 +373,7 @@ namespace SharpContent.Services.Upgrade
                         {
                             if (status)
                             {
-                                HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Creating Portal Alias: " + portalAlias.InnerText + "<br>");
+                                HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent + 5, "Creating Portal Alias: " + portalAlias.InnerText + "<br>");
                             }
                             objPortalController.AddPortalAlias(intPortalId, portalAlias.InnerText);
                         }
@@ -703,7 +702,7 @@ namespace SharpContent.Services.Upgrade
                 foreach (XmlNode scriptNode in node.SelectNodes("script"))
                 {
                     strScript = scriptNode.InnerText;
-                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Script: " + strScript);
+                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Excuting Script: " + strScript);
                     //objStreamReader = File.OpenText(strProviderPath + strScript);
                     //strScript = objStreamReader.ReadToEnd();
                     //objStreamReader.Close();
@@ -1349,13 +1348,14 @@ namespace SharpContent.Services.Upgrade
                             ProviderConfiguration objProviderConfiguration = ProviderConfiguration.GetProviderConfiguration("data");
 
                             //Output the Default Provider
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "DataProvider: " + objProviderConfiguration.DefaultProvider + "<br>");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Default DataProvider: " + objProviderConfiguration.DefaultProvider + "<br>");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Portal Database<br>");
 
                             // Loop through the available scripts
                             foreach (XmlNode scriptNode in node.SelectNodes("script"))
                             {
                                 strScript = scriptNode.InnerText + "." + objProviderConfiguration.DefaultProvider + ".sql";
-                                HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Script: " + strScript);
+                                HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Excuting Script: " + strScript);
                                 strExceptions += ExecuteScript(strProviderPath + strScript, "");
                                 HtmlUtils.WriteScriptSuccessError(HttpContext.Current.Response, (strExceptions == ""), strProviderPath + strScript.Replace("." + objProviderConfiguration.DefaultProvider + ".sql", ".log"));
                             }
@@ -1369,7 +1369,7 @@ namespace SharpContent.Services.Upgrade
                         }
                         if (installMemberRole)
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing MemberRole Provider:<br>");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing MemberRole Provider<br>");
                             strExceptions += InstallMemberRoleProvider(strProviderPath, xmlDoc);
                         }
 
@@ -1383,7 +1383,7 @@ namespace SharpContent.Services.Upgrade
                         node = xmlDoc.SelectSingleNode("//SharpContent/settings");
                         if (node != null)
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Loading Host Settings:<br>");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Loading Host Settings<br>");
                             ParseSettings(node);
                         }                        
 
@@ -1391,7 +1391,7 @@ namespace SharpContent.Services.Upgrade
                         node = xmlDoc.SelectSingleNode("//SharpContent/superuser");
                         if (node != null)
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Configuring SuperUser:<br>");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Configuring SuperUser<br>");
                             ParseSuperUser(node);
                         }
 
@@ -1399,7 +1399,7 @@ namespace SharpContent.Services.Upgrade
                         node = xmlDoc.SelectSingleNode("//SharpContent/files");
                         if (node != null)
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Loading Host Files:<br>");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Loading Host Files<br>");
                             ParseFiles(node, Null.NullInteger);
 
                         }
@@ -1409,11 +1409,11 @@ namespace SharpContent.Services.Upgrade
                     case 1: 
 
                         //Install modules if present
-                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Modules:<br>");
-                        objResourceInstaller.Install(true, 2, "modules");
+                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Modules<br>");
+                        objResourceInstaller.Install(true, 5, "modules");
 
                         //Run any addition scripts in the Scripts folder
-                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Executing Additional Scripts:<br>");
+                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Executing Additional Scripts<br>");
                         ExecuteScripts(strProviderPath);
 
                         break;
@@ -1430,18 +1430,18 @@ namespace SharpContent.Services.Upgrade
                                 int intPortalId = AddPortal(node, true, 0);
                                 if (intPortalId > -1)
                                 {
-                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "<font color='green'>Successfully Installed Portal " + intPortalId + ":</font><br>");
+                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "<font color='green'>Successfully Installed Portal " + intPortalId + "</font><br>");
                                 }
                                 else
                                 {
-                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "<font color='red'>Portal failed to install:Error!</font><br>");
+                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "<font color='red'>Error, portal failed to install!</font><br>");
                                 }
                             }
                         }
 
                         //Install optional resources if present
-                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Optional Resources:<br>");
-                        objResourceInstaller.Install(true, 2);                        
+                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 0, "Installing Optional Resources<br>");
+                        objResourceInstaller.Install(true, 5);                        
 
                         break;
 
@@ -1624,7 +1624,6 @@ namespace SharpContent.Services.Upgrade
             //Parse the SuperUsers nodes
             string strFirstName = XmlUtils.GetNodeValue(node, "firstname", "");
             string strLastName = XmlUtils.GetNodeValue(node, "lastname", "");
-            string strAccount = XmlUtils.GetNodeValue(node, "account", "");
             string strUserName = XmlUtils.GetNodeValue(node, "username", "");
             string strPassword = XmlUtils.GetNodeValue(node, "password", "");
             string strQuestion = XmlUtils.GetNodeValue(node, "question", "");

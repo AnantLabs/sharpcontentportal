@@ -132,7 +132,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
             {
                 case "scp":
 
-                    _Type = PaFileType.SCP;
+                    _Type = PaFileType.Scp;
                     break;
                 case "dll":
 

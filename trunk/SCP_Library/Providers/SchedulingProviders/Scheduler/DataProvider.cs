@@ -22,13 +22,13 @@ using System.Data;
 using SharpContent.Framework;
 //using Exceptions;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
     public abstract class DataProvider
     {
         // provider constants - eliminates need for Reflection later
         private const string ProviderType = "data"; // maps to <sectionGroup> in web.config
-        private const string ProviderNamespace = "SharpContent.Services.Scheduling.SCPScheduling"; // project namespace
+        private const string ProviderNamespace = "SharpContent.Services.Scheduling.PortalScheduling"; // project namespace
         private const string ProviderAssemblyName = "SharpContent.SCPScheduler"; // project assemblyname
 
         // singleton reference to the instantiated object

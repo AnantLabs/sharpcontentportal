@@ -27,7 +27,7 @@ using SharpContent.Security.Membership.Data;
 namespace SharpContent.Security.Profile
 {
     /// <summary>
-    /// The SCPProfileProvider overrides the default ProfileProvider to provide
+    /// The PortalProfileProvider overrides the default ProfileProvider to provide
     /// a purely SharpContent implementation
     /// </summary>
     /// <remarks>
@@ -35,7 +35,7 @@ namespace SharpContent.Security.Profile
     /// <history>
     /// 	[cnurse]	03/29/2006	Created
     /// </history>
-    public class SCPProfileProvider : ProfileProvider
+    public class PortalProfileProvider : ProfileProvider
     {
         private static SharpContent.Security.Membership.Data.DataProvider dataProvider;
 
@@ -54,9 +54,9 @@ namespace SharpContent.Security.Profile
             }
         }
 
-        static SCPProfileProvider()
+        static PortalProfileProvider()
         {
-            SCPProfileProvider.dataProvider = DataProvider.Instance();
+            PortalProfileProvider.dataProvider = DataProvider.Instance();
         }
 
         /// <summary>

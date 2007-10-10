@@ -100,7 +100,7 @@
     <Compile Include="SchedulingController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SchedulingProvider.cs">
+    <Compile Include="PortalSchedulingProvider.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

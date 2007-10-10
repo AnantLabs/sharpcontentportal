@@ -84,7 +84,7 @@ namespace SharpContent.Entities.Modules.Definitions
             {
                 return ModuleDefinitionVersion.V1;
             }
-            else if( xmlReader.LocalName.ToLower() == "sharpcontentportal" )
+            else if( xmlReader.LocalName.ToLower() == "sharpcontent" )
             {
                 if( xmlReader.GetAttribute( "type" ) == "Module" )
                 {

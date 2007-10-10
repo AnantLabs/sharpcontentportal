@@ -117,9 +117,7 @@ namespace SharpContent.Entities.Portals
                 objPortalInfo.AdministratorRoleName = Convert.ToString( Null.SetNull( dr["AdministratorRoleName"], objPortalInfo.AdministratorRoleName ) );
                 objPortalInfo.PowerUserRoleName = Convert.ToString(Null.SetNull(dr["PowerUserRoleName"], objPortalInfo.PowerUserRoleName));
                 objPortalInfo.RegisteredRoleName = Convert.ToString( Null.SetNull( dr["RegisteredRoleName"], objPortalInfo.RegisteredRoleName ) );
-                objPortalInfo.AdminAccountId = Convert.ToInt32(Null.SetNull(dr["AdminAccountId"], objPortalInfo.AdminAccountId));
-                objPortalInfo.AdminAccountNumber = Convert.ToString(Null.SetNull(dr["AdminAccountNumber"], objPortalInfo.AdminAccountNumber));
-
+                
                 objPortalInfo.Users = Null.NullInteger;
                 objPortalInfo.Pages = Null.NullInteger;
             }
@@ -788,6 +786,8 @@ namespace SharpContent.Entities.Portals
                 objProfileDefinition.Visible = true;
                 objProfileDefinition.ViewOrder = OrderCounter;
                 objProfileDefinition.Length = XmlUtils.GetNodeValueInt( node, "length", 0 );
+                objProfileDefinition.Searchable = true;
+
 
                 ProfileController.AddPropertyDefinition( objProfileDefinition );
             }
@@ -1282,7 +1282,7 @@ namespace SharpContent.Entities.Portals
                 }
                 string MappedHomeDirectory = objFolderController.GetMappedDirectory( Globals.ApplicationPath + "/" + HomeDirectory + "/" );
 
-                HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "Creating Profile Definitions: ");
+                HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Creating Profile Definitions: ");
                 strMessage += CreateProfileDefinitions( intPortalId, TemplatePath, TemplateFile );
 
                 if( strMessage == Null.NullString )
@@ -1292,7 +1292,7 @@ namespace SharpContent.Entities.Portals
                     // add administrator
                     try
                     {
-                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "Creating User " + Username + ": ");
+                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Creating User " + Username + ": ");
 
                         objAdminUser.PortalID = intPortalId;
                         objAdminUser.FirstName = FirstName;
@@ -1337,7 +1337,7 @@ namespace SharpContent.Entities.Portals
                 {
                     try
                     {
-                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "Deleting Old Upload Directory: ");
+                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Deleting Old Upload Directory: ");
                         // the upload directory may already exist if this is a new DB working with a previously installed application
                         if( Directory.Exists( MappedHomeDirectory ) )
                         {
@@ -1385,7 +1385,7 @@ namespace SharpContent.Entities.Portals
                     {
                         try
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "Creating New Upload Directory: ");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Creating New Upload Directory: ");
                             // create the upload directory for the new portal
                             Directory.CreateDirectory( MappedHomeDirectory );
 
@@ -1412,7 +1412,7 @@ namespace SharpContent.Entities.Portals
                         // parse portal template
                         try
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "Parsing Template: " + TemplateFile + " ");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Parsing Template: " + TemplateFile + " ");
                             ParseTemplate( intPortalId, TemplatePath, TemplateFile, AdministratorId, PortalTemplateModuleAction.Replace, true );
                         }
                         catch( Exception Exc )
@@ -1423,7 +1423,7 @@ namespace SharpContent.Entities.Portals
                         // parse admin template
                         try
                         {
-                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 2, "Parsing Template: admin.template ");
+                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, 5, "Parsing Template: admin.template ");
                             ParseTemplate( intPortalId, TemplatePath, "admin.template", AdministratorId, PortalTemplateModuleAction.Replace, true );
                         }
                         catch( Exception Exc )

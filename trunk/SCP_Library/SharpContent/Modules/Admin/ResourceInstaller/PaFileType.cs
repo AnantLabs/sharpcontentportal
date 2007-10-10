@@ -27,7 +27,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
         Dll = 0,
         Sql = 1,
         Ascx = 2,
-        SCP = 3,
+        Scp = 3,
         DataProvider = 4,
         Other = 5,
     }

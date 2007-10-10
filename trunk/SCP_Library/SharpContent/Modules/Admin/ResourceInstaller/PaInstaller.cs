@@ -61,7 +61,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
         public bool Install()
         {
             // -----------------------------------------------------------------------------
-            // Step 1:  Expand ZipFile in memory - identify .SCP file
+            // Step 1:  Expand ZipFile in memory - identify .scp file
             // Step 2:  Identify .SCP version/type and translate to object model
             // Step 3:  Install objects
             // -----------------------------------------------------------------------------
@@ -129,7 +129,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
 
                     InstallerInfo.FileTable[file.Name.ToLower()] = file;
 
-                    if( file.Type == PaFileType.SCP )
+                    if( file.Type == PaFileType.Scp )
                     {
                         if( InstallerInfo.SCPFile == null )
                         {

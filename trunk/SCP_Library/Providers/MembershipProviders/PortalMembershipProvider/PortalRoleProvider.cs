@@ -32,19 +32,19 @@ using SharpContent.Services.Exceptions;
 namespace SharpContent.Security.Roles
 {
     /// <summary>
-    /// The SCPRoleProvider overrides the default MembershipProvider to provide
-    /// a purely SCP Membership Component implementation
+    /// The PortalRoleProvider overrides the default MembershipProvider to provide
+    /// a purely Portal Membership Component implementation
     /// </summary>
     /// <remarks>
     /// </remarks>
     /// <history>
     ///     [cnurse]	03/28/2006	created
     /// </history>
-    public class SCPRoleProvider : RoleProvider
+    public class PortalRoleProvider : RoleProvider
     {
         private static DataProvider dataProvider;
 
-        static SCPRoleProvider()
+        static PortalRoleProvider()
         {
             dataProvider = DataProvider.Instance();
         }
@@ -121,16 +121,16 @@ namespace SharpContent.Security.Roles
         }
 
         /// <summary>
-        /// adds a SCP UserRole
+        /// adds a Portal UserRole
         /// </summary>
         /// <param name="userRole">The role to add the user to.</param>
         /// <returns>The added UserRoleInfo object</returns>
         /// <history>
         ///     [cnurse]	03/28/2006	created
         /// </history>
-        private UserRoleInfo AddSCPUserRole( UserRoleInfo userRole )
+        private UserRoleInfo AddPortalUserRole( UserRoleInfo userRole )
         {
-            //Add UserRole to SCP
+            //Add UserRole to Portal
             userRole.UserRoleID = Convert.ToInt32( dataProvider.AddUserRole( userRole.PortalID, userRole.UserID, userRole.RoleID, userRole.EffectiveDate, userRole.ExpiryDate ) );
             userRole = GetUserRole( userRole.PortalID, userRole.UserID, userRole.RoleID );
 
@@ -155,8 +155,8 @@ namespace SharpContent.Security.Roles
 
             try
             {
-                //Add UserRole to SCP
-                userRole = AddSCPUserRole( userRole );
+                //Add UserRole to Portal
+                userRole = AddPortalUserRole( userRole );
             }
             catch( Exception )
             {

@@ -79,7 +79,6 @@ END BackgroundFile, GUID, PaymentProcessor, ProcessorUserId, ProcessorPassword, 
 		 FROM csws_dbo.SCP_Roles 
 	WHERE 
 	(RoleID = P.RegisteredRoleId)  ) RegisteredRoleName, P.AdminAccountId,
-(SELECT AccountNumber FROM csws_dbo.SCP_AccountNumbers WHERE AccountId = P.AdminAccountId) AdminAccountNumber
  FROM csws_dbo.SCP_Portals P LEFT JOIN scp_Users U
 ON P.AdministratorId = U.UserID
 /

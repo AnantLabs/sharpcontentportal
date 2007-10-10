@@ -162,7 +162,7 @@
   <data name="MoveRoot.Action" xml:space="preserve">
     <value>Move</value>
   </data>
-  <data name="Admin.String" xml:space="preserve">
+  <data name="Site Admin.String" xml:space="preserve">
     <value>Admin</value>
   </data>
   <data name="Site Settings.String" xml:space="preserve">

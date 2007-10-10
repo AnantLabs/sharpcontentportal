@@ -91,7 +91,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                                     {
                                         if (status)
                                         {
-                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Skin File " + file + ":<br>");
+                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Skin: " + file + "<br>");
                                         }
                                         SkinController.UploadSkin(Globals.HostMapPath, SkinInfo.RootSkin, Path.GetFileNameWithoutExtension(file), file);
                                         // delete file
@@ -107,7 +107,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                                     {
                                         if (status)
                                         {
-                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Container File " + file + ":<br>");
+                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Container: " + file + "<br>");
                                         }
                                         SkinController.UploadSkin(Globals.HostMapPath, SkinInfo.RootContainer, Path.GetFileNameWithoutExtension(file), file);
                                         // delete file
@@ -123,7 +123,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                                     {
                                         if (status)
                                         {
-                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Language File " + file + ":<br>");
+                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Language: " + file + "<br>");
                                         }
                                         LocaleFilePackReader objLocaleFilePackReader = new LocaleFilePackReader();
                                         objLocaleFilePackReader.Install(file);
@@ -140,7 +140,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                                     {
                                         if (status)
                                         {
-                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Template " + file + ":<br>");
+                                            HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Template: " + file + "<br>");
                                         }
                                         string strNewFile = Globals.HostMapPath + "\\" + Path.GetFileName(file);
                                         if (File.Exists(strNewFile))
@@ -174,11 +174,11 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                                                 int portalId = Upgrade.AddPortal(node, true, indent);
                                                 if (portalId > -1)
                                                 {
-                                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent + 2, "Successfully Installed Portal " + portalId + ":<br>");
+                                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent + 2, "Successfully Installed Portal " + portalId + "<br>");
                                                 }
                                                 else
                                                 {
-                                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent + 2, "Portal failed to install:<br>");
+                                                    HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent + 2, "Error, portal failed to install<br>");
                                                 }
                                             }
                                         }
@@ -203,13 +203,16 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                 {
                     if (status)
                     {
-                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Module File " + Path.GetFileNameWithoutExtension(strFile) + ": ");
+                        HtmlUtils.WriteFeedback(HttpContext.Current.Response, indent, "Installing Module: " + Path.GetFileNameWithoutExtension(strFile) + " ");
                     }
                     PaInstaller objPaInstaller = new PaInstaller(strFile, Globals.ApplicationMapPath);
                     bool blnSuccess = objPaInstaller.Install();
                     HtmlUtils.WriteSuccessError(HttpContext.Current.Response, blnSuccess);
                     // delete file (also when error on installing)
-                    DeleteFile(strFile);
+                    if (blnSuccess)
+                    {
+                        DeleteFile(strFile);
+                    }
                 }
             }
         }

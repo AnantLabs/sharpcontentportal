@@ -31,8 +31,6 @@ namespace SharpContent.Entities.Portals
     public class PortalInfo
     {
         private int _AdministratorId;
-        private int _AdminAccountId;
-        private string _AdminAccountNumber;
         private int _AdministratorRoleId;
         private string _AdministratorRoleName;
         private int _PowerUserRoleId;
@@ -85,33 +83,7 @@ namespace SharpContent.Entities.Portals
                 this._AdministratorId = value;
             }
         }
-
-        [XmlElement("adminaccountid")]
-        public int AdminAccountId
-        {
-            get
-            {
-                return this._AdminAccountId;
-            }
-            set
-            {
-                this._AdminAccountId = value;
-            }
-        }
-
-        [XmlElement("adminaccountnumber")]
-        public string AdminAccountNumber
-        {
-            get
-            {
-                return this._AdminAccountNumber;
-            }
-            set
-            {
-                this._AdminAccountNumber = value;
-            }
-        }
-
+        
         [XmlElement("pagequota")]
         public int PageQuota
         {
