@@ -22,9 +22,9 @@ using System.Collections;
 using System.Threading;
 using SharpContent.Common.Utilities;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
-    public class SCPScheduler : SchedulingProvider
+    public class PortalScheduler : SchedulingProvider
     {
         private const string ProviderType = "schedulingprovider";
 

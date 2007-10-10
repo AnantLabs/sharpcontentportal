@@ -13,7 +13,7 @@ using System.Security.Cryptography;
 
 namespace SharpContent.Security.Membership
 {
-    public class SCPOracleMembershipProvider : System.Web.Security.MembershipProvider
+    public class PortalOracleMembershipProvider : System.Web.Security.MembershipProvider
     {
         private static DataProvider dataProvider = DataProvider.Instance();
         const int SALT_BYTES = 16;

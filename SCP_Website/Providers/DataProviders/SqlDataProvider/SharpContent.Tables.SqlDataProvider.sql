@@ -217,6 +217,7 @@ CREATE TABLE {databaseOwner}[{objectQualifier}Portals](
 	[SplashTabId] [int] NULL,
 	[PageQuota] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_PageQuota]  DEFAULT ((0)),
 	[UserQuota] [int] NOT NULL CONSTRAINT [DF_{objectQualifier}Portals_UserQuota]  DEFAULT ((0)),
+	[PowerUserRoleId] [int] NULL
  CONSTRAINT [PK_{objectQualifier}Portals] PRIMARY KEY NONCLUSTERED 
 (
 	[PortalID] ASC

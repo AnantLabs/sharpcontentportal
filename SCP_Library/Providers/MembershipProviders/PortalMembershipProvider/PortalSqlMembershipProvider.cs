@@ -25,7 +25,7 @@ namespace SharpContent.Security.Membership
 {
     /// Project:    SharpContent
     /// Namespace:  SharpContent.Security.Membership
-    /// Class:      SCPSQLMembershipProvider
+    /// Class:      PortalSQLMembershipProvider
     /// <summary>
     /// The AspNetSQLMembershipProvider overrides the default SqlMembershipProvider of
     /// the AspNet Membership Component (MemberRole)
@@ -35,7 +35,7 @@ namespace SharpContent.Security.Membership
     /// <history>
     ///     [cnurse]	12/08/2005	documented, and renamed to meet new provider mechanism
     /// </history>
-    public class SCPSqlMembershipProvider : System.Web.Security.SqlMembershipProvider
+    public class PortalSqlMembershipProvider : System.Web.Security.SqlMembershipProvider
     {
         /// <summary>
         /// The ApplicationName is used by the AspNet Membership Component (MemberRole)

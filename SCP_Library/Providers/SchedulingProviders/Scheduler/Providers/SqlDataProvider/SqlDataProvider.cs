@@ -23,7 +23,7 @@ using SharpContent.Common.Utilities;
 using SharpContent.Framework.Providers;
 using SharpContent.ApplicationBlocks.Data;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
     public class SqlDataProvider : DataProvider
     {

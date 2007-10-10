@@ -23,7 +23,7 @@ using SharpContent.Common.Utilities;
 using Microsoft.VisualBasic;
 using Globals=SharpContent.Common.Globals;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
     public class SchedulingController
     {

@@ -80,7 +80,7 @@ namespace SharpContent.Entities.Tabs
                 objTabInfo.TabName = Convert.ToString( Null.SetNull( dr["TabName"], objTabInfo.TabName ) );
                 objTabInfo.IsVisible = Convert.ToBoolean( Null.SetNull( dr["IsVisible"], objTabInfo.IsVisible ) );
                 objTabInfo.ParentId = Convert.ToInt32( Null.SetNull( dr["ParentId"], objTabInfo.ParentId ) );
-                objTabInfo.Level = Convert.ToInt32( Null.SetNull( dr["Level_"], objTabInfo.Level ) );
+                objTabInfo.Level = Convert.ToInt32( Null.SetNull( dr["Level"], objTabInfo.Level ) );
                 objTabInfo.IconFile = Convert.ToString( Null.SetNull( dr["IconFile"], objTabInfo.IconFile ) );
                 objTabInfo.DisableLink = Convert.ToBoolean( Null.SetNull( dr["DisableLink"], objTabInfo.DisableLink ) );
                 objTabInfo.Title = Convert.ToString( Null.SetNull( dr["Title"], objTabInfo.Title ) );

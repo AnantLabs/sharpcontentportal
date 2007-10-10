@@ -396,10 +396,4 @@
   <data name="RestoreCCSMessage.Text" xml:space="preserve">
     <value>Are You Sure You Want To Restore The Default Stylesheet (All Changes To The Current Stylesheet Will Be Lost) ? </value>
   </data>
-  <data name="plAdminAccountNumber.Help" xml:space="preserve">
-    <value>By selecting an account number from the list, only users in that account can be add to the Administrator role.  Current  members of the Administrator role with an account number that does not match the selected account number will not be remove for the role.</value>
-  </data>
-  <data name="plAdminAccountNumber.Text" xml:space="preserve">
-    <value>Admin Account #:</value>
-  </data>
 </root>

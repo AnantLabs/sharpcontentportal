@@ -22,7 +22,7 @@ using System.Reflection;
 using System.Threading;
 using System.Web.Compilation;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
     public class ProcessGroup
     {

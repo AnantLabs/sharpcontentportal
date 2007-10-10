@@ -302,7 +302,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
                             CreateBinFile(file);
                         }
                         break;
-                    case PaFileType.SCP:
+                    case PaFileType.Scp:
                         CreateModuleFile(file, Folder);
                         break;
 
@@ -373,7 +373,7 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
 
                 // save file
                 string FullFileName = Path.Combine(fileFolder, File.Name);
-                if (File.Type == PaFileType.SCP)
+                if (File.Type == PaFileType.Scp)
                 {
                     FullFileName += ".config"; // add a forbidden extension so that it is not browsable
                 }
@@ -410,11 +410,10 @@ namespace SharpContent.Modules.Admin.ResourceInstaller
             {
                 // DataProvider files may be either: the SQL to execute, uninstall, or XML stored procs.
                 // We only want to execute the first type of DataProvider files.
-                if (file.Type == PaFileType.Sql || (file.Type == PaFileType.DataProvider && file.Name.ToLower().IndexOf("uninstall") == -1 && file.Name.ToLower().IndexOf(".xml") == -1))
+                if ((file.Type == PaFileType.Sql || file.Type == PaFileType.DataProvider) && file.Name.ToLower().IndexOf("uninstall") == -1 && file.Name.ToLower().IndexOf(".xml") == -1)
                 {
                     ProviderConfiguration objProviderConfiguration = ProviderConfiguration.GetProviderConfiguration("data");
                                         
-                    //if (objProviderConfiguration.DefaultProvider.ToLower() == Path.GetExtension(file.Name.ToLower()).Substring(1))
                     if (file.Name.ToLower().IndexOf(objProviderConfiguration.DefaultProvider.ToLower()) != -1)
                     {
                         if (file.Name.ToLower().StartsWith("install."))

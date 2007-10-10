@@ -24,7 +24,7 @@ using SharpContent.Framework.Providers;
 using SharpContent.ApplicationBlocks.Data;
 using Oracle.DataAccess.Client;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
     public class OracleDataProvider : DataProvider
     {

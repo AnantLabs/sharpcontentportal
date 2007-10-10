@@ -968,6 +968,102 @@ SET    RoleGroupId = @RoleGroupId,
        IconFile = @IconFile
 WHERE  RoleId = @RoleId
 GO
+/****** Object:  StoredProcedure [dbo].[scp_GetUserRolesByUserId]    Script Date: 10/10/2007 11:54:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUserRolesByUserId] 
+
+@PortalId	int, 
+@UserID		int, 
+@RoleID		int,
+@PageIndex	int,   
+@PageSize	int 
+	
+AS
+
+	IF @UserID Is Null
+	BEGIN
+
+		-- Set the page bounds
+		DECLARE @PageLowerBound int
+		DECLARE @PageUpperBound int
+		SET @PageLowerBound = @PageSize * @PageIndex
+		SET @PageUpperBound = @PageSize - 1 + @PageLowerBound
+
+		-- Create a temp table TO store the select results
+		CREATE TABLE #PageIndexForUsers
+		(
+			IndexID int IDENTITY (0, 1) NOT NULL,
+			UserID int
+		)
+
+		 -- Insert into our temp table
+		INSERT INTO #PageIndexForUsers (UserID)
+        SELECT	UR.UserID
+			FROM scp_UserRoles UR
+				INNER JOIN scp_Users U ON UR.UserID = U.UserID
+				INNER JOIN scp_Roles R ON R.RoleID = UR.RoleID
+			WHERE  R.PortalId = @PortalId
+				AND (R.RoleID = @roleID)
+		
+		SELECT	R.*,
+				U.Username,
+				U.Firstname,
+				U.lastname,        
+				U.DisplayName,
+				UR.UserRoleID,
+				UR.UserID,
+				UR.EffectiveDate,
+				UR.ExpiryDate,
+				UR.IsTrialUsed
+			FROM scp_UserRoles UR
+				INNER JOIN scp_Users U ON UR.UserID = U.UserID
+				INNER JOIN scp_Roles R ON R.RoleID = UR.RoleID
+				INNER JOIN #PageIndexForUsers P ON U.UserID = P.UserID
+			WHERE P.IndexID >= @PageLowerBound AND P.IndexID <= @PageUpperBound
+			ORDER BY U.UserName
+
+		SELECT TotalRecords = COUNT(*) FROM #PageIndexForUsers
+	END
+	ELSE
+	BEGIN
+		IF @RoleID Is NULL
+			SELECT	R.*,							
+					U.Username,        
+					U.Firstname,
+					U.lastname,        
+					U.DisplayName,
+					UR.UserRoleID,
+					UR.UserID,
+					UR.EffectiveDate,
+					UR.ExpiryDate,
+					UR.IsTrialUsed
+				FROM scp_UserRoles UR
+					INNER JOIN scp_Users U ON UR.UserID = U.UserID
+					INNER JOIN scp_Roles R ON R.RoleID = UR.RoleID
+				WHERE R.PortalId = @PortalId
+					AND (U.UserID = @UserID)			
+		ELSE
+			SELECT	R.*,
+					U.Username,        
+					U.Firstname,
+					U.lastname,        
+					U.DisplayName,
+					UR.UserRoleID,
+					UR.UserID,
+					UR.EffectiveDate,
+					UR.ExpiryDate,
+					UR.IsTrialUsed
+				FROM scp_UserRoles UR
+					INNER JOIN scp_Users U ON UR.UserID = U.UserID
+					INNER JOIN scp_Roles R ON R.RoleID = UR.RoleID
+				WHERE R.PortalId = @PortalId
+					AND (R.RoleID = @RoleID)
+					AND (U.UserID = @UserID)
+	END
+GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}GetUserRolesByUsername]    Script Date: 10/05/2007 21:22:30 ******/
 SET ANSI_NULLS ON
 GO
@@ -7281,6 +7377,7 @@ create procedure {databaseOwner}[{objectQualifier}UpdatePortalSetup]
 @PortalId            int,
 @AdministratorId     int,
 @AdministratorRoleId int,
+@PowerUserRoleId     int,
 @RegisteredRoleId    int,
 @SplashTabId         int,
 @HomeTabId           int,
@@ -7292,7 +7389,8 @@ as
 
 update {objectQualifier}Portals
 set    AdministratorId = @AdministratorId, 
-       AdministratorRoleId = @AdministratorRoleId, 
+       AdministratorRoleId = @AdministratorRoleId,
+       PowerUserRoleId = @PowerUserRoleId, 
        RegisteredRoleId = @RegisteredRoleId,
        SplashTabId = @SplashTabId,
        HomeTabId = @HomeTabId,

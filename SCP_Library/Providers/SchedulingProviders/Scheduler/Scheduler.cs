@@ -25,7 +25,7 @@ using SharpContent.Common.Utilities;
 using SharpContent.Services.Log.EventLog;
 using Globals=SharpContent.Common.Globals;
 
-namespace SharpContent.Services.Scheduling.SCPScheduling
+namespace SharpContent.Services.Scheduling.PortalScheduling
 {
     internal sealed class Scheduler
     {

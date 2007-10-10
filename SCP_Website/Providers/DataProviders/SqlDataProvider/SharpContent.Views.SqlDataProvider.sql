@@ -50,7 +50,8 @@ SELECT
 	HostSpace, 
 	PageQuota, 
 	UserQuota, 
-	AdministratorRoleId, 
+	AdministratorRoleId,
+	PowerUserRoleId, 
 	RegisteredRoleId, 
 	Description, 
 	KeyWords, 
@@ -80,6 +81,7 @@ SELECT
 	UserTabId,
     (SELECT TabID FROM {objectQualifier}Tabs WHERE (PortalID IS NULL) AND (ParentId IS NULL)) AS SuperTabId,
 	(SELECT RoleName FROM {objectQualifier}Roles WHERE (RoleID = P.AdministratorRoleId)) AS AdministratorRoleName,
+	(SELECT RoleName FROM {objectQualifier}Roles WHERE (RoleID = P.PowerUserRoleId)) AS PowerUserRoleName,
 	(SELECT RoleName FROM {objectQualifier}Roles WHERE (RoleID = P.RegisteredRoleId)) AS RegisteredRoleName
 FROM {objectQualifier}Portals AS P
 LEFT OUTER JOIN {objectQualifier}Users AS U ON P.AdministratorId = U.UserID

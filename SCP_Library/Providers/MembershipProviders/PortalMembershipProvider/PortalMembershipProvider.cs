@@ -57,13 +57,13 @@ namespace SharpContent.Security.Membership
     /// <history>
     ///     
     /// </history>
-    public class SCPMembershipProvider : MembershipProvider
+    public class PortalMembershipProvider : MembershipProvider
     {
         const int SALT_BYTES = 16;
         private static DataProvider dataProvider = DataProvider.Instance();
         private string _connectionString;
 
-        public SCPMembershipProvider()
+        public PortalMembershipProvider()
         {
             _connectionString = Config.GetConnectionString();
         }
@@ -441,7 +441,7 @@ namespace SharpContent.Security.Membership
         }
 
         /// <summary>
-        /// CreateSCPUser persists the SCP User information to the Database
+        /// CreatePortalUser persists the Portal User information to the Database
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -450,7 +450,7 @@ namespace SharpContent.Security.Membership
         /// <history>
         ///     [cnurse]	12/13/2005	created
         /// </history>
-        private UserCreateStatus CreateSCPUser(ref UserInfo user)
+        private UserCreateStatus CreatePortalUser(ref UserInfo user)
         {
             PortalSecurity objSecurity = new PortalSecurity();            
             string userName = objSecurity.InputFilter(user.Username, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoAngleBrackets | PortalSecurity.FilterFlag.NoMarkup);
@@ -630,8 +630,8 @@ namespace SharpContent.Security.Membership
                 //to a new portal
                 if (createStatus == UserCreateStatus.Success || createStatus == UserCreateStatus.AddUserToPortal)
                 {
-                    //Create the SCP User Record
-                    createStatus = CreateSCPUser(ref user);
+                    //Create the Portal User Record
+                    createStatus = CreatePortalUser(ref user);
 
                     if (createStatus == UserCreateStatus.Success)
                     {
@@ -1579,7 +1579,7 @@ namespace SharpContent.Security.Membership
             //Initialise Login Status to Failure
             loginStatus = UserLoginStatus.LOGIN_FAILURE;
 
-            //Get a light-weight (unhydrated) SCP User from the Database, we will hydrate it later if neccessary
+            //Get a light-weight (unhydrated) Portal User from the Database, we will hydrate it later if neccessary
             UserInfo user = null;
             user = GetUserByUserName(portalId, username, false);
 
@@ -1796,7 +1796,7 @@ namespace SharpContent.Security.Membership
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name="aspNetUser">The MembershipUser object to use to fill the SCP UserMembership.</param>
+        /// <param name="aspNetUser">The MembershipUser object to use to fill the Portal UserMembership.</param>
         /// <history>
         /// 	[cnurse]	12/10/2005	created
         /// </history>
@@ -1947,8 +1947,8 @@ namespace SharpContent.Security.Membership
                             Exceptions.LogException(exc);
                         }
 
-                        RoleController objSCPRoles = new RoleController();
-                        string[] arrUserRoles = objSCPRoles.GetRolesByUser(objUser.UserID, PortalID);
+                        RoleController objPortalRoles = new RoleController();
+                        string[] arrUserRoles = objPortalRoles.GetRolesByUser(objUser.UserID, PortalID);
                         if (arrUserRoles != null)
                         {
                             try
@@ -2046,7 +2046,7 @@ namespace SharpContent.Security.Membership
 
             displayName = firstName + " " + lastName;
 
-            //Persist the SCP User to the Database
+            //Persist the Portal User to the Database
             dataProvider.UpdateUser(user.UserID, user.PortalID, firstName, lastName, email, displayName, updatePassword, isApproved);
 
             //Persist the Membership to the Data Store
