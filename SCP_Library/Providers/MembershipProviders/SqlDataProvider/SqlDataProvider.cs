@@ -443,45 +443,10 @@ namespace SharpContent.Security.Membership.Data
         {
             throw new Exception("The method or operation is not implemented.");
         }
-
-        public override int AddAccount(int i_portalId, string i_accountnumber, string i_accountname, string i_description, string i_email1, string i_email2, bool i_isenabled)
+        
+        public override IDataReader GetPasswordQuestons(string locale)
         {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override void UpdateAccount(int i_accountid, string i_accountname, string i_description, string i_email1, string i_email2, bool i_isenabled)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override void DeleteAccount(int i_accountid)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override int GetAccountId(int i_portalid, string i_accountnumber)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override IDataReader GetAccountById(int i_accountid)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override IDataReader GetAccountByNumber(int i_portalid, string i_accountnumber)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override IDataReader GetAccounts(int i_portalid, int i_pageindex, int i_pagesize)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public override IDataReader GetPasswordQuestons(string i_locale)
-        {
-            throw new Exception("The method or operation is not implemented.");
+            return SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "GetPasswordQuestions", locale);
         }
 
         public override void DeleteUserOnline(int i_userid)
