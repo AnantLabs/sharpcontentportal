@@ -309,7 +309,6 @@ namespace SharpContent.Modules.Admin.Security
                 HttpCookie userCookie = new HttpCookie("RemeberMe");
                 if (chkCookie.Checked)
                 {
-                    userCookie["AccountNumber"] = txtAccountNumber.Text;
                     userCookie["Username"] = txtUsername.Text;
                     userCookie.Expires = DateTime.Now.AddYears(100);
 
@@ -446,14 +445,13 @@ namespace SharpContent.Modules.Admin.Security
                     if (Request.Cookies["RemeberMe"] != null)
                     {
                         HttpCookie userCookie = Request.Cookies["RemeberMe"];
-                        txtAccountNumber.Text = userCookie["AccountNumber"].ToString();
                         txtUsername.Text = userCookie["Username"].ToString();
                         chkCookie.Checked = true;
                         Globals.SetFormFocus(txtPassword);
                     }
                     else
                     {
-                        Globals.SetFormFocus(txtAccountNumber);
+                        Globals.SetFormFocus(txtUsername);
                     }
 
                     if( Request.QueryString["verificationcode"] != null )
@@ -469,30 +467,13 @@ namespace SharpContent.Modules.Admin.Security
 
                     PageNo = 0;
                     if (Request.QueryString["accountnumber"] != null || Request.QueryString["username"] != null)
-                    {
-                        int valued = 0;
-                        if (Request.QueryString["accountnumber"] != null)
-                        {
-                            txtAccountNumber.Text = Request.QueryString["accountnumber"];
-                            valued = 1;
-                        }
+                    {                       
                         if (Request.QueryString["username"] != null)
                         {
                             txtUsername.Text = Request.QueryString["username"];
-                            valued += 2;
-                        }
-                        switch (valued)
-                        {
-                            case 1:
-                                Globals.SetFormFocus(txtUsername);
-                                break;
-                            case 2:
-                                Globals.SetFormFocus(txtAccountNumber);
-                                break;
-                            case 3:
-                                Globals.SetFormFocus(txtPassword);
-                                break;
-                        }                        
+                            Globals.SetFormFocus(txtPassword);
+                            
+                        }               
                     }
                 }
                 catch
@@ -580,7 +561,6 @@ namespace SharpContent.Modules.Admin.Security
                                     AddModuleMessage("UserLockedOut", ModuleMessageType.RedError, true);
                                     // notify administrator about account lockout ( possible hack attempt )
                                     custom = new ArrayList();
-                                    custom.Add(txtAccountNumber.Text);
                                     custom.Add(txtUsername.Text);
                                     Mail.SendMail(PortalSettings.Email, PortalSettings.Email, "", Localization.GetSystemMessage(PortalSettings, "EMAIL_USER_LOCKOUT_SUBJECT", Localization.GlobalResourceFile, custom), Localization.GetSystemMessage(PortalSettings, "EMAIL_USER_LOCKOUT_BODY", Localization.GlobalResourceFile, custom), "", "", "", "", "", "");
                                     break;

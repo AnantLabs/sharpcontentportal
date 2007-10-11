@@ -133,16 +133,7 @@ namespace SharpContent.Security.Membership.Data
         public abstract bool AspNetMembershipUnlockUser(string i_applicationname, string i_username);
         public abstract IDataReader AspNetMembershipGetPassword(string i_applicationname, string i_username);
         public abstract IDataReader AspNetMembershipGetAnswer(string i_applicationname, string i_username);
-
-        // Account Numbers
-        public abstract int AddAccount(int i_portalId, string i_accountnumber, string i_accountname, string i_description, string i_email1, string i_email2, bool i_isenabled);
-        public abstract void UpdateAccount(int i_accountid, string i_accountname, string i_description, string i_email1, string i_email2, bool i_isenabled);
-        public abstract void DeleteAccount(int i_accountid);
-        public abstract int GetAccountId(int i_portalid, string i_accountnumber);
-        public abstract IDataReader GetAccountById(int i_accountid);
-        public abstract IDataReader GetAccountByNumber(int i_portalid, string i_accountnumber);
-        public abstract IDataReader GetAccounts(int i_portalid, int i_pageindex, int i_pagesize);
-
+                
         // Password Questions
         public abstract IDataReader GetPasswordQuestons(string i_locale);
     }

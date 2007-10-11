@@ -4,13 +4,7 @@
 <%@ Register TagPrefix="scp" TagName="Password" Src="~/Admin/Users/Password.ascx" %>
 <%@ Register TagPrefix="scp" TagName="Profile" Src="~/Admin/Users/ProfileModule.ascx" %>
 <asp:panel id="pnlLogin" runat="server">
-	<table cellspacing="0" cellpadding="3" border="0" summary="SignIn Design Table" width="160">
-	    <tr>
-			<td colspan="2" class="SubHead" align="center"><scp:label id="plAccountNumber" controlname="txtAcountNumber" runat="server" text="AcountNumber:"></scp:label></td>
-		</tr>
-		<tr>
-			<td colspan="2"  align="center"><asp:textbox id="txtAccountNumber" columns="9" width="130" cssclass="NormalTextBox" runat="server" /></td>
-		</tr>
+	<table cellspacing="0" cellpadding="3" border="0" summary="SignIn Design Table" width="160">	    
 		<tr>
 			<td colspan="2" class="SubHead" align="center"><scp:label id="plUsername" controlname="txtUsername" runat="server" text="UserName:"></scp:label></td>
 		</tr>
