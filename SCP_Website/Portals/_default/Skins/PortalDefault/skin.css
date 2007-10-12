@@ -1,8 +1,13 @@
 /* 
 ================================
-Skin styles for SharpContent
+Skin styles for Sharp Content Portal Default Skin
 ================================
 */   
+
+body 
+{
+    background-color: #404040;
+}
 
 .pagemaster {
 	width: 100%;
