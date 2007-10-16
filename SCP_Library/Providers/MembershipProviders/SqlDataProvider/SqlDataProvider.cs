@@ -449,9 +449,9 @@ namespace SharpContent.Security.Membership.Data
             return SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "GetPasswordQuestions", locale);
         }
 
-        public override void DeleteUserOnline(int i_userid)
+        public override void DeleteUserOnline(int userid)
         {
-            throw new Exception("The method or operation is not implemented.");
+            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "DeleteUserOnline", userid);
         }
 
         public override bool AspNetMembershipSetPasswordQAndA(string i_applicationname, string i_username, string i_newpasswordquestion, string i_passwordanswer)

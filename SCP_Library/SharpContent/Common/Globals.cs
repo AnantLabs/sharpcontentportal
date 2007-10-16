@@ -85,28 +85,28 @@ namespace SharpContent.Common
         }
 
         public const string glbAboutPage = "about.htm";
-        public const string glbAppCompany = "SharpContent";
-        public const string glbAppDescription = "Open Source Web Application Framework";
+        public const string glbAppCompany = "Sharp Content";
+        public const string glbAppDescription = "Open Source Content Management System Framework";
         public const string glbAppTitle = "SharpContent";
-        public const string glbAppUrl = "http://www.SharpContentPortal.com";
-        public const string glbUpgradeUrl = "http://update.DotNetNuke.com";
+        public const string glbAppUrl = "http://www.sharpcontentportal.com";
+        public const string glbUpgradeUrl = "http://update.sharpcontentportal.com";
         
         public const string glbAppVersion = "01.01.01";
         public const string glbConfigFolder = "\\Config\\";
         public const string glbDefaultAdminContainer = "Image Header - Color Background.ascx";
         public const string glbDefaultAdminSkin = "Horizontal Menu - Fixed Width.ascx";
         public const string glbDefaultContainer = "Image Header - Color Background.ascx";
-        public const string glbDefaultContainerFolder = "/SCP-Blue/";
+        public const string glbDefaultContainerFolder = "/PortalDefualt/";
         public const string glbDefaultControlPanel = "Admin/ControlPanel/IconBar.ascx";
 
         public const string glbDefaultPage = "Default.aspx";
         public const string glbDefaultPane = "ContentPane";
         public const string glbDefaultSkin = "Horizontal Menu - Fixed Width.ascx";
-        public const string glbDefaultSkinFolder = "/SCP-Blue/";
-        public const string glbHelpUrl = "http://www.DotNetNuke.com/default.aspx?tabid=787";
+        public const string glbDefaultSkinFolder = "/PortalDefualt/";
+        public const string glbHelpUrl = "http://www.sharpcontentportal.com/default.aspx?tabid=787";
         public const string glbHostSkinFolder = "_default";
         public const string glbImageFileTypes = "jpg,jpeg,jpe,gif,bmp,png,swf";
-        public const string glbLegalCopyright = "SharpContent is copyright YYYY by SharpContent Corporation";
+        public const string glbLegalCopyright = "Sharp Content Portal is copyright YYYY by Sharp Content Corporation";
 
         public const string glbProtectedExtension = ".resources";
 

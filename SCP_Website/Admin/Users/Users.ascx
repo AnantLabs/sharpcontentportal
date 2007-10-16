@@ -56,7 +56,6 @@
                 <asp:Image ID="imgOnline" runat="Server" ImageUrl="~/images/userOnline.gif" />
             </ItemTemplate>
         </asp:TemplateColumn>
-        <scp:textcolumn datafield="AccountNumber" headertext="AccountNumber" Width="" />
         <scp:textcolumn datafield="UserName" headertext="Username" Width="" />
         <scp:textcolumn datafield="FirstName" headertext="FirstName" Width="" />
         <scp:textcolumn datafield="LastName" headertext="LastName" Width="" />

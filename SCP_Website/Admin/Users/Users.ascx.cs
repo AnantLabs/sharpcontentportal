@@ -530,7 +530,7 @@ namespace SharpContent.Modules.Admin.Users
             {
                 bool isVisible;
                 string header = column.HeaderText;
-                if (header == "" || header.ToLower() == "accountnumber" || header.ToLower() == "username")
+                if (header == "" || header.ToLower() == "username")
                 {
                     isVisible = true;
                 }
@@ -649,7 +649,6 @@ namespace SharpContent.Modules.Admin.Users
                     }
 
                     //Load the Search Combo
-                    ddlSearchType.Items.Add(AddSearchItem("AccountNumber"));
                     ddlSearchType.Items.Add(AddSearchItem("Username"));
                     ddlSearchType.Items.Add(AddSearchItem("Email"));
                     ProfilePropertyDefinitionCollection profileProperties = ProfileController.GetPropertyDefinitionsByPortal(PortalId);
