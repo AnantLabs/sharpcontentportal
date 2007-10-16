@@ -100,7 +100,7 @@ FCKConfig.ToolbarSets["Default"] = [
 	['FitWindow','-','About']
 ] ;
 
-FCKConfig.ToolbarSets["SCPDefault"] = [
+FCKConfig.ToolbarSets["PortalDefault"] = [
 	['Preview','-','Templates'],
 	['Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck'],
 	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],

@@ -4,21 +4,89 @@
 ================================
 */   
 
-.containermaster_blue {
+.containermaster_default {
 	width: 100%;
-	background-color: #dfe5f2;
-	border-right: #7994cb 1px solid; 
-	border-top: #7994cb 1px solid; 
-	border-left: #7994cb 1px solid; 
-	border-bottom: #7994cb 1px solid; 
+	background-color: #ffffff;
+	border-right: #000000 1px solid; 
+	border-top: #000000 1px solid; 
+	border-left: #000000 1px solid; 
+	border-bottom: #000000 1px solid; 
 	moz-border-radius-bottomleft: 15px; 
 	moz-border-radius-bottomright: 15px; 
 	moz-border-radius-topleft: 3px; 
 	moz-border-radius-topright: 3px;
 }
-.containerrow1_blue {
-	background-image: url(gradient_LtBlue.jpg);
+.containerrow1_default {
+	background-image: url(gradient_lt.jpg);
 }
-.containerrow2_blue {
+.containerrow2_default {
 	background-color: #ffffff;
 }
+
+/* Overrides Module Title in default.css */
+.ModuleTitle_MenuContainer {
+	background-color: transparent;
+	border: #000000 0px solid;
+}
+.ModuleTitle_MenuBar {
+	cursor: pointer; 
+	cursor: hand;
+	height: 18px;
+	background-color: Transparent;
+}
+.ModuleTitle_MenuItem {
+	cursor: pointer; 
+	cursor: hand; 
+	color: #000000; 
+	font-family: Verdana, Arial, Helvetica, Sans-Serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	font-style: normal; 
+	border: #FFFFF0 0px solid; 	
+	background-color: Transparent;
+}
+.ModuleTitle_MenuIcon {
+	cursor: hand; 
+	background-color: #ACA299; 
+	border: #ACA299 2px solid;
+	border-right: #FFFFF0 2px solid;
+	text-align: center; 
+	width: 20; 
+	height: 25;
+}
+.ModuleTitle_SubMenu {
+	z-index: 1000; 
+	cursor: pointer; 
+	cursor: hand; 
+	background-color: #FFFFF0; 
+	filter:progid:DXImageTransform.Microsoft.Shadow(color='DimGray', Direction=135, Strength=3); 
+	border: #FFFFF0 2px groove;
+}
+.ModuleTitle_MenuBreak {
+	border-bottom: #ACA299 1px solid; 
+	border-left: #ACA299 0px solid; 
+	border-top: #ACA299 1px solid;  
+	border-right: #ACA299 0px solid; 
+	background-color: #ACA299; 
+	height: 1px;
+}
+.ModuleTitle_MenuItemSel { 
+	cursor: hand; 
+	color: #000000; 
+	font-family: Verdana, Arial, Helvetica, Sans-Serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	font-style: normal;
+	background-color: Transparent;
+}
+.ModuleTitle_MenuArrow {
+	font-family: webdings; 
+	font-size: 10pt;
+	cursor: hand; 
+}
+.ModuleTitle_RootMenuArrow {
+	font-family: webdings; 
+	font-size: 10pt; 
+	cursor: hand;
+}
+

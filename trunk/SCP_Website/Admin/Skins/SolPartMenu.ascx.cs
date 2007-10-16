@@ -1121,18 +1121,18 @@ namespace SharpContent.UI.Skins.Controls
         private void SetAttributes()
         {
             SeparateCss = "true"; // CStr(True)
-            //Me.StyleSelectionBorderColor = Nothing
+            //this.StyleSelectionBorderColor = Nothing
 
             if( bool.Parse( GetValue( ClearDefaults, "false" ) ) )
             {
-                //Me.StyleSelectionBorderColor = Nothing
-                //Me.StyleSelectionForeColor = Nothing
-                //Me.StyleHighlightColor = Nothing
-                //Me.StyleIconBackColor = Nothing
-                //Me.EffectsShadowColor = Nothing
-                //Me.StyleSelectionColor = Nothing
-                //Me.StyleBackColor = Nothing
-                //Me.StyleForeColor = Nothing
+                this.StyleSelectionBorderColor = String.Empty;
+                this.StyleSelectionForeColor = String.Empty;
+                this.StyleHighlightColor = String.Empty;
+                this.StyleIconBackColor = String.Empty;
+                this.EffectsShadowColor = String.Empty;
+                this.StyleSelectionColor = String.Empty;
+                this.StyleBackColor = String.Empty;
+                this.StyleForeColor = String.Empty;
             }
             else //these defaults used to be on the page HTML
             {
@@ -1160,7 +1160,6 @@ namespace SharpContent.UI.Skins.Controls
                 {
                     this.StyleIconWidth = "0";
                 }
-                //Me.StyleSelectionBorderColor = "#333333" 'cleared above
                 if( String.IsNullOrEmpty( StyleSelectionColor ) )
                 {
                     this.StyleSelectionColor = "#CCCCCC";

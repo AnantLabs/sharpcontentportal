@@ -505,6 +505,7 @@ namespace SharpContent.Modules.Admin.Skins
             }
 
             strThumbnail = Globals.ApplicationPath + "\\" + strThumbnail.Substring( strThumbnail.IndexOf( "portals\\" ) );
+            strThumbnail = "\\" + strThumbnail.Substring(strThumbnail.IndexOf("portals\\"));
 
             // return thumbnail filename
             return strThumbnail;

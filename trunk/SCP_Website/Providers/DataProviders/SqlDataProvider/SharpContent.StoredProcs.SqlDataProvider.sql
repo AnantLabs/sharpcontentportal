@@ -3106,6 +3106,16 @@ as
 	-- Clean up the users online table
 	DELETE from {objectQualifier}UsersOnline WHERE LastActiveDate < DateAdd(minute, -@TimeWindow, GetDate())
 GO
+/****** Object:  StoredProcedure [dbo].[scp_DeleteUserOnline]    Script Date: 10/12/2007 08:50:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[scp_DeleteUserOnline] 
+	@UserID int
+AS
+	DELETE FROM scp_UsersOnline WHERE UserID = @UserID
+GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}UpdateOnlineUser]    Script Date: 10/05/2007 21:22:49 ******/
 SET ANSI_NULLS ON
 GO
