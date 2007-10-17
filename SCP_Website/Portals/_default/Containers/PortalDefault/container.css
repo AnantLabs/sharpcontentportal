@@ -17,7 +17,8 @@
 	moz-border-radius-topright: 3px;
 }
 .containerrow1_default {
-	background-image: url(gradient_lt.jpg);
+	background: #FFFFFF url(gradient_lt.jpg) repeat-x;
+	height: 30px; 
 }
 .containerrow2_default {
 	background-color: #ffffff;
