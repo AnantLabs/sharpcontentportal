@@ -27,8 +27,8 @@ using System.Runtime.InteropServices;
 
 // Review the values of the assembly attributes
 
-[assembly: AssemblyTitle("SharpContent.SCPTreeNavigationProvider")]
-[assembly: AssemblyDescription("SharpContent.SCPTreeNavigationProvider")]
+[assembly: AssemblyTitle("SharpContent.TreeNavigationProvider")]
+[assembly: AssemblyDescription("SharpContent.TreeNavigationProvider")]
 [assembly: AssemblyCompany("SharpContent Corporation")]
 [assembly: AssemblyProduct("http://www.SharpContentPortal.com")]
 [assembly: AssemblyCopyright("Sharp Content Portal is copyright 2002-2006 by SharpContent Corporation. All Rights Reserved.")]

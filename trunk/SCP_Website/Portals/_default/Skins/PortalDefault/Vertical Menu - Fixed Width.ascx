@@ -15,7 +15,7 @@
 <TABLE class="pagemaster" border="0" cellspacing="0" cellpadding="0">
 <TR>
 <TD valign="top">
-<TABLE class="skinmaster" width="770" border="0" align="center" cellspacing="0" cellpadding="0">
+<TABLE class="skinmaster" width="970" border="0" align="center" cellspacing="0" cellpadding="0">
 <TR>
 <TD id="ControlPanel" runat="server" class="contentpane" valign="top" align="center"></TD>
 </TR>
