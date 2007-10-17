@@ -24,7 +24,7 @@ using SharpContent.UI.WebControls;
 
 namespace SharpContent.NavigationControl
 {
-    public class SCPTreeNavigationProvider : NavigationProvider
+    public class TreeNavigationProvider : NavigationProvider
     {
         private SCPTree m_objTree;
         private string m_strControlID;

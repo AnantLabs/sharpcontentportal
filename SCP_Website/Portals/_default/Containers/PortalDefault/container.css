@@ -6,7 +6,7 @@
 
 .containermaster_default {
 	width: 100%;
-	background-color: #ffffff;
+	background-color: #FFFFFF;
 	border-right: #000000 1px solid; 
 	border-top: #000000 1px solid; 
 	border-left: #000000 1px solid; 
@@ -21,7 +21,7 @@
 	height: 30px; 
 }
 .containerrow2_default {
-	background-color: #ffffff;
+	background-color: #FFFFFF;
 }
 
 /* Overrides Module Title in default.css */

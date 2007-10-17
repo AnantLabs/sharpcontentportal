@@ -388,7 +388,7 @@ namespace SharpContent.UI.Skins.Controls
                 SCPTree objTree = (SCPTree)this.Control.NavigationControl;
                 if( objTree.SelectedTreeNodes.Count > 0 )
                 {
-                    TreeNode objTNode = (TreeNode)objTree.SelectedTreeNodes[1];
+                    TreeNode objTNode = (TreeNode)objTree.SelectedTreeNodes[0];
                     if( objTNode.SCPNodes.Count > 0 ) //only expand it if nodes are not pending
                     {
                         objTNode.Expand();
@@ -600,7 +600,7 @@ namespace SharpContent.UI.Skins.Controls
         protected override void OnInit( EventArgs e )
         {
             InitializeTree();
-            InitializeNavControl( this.cellBody, "SCPTreeNavigationProvider" );
+            InitializeNavControl( this.cellBody, "TreeNavigationProvider" );
             Control.NodeClick += new NavigationProvider.NodeClickEventHandler( SCPTree_NodeClick );
             Control.PopulateOnDemand += new NavigationProvider.PopulateOnDemandEventHandler(SCPTree_PopulateOnDemand);
 
