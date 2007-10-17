@@ -96,13 +96,13 @@ namespace SharpContent.Common
         public const string glbDefaultAdminContainer = "Image Header - Color Background.ascx";
         public const string glbDefaultAdminSkin = "Horizontal Menu - Fixed Width.ascx";
         public const string glbDefaultContainer = "Image Header - Color Background.ascx";
-        public const string glbDefaultContainerFolder = "/PortalDefualt/";
+        public const string glbDefaultContainerFolder = "/PortalDefault/";
         public const string glbDefaultControlPanel = "Admin/ControlPanel/IconBar.ascx";
 
         public const string glbDefaultPage = "Default.aspx";
         public const string glbDefaultPane = "ContentPane";
         public const string glbDefaultSkin = "Horizontal Menu - Fixed Width.ascx";
-        public const string glbDefaultSkinFolder = "/PortalDefualt/";
+        public const string glbDefaultSkinFolder = "/PortalDefault/";
         public const string glbHelpUrl = "http://www.sharpcontentportal.com/default.aspx?tabid=787";
         public const string glbHostSkinFolder = "_default";
         public const string glbImageFileTypes = "jpg,jpeg,jpe,gif,bmp,png,swf";
