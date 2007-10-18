@@ -371,8 +371,7 @@ namespace SharpContent.UI.Skins
                     if (objModule.DisplayTitle == false)
                     {
                         // always display container if the current user is the administrator or the module is being used in an admin case
-//AC                        bool blnDisplayTitle = (PortalSecurity.IsInRoles(portalSettings.AdministratorRoleName) || PortalSecurity.IsInRoles(portalSettings.ActiveTab.AdministratorRoles.ToString())) || Globals.IsAdminSkin(portalSettings.ActiveTab.IsAdminTab);
-                        bool blnDisplayTitle = true;
+                        bool blnDisplayTitle = (PortalSecurity.IsInRoles(portalSettings.AdministratorRoleName) || PortalSecurity.IsInRoles(portalSettings.ActiveTab.AdministratorRoles.ToString())) || Globals.IsAdminSkin(portalSettings.ActiveTab.IsAdminTab);
                         // unless the administrator has selected the Page Preview option
                         if (blnDisplayTitle)
                         {
