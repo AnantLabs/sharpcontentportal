@@ -48,8 +48,8 @@
 }
 .ModuleTitle_MenuIcon {
 	cursor: hand; 
-	background-color: #ACA299; 
-	border: #ACA299 2px solid;
+	background-color: #A0A0A0; 
+	border: #A0A0A0 2px solid;
 	border-right: #FFFFF0 2px solid;
 	text-align: center; 
 	width: 20; 
@@ -59,16 +59,16 @@
 	z-index: 1000; 
 	cursor: pointer; 
 	cursor: hand; 
-	background-color: #FFFFF0; 
+	background-color: #FFFFFF; 
 	filter:progid:DXImageTransform.Microsoft.Shadow(color='DimGray', Direction=135, Strength=3); 
 	border: #FFFFF0 2px groove;
 }
 .ModuleTitle_MenuBreak {
-	border-bottom: #ACA299 1px solid; 
-	border-left: #ACA299 0px solid; 
-	border-top: #ACA299 1px solid;  
-	border-right: #ACA299 0px solid; 
-	background-color: #ACA299; 
+	border-bottom: #A0A0A0 1px solid; 
+	border-left: #A0A0A0 0px solid; 
+	border-top: #A0A0A0 1px solid;  
+	border-right: #A0A0A0 0px solid; 
+	background-color: #A0A0A0; 
 	height: 1px;
 }
 .ModuleTitle_MenuItemSel { 
