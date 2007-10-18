@@ -29,7 +29,7 @@
                                 </td>
                                 <td valign="top" align="right" nowrap>
                                     <scp:USER runat="server" ID="SCPUSER" />
-                                    &nbsp;&nbsp;<scp:LOGIN runat="server" ID="SCPLOGIN" />
+                                    &nbsp;|&nbsp;<scp:LOGIN runat="server" ID="SCPLOGIN" />
                                 </td>
                             </tr>
                             <tr>
@@ -57,7 +57,7 @@
                                 <td width="100%" valign="top" align="left" nowrap style="height: 23px">
                                     <asp:Label ID="lblBreadCrumb" runat="server" Text="You are here:" CssClass="SkinObject"></asp:Label>&nbsp;
                                     <scp:BREADCRUMB runat="server" ID="SCPBREADCRUMB" RootLevel="0"
-                                        Separator="&nbsp;&rArr;&nbsp;" UseTitle="false" />
+                                        Separator="&nbsp;&rArr;&nbsp;&bull;" UseTitle="false" />
                                     </td>
                                 <td width="200" valign="top" align="center" style="height: 23px">
                                 </td>
