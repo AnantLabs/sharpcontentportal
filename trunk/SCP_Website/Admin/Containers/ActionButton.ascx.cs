@@ -198,12 +198,12 @@ namespace SharpContent.UI.Containers
                     {
                         if( action.Visible && PortalSecurity.HasNecessaryPermission( action.Secure, PortalSettings, PortalModule.ModuleConfiguration, userInfo.UserID.ToString() ) )
                         {
-                            //bool blnPreview = false;
-                            //if (Request.Cookies["_Tab_Admin_Preview" + PortalSettings.PortalId] != null)
-                            //{
-                            //    blnPreview = bool.Parse(Request.Cookies["_Tab_Admin_Preview" + PortalSettings.PortalId].Value);
-                            //}
-                            if ((PortalModule.PortalSettings.ActiveTab.IsAdminTab == true) || (action.Secure == SecurityAccessLevel.Anonymous || action.Secure == SecurityAccessLevel.View))
+                            bool blnPreview = false;
+                            if (Request.Cookies["_Tab_Admin_Preview" + PortalSettings.PortalId] != null)
+                            {
+                                blnPreview = bool.Parse(Request.Cookies["_Tab_Admin_Preview" + PortalSettings.PortalId].Value);
+                            }
+                            if ((!blnPreview || PortalModule.PortalSettings.ActiveTab.IsAdminTab == true) || (action.Secure == SecurityAccessLevel.Anonymous || action.Secure == SecurityAccessLevel.View))
                             {
                                 if( action.CommandName == ModuleActionType.PrintModule && PortalModule.ModuleConfiguration.DisplayPrint == false )
                                 {

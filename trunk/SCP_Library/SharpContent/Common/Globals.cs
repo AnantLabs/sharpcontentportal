@@ -93,9 +93,9 @@ namespace SharpContent.Common
         
         public const string glbAppVersion = "01.01.01";
         public const string glbConfigFolder = "\\Config\\";
-        public const string glbDefaultAdminContainer = "Image Header - Color Background.ascx";
+        public const string glbDefaultAdminContainer = "Image Header - White Background.ascx";
         public const string glbDefaultAdminSkin = "Horizontal Menu - Fixed Width.ascx";
-        public const string glbDefaultContainer = "Image Header - Color Background.ascx";
+        public const string glbDefaultContainer = "Image Header - White Background.ascx";
         public const string glbDefaultContainerFolder = "/PortalDefault/";
         public const string glbDefaultControlPanel = "Admin/ControlPanel/IconBar.ascx";
 

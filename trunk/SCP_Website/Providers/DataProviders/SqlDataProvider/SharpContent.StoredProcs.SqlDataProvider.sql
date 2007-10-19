@@ -1022,7 +1022,7 @@ AS
 				INNER JOIN scp_Users U ON UR.UserID = U.UserID
 				INNER JOIN scp_Roles R ON R.RoleID = UR.RoleID
 				INNER JOIN #PageIndexForUsers P ON U.UserID = P.UserID
-			WHERE P.IndexID >= @PageLowerBound AND P.IndexID <= @PageUpperBound
+			WHERE UR.RoleID = @RoleID AND P.IndexID >= @PageLowerBound AND P.IndexID <= @PageUpperBound
 			ORDER BY U.UserName
 
 		SELECT TotalRecords = COUNT(*) FROM #PageIndexForUsers
