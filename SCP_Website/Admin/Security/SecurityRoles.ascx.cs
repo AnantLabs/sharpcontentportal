@@ -328,7 +328,6 @@ namespace SharpContent.Modules.Admin.Security
                 grdUserRoles.Columns[2].Visible = false;
                 grdUserRoles.Columns[3].Visible = false;
                 grdUserRoles.Columns[4].Visible = false;
-                grdUserRoles.Columns[5].Visible = false;
                 ctlPagingControl.Visible = false;
                 grdUserRoles.DataSource = objRoleController.GetUserRolesByUserId(PortalId, objUserInfo.UserID, -1);
                 grdUserRoles.DataBind();

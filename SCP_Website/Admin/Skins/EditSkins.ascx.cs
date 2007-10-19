@@ -286,7 +286,7 @@ namespace SharpContent.Modules.Admin.Skins
                     strGallery += "<td align=\"center\" valign=\"bottom\" class=\"NormalBold\">" + Localization.GetString( "NoSkin.ErrorMessage", this.LocalResourceFile ) + "</td>";
                 }
 
-                string strFolder = strFolderPath.Substring( strFolderPath.LastIndexOf( "\\" ) + 1 - 1 );
+                string strFolder = strFolderPath.Substring( strFolderPath.LastIndexOf( "\\" ) + 1 );
                 foreach( string tempLoopVar_strFile in arrFiles )
                 {
                     string strFile = tempLoopVar_strFile;

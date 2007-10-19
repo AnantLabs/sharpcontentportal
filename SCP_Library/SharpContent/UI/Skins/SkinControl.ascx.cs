@@ -141,9 +141,9 @@ namespace SharpContent.UI.Skins
                         return strSkinFolder;
 
                     case "default":
-                        return strSkinFolder + " - " + strSkinFile;
-                    default:
                         return strSkinFolder;
+                    default:
+                        return strSkinFolder + " - " + strSkinFile;
                 }
             }
         }
@@ -261,9 +261,13 @@ namespace SharpContent.UI.Skins
             cboSkin.Items.Insert( 0, new ListItem( "<" + Localization.GetString( "Not_Specified" ) + ">", "" ) );
 
             // select current skin
+            string comboValue;
+            string vsSkin;
             int intIndex;
             for( intIndex = 0; intIndex <= cboSkin.Items.Count - 1; intIndex++ )
             {
+                comboValue = cboSkin.Items[intIndex].Value.ToString();
+                vsSkin = Convert.ToString(ViewState["SkinSrc"]);
                 if( cboSkin.Items[intIndex].Value.ToLower() == Convert.ToString( ViewState["SkinSrc"] ).ToLower() )
                 {
                     cboSkin.Items[intIndex].Selected = true;

@@ -63,7 +63,6 @@
 							</itemtemplate>
 						</asp:TemplateColumn>
 						<scp:textcolumn datafield="RoleName" headertext="SecurityRole" Width="" />
-						<scp:textcolumn datafield="AccountNumber" headertext="AccountNumber" Width="" />
 						<scp:textcolumn datafield="UserName" headertext="UserName" Width="" />					
                         <scp:textcolumn datafield="FirstName" headertext="FirstName" Width="" />
                         <scp:textcolumn datafield="LastName" headertext="LastName" Width="" />						
