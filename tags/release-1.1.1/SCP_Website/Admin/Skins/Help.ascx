@@ -1,0 +1,2 @@
+<%@ Control Language="C#" AutoEventWireup="true"  Inherits="SharpContent.UI.Skins.Controls.Help" CodeFile="Help.ascx.cs" %>
+<asp:hyperlink id="hypHelp" runat="server" cssclass="SkinObject" enableviewstate="False"></asp:hyperlink>

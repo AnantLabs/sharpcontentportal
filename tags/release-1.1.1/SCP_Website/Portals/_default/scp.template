@@ -1,0 +1,446 @@
+﻿<portal version="3.0">
+  <description>Default Content Management Portal</description>
+  <settings>
+    <logofile>logo.gif</logofile>
+    <footertext>Copyright 2007</footertext>
+    <userregistration>2</userregistration>
+    <banneradvertising>0</banneradvertising>
+    <defaultlanguage>en-US</defaultlanguage>
+    <timezoneoffset>-480</timezoneoffset>
+  </settings>
+  <profiledefinitions>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Name</propertycategory>
+      <propertyname>Prefix</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Name</propertycategory>
+      <propertyname>FirstName</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Name</propertycategory>
+      <propertyname>MiddleName</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Name</propertycategory>
+      <propertyname>LastName</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Name</propertycategory>
+      <propertyname>Suffix</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Address</propertycategory>
+      <propertyname>Unit</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Address</propertycategory>
+      <propertyname>Street</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Address</propertycategory>
+      <propertyname>City</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>0</length>
+      <propertycategory>Address</propertycategory>
+      <propertyname>Region</propertyname>
+      <datatype>Region</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>0</length>
+      <propertycategory>Address</propertycategory>
+      <propertyname>Country</propertyname>
+      <datatype>Country</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Address</propertycategory>
+      <propertyname>PostalCode</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Contact Info</propertycategory>
+      <propertyname>Telephone</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Contact Info</propertycategory>
+      <propertyname>Cell</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Contact Info</propertycategory>
+      <propertyname>Fax</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Contact Info</propertycategory>
+      <propertyname>Website</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>50</length>
+      <propertycategory>Contact Info</propertycategory>
+      <propertyname>IM</propertyname>
+      <datatype>Text</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>0</length>
+      <propertycategory>Preferences</propertycategory>
+      <propertyname>Biography</propertyname>
+      <datatype>RichText</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>0</length>
+      <propertycategory>Preferences</propertycategory>
+      <propertyname>TimeZone</propertyname>
+      <datatype>TimeZone</datatype>
+    </profiledefinition>
+    <profiledefinition>
+      <length>0</length>
+      <propertycategory>Preferences</propertycategory>
+      <propertyname>PreferredLocale</propertyname>
+      <datatype>Locale</datatype>
+    </profiledefinition>
+  </profiledefinitions>
+  <roles>
+    <role>
+      <rolename>Administrators</rolename>
+      <description>Portal Administration</description>
+      <billingfrequency />
+      <servicefee>-3.40282347E+38</servicefee>
+      <trialfrequency />
+      <trialperiod>-1</trialperiod>
+      <billingperiod>-1</billingperiod>
+      <trialfee>-3.40282347E+38</trialfee>
+      <ispublic>false</ispublic>
+      <autoassignment>false</autoassignment>
+      <rsvpcode />
+      <iconfile />
+      <roletype>adminrole</roletype>
+    </role>
+    <role>
+      <rolename>Power Users</rolename>
+      <description>Power Users</description>
+      <billingfrequency />
+      <servicefee>-3.40282347E+38</servicefee>
+      <trialfrequency />
+      <trialperiod>-1</trialperiod>
+      <billingperiod>-1</billingperiod>
+      <trialfee>-3.40282347E+38</trialfee>
+      <ispublic>false</ispublic>
+      <autoassignment>false</autoassignment>
+      <rsvpcode />
+      <iconfile />
+      <roletype>poweruserrole</roletype>
+    </role>
+    <role>
+      <rolename>Registered Users</rolename>
+      <description>Registered Users</description>
+      <billingfrequency />
+      <servicefee>-3.40282347E+38</servicefee>
+      <trialfrequency />
+      <trialperiod>-1</trialperiod>
+      <billingperiod>-1</billingperiod>
+      <trialfee>-3.40282347E+38</trialfee>
+      <ispublic>false</ispublic>
+      <autoassignment>true</autoassignment>
+      <rsvpcode />
+      <iconfile />
+      <roletype>registeredrole</roletype>
+    </role>
+  </roles>
+  <tabs>
+    <tab>
+      <name>Home</name>
+      <visible>true</visible>
+      <iconfile />
+      <disabled>false</disabled>
+      <title />
+      <description />
+      <keywords />
+      <url />
+      <skinsrc />
+      <containersrc />
+      <startdate>0001-01-01T00:00:00</startdate>
+      <enddate>0001-01-01T00:00:00</enddate>
+      <tabpermissions>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <rolename>All Users</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <rolename>Administrators</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <rolename>Administrators</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+      </tabpermissions>
+      <refreshinterval>-1</refreshinterval>
+      <pageheadtext />
+      <panes>        
+        <pane>
+          <name>ContentPane</name>
+          <modules>
+            <module>
+              <moduleID>347</moduleID>
+              <title>Welcome to a Sharp Content Portal</title>
+              <cachetime>3600</cachetime>
+              <alignment>left</alignment>
+              <color />
+              <border />
+              <iconfile />
+              <alltabs>false</alltabs>
+              <visibility>Maximized</visibility>
+              <header />
+              <footer />
+              <startdate>0001-01-01T00:00:00</startdate>
+              <enddate>0001-01-01T00:00:00</enddate>
+              <containersrc />
+              <displaytitle>true</displaytitle>
+              <displayprint>true</displayprint>
+              <displaysyndicate>true</displaysyndicate>
+              <inheritviewpermissions>true</inheritviewpermissions>
+              <modulepermissions>
+                <permission>
+                  <permissioncode>SYSTEM_MODULE_DEFINITION</permissioncode>
+                  <permissionkey>EDIT</permissionkey>
+                  <rolename>Administrators</rolename>
+                  <allowaccess>true</allowaccess>
+                </permission>
+              </modulepermissions>
+              <definition>SCP_HTML</definition>
+              <moduledefinition>Text/HTML</moduledefinition>
+              <content type="TextHTML" version="01.01.01">
+      <![CDATA[&lt;htmltext&gt;&lt;desktophtml&gt;&lt;![CDATA[
+		&amp;lt;b&amp;gt;Administrator Login:&amp;lt;/b&amp;gt;
+		&amp;lt;br /&amp;gt;
+		&amp;lt;br /&amp;gt;Username: admin&amp;lt;br /&amp;gt;Password: ScpAdmin1&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;* Select the Admin tab to manage the portal settings as the Administrator. &amp;lt;font color=&amp;quot;#ff0000&amp;quot;&amp;gt;Make sure you change the default password and specify a valid Email address for this account.&amp;lt;br /&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;b&amp;gt;Host Login:&amp;lt;/b&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;Username: host&amp;lt;br /&amp;gt;Password: ScpHost1&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;* Select the Host tab to manage multiple portals as the Host. &amp;lt;font color=&amp;quot;#ff0000&amp;quot;&amp;gt;Make sure you change the default password and specify a valid Email address for this account.&amp;lt;br /&amp;gt;&amp;lt;/font&amp;gt;]]&gt;&lt;/desktophtml&gt;&lt;desktopsummary&gt;&lt;![CDATA[]]&gt;&lt;/desktopsummary&gt;&lt;/htmltext&gt;]]></content>
+            </module>            
+          </modules>
+        </pane>
+        <pane>
+          <name>RightPane</name>
+          <modules>
+            <module>
+              <moduleID>350</moduleID>
+              <title>Links</title>
+              <cachetime>3600</cachetime>
+              <alignment>left</alignment>
+              <color />
+              <border />
+              <iconfile />
+              <alltabs>false</alltabs>
+              <visibility>Maximized</visibility>
+              <header />
+              <footer />
+              <startdate>0001-01-01T00:00:00</startdate>
+              <enddate>0001-01-01T00:00:00</enddate>
+              <containersrc />
+              <displaytitle>true</displaytitle>
+              <displayprint>true</displayprint>
+              <displaysyndicate>false</displaysyndicate>
+              <inheritviewpermissions>true</inheritviewpermissions>
+              <modulepermissions>
+                <permission>
+                  <permissioncode>SYSTEM_MODULE_DEFINITION</permissioncode>
+                  <permissionkey>EDIT</permissionkey>
+                  <rolename>Administrators</rolename>
+                  <allowaccess>true</allowaccess>
+                </permission>
+              </modulepermissions>
+              <definition>SCP_Links</definition>
+              <moduledefinition>Links</moduledefinition>
+              <content type="Links" version="01.01.01">
+                <![CDATA[&lt;links&gt;
+&lt;link&gt;&lt;title&gt;&lt;![CDATA[Sharp Content Portal]]&gt;&lt;/title&gt;&lt;url&gt;&lt;![CDATA[http://www.sharpcontentportal.com]]&gt;&lt;/url&gt;&lt;vieworder&gt;&lt;![CDATA[0]]&gt;&lt;/vieworder&gt;&lt;description&gt;&lt;![CDATA[The Official Sharp Content Portal Website]]&gt;&lt;/description&gt;&lt;newwindow&gt;&lt;![CDATA[False]]&gt;&lt;/newwindow&gt;&lt;/link&gt;
+&lt;/links&gt;]]>
+              </content>
+            </module>
+          </modules>
+        </pane>
+        <pane>
+          <name>LeftPane</name>
+          <modules>
+            <module>
+              <moduleID>353</moduleID>
+              <title>Login</title>
+              <cachetime>3600</cachetime>
+              <alignment>left</alignment>
+              <color />
+              <border />
+              <iconfile />
+              <alltabs>false</alltabs>
+              <visibility>None</visibility>
+              <header />
+              <footer />
+              <startdate>0001-01-01T00:00:00</startdate>
+              <enddate>0001-01-01T00:00:00</enddate>
+              <containersrc />
+              <displaytitle>true</displaytitle>
+              <displayprint>false</displayprint>
+              <displaysyndicate>false</displaysyndicate>
+              <inheritviewpermissions>false</inheritviewpermissions>
+              <modulepermissions>
+                <permission>
+                  <permissioncode>SYSTEM_MODULE_DEFINITION</permissioncode>
+                  <permissionkey>EDIT</permissionkey>
+                  <rolename>Administrators</rolename>
+                  <allowaccess>true</allowaccess>
+                </permission>
+                <permission>
+                <permissioncode>SYSTEM_MODULE_DEFINITION</permissioncode>
+                <permissionkey>VIEW</permissionkey>
+                <rolename>Unathenticated Users</rolename>
+                <allowaccess>true</allowaccess>
+                </permission>
+              </modulepermissions>
+              <definition>SCP_Links</definition>
+              <moduledefinition>Links</moduledefinition>
+              <content></content>
+            </module>
+          </modules>
+        </pane>
+      </panes>
+    </tab>
+    <tab>
+      <name>Search Results</name>
+      <visible>false</visible>
+      <iconfile />
+      <disabled>false</disabled>
+      <title>Search Results</title>
+      <description />
+      <keywords />
+      <url />
+      <skinsrc />
+      <containersrc />
+      <startdate>0001-01-01T00:00:00</startdate>
+      <enddate>0001-01-01T00:00:00</enddate>
+      <tabpermissions>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <rolename>All Users</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>VIEW</permissionkey>
+          <rolename>Administrators</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_TAB</permissioncode>
+          <permissionkey>EDIT</permissionkey>
+          <rolename>Administrators</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+      </tabpermissions>
+      <refreshinterval>-1</refreshinterval>
+      <pageheadtext />
+      <panes>
+        <pane>
+          <name>ContentPane</name>
+          <modules>
+            <module>
+              <moduleID>352</moduleID>
+              <title>Search Results</title>
+              <cachetime>0</cachetime>
+              <alignment />
+              <color />
+              <border />
+              <iconfile />
+              <alltabs>false</alltabs>
+              <visibility>Maximized</visibility>
+              <header />
+              <footer />
+              <startdate>0001-01-01T00:00:00</startdate>
+              <enddate>0001-01-01T00:00:00</enddate>
+              <containersrc />
+              <displaytitle>true</displaytitle>
+              <displayprint>true</displayprint>
+              <displaysyndicate>false</displaysyndicate>
+              <inheritviewpermissions>true</inheritviewpermissions>
+              <modulepermissions />
+              <definition>Search Results</definition>
+              <moduledefinition>Search Results</moduledefinition>
+            </module>
+          </modules>
+        </pane>
+      </panes>
+    </tab>
+  </tabs>
+  <folders>
+    <folder>
+      <folderpath />
+      <storagelocation>0</storagelocation>
+      <folderpermissions>
+        <permission>
+          <permissioncode>SYSTEM_FOLDER</permissioncode>
+          <permissionkey>READ</permissionkey>
+          <rolename>Administrators</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_FOLDER</permissioncode>
+          <permissionkey>WRITE</permissionkey>
+          <rolename>Administrators</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+        <permission>
+          <permissioncode>SYSTEM_FOLDER</permissioncode>
+          <permissionkey>READ</permissionkey>
+          <rolename>All Users</rolename>
+          <allowaccess>true</allowaccess>
+        </permission>
+      </folderpermissions>
+      <files>
+        <file>
+          <contenttype>image/gif</contenttype>
+          <extension>gif</extension>
+          <filename>logo.gif</filename>
+          <height>78</height>
+          <size>2259</size>
+          <width>1369</width>
+        </file>
+        <file>
+          <contenttype>application/octet-stream</contenttype>
+          <extension>css</extension>
+          <filename>portal.css</filename>
+          <height>0</height>
+          <size>2832</size>
+          <width>0</width>
+        </file>        
+      </files>
+    </folder>
+  </folders>
+</portal>

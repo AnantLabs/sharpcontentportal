@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdBrowse.Text" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="cmdLoad.Text" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="ControlTitle_userbulkload.Text" xml:space="preserve">
+    <value>User Bulk Load</value>
+  </data>
+  <data name="lblBrowse.Text" xml:space="preserve">
+    <value>Browse for a properly formatted xml file that contains the users to be added to the site.</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>User Bulk Load</value>
+  </data>
+  <data name="LogFile.Text" xml:space="preserve">
+    <value>UserBulkLoad</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;About the User Bulk Load Module&lt;/h1&gt;&lt;p&gt;This module allows administrators to add multiple users to the site with an xml formatted file that contains the user information.  The file should end with the extension ".scp" and have the following format:&lt;p&gt; &amp;lt;Sharp Content Portal version="1.0" type="user"&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;lt;users&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;lt;user&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;account&amp;gt;&amp;lt;/account&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;username&amp;gt;&amp;lt;/username&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;firstname&amp;gt;&amp;lt;/firstname&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;lastname&amp;gt;&amp;lt;/lastname&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;email&amp;gt;&amp;lt;/email&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;password&amp;gt;&amp;lt;/password&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;question&amp;gt;&amp;lt;/question&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;answer&amp;gt;&amp;lt;/answer&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;lt;/user&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;lt;user&amp;gt;...&lt;br /&gt;
+&amp;nbsp; &amp;nbsp; &amp;lt;/user&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;lt;/user&amp;gt;&lt;br /&gt;
+&amp;lt;/Sharp Content Portal&amp;gt;&lt;/p&gt;&lt;p&gt;The password and answer nodes can be left empty and they will be populated with random values.  If the question node is left empty, it will default to the first question in the password question list.  Password question values should be numerical (i.e., 1, 2 , 3).&lt;/p&gt;</value>
+  </data>
+  <data name="plAuthorize.Help" xml:space="preserve">
+    <value>When checked, all users who are added will also be authorized to log into the site.</value>
+  </data>
+  <data name="plAuthorize.Text" xml:space="preserve">
+    <value>Authorize Users:</value>
+  </data>
+  <data name="plFile.Help" xml:space="preserve">
+    <value>Browse your local file system for properly formatted xml file of users to be loaded.</value>
+  </data>
+  <data name="plFile.Text" xml:space="preserve">
+    <value>XML File:</value>
+  </data>
+  <data name="plLogFile.Help" xml:space="preserve">
+    <value>Click the link to download the results log for the resently loaded users.</value>
+  </data>
+  <data name="plLogFile.Text" xml:space="preserve">
+    <value>Log File:</value>
+  </data>
+  <data name="plNotify.Help" xml:space="preserve">
+    <value>When checked, all users who are added will be sent an email with their account information.</value>
+  </data>
+  <data name="plNotify.Text" xml:space="preserve">
+    <value>Notify Users:</value>
+  </data>
+  <data name="UserLoadCompleted.Text" xml:space="preserve">
+    <value>Users load completed successfully.</value>
+  </data>
+  <data name="UserLoadCompletedWithErrors.Text" xml:space="preserve">
+    <value>Users load completed, but with errors.  One or more users may not have been  loaded.  Please review the log file for details.</value>
+  </data>
+  <data name="UserLoadFailure.Text" xml:space="preserve">
+    <value>User load failed.</value>
+  </data>
+</root>

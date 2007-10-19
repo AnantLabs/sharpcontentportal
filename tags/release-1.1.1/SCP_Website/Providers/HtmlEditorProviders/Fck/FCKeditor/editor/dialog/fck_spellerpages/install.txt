@@ -1,0 +1,2 @@
+Speller pages was removed because the path was too long.
+Please check the provider project page to learn how to install it.
