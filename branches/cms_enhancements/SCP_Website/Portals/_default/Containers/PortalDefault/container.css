@@ -1,0 +1,93 @@
+/* 
+================================
+ Container Styles for SharpContent
+================================
+*/   
+
+.containermaster_default {
+	width: 100%;
+	background-color: #FFFFFF;
+	border-right: #000000 1px solid; 
+	border-top: #000000 1px solid; 
+	border-left: #000000 1px solid; 
+	border-bottom: #000000 1px solid; 
+	moz-border-radius-bottomleft: 15px; 
+	moz-border-radius-bottomright: 15px; 
+	moz-border-radius-topleft: 3px; 
+	moz-border-radius-topright: 3px;
+}
+.containerrow1_default {
+	background: #FFFFFF url(gradient_lt.jpg) repeat-x;
+	height: 30px; 
+}
+.containerrow2_default {
+	background-color: #FFFFFF;
+}
+
+/* Overrides Module Title in default.css */
+.ModuleTitle_MenuContainer {
+	background-color: transparent;
+	border: #000000 0px solid;
+}
+.ModuleTitle_MenuBar {
+	cursor: pointer; 
+	cursor: hand;
+	height: 18px;
+	background-color: Transparent;
+}
+.ModuleTitle_MenuItem {
+	cursor: pointer; 
+	cursor: hand; 
+	color: #000000; 
+	font-family: Verdana, Arial, Helvetica, Sans-Serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	font-style: normal; 
+	border: #FFFFF0 0px solid; 	
+	background-color: Transparent;
+}
+.ModuleTitle_MenuIcon {
+	cursor: hand; 
+	background-color: #A0A0A0; 
+	border: #A0A0A0 2px solid;
+	border-right: #FFFFF0 2px solid;
+	text-align: center; 
+	width: 20; 
+	height: 25;
+}
+.ModuleTitle_SubMenu {
+	z-index: 1000; 
+	cursor: pointer; 
+	cursor: hand; 
+	background-color: #FFFFFF; 
+	filter:progid:DXImageTransform.Microsoft.Shadow(color='DimGray', Direction=135, Strength=3); 
+	border: #FFFFF0 2px groove;
+}
+.ModuleTitle_MenuBreak {
+	border-bottom: #A0A0A0 1px solid; 
+	border-left: #A0A0A0 0px solid; 
+	border-top: #A0A0A0 1px solid;  
+	border-right: #A0A0A0 0px solid; 
+	background-color: #A0A0A0; 
+	height: 1px;
+}
+.ModuleTitle_MenuItemSel { 
+	cursor: hand; 
+	color: #000000; 
+	font-family: Verdana, Arial, Helvetica, Sans-Serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	font-style: normal;
+	background-color: Transparent;
+}
+.ModuleTitle_MenuArrow {
+	font-family: webdings; 
+	font-size: 10pt;
+	cursor: hand; 
+}
+.ModuleTitle_RootMenuArrow {
+	font-family: webdings; 
+	font-size: 10pt; 
+	cursor: hand;
+}
+
