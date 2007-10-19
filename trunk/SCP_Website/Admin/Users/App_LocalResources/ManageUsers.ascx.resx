@@ -236,8 +236,7 @@
     <value>&lt;b&gt;*Note:&lt;/b&gt; Membership to this site is Verified. Once your account information has been submitted, you will receive an email containing your unique Verification Code. The Verification Code will be required the first time you attempt to sign in to the environment.</value>
   </data>
   <data name="Required.Text" xml:space="preserve">
-    <value> All fields marked with an icon
-(&lt;img src="/Images/required.gif" /&gt;) are required.</value>
+    <value />
   </data>
   <data name="VerifiedConfirmationMessage.Text" xml:space="preserve">
     <value>&lt;b&gt;An e-mail with your verification code has been sent to your e-mail address: {0}&lt;br&gt;Please access your in-box and get the verification code, which is required to log-in first time.&lt;/b&gt;</value>
