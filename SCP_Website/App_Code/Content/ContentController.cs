@@ -209,9 +209,9 @@ namespace SharpContent.Modules.Content
         ///		[cnurse]	11/15/2004	documented
         /// </history>
         /// -----------------------------------------------------------------------------
-        public void AddContent(ContentInfo contentInfo)
+        public int AddContent(ContentInfo contentInfo)
         {
-            DataProvider.Instance().AddContent(contentInfo.ContentId, contentInfo.ModuleId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.CreatedByUserID, contentInfo.Publish);
+            return DataProvider.Instance().AddContent(contentInfo.ContentId, contentInfo.ModuleId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.CreatedByUserID, contentInfo.Publish);
         }
 
         /// -----------------------------------------------------------------------------

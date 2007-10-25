@@ -110,14 +110,11 @@ namespace SharpContent.Modules.Content
                 contentInfo.Publish = publishContent;
 
                 // persist the content
-                contentController.AddContent(contentInfo); 
-                //contentController.UpdateContent(contentInfo);
+                ContentId = contentController.AddContent(contentInfo);
 
                 // refresh cache
                 SynchronizeModule();
-
-                // redirect back to portal
-                //Response.Redirect(SharpContent.Common.Globals.NavigateURL(), true);
+                
             }
             catch (Exception exc)
             {
