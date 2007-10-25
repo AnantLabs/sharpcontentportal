@@ -66,7 +66,7 @@ namespace SharpContent.Modules.Content
 
         #region "Abstract methods"
 
-        public abstract void AddContent(int contentId, int moduleId, string desktopHtml, string desktopSummary, int userID, bool publish);
+        public abstract int AddContent(int contentId, int moduleId, string desktopHtml, string desktopSummary, int userID, bool publish);
         public abstract IDataReader GetContentVersions(int moduleId);
         public abstract IDataReader GetContent(int moduleId);
         public abstract IDataReader GetContentById(int contentId);

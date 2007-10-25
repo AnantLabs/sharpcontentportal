@@ -131,9 +131,9 @@ namespace SharpContent.Modules.Content
             return Common.Utilities.Null.GetNull(Field, DBNull.Value);
         }
 
-        public override void AddContent(int contentId, int moduleId, string desktopHtml, string desktopSummary, int userId, bool publish)
+        public override int AddContent(int contentId, int moduleId, string desktopHtml, string desktopSummary, int userId, bool publish)
         {
-            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContent", contentId, moduleId, desktopHtml, desktopSummary, userId, publish);
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContent", contentId, moduleId, desktopHtml, desktopSummary, userId, publish));
         }
 
         public override IDataReader GetContentVersions(int moduleId)

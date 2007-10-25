@@ -104,7 +104,7 @@ namespace SharpContent.Modules.Content
 		    return Common.Utilities.Null.GetNull(Field, DBNull.Value);
 	    }
 
-         public override void AddContent(int i_contentid, int i_moduleid, string i_desktophtml, string i_desktopsummary, int i_userid, bool i_publish)
+         public override int AddContent(int i_contentid, int i_moduleid, string i_desktophtml, string i_desktopsummary, int i_userid, bool i_publish)
          {
              OracleParameter[] parms = {
               new OracleParameter("i_contentid", OracleDbType.Int32),
@@ -112,7 +112,8 @@ namespace SharpContent.Modules.Content
 		    new OracleParameter("i_desktophtml", OracleDbType.NClob), 
 		    new OracleParameter("i_desktopsummary", OracleDbType.NClob), 
 		    new OracleParameter("i_userid", OracleDbType.Int32),
-              new OracleParameter("i_publish", OracleDbType.Int32)};
+              new OracleParameter("i_publish", OracleDbType.Int32), 
+		      new OracleParameter("o_contentid", OracleDbType.Int32)};
              parms[0].Direction = ParameterDirection.Input;
              parms[0].Value = i_contentid;
              parms[1].Direction = ParameterDirection.Input;
@@ -125,8 +126,10 @@ namespace SharpContent.Modules.Content
              parms[4].Value = i_userid;
              parms[5].Direction = ParameterDirection.Input;
              parms[5].Value = i_publish == true ? 1 : 0;
+             parms[6].Direction = ParameterDirection.Output;
 
-             OracleHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "ADDCONTENT", parms);
+             OracleHelper.ExecuteScalar(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "ADDCONTENT", parms);
+             return Convert.ToInt32(parms[6].Value.ToString());
          }
 
          public override IDataReader GetContentVersions(int i_moduleid)

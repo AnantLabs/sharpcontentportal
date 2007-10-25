@@ -78,17 +78,18 @@ as
 
 if (@Publish = 1)
 begin
-	update scp_Content set Publish = 0 where ModuleId = @ModuleId
+	update scp_Content set Publish = 0 where ModuleId = @ModuleId	
 End 
 
 if exists (select * from scp_Content where ModuleId = @ModuleId and DesktopHtml like @DesktopHtml and DesktopSummary like @DesktopSummary)
-
-	update scp_Content
-	set    Publish          = @Publish
-	where  ContentId = @ContentId
-
+begin
+	if (@Publish = 1)
+	begin
+		update scp_Content set Publish = @Publish where  ContentId = @ContentId
+	End
+end
 else
-
+begin
 	insert into scp_Content (
 		ModuleId,
 		DesktopHtml,
@@ -105,6 +106,12 @@ else
 		getdate(),
 		@Publish
 	)
+
+	SET @ContentId = SCOPE_IDENTITY()
+
+end
+
+SELECT @ContentId
 
 GO
 
