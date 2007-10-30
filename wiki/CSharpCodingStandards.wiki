@@ -7,4 +7,4 @@ The link below is to a document that was found at http://www.dotnetspider.com.  
 
 = Details =
 
-[http://sharpcontentportal.googlecode.com/files/CodingStandards.rtf]CodingStandards.rtf
+[http://sharpcontentportal.googlecode.com/files/CodingStandards.rtf CodingStandards.rtf]
