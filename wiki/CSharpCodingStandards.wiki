@@ -1,4 +1,4 @@
-# C# Coding Standards and Best Programming Practices.
+# CSharp Coding Standards and Best Programming Practices.
 
 = Introduction =
 
