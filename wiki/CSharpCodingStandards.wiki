@@ -1,10 +1,10 @@
 = C# Coding Standards and Best Programming Practices =
 
-= Introduction =
+== Introduction ==
 
 The link below is to a document that was found at http://www.dotnetspider.com.  This project will do its best to follows these coding standards and practices when possible.
 
 
-= Details =
+== Details ==
 
 [http://sharpcontentportal.googlecode.com/files/CodingStandards.rtf CodingStandards.rtf]
