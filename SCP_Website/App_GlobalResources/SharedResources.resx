@@ -945,4 +945,7 @@ review the message below, and check with your Provider.
   <data name="cmdCalendar.Text" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="ModuleAction.Error" xml:space="preserve">
+    <value>You do not have permission to proform this action.</value>
+  </data>
 </root>
