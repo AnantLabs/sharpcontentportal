@@ -131,9 +131,14 @@ namespace SharpContent.Modules.Content
             return Common.Utilities.Null.GetNull(Field, DBNull.Value);
         }
 
-        public override int AddContent(int contentId, int moduleId, string desktopHtml, string desktopSummary, int userId, bool publish)
+        public override int AddContent(int contentId, int moduleId, string desktopHtml, string desktopSummary, int userId)
         {
-            return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContent", contentId, moduleId, desktopHtml, desktopSummary, userId, publish));
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContent", contentId, moduleId, desktopHtml, desktopSummary, userId));
+        }
+
+        public override int AddContentComment(int contentId, int userId, string comment, int commentFlag)
+        {
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContentComment", contentId, userId, comment, commentFlag));
         }
 
         public override IDataReader GetContentVersions(int moduleId)
@@ -151,10 +156,21 @@ namespace SharpContent.Modules.Content
             return SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "GetContentById", contentId);
         }
 
-        public override void UpdateContent(int contentId, string desktopHtml, string desktopSummary, int userId, bool publish)
+        public override IDataReader GetContentComments(int contentId)
         {
-            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContent", contentId, desktopHtml, desktopSummary, userId, publish);
+            return SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "GetContentComments", contentId);
         }
+
+        public override void UpdateContent(int contentId, string desktopHtml, string desktopSummary, bool publish, int commentFlag)
+        {
+            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContent", contentId, desktopHtml, desktopSummary, publish, commentFlag);
+        }
+
+        public override void UpdateContentPublish(int contentId)
+        {
+            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContentPublish", contentId);
+        }
+
         #endregion
 
     }

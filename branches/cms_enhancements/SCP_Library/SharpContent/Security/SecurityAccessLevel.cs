@@ -32,5 +32,7 @@ namespace SharpContent.Security
         Edit = 1,
         Admin = 2,
         Host = 3,
+        Author = 4,
+        Publisher = 5,
     }
 }

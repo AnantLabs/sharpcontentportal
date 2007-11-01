@@ -44,9 +44,6 @@ namespace SharpContent.Modules.Content
     /// <remarks>
     /// </remarks>
     /// <history>
-    ///		[cnurse]	11/15/2004	documented
-    ///     [cnurse]    11/16/2004  Add/UpdateContent separated into two methods,
-    ///                             GetSearchItems modified to use decoded content
     /// </history>
     /// -----------------------------------------------------------------------------
     public class ContentController : Entities.Modules.ISearchable, Entities.Modules.IPortable
@@ -57,14 +54,13 @@ namespace SharpContent.Modules.Content
         #region "Private Methods"
 
         /// <summary>
-        /// FillContentCollection fills an ArrayList from a collection Asp.Net MembershipUsers
+        /// FillContentCollection fills an ArrayList 
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name="portalId">The Id of the Portal</param>
-        /// <param name="dr">The data reader corresponding to the User.</param>
-        /// <param name="isHydrated">A flag that determines whether the user is hydrated.</param>
-        /// <returns>An ArrayList of UserInfo objects.</returns>
+        /// <param name="dr">The data reader corresponding to the content.</param>
+        /// <param name="totalRecords">The number of records returned from the query</param>
+        /// <returns>An ArrayList of ContentInfo objects.</returns>
         /// <history>
         /// </history>
         private ArrayList FillContentCollection(IDataReader dr, ref int totalRecords)
@@ -108,6 +104,56 @@ namespace SharpContent.Modules.Content
         }
 
         /// <summary>
+        /// FillCommentCollection fills an ArrayList
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="dr">The data reader corresponding to the comment.</param>
+        /// <param name="totalRecords">The number of records returned from the query</param>
+        /// <returns>An ArrayList of CommentInfo objects.</returns>
+        /// <history>
+        /// </history>
+        private ArrayList FillCommentsCollection(IDataReader dr, ref int totalRecords)
+        {
+            //Note:  the DataReader returned from this method should contain 2 result sets.  The first set
+            //       contains the TotalRecords, that satisfy the filter, the second contains the page
+            //       of data
+
+            ArrayList arrComments = new ArrayList();
+            try
+            {
+                CommentInfo commentInfo;
+                while (dr.Read())
+                {
+                    // fill business object
+                    commentInfo = FillCommentInfo(dr, false);
+                    // add to collection
+                    arrComments.Add(commentInfo);
+                }
+
+                //Get the next result (containing the total)
+                bool nextResult = dr.NextResult();
+
+                //Get the total no of records from the second result
+                totalRecords = GetTotalRecords(dr);
+            }
+            catch (Exception exc)
+            {
+                Exceptions.LogException(exc);
+            }
+            finally
+            {
+                // close datareader
+                if (dr != null)
+                {
+                    dr.Close();
+                }
+            }
+
+            return arrComments;
+        }
+
+        /// <summary>
         /// FillContentInfo fills a User Info object from a data reader
         /// </summary>
         /// <remarks>
@@ -122,13 +168,6 @@ namespace SharpContent.Modules.Content
         private ContentInfo FillContentInfo(IDataReader dr, bool CheckForOpenDataReader)
         {
             ContentInfo contentInfo = null;
-            int contentVersion = -1;
-            int moduleId = -1;
-            string deskTopHTML = String.Empty;
-            string desktopSummary = String.Empty;
-            int createdByUserID = -1;
-            string createdByUsername = String.Empty;
-            DateTime createdDate = DateTime.MinValue;
 
             try
             {
@@ -152,9 +191,12 @@ namespace SharpContent.Modules.Content
                     contentInfo.DeskTopHTML = Convert.ToString(dr["DeskTopHTML"]);
                     contentInfo.DesktopSummary = Convert.ToString(dr["DesktopSummary"]);
                     contentInfo.CreatedByUserID = Convert.ToInt32(dr["CreatedByUserID"]);
-                    contentInfo.CreatedByUsername = Convert.ToString(dr["CreatedByUsername"]);
+                    contentInfo.CreatedByUsername = Convert.ToString(dr["Username"]);
+                    contentInfo.CreatedByFirstName = Convert.ToString(dr["FirstName"]);
+                    contentInfo.CreatedByLastName = Convert.ToString(dr["LastName"]);
                     contentInfo.CreatedDate = Convert.ToDateTime(dr["CreatedDate"]);
                     contentInfo.Publish = Convert.ToBoolean(dr["Publish"]);
+                    contentInfo.CommentFlag = Convert.ToInt32(dr["CommentFlag"]);
                 }
             }
             finally
@@ -166,6 +208,59 @@ namespace SharpContent.Modules.Content
             }
 
             return contentInfo;
+        }
+
+        /// <summary>
+        /// FillCommentInfo fills a User Info object from a data reader
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="portalId">The Id of the Portal</param>
+        /// <param name="dr">The data reader corresponding to the User.</param>
+        /// <param name="isHydrated">A flag that determines whether the user is hydrated.</param>
+        /// <param name="CheckForOpenDataReader">Flag to determine whether to chcek if the datareader is open</param>
+        /// <returns>The User as a UserInfo object</returns>
+        /// <history>
+        /// </history>
+        private CommentInfo FillCommentInfo(IDataReader dr, bool CheckForOpenDataReader)
+        {
+            CommentInfo commentInfo = null;            
+
+            try
+            {
+                // read datareader
+                bool bContinue = true;
+
+                if (CheckForOpenDataReader)
+                {
+                    bContinue = false;
+                    if (dr.Read())
+                    {
+                        bContinue = true;
+                    }
+                }
+                if (bContinue)
+                {
+                    commentInfo = new CommentInfo();
+                    commentInfo.CommentId = Convert.ToInt32(dr["CommentID"]);
+                    commentInfo.ContentId = Convert.ToInt32(dr["ContentID"]); 
+                    commentInfo.CreatedByUserId = Convert.ToInt32(dr["UserID"]);
+                    commentInfo.CreatedByUsername = Convert.ToString(dr["Username"]);
+                    commentInfo.CreatedByFirstName = Convert.ToString(dr["FirstName"]);
+                    commentInfo.CreatedByLastName = Convert.ToString(dr["LastName"]);
+                    commentInfo.CommentDate = Convert.ToDateTime(dr["CommentDate"]);
+                    commentInfo.Comment = Convert.ToString(dr["Comment"]);
+                }
+            }
+            finally
+            {
+                if (CheckForOpenDataReader && dr != null)
+                {
+                    dr.Close();
+                }
+            }
+
+            return commentInfo;
         }
 
         /// <summary>
@@ -204,15 +299,33 @@ namespace SharpContent.Modules.Content
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name="objText">The ContentInfo object</param>
+        /// <param name="contentInfo">The ContentInfo object</param>
         /// <history>
-        ///		[cnurse]	11/15/2004	documented
         /// </history>
         /// -----------------------------------------------------------------------------
         public int AddContent(ContentInfo contentInfo)
         {
-            return DataProvider.Instance().AddContent(contentInfo.ContentId, contentInfo.ModuleId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.CreatedByUserID, contentInfo.Publish);
+            return DataProvider.Instance().AddContent(contentInfo.ContentId, contentInfo.ModuleId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.CreatedByUserID);
         }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// AddContentComment adds a comment to the Database and updates the comment flag
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="contentId">The ID of the assosiated content</param>
+        /// <param name="userId">The ID of the user adding the comment</param>
+        /// <param name="comment">The comment</param>
+        /// <param name="commentFlag">The value of the CommentFlag</param>
+        /// <history>
+        /// </history>
+        /// -----------------------------------------------------------------------------
+        public int AddContentComment(int contentId, int userId, string comment, int commentFlag)
+        {
+            return DataProvider.Instance().AddContentComment(contentId, userId, comment, commentFlag);
+        }
+
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -222,13 +335,28 @@ namespace SharpContent.Modules.Content
         /// </remarks>
         /// <param name="moduleId">The Id of the module</param>
         /// <history>
-        ///		[cnurse]	11/15/2004	documented
         /// </history>
         /// -----------------------------------------------------------------------------
         public ArrayList GetContentVersions(int moduleId)
         {
             int totalRecords = -1;
             return FillContentCollection(DataProvider.Instance().GetContentVersions(moduleId), ref totalRecords);
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// GetComments gets a list of comment for a content version from the Database
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="contentId">The Id of the content</param>
+        /// <history>
+        /// </history>
+        /// -----------------------------------------------------------------------------
+        public ArrayList GetContentComments(int contentId)
+        {
+            int totalRecords = -1;
+            return FillCommentsCollection(DataProvider.Instance().GetContentComments(contentId), ref totalRecords);
         }
 
 
@@ -240,7 +368,6 @@ namespace SharpContent.Modules.Content
         /// </remarks>
         /// <param name="moduleId">The Id of the module</param>
         /// <history>
-        ///		[cnurse]	11/15/2004	documented
         /// </history>
         /// -----------------------------------------------------------------------------
         public ContentInfo GetContent(int moduleId)
@@ -254,9 +381,8 @@ namespace SharpContent.Modules.Content
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name="moduleId">The Id of the module</param>
+        /// <param name="contentId">The Id of the content</param>
         /// <history>
-        ///		[cnurse]	11/15/2004	documented
         /// </history>
         /// -----------------------------------------------------------------------------
         public ContentInfo GetContentById(int contentId)
@@ -270,14 +396,28 @@ namespace SharpContent.Modules.Content
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name="objText">The ContentInfo object</param>
+        /// <param name="contentInfo">The ContentInfo object</param>
         /// <history>
-        ///		[cnurse]	11/15/2004	documented
         /// </history>
         /// -----------------------------------------------------------------------------
         public void UpdateContent(ContentInfo contentInfo)
         {
-            DataProvider.Instance().UpdateContent(contentInfo.ContentId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.CreatedByUserID, contentInfo.Publish);
+            DataProvider.Instance().UpdateContent(contentInfo.ContentId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.Publish, contentInfo.CommentFlag);
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// UpdateContent saves the ContentInfo object to the Database
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="contentId">The Id of the content</param>
+        /// <history>
+        /// </history>
+        /// -----------------------------------------------------------------------------
+        public void UpdateContentPublish(int contentId)
+        {
+            DataProvider.Instance().UpdateContentPublish(contentId);
         }
 
         #endregion

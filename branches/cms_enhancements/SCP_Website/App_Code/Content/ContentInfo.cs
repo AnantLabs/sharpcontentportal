@@ -35,8 +35,11 @@ namespace SharpContent.Modules.Content
         private string _desktopSummary;
         private int _createdByUserID;
         private string _createdByUsername;
+        private string _createdByFirstName;
+        private string _createdByLastName;
         private DateTime _createdDate;
         private bool _publish;
+        private int _commentFlag;
 
         // initialization
         public ContentInfo()
@@ -86,6 +89,18 @@ namespace SharpContent.Modules.Content
             set { _createdByUsername = value; }
         }
 
+        public string CreatedByFirstName
+        {
+            get { return _createdByFirstName; }
+            set { _createdByFirstName = value; }
+        }
+
+        public string CreatedByLastName
+        {
+            get { return _createdByLastName; }
+            set { _createdByLastName = value; }
+        }
+
         public DateTime CreatedDate
         {
             get { return _createdDate; }
@@ -96,6 +111,12 @@ namespace SharpContent.Modules.Content
         {
             get { return _publish; }
             set { _publish = value; }
+        }
+
+        public int CommentFlag
+        {
+            get { return _commentFlag; }
+            set { _commentFlag = value; }
         }
     }
 }

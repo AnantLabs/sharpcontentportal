@@ -148,6 +148,18 @@
     <value>Save</value>
   </data>
   <data name="cmdPublish.Text" xml:space="preserve">
-    <value>Save &amp; Publish</value>
+    <value>Publish</value>
+  </data>
+  <data name="lblComment.Text" xml:space="preserve">
+    <value>Comment:</value>
+  </data>
+  <data name="lblCommentFlags.Text" xml:space="preserve">
+    <value>Comment Flag:</value>
+  </data>
+  <data name="lblCommentsHistory.Text" xml:space="preserve">
+    <value>Comment History:</value>
+  </data>
+  <data name="cmdUpdateComments.Text" xml:space="preserve">
+    <value>Update Comments</value>
   </data>
 </root>

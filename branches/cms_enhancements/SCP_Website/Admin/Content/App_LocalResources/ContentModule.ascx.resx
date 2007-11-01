@@ -138,4 +138,7 @@
   <data name="AddContentFromActionMenu.Text" xml:space="preserve">
     <value>Use module action menu to edit content</value>
   </data>
+  <data name="PublishContent.Action" xml:space="preserve">
+    <value>Publish Content</value>
+  </data>
 </root>

@@ -379,8 +379,7 @@ namespace SharpContent.Security
                     }
                     break;
                 case SecurityAccessLevel.Host: // host
-                    // HACK : Modified to not error if object is null.
-                    //if( UserName.Length > 0 )
+
                     if (!String.IsNullOrEmpty(UserName))
                     {
                         UserInfo objUserInfo = UserController.GetCurrentUserInfo();
@@ -392,6 +391,26 @@ namespace SharpContent.Security
                     else // no longer logged in
                     {
                         blnAuthorized = false;
+                    }
+                    break;
+                case SecurityAccessLevel.Author: // content author
+
+                    if (IsInRole(PortalSettings.AdministratorRoleName.ToString()) == false && IsInRoles(PortalSettings.ActiveTab.AdministratorRoles.ToString()) == false)
+                    {
+                        if (!IsInRoles("Content Author"))
+                        {
+                            blnAuthorized = false;
+                        }
+                    }
+                    break;
+                case SecurityAccessLevel.Publisher: // content publisher
+
+                    if ( IsInRole( PortalSettings.AdministratorRoleName.ToString() ) == false && IsInRoles(PortalSettings.ActiveTab.AdministratorRoles.ToString()) == false)
+                    {
+                        if (!IsInRoles("Content Publisher"))
+                        {
+                            blnAuthorized = false;
+                        }
                     }
                     break;
             }

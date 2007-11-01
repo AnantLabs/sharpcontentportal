@@ -18,6 +18,8 @@
 //
 
 using System;
+using System.Collections;
+using System.Text;
 using SharpContent;
 using SharpContent.Common;
 using SharpContent.Modules.HTML;
@@ -26,6 +28,7 @@ using SharpContent.Services.Localization;
 using SharpContent.UI.Utilities;
 using SharpContent.UI.WebControls;
 using SharpContent.Common.Utilities;
+using SharpContent.Security;
 
 namespace SharpContent.Modules.Content
 {
@@ -45,6 +48,23 @@ namespace SharpContent.Modules.Content
         #region "Private Members"
 
         protected bool _isNew = true;
+        protected string _mode;
+        private ContentController _contentController;
+
+        #endregion
+
+        #region "Private Properties"
+
+        private ContentController ContentController
+        {
+            get {
+                if (_contentController == null)
+                {
+                    _contentController = new ContentController();
+                }
+                return _contentController;
+            }
+        }
 
         #endregion
 
@@ -83,38 +103,60 @@ namespace SharpContent.Modules.Content
         #region "Private Methods"
 
         private void BindGrid()
-        {
-            // get Content object
-            ContentController contentController = new ContentController();
-            grdContent.DataSource = contentController.GetContentVersions(ModuleId);
+        {            
+            grdContent.DataSource = ContentController.GetContentVersions(ModuleId);
             grdContent.DataBind();
         }
 
-        private void SaveContent(bool publishContent)
+        private void BindRadioButtonList()
+        {
+            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-green.gif") + "\" />", "1"));
+            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-orange.gif") + "\" />", "2"));
+            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-red.gif") + "\" />", "3"));
+            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-white.gif") + "\" />", "4"));
+            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("None", "0"));
+        }
+
+        private void BindComments()
+        {
+            ArrayList comments;
+            comments = ContentController.GetContentComments(ContentId);
+            lblComments.Text = String.Empty;
+            if (comments.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (CommentInfo commentInfo in comments)
+                {
+                    sb.Append("<p>" + commentInfo.CommentDate.ToString("MM.dd.yyyy HH:mm") + " - ");
+                    sb.Append(commentInfo.CreatedByUsername + ": ");
+                    sb.Append(commentInfo.Comment + "</p>");
+                    sb.AppendLine();
+                }
+                lblComments.Text = sb.ToString();
+            }
+        }
+
+        private void SaveContent()
         {
             try
             {
-                // create HTMLText object
-                ContentController contentController = new ContentController();
                 ContentInfo contentInfo = new ContentInfo();
 
-                // set content values
                 if (!_isNew)
                 {
                     contentInfo.ContentId = ContentId;
-                }                
+                }
                 contentInfo.ModuleId = ModuleId;
                 contentInfo.DeskTopHTML = teContent.Text;
                 contentInfo.DesktopSummary = txtDesktopSummary.Text;
                 contentInfo.CreatedByUserID = this.UserId;
-                contentInfo.Publish = publishContent;
 
                 // persist the content
-                ContentId = contentController.AddContent(contentInfo);
+                ContentId = ContentController.AddContent(contentInfo);
 
                 // refresh cache
                 SynchronizeModule();
-                
+
             }
             catch (Exception exc)
             {
@@ -122,13 +164,57 @@ namespace SharpContent.Modules.Content
             }
         }
 
+        private void PublishContent()
+        {            
+            ContentController.UpdateContentPublish(ContentId);
+        }
+
+        private void UpdateComment()
+        {
+            ContentController.AddContentComment(ContentId, UserId, txtComment.Text, Convert.ToInt16(rdolCommentFlags.SelectedValue));
+        }
+
+        private void ModuleActionDenied()
+        {
+            Response.Redirect(SharpContent.Common.Globals.AccessDeniedURL(Localization.GetString("ModuleAction.Error")), true);
+        }
+
         #endregion
 
         #region "Public Methods"
 
+        public string CommentFlagURL(int commentFlag)
+        {
+            string commentFlagURL = String.Empty;
+            switch (commentFlag)
+            {
+                case 0:
+                    commentFlagURL = "~/Images/spacer.gif";
+                    break;
+                case 1:
+                    commentFlagURL = "~/Images/flag-green.gif";
+                    break;
+                case 2:
+                    commentFlagURL = "~/Images/flag-orange.gif";
+                    break;
+                case 3:
+                    commentFlagURL = "~/Images/flag-red.gif";
+                    break;
+                case 4:
+                    commentFlagURL = "~/Images/flag-white.gif";
+                    break;
+            }
+            return commentFlagURL;
+        }
+
         #endregion
 
         #region "Event Handlers"
+
+        protected void Page_Init(object sender, System.EventArgs e)
+        {
+            cmdUpdateComments.Click += new EventHandler(cmdUpdateComments_Click);
+        }
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -149,9 +235,9 @@ namespace SharpContent.Modules.Content
                 if (!Page.IsPostBack)
                 {
                     BindGrid();
-                    // get Content object
-                    ContentController contentController = new ContentController();
-                    ContentInfo contentInfo = contentController.GetContent(ModuleId);
+                    BindRadioButtonList();
+
+                    ContentInfo contentInfo = ContentController.GetContent(ModuleId);
 
                     if ((contentInfo != null))
                     {
@@ -159,8 +245,13 @@ namespace SharpContent.Modules.Content
 
                         // initialize control values
                         teContent.Text = contentInfo.DeskTopHTML;
+                        lblPreview.Text = Server.HtmlDecode(contentInfo.DeskTopHTML);
                         txtDesktopSummary.Text = Server.HtmlDecode((string)contentInfo.DesktopSummary);
+                        rdolCommentFlags.Items.FindByValue(contentInfo.CommentFlag.ToString()).Selected = true;
                         _isNew = false;
+                        grdContent.SelectedIndex = contentInfo.ContentVersion - 1;
+
+                        BindComments();
                     }
                     else
                     {
@@ -169,6 +260,24 @@ namespace SharpContent.Modules.Content
                         txtDesktopSummary.Text = "";
                         _isNew = true;
                     }
+
+                }
+
+                _mode = Request.QueryString["mode"];
+                switch (_mode)
+                {
+                    case "publish":
+                        cmdSave.Visible = false;
+                        tcContentEditor.Items.RemoveAt(0);
+                        if (!Page.IsPostBack)
+                        {
+                            mvContentEditor.ActiveViewIndex = 1;
+                        }
+                        break;
+                    case "author":
+                        //rdolCommentFlags.Enabled = false;
+                        cmdPublish.Visible = false;
+                        break;
                 }
 
                 // save the IsNew state to the ViewState
@@ -204,46 +313,6 @@ namespace SharpContent.Modules.Content
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// lbtnEditor_Click runs when the Editor button is clicked
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <history>
-        /// </history>
-        /// -----------------------------------------------------------------------------
-        protected void lbtnEditor_Click(object sender, EventArgs e)
-        {
-            mvContentEditor.ActiveViewIndex = 0;
-        }
-
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// cmdPreview_Click runs when the preview button is clicked
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <history>
-        /// </history>
-        /// -----------------------------------------------------------------------------
-        protected void cmdPreview_Click(object sender, System.EventArgs e)
-        {
-            try
-            {
-                string strDesktopHTML;
-
-                strDesktopHTML = teContent.Text;
-
-                lblPreview.Text = SharpContent.Common.Globals.ManageUploadDirectory(Server.HtmlDecode(strDesktopHTML), PortalSettings.HomeDirectory);
-                mvContentEditor.ActiveViewIndex = 1;
-            }
-            catch (Exception exc)
-            {
-                Exceptions.ProcessModuleLoadException(this, exc);
-            }
-        }
-
-        /// -----------------------------------------------------------------------------
-        /// <summary>
         /// cmdUpdate_Click runs when the update button is clicked
         /// </summary>
         /// <remarks>
@@ -253,31 +322,80 @@ namespace SharpContent.Modules.Content
         /// -----------------------------------------------------------------------------
         protected void cmdSave_Click(object sender, System.EventArgs e)
         {
-            SaveContent(false);
-            BindGrid();
+            if (PortalSecurity.IsInRole("Content Author") || PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName))
+            {
+                int contentId = ContentId;
+                SaveContent();
+                BindGrid();
+                BindComments();
+                if (contentId != ContentId)
+                {
+                    grdContent.SelectedIndex = grdContent.Rows.Count - 1;
+                }
+            }
+            else
+            {
+                ModuleActionDenied();
+            }
         }
 
         protected void cmdPublish_Click(object sender, EventArgs e)
         {
-            SaveContent(true);
-
+            if (PortalSecurity.IsInRole("Content Publisher") || PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName))
+            {
+                PublishContent();
+            }
+            else
+            {
+                ModuleActionDenied();
+            }
             // redirect back to portal
             Response.Redirect(SharpContent.Common.Globals.NavigateURL(), true);
         }
 
+        protected void cmdUpdateComments_Click(object sender, EventArgs e)
+        {
+            UpdateComment();
+            BindGrid();
+            BindComments();
+            txtComment.Text = String.Empty;
+        }
+
         protected void grdContent_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
+            grdContent.SelectedIndex = e.NewEditIndex;
             ContentId = Convert.ToInt32(grdContent.DataKeys[e.NewEditIndex].Value);
-            ContentController contentController = new ContentController();
-            ContentInfo contentInfo = contentController.GetContentById(ContentId);
+            ContentInfo contentInfo = ContentController.GetContentById(ContentId);
 
             teContent.Text = contentInfo.DeskTopHTML;
-            txtDesktopSummary.Text = Server.HtmlDecode((string)contentInfo.DesktopSummary);
+            lblPreview.Text = Server.HtmlDecode(contentInfo.DeskTopHTML);
+            txtDesktopSummary.Text = Server.HtmlDecode(contentInfo.DesktopSummary);
+            rdolCommentFlags.ClearSelection();
+            rdolCommentFlags.Items.FindByValue(contentInfo.CommentFlag.ToString()).Selected = true;
+            //ContentId = contentInfo.ContentId;
+            BindComments();
+
             ViewState["IsNew"] = false;
         }
 
-        #endregion
+        protected void tcContentEditor_Click(object sender, WebCtrls.TabContainerEventArgs e)
+        {
+            switch (tcContentEditor.Items[e.SelectedTab].Name)
+            {
+                case "Edit":
+                    mvContentEditor.ActiveViewIndex = 0;
+                    break;
+                case "Preview":
+                    lblPreview.Text = Server.HtmlDecode(teContent.Text);
+                    mvContentEditor.ActiveViewIndex = 1;
+                    break;
+                case "Comments":
+                    mvContentEditor.ActiveViewIndex = 2;
+                    break;
+            }
+        }
 
-    }
+        #endregion        
+}
 
 }
