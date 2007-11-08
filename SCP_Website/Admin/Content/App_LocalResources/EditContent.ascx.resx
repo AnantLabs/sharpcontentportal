@@ -150,10 +150,10 @@
   <data name="cmdPublish.Text" xml:space="preserve">
     <value>Publish</value>
   </data>
-  <data name="lblComment.Text" xml:space="preserve">
+  <data name="plComment.Text" xml:space="preserve">
     <value>Comment:</value>
   </data>
-  <data name="lblCommentFlags.Text" xml:space="preserve">
+  <data name="plCommentFlags.Text" xml:space="preserve">
     <value>Comment Flag:</value>
   </data>
   <data name="lblCommentsHistory.Text" xml:space="preserve">
@@ -161,5 +161,23 @@
   </data>
   <data name="cmdUpdateComments.Text" xml:space="preserve">
     <value>Update Comments</value>
+  </data>
+  <data name="plComment.Help" xml:space="preserve">
+    <value>Enter you comment in the field and click on the Update Comment link.</value>
+  </data>
+  <data name="plCommentFlags.Help" xml:space="preserve">
+    <value>Comment flags are visual comments that you can add to a content version, i.e. red flag a version that you do not like.</value>
+  </data>
+  <data name="cmdApprove.Text" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="cmdReject.Text" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="cmdSubmit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="cmdBanned.Text" xml:space="preserve">
+    <value>Banned</value>
   </data>
 </root>

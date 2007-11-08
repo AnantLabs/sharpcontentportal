@@ -136,9 +136,9 @@ namespace SharpContent.Modules.Content
             return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContent", contentId, moduleId, desktopHtml, desktopSummary, userId));
         }
 
-        public override int AddContentComment(int contentId, int userId, string comment, int commentFlag)
+        public override int AddContentComment(int contentId, int userId, string comment)
         {
-            return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContentComment", contentId, userId, comment, commentFlag));
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "AddContentComment", contentId, userId, comment));
         }
 
         public override IDataReader GetContentVersions(int moduleId)
@@ -161,14 +161,19 @@ namespace SharpContent.Modules.Content
             return SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "GetContentComments", contentId);
         }
 
-        public override void UpdateContent(int contentId, string desktopHtml, string desktopSummary, bool publish, int commentFlag)
+        public override void UpdateContent(int contentId, string desktopHtml, string desktopSummary, bool publish, int workflowState)
         {
-            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContent", contentId, desktopHtml, desktopSummary, publish, commentFlag);
+            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContent", contentId, desktopHtml, desktopSummary, publish, workflowState);
         }
 
         public override void UpdateContentPublish(int contentId)
         {
             SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContentPublish", contentId);
+        }
+
+        public override void UpdateContentWorkflow(int contentId, int workflowState)
+        {
+            SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "UpdateContentWorkflow", contentId, workflowState);
         }
 
         #endregion

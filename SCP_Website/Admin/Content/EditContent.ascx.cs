@@ -47,8 +47,26 @@ namespace SharpContent.Modules.Content
 
         #region "Private Members"
 
-        protected bool _isNew = true;
-        protected string _mode;
+        // Modes
+        private enum EditMode
+        { 
+            None = 0,
+            Author = 1,
+            Publish = 2            
+        }
+
+        // Workflow
+        private enum WorkflowState
+        {
+            None = 0,
+            Approve = 1,
+            Submit = 2,
+            Reject = 3,
+            Banned = 4
+        }
+
+        private string _mode;
+        private int _workFlowState;
         private ContentController _contentController;
 
         #endregion
@@ -57,12 +75,49 @@ namespace SharpContent.Modules.Content
 
         private ContentController ContentController
         {
-            get {
+            get
+            {
                 if (_contentController == null)
                 {
                     _contentController = new ContentController();
                 }
                 return _contentController;
+            }
+        }
+
+        private bool IsNew
+        {
+            get 
+            { 
+                return Convert.ToBoolean(ViewState["isNew"]);
+            }
+            set 
+            { 
+                ViewState["isNew"] = value;
+            }
+        }
+
+        private EditMode CurrentEditMode
+        {            
+            get
+            {
+                EditMode editMode;
+                editMode = (EditMode)Convert.ToInt32(Request.QueryString["mode"]);
+                return editMode;
+            }
+        }
+
+        private WorkflowState CurrentWorkflowState
+        {
+            get 
+            {
+                WorkflowState workflowState;
+                workflowState = ViewState["currentWorkflowState"] == null ? WorkflowState.None : (WorkflowState)Convert.ToInt32(ViewState["currentWorkflowState"]);
+                return workflowState;
+            }
+            set 
+            {
+                ViewState["currentWorkflowState"] = Convert.ToInt32(value);
             }
         }
 
@@ -102,22 +157,13 @@ namespace SharpContent.Modules.Content
 
         #region "Private Methods"
 
-        private void BindGrid()
-        {            
+        private void BindContentVersionGrid()
+        {
             grdContent.DataSource = ContentController.GetContentVersions(ModuleId);
             grdContent.DataBind();
         }
 
-        private void BindRadioButtonList()
-        {
-            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-green.gif") + "\" />", "1"));
-            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-orange.gif") + "\" />", "2"));
-            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-red.gif") + "\" />", "3"));
-            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("<img src=\"" + ResolveUrl("~/Images/flag-white.gif") + "\" />", "4"));
-            rdolCommentFlags.Items.Add(new System.Web.UI.WebControls.ListItem("None", "0"));
-        }
-
-        private void BindComments()
+        private void BindVersionComments()
         {
             ArrayList comments;
             comments = ContentController.GetContentComments(ContentId);
@@ -142,17 +188,30 @@ namespace SharpContent.Modules.Content
             {
                 ContentInfo contentInfo = new ContentInfo();
 
-                if (!_isNew)
+                if (!IsNew)
                 {
                     contentInfo.ContentId = ContentId;
                 }
                 contentInfo.ModuleId = ModuleId;
                 contentInfo.DeskTopHTML = teContent.Text;
                 contentInfo.DesktopSummary = txtDesktopSummary.Text;
-                contentInfo.CreatedByUserID = this.UserId;
+                contentInfo.CreatedByUserID = this.UserId;                
 
                 // persist the content
-                ContentId = ContentController.AddContent(contentInfo);
+                switch (CurrentWorkflowState)
+                {
+                    case WorkflowState.None:                        
+                        ContentController.UpdateContent(contentInfo);
+                        break;
+                    case WorkflowState.Reject:
+                        contentInfo.WorkflowState = Convert.ToInt32(WorkflowState.None);
+                        CurrentWorkflowState = WorkflowState.None;
+                        ContentController.UpdateContent(contentInfo);
+                        break;
+                    default:
+                        ContentId = ContentController.AddContent(contentInfo);
+                        break;
+                }
 
                 // refresh cache
                 SynchronizeModule();
@@ -165,13 +224,21 @@ namespace SharpContent.Modules.Content
         }
 
         private void PublishContent()
-        {            
+        {
             ContentController.UpdateContentPublish(ContentId);
         }
 
         private void UpdateComment()
         {
-            ContentController.AddContentComment(ContentId, UserId, txtComment.Text, Convert.ToInt16(rdolCommentFlags.SelectedValue));
+            ContentController.AddContentComment(ContentId, UserId, txtComment.Text);
+        }
+
+        private void UpdateContentWorkflow(WorkflowState workflowState)
+        {
+            CurrentWorkflowState = workflowState;
+            ContentController.UpdateContentWorkflow(ContentId, Convert.ToInt32(CurrentWorkflowState));
+            BindContentVersionGrid();
+            ManageWorkFlowState();
         }
 
         private void ModuleActionDenied()
@@ -179,11 +246,58 @@ namespace SharpContent.Modules.Content
             Response.Redirect(SharpContent.Common.Globals.AccessDeniedURL(Localization.GetString("ModuleAction.Error")), true);
         }
 
+        private void ManageWorkFlowState()
+        {
+            cmdSave.Visible = false;
+            cmdPublish.Visible = false;
+            cmdApprove.Visible = false;
+            cmdSubmit.Visible = false;
+            cmdReject.Visible = false;
+            cmdBanned.Visible = false;
+            switch (CurrentEditMode)
+            {
+                case EditMode.Author:    
+                    
+                    tcContentEditor.Items[2].Visible = !IsNew;
+                    if (!IsNew)
+                    {
+                        cmdSubmit.Visible = CurrentWorkflowState == WorkflowState.None;
+                    }
+                    cmdSave.Visible = CurrentWorkflowState != WorkflowState.Banned;                    
+                    break;
+
+                case EditMode.Publish:
+
+                    tcContentEditor.Items[0].Visible = false;
+                    tcContentEditor.Items[2].Visible = !IsNew;                    
+                    if (!Page.IsPostBack)
+                    {
+                        mvContentEditor.ActiveViewIndex = 1;
+                    }
+                    switch (CurrentWorkflowState)
+                    {
+                        case WorkflowState.Approve:
+                            cmdPublish.Visible = true;
+                            break;
+                        case WorkflowState.Submit:
+                            cmdApprove.Visible = true;
+                            cmdReject.Visible = true;
+                            cmdBanned.Visible = true;
+                            break;
+                        case WorkflowState.Reject:
+                            break;
+                        case WorkflowState.Banned:
+                            break;
+                    }
+                    break;
+            }
+        }
+
         #endregion
 
         #region "Public Methods"
 
-        public string CommentFlagURL(int commentFlag)
+        public string WorkFlowStateFlagURL(int commentFlag)
         {
             string commentFlagURL = String.Empty;
             switch (commentFlag)
@@ -201,7 +315,7 @@ namespace SharpContent.Modules.Content
                     commentFlagURL = "~/Images/flag-red.gif";
                     break;
                 case 4:
-                    commentFlagURL = "~/Images/flag-white.gif";
+                    commentFlagURL = "~/Images/flag-black.gif";
                     break;
             }
             return commentFlagURL;
@@ -214,74 +328,54 @@ namespace SharpContent.Modules.Content
         protected void Page_Init(object sender, System.EventArgs e)
         {
             cmdUpdateComments.Click += new EventHandler(cmdUpdateComments_Click);
+            cmdSave.Click += new EventHandler(cmdSave_Click);
+            cmdPublish.Click += new EventHandler(cmdPublish_Click);
+            cmdApprove.Click += new EventHandler(cmdWorkflowState_Click);
+            cmdSubmit.Click += new EventHandler(cmdWorkflowState_Click);
+            cmdReject.Click += new EventHandler(cmdWorkflowState_Click);
+            cmdBanned.Click += new EventHandler(cmdWorkflowState_Click);
+            cmdCancel.Click += new EventHandler(cmdCancel_Click);
         }
 
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// Page_Load runs when the control is loaded
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <history>
-        /// </history>
-        /// -----------------------------------------------------------------------------
         protected void Page_Load(object sender, System.EventArgs e)
         {
             try
             {
-                // get the IsNew state from the ViewState
-                _isNew = Convert.ToBoolean(ViewState["IsNew"]);
-
                 if (!Page.IsPostBack)
                 {
-                    BindGrid();
-                    BindRadioButtonList();
+                    // Get all of the version of content for this module.
+                    BindContentVersionGrid();
 
+                    // Get the currently published content for the module.
                     ContentInfo contentInfo = ContentController.GetContent(ModuleId);
 
+                    // Initialize control values if contentInfo is not null.
                     if ((contentInfo != null))
                     {
+                        IsNew = false;
                         ContentId = contentInfo.ContentId;
 
-                        // initialize control values
                         teContent.Text = contentInfo.DeskTopHTML;
                         lblPreview.Text = Server.HtmlDecode(contentInfo.DeskTopHTML);
                         txtDesktopSummary.Text = Server.HtmlDecode((string)contentInfo.DesktopSummary);
-                        rdolCommentFlags.Items.FindByValue(contentInfo.CommentFlag.ToString()).Selected = true;
-                        _isNew = false;
+                        CurrentWorkflowState = (WorkflowState)contentInfo.WorkflowState;
                         grdContent.SelectedIndex = contentInfo.ContentVersion - 1;
-
-                        BindComments();
+                        
+                        BindVersionComments();
                     }
                     else
                     {
-                        // get default content from resource file
+                        IsNew = true;
+
+                        // Get default content from resource file.
                         teContent.Text = Localization.GetString("AddContent", LocalResourceFile);
                         txtDesktopSummary.Text = "";
-                        _isNew = true;
                     }
 
                 }
 
-                _mode = Request.QueryString["mode"];
-                switch (_mode)
-                {
-                    case "publish":
-                        cmdSave.Visible = false;
-                        tcContentEditor.Items.RemoveAt(0);
-                        if (!Page.IsPostBack)
-                        {
-                            mvContentEditor.ActiveViewIndex = 1;
-                        }
-                        break;
-                    case "author":
-                        //rdolCommentFlags.Enabled = false;
-                        cmdPublish.Visible = false;
-                        break;
-                }
-
-                // save the IsNew state to the ViewState
-                ViewState["IsNew"] = _isNew;
+                ManageWorkFlowState();
+                
             }
 
             catch (Exception exc)
@@ -290,48 +384,29 @@ namespace SharpContent.Modules.Content
             }
         }
 
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// cmdCancel_Click runs when the cancel button is clicked
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <history>
-        /// </history>
-        /// -----------------------------------------------------------------------------
-        protected void cmdCancel_Click(object sender, System.EventArgs e)
+        protected void cmdUpdateComments_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Response.Redirect(SharpContent.Common.Globals.NavigateURL(), true);
-            }
-            catch (Exception exc)
-            {
-                Exceptions.ProcessModuleLoadException(this, exc);
-            }
+            UpdateComment();
+            BindContentVersionGrid();
+            BindVersionComments();
+            txtComment.Text = String.Empty;
         }
 
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// cmdUpdate_Click runs when the update button is clicked
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <history>
-        /// </history>
-        /// -----------------------------------------------------------------------------
         protected void cmdSave_Click(object sender, System.EventArgs e)
         {
+            // If the user is not a member of the "Content Author" role or an Admin then they can not save content.
             if (PortalSecurity.IsInRole("Content Author") || PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName))
-            {
-                int contentId = ContentId;
+            {                
+                int oldContentId = ContentId;
                 SaveContent();
-                BindGrid();
-                BindComments();
-                if (contentId != ContentId)
+                BindContentVersionGrid();
+                BindVersionComments();
+                if (oldContentId != ContentId)
                 {
                     grdContent.SelectedIndex = grdContent.Rows.Count - 1;
                 }
+                IsNew = false;
+                ManageWorkFlowState();
             }
             else
             {
@@ -351,14 +426,23 @@ namespace SharpContent.Modules.Content
             }
             // redirect back to portal
             Response.Redirect(SharpContent.Common.Globals.NavigateURL(), true);
-        }
+        }        
 
-        protected void cmdUpdateComments_Click(object sender, EventArgs e)
+        protected void cmdWorkflowState_Click(object sender, System.EventArgs e)
         {
-            UpdateComment();
-            BindGrid();
-            BindComments();
-            txtComment.Text = String.Empty;
+            UpdateContentWorkflow((WorkflowState)Enum.Parse(typeof(WorkflowState), ((CommandButton)sender).CommandName));
+        }
+       
+        protected void cmdCancel_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                Response.Redirect(SharpContent.Common.Globals.NavigateURL(), true);
+            }
+            catch (Exception exc)
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
         }
 
         protected void grdContent_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
@@ -370,12 +454,12 @@ namespace SharpContent.Modules.Content
             teContent.Text = contentInfo.DeskTopHTML;
             lblPreview.Text = Server.HtmlDecode(contentInfo.DeskTopHTML);
             txtDesktopSummary.Text = Server.HtmlDecode(contentInfo.DesktopSummary);
-            rdolCommentFlags.ClearSelection();
-            rdolCommentFlags.Items.FindByValue(contentInfo.CommentFlag.ToString()).Selected = true;
-            //ContentId = contentInfo.ContentId;
-            BindComments();
+            CurrentWorkflowState = (WorkflowState)contentInfo.WorkflowState;
+            BindVersionComments();
 
-            ViewState["IsNew"] = false;
+            IsNew = false;
+
+            ManageWorkFlowState();
         }
 
         protected void tcContentEditor_Click(object sender, WebCtrls.TabContainerEventArgs e)
@@ -395,7 +479,7 @@ namespace SharpContent.Modules.Content
             }
         }
 
-        #endregion        
-}
+        #endregion
+    }
 
 }

@@ -38,7 +38,7 @@
                                                     <asp:Image runat="server" ID="imgPublished" ImageUrl="~/images/content-publish.gif"
                                                         Visible="<%# Convert.ToBoolean(((SharpContent.Modules.Content.ContentInfo)Container.DataItem).Publish.ToString()) %>" /></td>
                                                 <td width="16px">
-                                                    <asp:Image runat="server" ID="Image1" ImageUrl="<%# CommentFlagURL(((SharpContent.Modules.Content.ContentInfo)Container.DataItem).CommentFlag) %>" /></td>
+                                                    <asp:Image runat="server" ID="Image1" ImageUrl="<%# WorkFlowStateFlagURL(((SharpContent.Modules.Content.ContentInfo)Container.DataItem).WorkflowState) %>" /></td>
                                                 <td width="16px">
                                                 </td>
                                             </tr>
@@ -90,7 +90,7 @@
                     <asp:View ID="vwComments" runat="server">
                         <table cellpadding="5" cellspacing="0" border="0">
                             <tr>
-                                <td colspan="2">
+                                <td>
                                     <asp:Label ID="lblCommentsHistory" runat="server" resourcekey="lblCommentsHistory"
                                         CssClass="SubHead" /><br />
                                     <asp:Panel ID="pnlComments" runat="server" BorderColor="Black" BorderStyle="Solid"
@@ -100,19 +100,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                    <scp:Label ID="lblComment" ControlName="txtComment" runat="server" ResourceKey="lblComment" />
+                                <td>
+                                    <scp:Label ID="plComment" ControlName="txtComment" runat="server" ResourceKey="plComment" CssClass="SubHead" />
                                     <asp:TextBox ID="txtComment" runat="server" Height="75px" TextMode="MultiLine" Width="625px" CssClass="Normal"></asp:TextBox><br />
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <asp:Panel ID="pnlCommentFlags" runat="server" Width="425px" CssClass="Normal">
-                                        <asp:Label ID="lblCommentFlags" runat="server" resourcekey="lblCommentFlags" CssClass="SubHead" /><br />
-                                        <asp:RadioButtonList ID="rdolCommentFlags" runat="server" RepeatDirection="Horizontal"
-                                            TextAlign="Left" Width="375px">
-                                        </asp:RadioButtonList></asp:Panel>
-                                </td>
+                            <tr>                                
                                 <td>
                                     <scp:CommandButton ID="cmdUpdateComments" runat="server" ResourceKey="cmdUpdateComments"
                                         ImageUrl="~/images/save.gif" CausesValidation="False" />
@@ -141,12 +134,13 @@
     </tr>
 </table>
 <p>
-    <asp:LinkButton CssClass="CommandButton" ID="cmdSave" resourcekey="cmdSave" runat="server"
-        BorderStyle="none" Text="Save" OnClick="cmdSave_Click"></asp:LinkButton>&nbsp;
-    <asp:LinkButton CssClass="CommandButton" ID="cmdPublish" resourcekey="cmdPublish"
-        runat="server" BorderStyle="none" Text="Publish" CausesValidation="False" OnClick="cmdPublish_Click"></asp:LinkButton>&nbsp;
-    <asp:LinkButton CssClass="CommandButton" ID="cmdCancel" resourcekey="cmdCancel" runat="server"
-        BorderStyle="none" Text="Cancel" CausesValidation="False" OnClick="cmdCancel_Click"></asp:LinkButton>&nbsp;
+    <scp:CommandButton ID="cmdSave" runat="server" ResourceKey="cmdSave" ImageUrl="~/images/save.gif" CausesValidation="False" Visible="False" />&nbsp;        
+    <scp:CommandButton ID="cmdPublish" runat="server" ResourceKey="cmdPublish" ImageUrl="~/images/content-publish.gif" CausesValidation="False" Visible="False" />&nbsp;        
+    <scp:CommandButton ID="cmdApprove" runat="server" ResourceKey="cmdApprove" ImageUrl="~/images/flag-green.gif" CausesValidation="False" Visible="False" CommandName="Approve" />&nbsp;
+    <scp:CommandButton ID="cmdSubmit" runat="server" ResourceKey="cmdSubmit" ImageUrl="~/images/flag-orange.gif" CausesValidation="False" Visible="False" CommandName="Submit" />&nbsp;
+    <scp:CommandButton ID="cmdReject" runat="server" ResourceKey="cmdReject" ImageUrl="~/images/flag-red.gif" CausesValidation="False" Visible="False" CommandName="Reject" />&nbsp;
+    <scp:CommandButton ID="cmdBanned" runat="server" ResourceKey="cmdBanned" ImageUrl="~/images/flag-black.gif" CausesValidation="False" Visible="False" CommandName="Banned" />&nbsp;
+    <scp:CommandButton ID="cmdCancel" runat="server" ResourceKey="cmdCancel" ImageUrl="~/images/lt.gif" CausesValidation="False" />&nbsp;
 </p>
 <table cellspacing="0" cellpadding="0" width="660">
     <tr valign="top">

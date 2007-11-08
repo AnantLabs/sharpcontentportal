@@ -196,7 +196,7 @@ namespace SharpContent.Modules.Content
                     contentInfo.CreatedByLastName = Convert.ToString(dr["LastName"]);
                     contentInfo.CreatedDate = Convert.ToDateTime(dr["CreatedDate"]);
                     contentInfo.Publish = Convert.ToBoolean(dr["Publish"]);
-                    contentInfo.CommentFlag = Convert.ToInt32(dr["CommentFlag"]);
+                    contentInfo.WorkflowState = Convert.ToInt32(dr["WorkflowState"]);
                 }
             }
             finally
@@ -317,13 +317,12 @@ namespace SharpContent.Modules.Content
         /// <param name="contentId">The ID of the assosiated content</param>
         /// <param name="userId">The ID of the user adding the comment</param>
         /// <param name="comment">The comment</param>
-        /// <param name="commentFlag">The value of the CommentFlag</param>
         /// <history>
         /// </history>
         /// -----------------------------------------------------------------------------
-        public int AddContentComment(int contentId, int userId, string comment, int commentFlag)
+        public int AddContentComment(int contentId, int userId, string comment)
         {
-            return DataProvider.Instance().AddContentComment(contentId, userId, comment, commentFlag);
+            return DataProvider.Instance().AddContentComment(contentId, userId, comment);
         }
 
 
@@ -362,7 +361,7 @@ namespace SharpContent.Modules.Content
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// GetContent gets the ContentInfo object from the Database
+        /// GetContent gets the ContentInfo object from the Database that is published.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -402,7 +401,7 @@ namespace SharpContent.Modules.Content
         /// -----------------------------------------------------------------------------
         public void UpdateContent(ContentInfo contentInfo)
         {
-            DataProvider.Instance().UpdateContent(contentInfo.ContentId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.Publish, contentInfo.CommentFlag);
+            DataProvider.Instance().UpdateContent(contentInfo.ContentId, contentInfo.DeskTopHTML, contentInfo.DesktopSummary, contentInfo.Publish, contentInfo.WorkflowState);
         }
 
         /// -----------------------------------------------------------------------------
@@ -418,6 +417,22 @@ namespace SharpContent.Modules.Content
         public void UpdateContentPublish(int contentId)
         {
             DataProvider.Instance().UpdateContentPublish(contentId);
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// UpdateContentWorkflow saves the workflow state to the Database
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="contentId">The Id of the content</param>
+        /// <param name="workflowState">The state of the workflow</param>
+        /// <history>
+        /// </history>
+        /// -----------------------------------------------------------------------------
+        public void UpdateContentWorkflow(int contentId, int workflowState)
+        {
+            DataProvider.Instance().UpdateContentWorkflow(contentId, workflowState);
         }
 
         #endregion
