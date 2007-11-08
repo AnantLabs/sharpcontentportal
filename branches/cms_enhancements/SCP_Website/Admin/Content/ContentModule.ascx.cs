@@ -363,8 +363,8 @@ namespace SharpContent.Modules.Content
             get
             {
                 Entities.Modules.Actions.ModuleActionCollection Actions = new Entities.Modules.Actions.ModuleActionCollection();
-                Actions.Add(GetNextActionID(), Localization.GetString(Entities.Modules.Actions.ModuleActionType.AddContent, LocalResourceFile), Entities.Modules.Actions.ModuleActionType.AddContent, "", "content-edit.gif", EditUrl("mode","author"), false, Security.SecurityAccessLevel.Author, true, false);
-                Actions.Add(GetNextActionID(), Localization.GetString("PublishContent.Action", LocalResourceFile), Entities.Modules.Actions.ModuleActionType.AddContent, "", "content-publish.gif", EditUrl("mode", "publish"), false, Security.SecurityAccessLevel.Publisher, true, false);
+                Actions.Add(GetNextActionID(), Localization.GetString(Entities.Modules.Actions.ModuleActionType.AddContent, LocalResourceFile), Entities.Modules.Actions.ModuleActionType.AddContent, "", "content-edit.gif", EditUrl("mode","1"), false, Security.SecurityAccessLevel.Author, true, false);
+                Actions.Add(GetNextActionID(), Localization.GetString("PublishContent.Action", LocalResourceFile), Entities.Modules.Actions.ModuleActionType.AddContent, "", "content-publish.gif", EditUrl("mode", "2"), false, Security.SecurityAccessLevel.Publisher, true, false);
                 return Actions;
             }
         }

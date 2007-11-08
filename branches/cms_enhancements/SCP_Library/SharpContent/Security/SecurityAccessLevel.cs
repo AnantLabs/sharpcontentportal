@@ -34,5 +34,6 @@ namespace SharpContent.Security
         Host = 3,
         Author = 4,
         Publisher = 5,
+        PowerUser = 6,
     }
 }

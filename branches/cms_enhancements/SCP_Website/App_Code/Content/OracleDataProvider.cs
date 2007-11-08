@@ -129,13 +129,12 @@ namespace SharpContent.Modules.Content
              return Convert.ToInt32(parms[5].Value.ToString());
          }
 
-         public override int AddContentComment(int i_contentid, int i_userid, string i_comment, int i_commentflag)
+         public override int AddContentComment(int i_contentid, int i_userid, string i_comment)
          {
              OracleParameter[] parms = {
 		    new OracleParameter("i_contentid", OracleDbType.Int32), 
 		    new OracleParameter("i_userid", OracleDbType.Int32), 
-		    new OracleParameter("i_comment", OracleDbType.NClob), 
-		    new OracleParameter("i_commentflag", OracleDbType.Int16), 
+		    new OracleParameter("i_comment", OracleDbType.NClob),
 		    new OracleParameter("o_commentid", OracleDbType.Int32)};
              parms[0].Direction = ParameterDirection.Input;
              parms[0].Value = i_contentid;
@@ -144,11 +143,9 @@ namespace SharpContent.Modules.Content
              parms[2].Direction = ParameterDirection.Input;
              parms[2].Value = i_comment;
              parms[3].Direction = ParameterDirection.Input;
-             parms[3].Value = i_commentflag;
-             parms[4].Direction = ParameterDirection.Input;
 
              OracleHelper.ExecuteScalar(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "ADDCONTENTCOMMENT", parms);
-             return Convert.ToInt32(parms[4].Value.ToString());
+             return Convert.ToInt32(parms[3].Value.ToString());
          }
 
          public override IDataReader GetContentVersions(int i_moduleid)
@@ -198,8 +195,8 @@ namespace SharpContent.Modules.Content
 
              return OracleHelper.ExecuteReader(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "GETCOMMENTS", parms);
          }
-         
-         public override void UpdateContent(int i_contentid, string i_desktophtml, string i_desktopsummary, bool i_publish, int i_commentflag)
+
+         public override void UpdateContent(int i_contentid, string i_desktophtml, string i_desktopsummary, bool i_publish, int i_workflowstate)
          {
              OracleParameter[] parms = {
 		    new OracleParameter("i_contentid", OracleDbType.Int32),
@@ -207,7 +204,7 @@ namespace SharpContent.Modules.Content
 		    new OracleParameter("i_desktophtml", OracleDbType.NClob), 
 		    new OracleParameter("i_desktopsummary", OracleDbType.NClob), 		    
               new OracleParameter("i_publish", OracleDbType.Int32),
-              new OracleParameter("i_commentflag", OracleDbType.Int32)};
+              new OracleParameter("i_workflowstate", OracleDbType.Int32)};
              parms[0].Direction = ParameterDirection.Input;
              parms[0].Value = i_contentid;
              parms[1].Direction = ParameterDirection.Input;
@@ -217,7 +214,7 @@ namespace SharpContent.Modules.Content
              parms[3].Direction = ParameterDirection.Input;
              parms[3].Value = i_publish == true ? 1 : 0;
              parms[4].Direction = ParameterDirection.Input;
-             parms[4].Value = i_commentflag;
+             parms[4].Value = i_workflowstate;
 
              OracleHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "UPDATECONTENT", parms);
          }
@@ -230,6 +227,19 @@ namespace SharpContent.Modules.Content
              parms[0].Value = i_contentid;
 
              OracleHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "UPDATECONTENTPUBLISH", parms);
+         }
+
+         public override void UpdateContentWorkflow(int i_contentid, int i_workflowstate)
+         {
+             OracleParameter[] parms = {
+		    new OracleParameter("i_contentid", OracleDbType.Int32),
+              new OracleParameter("i_workflowstate", OracleDbType.Int32)};
+             parms[0].Direction = ParameterDirection.Input;
+             parms[0].Value = i_contentid;
+             parms[1].Direction = ParameterDirection.Input;
+             parms[1].Value = i_workflowstate;
+
+             OracleHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure, DatabaseOwner + PackageName + "UPDATECONTENTWORKFLOW", parms);
          }
 
 		#endregion         

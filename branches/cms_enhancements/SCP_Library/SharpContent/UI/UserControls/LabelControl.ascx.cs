@@ -143,6 +143,22 @@ namespace SharpContent.UI.UserControls
             }
         }
 
+        /// <Summary>
+        /// Gets or sets the Cascading Style Sheet (CSS) class rendered by the Web server
+        ///  control on the client.
+        /// </Summary>
+        public string CssClass
+        {
+            get
+            {
+                return this.lblLabel.CssClass;
+            }
+            set
+            {
+                this.lblLabel.CssClass = value;
+            }
+        }
+
         public LabelControl()
         {
             Load += new EventHandler( this.Page_Load );

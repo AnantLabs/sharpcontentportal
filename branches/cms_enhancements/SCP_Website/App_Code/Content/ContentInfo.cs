@@ -39,7 +39,7 @@ namespace SharpContent.Modules.Content
         private string _createdByLastName;
         private DateTime _createdDate;
         private bool _publish;
-        private int _commentFlag;
+        private int _workFlowState;
 
         // initialization
         public ContentInfo()
@@ -113,10 +113,10 @@ namespace SharpContent.Modules.Content
             set { _publish = value; }
         }
 
-        public int CommentFlag
+        public int WorkflowState
         {
-            get { return _commentFlag; }
-            set { _commentFlag = value; }
+            get { return _workFlowState; }
+            set { _workFlowState = value; }
         }
     }
 }
