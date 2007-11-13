@@ -124,7 +124,7 @@ namespace SharpContent.Security.Authentication
             }
 
             // expire cookies
-            if( PortalSecurity.IsInRoles( portalSettings.AdministratorRoleId.ToString() ) && HttpContext.Current.Request.Cookies["_Tab_Admin_Content" + portalSettings.PortalId] != null )
+            if ((PortalSecurity.IsInRoles(portalSettings.AdministratorRoleId.ToString()) || PortalSecurity.IsInRoles(portalSettings.PowerUserRoleId.ToString())) && HttpContext.Current.Request.Cookies["_Tab_Admin_Content" + portalSettings.PortalId] != null)
             {
                 HttpContext.Current.Response.Cookies["_Tab_Admin_Content" + portalSettings.PortalId].Value = null;
                 HttpContext.Current.Response.Cookies["_Tab_Admin_Content" + portalSettings.PortalId].Path = "/";

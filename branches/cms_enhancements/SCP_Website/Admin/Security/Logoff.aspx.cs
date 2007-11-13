@@ -98,7 +98,7 @@ namespace SharpContent.Common.Controls
                 Response.Cookies["language"].Value = "";
 
                 // expire cookies
-                if( PortalSecurity.IsInRoles( PortalSettings.AdministratorRoleId.ToString() ) && Request.Cookies["_Tab_Admin_Content" + PortalSettings.PortalId] != null )
+                if((PortalSecurity.IsInRoles(PortalSettings.AdministratorRoleId.ToString()) || PortalSecurity.IsInRoles(PortalSettings.PowerUserRoleId.ToString())) && Request.Cookies["_Tab_Admin_Content" + PortalSettings.PortalId] != null )
                 {
                     Response.Cookies["_Tab_Admin_Content" + PortalSettings.PortalId].Value = null;
                     Response.Cookies["_Tab_Admin_Content" + PortalSettings.PortalId].Path = "/";

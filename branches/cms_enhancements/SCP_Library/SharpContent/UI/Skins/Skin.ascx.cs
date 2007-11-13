@@ -915,7 +915,7 @@ namespace SharpContent.UI.Skins
             if (Request.QueryString["SCPprintmode"] != "true")
             {
                 // ControlPanel processing
-                if (PortalSecurity.IsInRoles(PortalSettings.AdministratorRoleName.ToString()) || PortalSecurity.IsInRoles(PortalSettings.ActiveTab.AdministratorRoles.ToString()))
+                if (PortalSecurity.IsInRoles(PortalSettings.AdministratorRoleName.ToString()) || PortalSecurity.IsInRoles(PortalSettings.ActiveTab.AdministratorRoles.ToString()) || PortalSecurity.IsInRoles("Content Publisher"))
                 {
                     UserControl objControlPanel = null;
                     if (Convert.ToString(PortalSettings.HostSettings["ControlPanel"]) != "")
