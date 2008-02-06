@@ -195,7 +195,7 @@ namespace SharpContent.Modules.Admin.ModuleDefinitions
                     ModuleControlController objModuleControls = new ModuleControlController();
                     ModuleControlInfo objModuleControl;
 
-                    objModuleControl = objModule 
+                    objModuleControl = objModuleControls.GetModuleControl(ModuleControlId);
                     // Added to populate cboSource with desktop module or skin controls
                     // Issue #586
                     BindControlList( "DesktopModules", true );
