@@ -200,8 +200,15 @@ namespace SharpContent.Modules.Content
                 // persist the content
                 switch (CurrentWorkflowState)
                 {
-                    case WorkflowState.None:                        
-                        ContentController.UpdateContent(contentInfo);
+                    case WorkflowState.None:
+                        if (IsNew)
+                        {
+                            ContentId = ContentController.AddContent(contentInfo);
+                        }
+                        else
+                        {
+                            ContentController.UpdateContent(contentInfo);
+                        }
                         break;
                     case WorkflowState.Reject:
                         contentInfo.WorkflowState = Convert.ToInt32(WorkflowState.None);
