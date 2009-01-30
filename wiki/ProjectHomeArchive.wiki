@@ -3,6 +3,8 @@
 
 = Project Home Archive =
 ---
+02.24.2008:  Thing have been moving slow, but they are moving forward.  Real life has been getting in the way of finishing the work flow enhancements that I want to put in at the page level.  My goal was to integrate the new content module as a part of the core but I will be extracting it as a stand alone piece.  Still looking for anyone that wants to help, contact me if you are interested.
+
 12.22.2007:  I want to take a moment a wish everyone well as this year comes to a close and for those that celebrate one of the many events this time of the year a happy holiday.  I hope that the new year will see a new time of peace and prosperity for all.  I will not be shy in saying that I look forward to the end of my countries occupation of Iraq.  
 
 I have been busy and have not been able to spend time working on the software, but I now have a few day off of work and hope to complete the updates that I have been working on.  If every thing goes well I want publish the new version by January 1st, 2008.
